@@ -93,6 +93,12 @@
                                     name="date_reception[]" required autocomplete="date_reception">
                             </div>
                             <div class="form-group col">
+                                <label for="quantite">{{ __('quantite') }}</label>
+                                <input id="quantite" type="text" class="form-control form-control-sm"
+                                    name="quantite" value="{{ old('quantite') }}" required
+                                    autocomplete="quantite">
+                            </div>
+                            <div class="form-group col">
                                 <label for="lieu_id">{{ __('Lieu') }}</label>
                                 <select id="lieu_id" name="lieu_id" class='form-control form-control-sm'>
                                     @foreach ($listLieus as $lieu)

@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::PATCH('/analyses', [AnalyseController::class,'update']);
     Route::post('/analyses', [AnalyseController::class,'index']);
     Route::get('/analyses', [AnalyseController::class,'index']);
+    Route::get('file', [AnalyseController::class, 'export']);
 
     Route::get('report/{commande_id}', [ReportController::class, 'index']);
 

@@ -95,6 +95,7 @@ class CommandeController extends Controller
         //print_r($request->input());
         //echo json_encode($request->input());
         for($i = 0 ; $i<count($request["matrice"]);$i++){
+            $mailError = null;
             $commande = new Commande();
             $commande->code_commande = null;
             $commande->client_id = $id_client;
@@ -111,14 +112,19 @@ class CommandeController extends Controller
             $commande->horizon_2 = $request["horizon_2"][$i];
             $commande->temperature = $request["temperateur"][$i];
             $commande->date_reception = $request["date_reception"][0];
+            $commande->quantite = $request["quantite"][0];
             $commande->date_prelevement = $request["date_prelevement"][$i];
             $commande->date_edition = date('Y-m-d');
             $commande->state =  "En cours";
             $commande->save();
+            try{
+                self::notifNewCommande($id);
+            }catch(\Exception $e){
+                $mailError = " [lacq-app not connected with serveur mail]";
+            }
             ActivityController::addActivity(new Commande(),$commande->id);
-            self::notifNewCommande($commande->id);
         }
-        return redirect()->back()->with('success','Commande ajoutée avec succès');
+        return redirect()->back()->with('success','Commande ajoutée avec succès'.$mailError);
     }
 
     /**
@@ -179,6 +185,7 @@ class CommandeController extends Controller
         $commande->horizon_2 = $request->input("horizon_2");
         $commande->temperature = $request->input("temperateur");
         $commande->date_reception = $request->input("date_reception");
+        $commande->quantite = $request->input("quantite");
         $commande->date_prelevement = $request->input("date_prelevement");
         $commande->save();
         ActivityController::updateActivity(new Commande(),$id);
