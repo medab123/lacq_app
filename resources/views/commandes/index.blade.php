@@ -268,6 +268,7 @@
                 });
             } 
         }
+        //
         document.getElementById("commantaireInpute").addEventListener("keyup", e => {
             $("#commantaireValidation").addClass("d-none");
         })
