@@ -28,52 +28,40 @@
 
 <body style="text-align: center;margin:0 auto">
     <style>
-       
-        h6{ 
-            display:inline !important;
-            font-family: DejaVu Sans;
-        
+       table{
+            border-collapse:collapse;
+           
+           
         }
+
         .head {
             text-align: left;
             background-color: #b5feb4 !important;
-            
-            
-        }
-        .h4::before {
-            content: "*";
-            color: red
-        }
-        tr,
-        td {
-            margin: 0 !important;
-            padding: 2px 10px !important;
+           
            
         }
-        .th,
-        .col-md-3 {
-            text-align: center;
-            border: 1px solid black;
-        }
+
         .bordered {
             padding: 1px 5px;
             border: 1px solid black;
         }
+
         .text{
             text-align: center;
             bottom : 0px;
-            position: fixed; 
-            left: 0px; 
-            bottom: -180px; 
-            right: 0px; 
-            height: 150px; 
-            position: fixed; 
-            left: 0px; 
-            bottom: -140px; 
+            position: fixed;
+            left: 0px;
+            bottom: -180px;
+            right: 0px;
+            height: 150px;
+            position: fixed;
+            left: 0px;
+            bottom: -140px;
             right: 0px;
              height: 150px;
              
 }
+
     </style>
 
 
@@ -91,7 +79,7 @@
                 <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE AMENDEMENT ORGANIQUE ET SUPPORT DE CULTURE
                     </br>N° {{$commande_info->code_commande }}</h5>
             </td>
-            <td style="text-align:right;"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
+            <td style="text-align:right;vertical-align:top"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
                     width="90px" height="40px"><br>
                 <h6 style="color:brown;font-size:10px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018</h6>
                 </td>
@@ -141,12 +129,26 @@
         </tr>
     </table>
 
-    <table style="width:100%" >
+    <table style="width:100%;font-size:12px;margin-top:" >
         <tr>
-          <th class="head bordered;text-align:center;">Firstname</th>
-
+          <th class="head bordered" style="text-align:center">RENSEIGNEMENTS RELATIFS A L'ECHANTILLON</th>
         </tr>
 
-      </table>
+    </table>
+
+        <table style="width:100%;font-size:12px;margin-top:; border:1px solid black; background:rgb(230, 230, 230);" >
+            <tr >
+              <th style="width:180px;border:1px solid black;height:150px"><label style="text-align:top;color:green">Photo prise à la réception</label>
+                <img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
+              width="150px" height="120px" style="margin-top:5;border:0.01em solid black"></th>
+              <th class="bordred" style="height:150px ">Observations :</label></th> 
+             
+            </tr>
+         
+         
+          </table>
+         
+     
+     
 </body>
 </html>

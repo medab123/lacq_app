@@ -273,7 +273,8 @@
             $("#commantaireValidation").addClass("d-none");
         })
         document.getElementById("searchInput").addEventListener("keyup", e => {
-            $('.table-responsive-sm').preloader({
+            var container = $('.card-body');
+            container.preloader({
                 text: 'Loading'
             })
             $.ajax({
@@ -284,9 +285,8 @@
                     buffer: $("#searchInput").val(),
                 },
                 success: function(response) {
-                    var $container = $('.table-responsive');
-                    $container.html(response.table);
-                    $('.table-responsive-sm').preloader('remove')
+                    container.html(response.table);
+                    container.preloader('remove')
                 },
             });
         })

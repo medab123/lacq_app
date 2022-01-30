@@ -88,7 +88,7 @@
                             <th class="text-center">Adresse</th>
                             <th class="text-center ">Exploiteur</th>
                             <th class="text-center ">Organisme</th>
-                            @if (Auth::user()->role_id <= 2)
+                            @if (Auth::user()->role_id <= 2 || Auth::user()->role_id == 4)
                                 <th class="text-right pr-4">Actions</th>
                             @endif
 
@@ -102,7 +102,7 @@
                                 <td class="text-center">{{ $client->address }}</td>
                                 <td class="text-center">{{ $client->exploiteur }}</td>
                                 <td class="text-center">{{ $client->organisme }}</td>
-                                @if (Auth::user()->role_id <= 2)
+                                @if (Auth::user()->role_id <= 2 || Auth::user()->role_id == 4)
                                     <td class="text-right">
                                         <div class="d-inline p-2">
                                             <button class="btn btn-primary btn-sm btnAction"
