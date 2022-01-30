@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table table-striped table-sm ">
     <thead class="thead-light">
         <tr>
@@ -99,6 +100,7 @@
         @endforeach
     </tbody>
 </table>
+</div>
 @if ($listCommandes instanceof \Illuminate\Pagination\LengthAwarePaginator)
 <div class="d-flex justify-content-center mt-2">
     

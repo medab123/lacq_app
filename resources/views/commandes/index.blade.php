@@ -240,12 +240,12 @@
                 Commande</a>
         </div>
         <div class="card-body">
-            <div class="table-responsive-sm">
+            
                 @include('commandes.table')
-            </div>
+            
         </div>
     </div>
-    </div>
+
 
 
     <script>
