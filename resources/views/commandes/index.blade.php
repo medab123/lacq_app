@@ -284,7 +284,7 @@
                     buffer: $("#searchInput").val(),
                 },
                 success: function(response) {
-                    var $container = $('.table-responsive-sm');
+                    var $container = $('.table-responsive');
                     $container.html(response.table);
                     $('.table-responsive-sm').preloader('remove')
                 },

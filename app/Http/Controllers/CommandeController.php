@@ -272,7 +272,6 @@ class CommandeController extends Controller
     }
     public static function search(Request $request){
         $buffer = $request->input("buffer");
-        if(empty($buffer)) return self::index();
         $listCommandes = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
@@ -285,7 +284,6 @@ class CommandeController extends Controller
         ->get();
         $table = view('commandes.table', compact('listCommandes'))->render();
         return response()->json(compact('table'));
-        return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes ,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => 0]);
 
     }
     public static function getCommandesWhereState($state)
@@ -310,12 +308,12 @@ class CommandeController extends Controller
         ->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
         ->where("state","=",$statu)
-        ->paginate(8);
+        ->paginate(20);
         else
         $listCommandes  = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
-        ->paginate(8);
+        ->paginate(20);
 
         return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes ,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => $state]);
     }
