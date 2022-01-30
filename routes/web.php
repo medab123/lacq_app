@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('/lieus',LieuController::class);
 
     ///////////////////////////////////////////////////////////////////////////////
-
+//
 
 
     
