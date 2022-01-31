@@ -7,8 +7,10 @@ use App\Models\Matrice;
 use Illuminate\Http\Request;
 use App\Models\Lieu;
 use App\Models\Analys; 
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AnalyseExport;
 use App\Http\Controllers\ActivityController;
+
 
 class AnalyseController extends Controller
 {
@@ -42,6 +44,13 @@ class AnalyseController extends Controller
         return view("analyses.index",["columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
     }
+    public function export(Request $request) 
+    {
+        $export = new AnalyseExport();
+        $export->getTableName($request->input("matrice"));
+        return Excel::download($export, 'users.xlsx');
+    }
+
 
     /**
      * Show the form for creating a new resource.

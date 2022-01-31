@@ -8,6 +8,7 @@ use App\Models\Commantaire;
 use App\Models\Matrice;
 use App\Models\Menu;
 use App\Models\Lieu;
+use Illuminate\Support\Facades\Schema;
 
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
@@ -40,11 +41,24 @@ class CommandeController extends Controller
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')
         ->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
-        ->paginate(10);
+        ->paginate(20);
         $listCommandes->setPath('/commandes');
 
 
         return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => 0]);
+    }
+    public static function json()
+    {
+        //
+        $listCommandes  = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
+        ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')
+        ->join('menus', 'menus.id', '=', 'commandes.menu_id')
+        ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
+        ->paginate(20);
+        $listCommandes->setPath('/commandes');
+
+        $table = view('commandes.table', compact('listCommandes'))->render();
+        return response()->json(compact('table')); 
     }
 
     /**
@@ -81,6 +95,7 @@ class CommandeController extends Controller
         //print_r($request->input());
         //echo json_encode($request->input());
         for($i = 0 ; $i<count($request["matrice"]);$i++){
+            $mailError = null;
             $commande = new Commande();
             $commande->code_commande = null;
             $commande->client_id = $id_client;
@@ -97,14 +112,19 @@ class CommandeController extends Controller
             $commande->horizon_2 = $request["horizon_2"][$i];
             $commande->temperature = $request["temperateur"][$i];
             $commande->date_reception = $request["date_reception"][0];
+            $commande->quantite = $request["quantite"][0];
             $commande->date_prelevement = $request["date_prelevement"][$i];
             $commande->date_edition = date('Y-m-d');
             $commande->state =  "En cours";
             $commande->save();
+            try{
+                self::notifNewCommande($id);
+            }catch(\Exception $e){
+                $mailError = " [lacq-app not connected with serveur mail]";
+            }
             ActivityController::addActivity(new Commande(),$commande->id);
-            self::notifNewCommande($commande->id);
         }
-        return redirect()->back()->with('success','Commande ajoutée avec succès');
+        return redirect()->back()->with('success','Commande ajoutée avec succès'.$mailError);
     }
 
     /**
@@ -165,6 +185,7 @@ class CommandeController extends Controller
         $commande->horizon_2 = $request->input("horizon_2");
         $commande->temperature = $request->input("temperateur");
         $commande->date_reception = $request->input("date_reception");
+        $commande->quantite = $request->input("quantite");
         $commande->date_prelevement = $request->input("date_prelevement");
         $commande->save();
         ActivityController::updateActivity(new Commande(),$id);
@@ -185,7 +206,7 @@ class CommandeController extends Controller
         $commande = Commande::find($id);
         $commande->delete();
         ActivityController::deleteActivity(new Commande(),$id);
-        return redirect()->back()->with('success','Commande supprimée avec succès');
+        return response()->json(['status' => true, 'message' =>'Commande supprimée avec succès']);
         
     }
     public function notifCommandeValider($idCommande)
@@ -244,22 +265,13 @@ class CommandeController extends Controller
         ->first()["startCode"];
         $lastCode = Commande::select("code_commande as code")
         ->where("code_commande","like",$codeMatrice."%")
-        ->orderByRaw('updated_at desc')
+        ->orderByRaw('id desc')
         ->first();
         (!empty($lastCode)) ? $code = $lastCode["code"] + 1 : $code = $codeMatrice."001";
         return  $code;
     }
     public static function search(Request $request){
         $buffer = $request->input("buffer");
-        if(empty($buffer)) return self::index();
-        $listLieus = Lieu::get();
-        $listMatrices = Matrice::get();
-        $listCultures = Commande::select('culture')->distinct()->get();
-        $listNatures  = Commande::select('nature')->distinct()->get();
-        $listVarites  = Commande::select('varite')->distinct()->get();
-        $listCommercials  = Commercial::get();
-        $listClients  = Client::get();
-        $statu = "En cours";
         $listCommandes = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
@@ -270,7 +282,8 @@ class CommandeController extends Controller
         ->orWhere("clients.exploiteur", 'LIKE', '%' . $buffer . '%')
         ->orWhere("menus.name", 'LIKE', '%' . $buffer . '%')
         ->get();
-        return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes ,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => 0]);
+        $table = view('commandes.table', compact('listCommandes'))->render();
+        return response()->json(compact('table'));
 
     }
     public static function getCommandesWhereState($state)
@@ -295,12 +308,12 @@ class CommandeController extends Controller
         ->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
         ->where("state","=",$statu)
-        ->paginate(8);
+        ->paginate(20);
         else
         $listCommandes  = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')->join('menus', 'menus.id', '=', 'commandes.menu_id')
         ->select("commandes.*","menus.name as menu","clients.exploiteur as client","commercials.name as commercial")
-        ->paginate(8);
+        ->paginate(20);
 
         return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes ,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => $state]);
     }
@@ -322,16 +335,18 @@ class CommandeController extends Controller
             $analyse_table = strtolower($analyse_table); 
             $analyse_table = str_replace(' ', '_', $analyse_table); 
             $analyse_table = "analyse_".$analyse_table;
-            if(!DB::table($analyse_table)->where("commande_id","=",$id)->first()){
-                DB::table($analyse_table)->insert([
-                    'commande_id' => $id,
-                ]);
+            if (Schema::hasTable($analyse_table)) {
+                if(!DB::table($analyse_table)->where("commande_id","=",$id)->first()){
+                    DB::table($analyse_table)->insert([
+                        'commande_id' => $id,
+                    ]);
+                }
             }
             ActivityController::CommandeValider($id);
             try{
                 self::notifCommandeValider($id);
             }catch(\Exception $e){
-                return response()->json(['status' => false,'message' => 'mail not sended'],['status' => false,'message' => 'mail not sended']);
+                return response()->json([['status' => false,'message' => 'Mail not sended'],['status' => true,'message' => 'Commande validée avec succès']]);
             }
             return response()->json([['status' => true,'message' => 'Commande validée avec succès']]); 
         }catch(\Exception $e){
@@ -354,7 +369,7 @@ class CommandeController extends Controller
         $commande->state = "Rejete";
         $commande->save();
         ActivityController::CommandeRejter($commande_id);
-        return response()->json(['status' => false,'message' => 'Commande rejetée avec succès']);
+        return response()->json(['status' => true,'message' => 'Commande rejetée avec succès']);
     }
     public function menuOfMatrice($matrice_id){
         $listMenus = Menu::where("matrice_id","=",$matrice_id)
