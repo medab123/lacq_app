@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnalyseTerreTable extends Migration
+class CreateAnalyseSolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAnalyseTerreTable extends Migration
      */
     public function up()
     {
-        Schema::create('analyse_terre', function (Blueprint $table) {
+        Schema::create('analyse_sol', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("commande_id");
             $table->float("CT_%")->nullable();
@@ -53,6 +53,6 @@ class CreateAnalyseTerreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('analyse_terre');
+        Schema::dropIfExists('analyse_sol');
     }
 }

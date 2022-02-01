@@ -171,7 +171,17 @@
                                     <div id="temperateurGroup" class="form-group col d-none">
                                         <label for="temperateur">{{ __('Temperateur') }}</label>
                                         <input id="temperateur" type="number" class="form-control form-control-sm "
-                                            name="temperateur" autocomplete="temperateur">
+                                            name="temperateur" autocomplete="temperateur" step="any">
+                                    </div>
+                                    <div id="image_1Group" class="form-group col d-none">
+                                        <label for="image_1">{{ __('Image 1') }}</label>
+                                        <input id="image_1" type="file" class="form-control form-control-sm "
+                                            name="image_1" accept="image/*">
+                                    </div>
+                                    <div id="image_2Group" class="form-group col d-none">
+                                        <label for="image_2">{{ __('Image 2') }}</label>
+                                        <input id="image_2" type="file" class="form-control form-control-sm "
+                                            name="image_2" accept="image/*">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -392,7 +402,7 @@
                 $("#varite").val(data.varite);
                 $("#nature").val(data.nature);
                 $("#culture").val(data.culture);
-                $("#ref_client").val(data.ref_client);
+                $("#quantite").val(data.quantite);
                 $("#matrice").val(data.matrice_id);
                 menuOfMatrice(data.matrice_id, data.menu_id);
                 $("#gps_1").val(data.gps_1);
@@ -437,6 +447,17 @@
             } else {
                 $("#temperateurGroup").addClass("d-none")
                 $("#temperateur").removeAttr('required');
+            }
+            if (matrice == "AMEO") {
+                $("#image_1Group").removeClass("d-none")
+                $("#image_2Group").removeClass("d-none")
+                $("#image_1").attr('required', '');
+                $("#image_2").attr('required', '');
+            } else {
+                $("#image_1Group").addClass("d-none")
+                $("#image_2Group").addClass("d-none")
+                $("#image_1").removeAttr('required');
+                $("#image_2").removeAttr('required');
             }
         }
 

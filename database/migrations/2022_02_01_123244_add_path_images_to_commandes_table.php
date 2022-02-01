@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddQuantiteToCommandesTable extends Migration
+class AddPathImagesToCommandesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddQuantiteToCommandesTable extends Migration
     public function up()
     {
         Schema::table('commandes', function (Blueprint $table) {
-            $table->string('quantite')->nullable();
+            $table->string("img_1")->nullable();
+            $table->string("img_2")->nullable();
         });
     }
 
@@ -26,7 +27,8 @@ class AddQuantiteToCommandesTable extends Migration
     public function down()
     {
         Schema::table('commandes', function (Blueprint $table) {
-            $table->dropColumn('quantite');
+            $table->dropColumn('img_1');
+            $table->dropColumn('img_2');
         });
     }
 }
