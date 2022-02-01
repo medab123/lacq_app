@@ -14,7 +14,7 @@ class AddQuantiteToCommandesTable extends Migration
     public function up()
     {
         Schema::table('commandes', function (Blueprint $table) {
-            $table->integer('quantite')->nullable();
+            $table->float('quantite')->nullable();
         });
     }
 

@@ -44,11 +44,11 @@ class AnalyseController extends Controller
         return view("analyses.index",["columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
     }
-    public function export(Request $request) 
+    public function export($matrice_id) 
     {
         $export = new AnalyseExport();
-        $export->getTableName($request->input("matrice"));
-        return Excel::download($export, 'users.xlsx');
+        $export->getTableName($matrice_id);
+        return Excel::download($export, 'analyse_export.xlsx');
     }
 
 

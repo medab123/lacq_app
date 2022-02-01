@@ -25,11 +25,13 @@
                                 </i>
                             </button>
                         </div>
-                        <div class="d-inline p-2">
-                            <button  class="btn btn-danger btn-sm btnAction" onclick="remove(this)">
-                                <i class="fa fa-trash" aria-hidden="true">
-                            </i></button>
-                        </div>
+                        @if ($lieu->id != 1)
+                            <div class="d-inline p-2">
+                                <button  class="btn btn-danger btn-sm btnAction" onclick="remove(this)">
+                                    <i class="fa fa-trash" aria-hidden="true">
+                                </i></button>
+                            </div>
+                        @endif
                     </td>
                 @endif
             </tr>

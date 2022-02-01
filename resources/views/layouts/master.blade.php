@@ -48,6 +48,8 @@
                     <a class="dItem" href="{{ url('/matrices') }}">Matrice</a>
                     <a class="dItem" href="{{ url('/menus') }}">Menu</a>
                     <a class="dItem" href="{{ url('/commercials') }}">Commercial</a>
+                    <a class="dItem" href="{{ url('/lieus') }}">Lieu</a>
+
                 </div>
             </div>
             @if (Auth::user()->role_id == 1)

@@ -14,6 +14,7 @@
             font-size: 8px;
         }
 
+
     </style>
     <!---------------------------------------commantaire modal ------------------------------------------->
 
@@ -471,13 +472,13 @@
         }
         function renderTable() {
             var $request = $.get('{{ url("commandes/json") }}'); // make request
-            var $container = $('.table-responsive-sm');
-            $container.preloader({text: 'Loading'})
-            $request.done(function(data) { // success
-                $container.html(data.table);
+            var container = $('.card-body');
+            container.preloader({text: 'Loading'})
+            $request.done(function(data) { // successs
+                container.html(data.table);
             });
             $request.always(function() {
-                $container.preloader('remove')
+                container.preloader('remove')
             });
         }
         function alert_success(message){

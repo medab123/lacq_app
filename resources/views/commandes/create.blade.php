@@ -175,7 +175,7 @@
 
                                 <div id="temperateurGroup" class="form-group col d-none">
                                     <label for="temperateur">{{ __('Temperateur') }}</label>
-                                    <input id="temperateur" type="number" class="form-control form-control-sm "
+                                    <input id="temperateur" type="number" step="any" class="form-control form-control-sm "
                                         name="temperateur[]" autocomplete="temperateur">
                                 </div>
                             </div>
