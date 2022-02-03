@@ -69,7 +69,7 @@
                                     @if ($column == 'deleted_at' || $column == 'id' || $column == 'created_at' || $column == 'updated_at' || $column == 'commande_id')
                                         @continue
                                     @endif
-                                    <th class="text-center text-nowrap">{{ $column }}</th>
+                                    <th class="text-center text-nowrap">{{ $column }} @if(isset($listUnites[$column])) @php echo "(".$listUnites[$column].")" @endphp @endif </th>
                                 @endforeach
                                 <th class="text-center text-nowrap">Export</th>
                             </tr>

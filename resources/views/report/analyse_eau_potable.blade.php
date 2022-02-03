@@ -149,7 +149,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
             <th class="head bordered" style="width: 150px;">Nature déchantillon :</th>
             <td class="bordered">{{ $commande_info->nature }}</td>
             <th class="head bordered">Date d'analyse :</th>
-            <td class="bordered" style="width: 150px;"> @php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp  </td>
+            <td class="bordered" style="width: 150px;"> @php echo Archivos::costomDateFormate($commande_info->date_reception) @endphp  </td>
         </tr>
 
         <tr>
@@ -237,7 +237,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered">NO3</td>
                 <td class="col-md-3 bordered">NF EN ISO 13395:V1996</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><? (floatval($nitra) <=0.1) ? "INF à 0,5":Archivos::ft3nb($nitra) ?></td>
+                <td class="col-md-3 bordered">  {{(floatval($nitra) <=0.1) ? "INF à 0,5":Archivos::ft3nb($nitra)}}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($nitra > 50 ) {
@@ -254,7 +254,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered">NO2</td>
                 <td class="col-md-3 bordered">NF EN ISO 13395:V1996</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <? (floatval($nitri  ) <=0.1) ? "INF à 0,1":Archivos::ft3nb($nitri) ?></td>
+                <td class="col-md-3 bordered"> {{(floatval($nitri) <=0.1) ? "INF à 0,1":Archivos::ft3nb($nitri)}}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($nitri > 0.5 ) {
@@ -271,7 +271,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered">NH4</td>
                 <td class="col-md-3 bordered">NF EN ISO 11732:V2005</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><? (floatval($ammon ) <=0.1) ? "INF à 0,1":Archivos::ft3nb($ammon) ?></td>
+                <td class="col-md-3 bordered">{{(floatval($ammon ) <=0.1) ? "INF à 0,1":Archivos::ft3nb($ammon)}} </td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($ammon > 0.5 ) {
@@ -406,7 +406,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered">Cu</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?  (floatval($cu) <=0.01) ? "INF à 0,01":Archivos::ft3nb($cu) ?></td>
+                <td class="col-md-3 bordered">{{(floatval($cu) <=0.01) ? "INF à 0,01":Archivos::ft3nb($cu) }}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($cu > 2 ) {
@@ -423,7 +423,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered">Zn</td>
                 <td class="col-md-3 bordered">NF EN ISO 11885:V2009 </td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><? (floatval($zn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($zn) ?></td>
+                <td class="col-md-3 bordered">{{ (floatval($zn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($zn) }}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($zn > 3 ) {
@@ -440,7 +440,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered"> Mn</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <? (floatval($mn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($mn) ?></td>
+                <td class="col-md-3 bordered"> {{ (floatval($mn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($mn) }}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($mn > 0.5 ) {
@@ -457,7 +457,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td class="col-md-3 bordered"> Fe</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><? (floatval($fe) < 0.005) ? "INF à 0,005 ":Archivos::ft3nb($fe) ?></td>
+                <td class="col-md-3 bordered">{{ (floatval($fe) < 0.005) ? "INF à 0,005 ":Archivos::ft3nb($fe) }}</td>
                 <td class="col-md-3 bordered">
                     @php
                         if ($fe > 0.30 ) {
