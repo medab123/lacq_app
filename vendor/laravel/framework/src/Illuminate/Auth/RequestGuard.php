@@ -35,6 +35,8 @@ class RequestGuard implements Guard
      */
     public function __construct(callable $callback, Request $request, UserProvider $provider = null)
     {
+        
+
         $this->request = $request;
         $this->callback = $callback;
         $this->provider = $provider;

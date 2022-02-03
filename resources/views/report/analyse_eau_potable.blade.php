@@ -195,11 +195,11 @@
                 $zn = $analyse_data->Zn_ppm;
                 $mn = $analyse_data->Mn_ppm;
                 if (floatval($cu) <= 0.01) {
-                    $cu = 'Inf à 0,1';
+                    $cu = 'Inf à 0,01';
                 } elseif (floatval($zn) <= 0.01) {
-                    $zn = 'Inf à 0,1';
+                    $zn = 'Inf à 0,01';
                 } elseif (floatval($mn) <= 0.01) {
-                    $mn = 'Inf à 0,1';
+                    $mn = 'Inf à 0,01';
                 }
                 $fe = $analyse_data->Fe_ppm;
                 if (floatval($fe) <= 0.005) {
@@ -488,6 +488,8 @@
                 <td class="col-md-3 bordered"> <?= $mn ?></td>
                 <td class="col-md-3 bordered">
                     @php
+                    //////////////////// inf 
+
                         if ($mn > 8.5 or $mn < 6.5) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];

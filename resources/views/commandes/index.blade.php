@@ -14,7 +14,6 @@
             font-size: 8px;
         }
 
-
     </style>
     <!---------------------------------------commantaire modal ------------------------------------------->
 
@@ -94,9 +93,8 @@
                                 </div>
                                 <div class="form-group col">
                                     <label for="quantite">{{ __('quantite') }}</label>
-                                    <input id="quantite" type="text" class="form-control form-control-sm"
-                                        name="quantite" value="{{ old('quantite') }}" required
-                                        autocomplete="quantite">
+                                    <input id="quantite" type="text" class="form-control form-control-sm" name="quantite"
+                                        value="{{ old('quantite') }}" required autocomplete="quantite">
                                 </div>
                                 <div class="form-group col">
                                     <label for="lieu_id">{{ __('Lieu') }}</label>
@@ -133,15 +131,21 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="nature">{{ __('Nature') }}</label>
-                                        <input list="listNatures" id="nature" type="text" class="form-control form-control-sm" name="nature" value="{{ old('nature') }}" required autocomplete="nature" autofocus>
+                                        <input list="listNatures" id="nature" type="text"
+                                            class="form-control form-control-sm" name="nature"
+                                            value="{{ old('nature') }}" required autocomplete="nature" autofocus>
                                     </div>
                                     <div class="form-group col">
-                                        <label for="culture" >{{ __('Culture') }}</label>
-                                        <input list="listCultures" id="culture" type="text" class="form-control form-control-sm " name="culture" required autocomplete="culture">
+                                        <label for="culture">{{ __('Culture') }}</label>
+                                        <input list="listCultures" id="culture" type="text"
+                                            class="form-control form-control-sm " name="culture" required
+                                            autocomplete="culture">
                                     </div>
                                     <div class="form-group col">
-                                        <label for="varite" >{{ __('Varièté') }}</label>
-                                        <input list="listVarites" id="varite" type="text" class="form-control form-control-sm " name="varite" required autocomplete="varite">
+                                        <label for="varite">{{ __('Varièté') }}</label>
+                                        <input list="listVarites" id="varite" type="text"
+                                            class="form-control form-control-sm " name="varite" required
+                                            autocomplete="varite">
                                     </div>
                                 </div>
                                 <div class="form-row row2">
@@ -175,13 +179,13 @@
                                     </div>
                                     <div id="image_1Group" class="form-group col d-none">
                                         <label for="image_1">{{ __('Image 1') }}</label>
-                                        <input id="image_1" type="file" class="form-control form-control-sm "
-                                            name="image_1" accept="image/*">
+                                        <input id="image_1" type="file" class="form-control form-control-sm " name="image_1"
+                                            accept="image/*">
                                     </div>
                                     <div id="image_2Group" class="form-group col d-none">
                                         <label for="image_2">{{ __('Image 2') }}</label>
-                                        <input id="image_2" type="file" class="form-control form-control-sm "
-                                            name="image_2" accept="image/*">
+                                        <input id="image_2" type="file" class="form-control form-control-sm " name="image_2"
+                                            accept="image/*">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -220,24 +224,24 @@
     </datalist>
 
     <!------------------------------------------------------------------------->
-<div id="notification">
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ $message }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if ($message = Session::get('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ $message }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-</div>
+    <div id="notification">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ $message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ $message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    </div>
     <div class="card " style=" background-color: rgb(255, 255, 255)">
         <div class="card-header d-inline ">{{ __('La liste des Commandes') }}
             <select id="stateFilter" class="ml-3 d-inline  form-control form-control-sm col-2">
@@ -251,22 +255,24 @@
                 Commande</a>
         </div>
         <div class="card-body">
-            
-                @include('commandes.table')
-            
+
+            @include('commandes.table')
+
         </div>
     </div>
 
 
 
     <script>
-        function remove(btn){
-            if(confirm('Êtes-vous sûr de vouloir supprimer les données de manière permanente') ){
+        function remove(btn) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer les données de manière permanente')) {
                 commande_id = $(btn).parent().parent().parent().children("#id").html();
-                $('table').preloader({text: 'Loading'})
-                data = "_method=DELETE&_token={{ csrf_token() }}" 
+                $('table').preloader({
+                    text: 'Loading'
+                })
+                data = "_method=DELETE&_token={{ csrf_token() }}"
                 $.ajax({
-                    url: '/commandes/'+commande_id,
+                    url: '/commandes/' + commande_id,
                     type: "POST",
                     data: data,
                     success: function(response) {
@@ -274,10 +280,10 @@
                         renderTable();
                         $('#modalEditLieu').modal('hide');
                         obj = response;
-                        (obj.status == true) ? alert_success(obj.message) : alert_danger(obj.message)
+                        (obj.status == true) ? alert_success(obj.message): alert_danger(obj.message)
                     },
                 });
-            } 
+            }
         }
         //
         document.getElementById("commantaireInpute").addEventListener("keyup", e => {
@@ -339,8 +345,8 @@
             });
             $.get('/commandes/' + id_commande + '/valider', function(response) {
                 data = response
-                $.each(data, function(indx,obj) {
-                    (obj.status == true) ? alert_success(obj.message) : alert_danger(obj.message)
+                $.each(data, function(indx, obj) {
+                    (obj.status == true) ? alert_success(obj.message): alert_danger(obj.message)
                     console.log(obj);
                 });
                 renderTable()
@@ -371,9 +377,9 @@
                 success: function(response) {
                     renderTable();
                     obj = response;
-                    (obj.status == true) ? alert_success(obj.message) : alert_danger(obj.message)
+                    (obj.status == true) ? alert_success(obj.message): alert_danger(obj.message)
                     console.log(obj);
-                   
+
                     $('html').preloader('remove')
                 },
             });
@@ -491,10 +497,13 @@
             }
 
         }
+
         function renderTable() {
-            var $request = $.get('{{ url("commandes/json") }}'); // make request
+            var $request = $.get('{{ url('commandes/json') }}'); // make request
             var container = $('.card-body');
-            container.preloader({text: 'Loading'})
+            container.preloader({
+                text: 'Loading'
+            })
             $request.done(function(data) { // successs
                 container.html(data.table);
             });
@@ -502,18 +511,20 @@
                 container.preloader('remove')
             });
         }
-        function alert_success(message){
+
+        function alert_success(message) {
             html = '<div class="alert alert-success alert-dismissible fade show" role="alert">'
-            html += '    <strong>'+message+'</strong>'
+            html += '    <strong>' + message + '</strong>'
             html += '   <button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             html += '        <span aria-hidden="true">&times;</span>'
             html += '    </button>'
             html += '</div>'
             $("#notification").append(html);
         }
-        function alert_danger(message){
+
+        function alert_danger(message) {
             html = '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
-            html += '    <strong>'+message+'</strong>'
+            html += '    <strong>' + message + '</strong>'
             html += '   <button type="button" class="close" data-dismiss="alert" aria-label="Close">'
             html += '        <span aria-hidden="true">&times;</span>'
             html += '    </button>'
