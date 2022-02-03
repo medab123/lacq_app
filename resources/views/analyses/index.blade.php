@@ -51,6 +51,8 @@
                             {{ $matrice->name }}</option>
                     @endforeach
                 </select>
+                <button class="btn btn-success btn-sm float-right mr-2 py-1" type="button" onclick="analyses_export()"><i class="fa fa-download" aria-hidden="true"></i></button>
+                <a class="btn btn-primary btn-sm float-right mr-2 py-1" href="{{url('/Biens/import')}}" ><i class="fa fa-upload" aria-hidden="true"></i></a>
             </div>
 
             @csrf
@@ -151,5 +153,8 @@
                 },
             });
         });
+        function analyses_export(){
+            window.open("{{ url('/analyses/export/') }}"+"/"+$("#matriceFilter").val(),"_self")
+        }
     </script>
 @endsection

@@ -19,7 +19,7 @@ class DashboardController extends Controller
         ->join('matrices', 'matrices.id', '=', 'menus.matrice_id')
         ->select("commandes.*","menus.name as menu","matrices.name as matrice","matrices.delai as matriceDelai","clients.exploiteur as client","commercials.name as commercial")
         ->where("commandes.state","=","Valid")
-        ->paginate(8);
+        ->paginate(20);
         foreach($listCommandes as &$row) {
             $delai = $row['matriceDelai'];
             $dtRc = $row['date_reception'];

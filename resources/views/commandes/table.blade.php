@@ -103,7 +103,6 @@
 </div>
 @if ($listCommandes instanceof \Illuminate\Pagination\LengthAwarePaginator)
 <div class="d-flex justify-content-center mt-2">
-    
     {!! $listCommandes->links('pagination::bootstrap-4') !!}
 </div>
 @endif

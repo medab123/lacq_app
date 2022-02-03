@@ -76,12 +76,6 @@
                                 </span>
                             </div>
                             <div class="form-group col">
-                                <label for="ref_client">{{ __('Réf Client') }}</label>
-                                <input id="ref_client" type="ref_client" class="form-control form-control-sm"
-                                    name="ref_client[]" value="{{ old('ref_client') }}" required
-                                    autocomplete="ref_client">
-                            </div>
-                            <div class="form-group col">
                                 <label for="commercial">{{ __('Commercial') }}</label>
                                 <input list="listCommercials" id="commercial" type="text"
                                     class="form-control form-control-sm " name="commercial[]" required
@@ -95,12 +89,12 @@
                             <div class="form-group col">
                                 <label for="quantite">{{ __('quantite') }}</label>
                                 <input id="quantite" type="text" class="form-control form-control-sm"
-                                    name="quantite" value="{{ old('quantite') }}" required
+                                    name="quantite[]" value="{{ old('quantite') }}" required
                                     autocomplete="quantite">
                             </div>
                             <div class="form-group col">
                                 <label for="lieu_id">{{ __('Lieu') }}</label>
-                                <select id="lieu_id" name="lieu_id" class='form-control form-control-sm'>
+                                <select id="lieu_id" name="lieu_id[]" class='form-control form-control-sm'>
                                     @foreach ($listLieus as $lieu)
                                         <option value="{{ $lieu->id }}">{{ $lieu->lieu }}</option>
                                     @endforeach
@@ -175,8 +169,18 @@
 
                                 <div id="temperateurGroup" class="form-group col d-none">
                                     <label for="temperateur">{{ __('Temperateur') }}</label>
-                                    <input id="temperateur" type="number" class="form-control form-control-sm "
-                                        name="temperateur[]" autocomplete="temperateur">
+                                    <input id="temperateur" type="number" step="any" class="form-control form-control-sm "
+                                        name="temperateur[]" autocomplete="temperateur" >
+                                </div>
+                                <div id="image_1Group" class="form-group col d-none">
+                                    <label for="image_1">{{ __('Image 1') }}</label>
+                                    <input id="image_1" type="file" class="form-control form-control-sm "
+                                        name="image_1[]" accept="image/*">
+                                </div>
+                                <div id="image_2Group" class="form-group col d-none">
+                                    <label for="image_2">{{ __('Image 2') }}</label>
+                                    <input id="image_2" type="file" class="form-control form-control-sm "
+                                        name="image_2[]" accept="image/*">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -254,6 +258,21 @@
                 $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").addClass("d-none")
                 $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").children(
                     "#temperateur").removeAttr('required');
+            }
+            if (text == "AMEO") {
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").removeClass("d-none")
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").removeClass("d-none")
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1")
+                    .attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2")
+                    .attr('required', '');
+            } else {
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").addClass("d-none")
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").addClass("d-none")
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1")
+                    .removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2")
+                    .removeAttr('required');
             }
         }
 

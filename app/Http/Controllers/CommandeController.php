@@ -116,9 +116,25 @@ class CommandeController extends Controller
             $commande->date_prelevement = $request["date_prelevement"][$i];
             $commande->date_edition = date('Y-m-d');
             $commande->state =  "En cours";
+            if($request->hasFile('image_1')){
+                $img_1=md5($request->file('image_1')[$i]->getClientOriginalName(). time()).".".$request->file('image_1')[$i]->extension();
+                $destination=base_path().'/public/img/commande/ameo';
+                $request->file('image_1')[$i]->move($destination, $img_1);
+            }else{
+                $img_1 = NULL;
+            }
+            if($request->hasFile('image_2')){
+                $img_2=md5($request->file('image_2')[$i]->getClientOriginalName(). time()).".".$request->file('image_2')[$i]->extension();
+                $destination=base_path().'/public/img/commande/ameo';
+                $request->file('image_2')[$i]->move($destination, $img_2);
+            }else{
+                $img_2 = NULL;
+            }
+            $commande->img_1 = $img_1;
+            $commande->img_2 = $img_2;
             $commande->save();
             try{
-                self::notifNewCommande($id);
+                self::notifNewCommande($commande->id);
             }catch(\Exception $e){
                 $mailError = " [lacq-app not connected with serveur mail]";
             }
@@ -187,6 +203,22 @@ class CommandeController extends Controller
         $commande->date_reception = $request->input("date_reception");
         $commande->quantite = $request->input("quantite");
         $commande->date_prelevement = $request->input("date_prelevement");
+        if($request->hasFile('image_1')){
+            $img_1=md5($request->file('image_1')->getClientOriginalName(). time()).".".$request->file('image_1')->extension();
+            $destination=base_path().'/public/img/commande/ameo';
+            $request->file('image_1')->move($destination, $img_1);
+        }else{
+            $img_1 = NULL;
+        }
+        if($request->hasFile('image_2')){
+            $img_2=md5($request->file('image_2')->getClientOriginalName(). time()).".".$request->file('image_2')->extension();
+            $destination=base_path().'/public/img/commande/ameo';
+            $request->file('image_2')->move($destination, $img_2);
+        }else{
+            $img_2 = NULL;
+        }
+        $commande->img_1 = $img_1;
+        $commande->img_2 = $img_2;
         $commande->save();
         ActivityController::updateActivity(new Commande(),$id);
         return redirect()->back()->with('success','Commande modifiée avec succès');

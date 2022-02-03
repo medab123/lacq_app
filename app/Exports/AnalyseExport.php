@@ -32,6 +32,15 @@ class AnalyseExport implements FromCollection,WithHeadings
         return $listData;
     }
     public function headings():array{
-        return Schema::getColumnListing($this->analyse_table);
+        $columns =  collect(\DB::select("describe ". $this->analyse_table))->pluck('Field')->toArray();
+        $count = count($columns);
+        ///dd($request);
+        for($i = 0 ; $i<$count;$i++){
+            $column = $columns[$i];
+            if($column == "deleted_at" || $column == "created_at" || $column == "updated_at" ){
+                unset($columns[$i]);
+            }
+        } 
+        return $columns;
     } 
 }

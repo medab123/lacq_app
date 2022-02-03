@@ -66,6 +66,9 @@
             padding: 1px 5px;
             border: 1px solid black;
         }
+        table.border_light tr>td {
+            border-bottom: 1px solid rgb(228, 228, 228);
+        }
 
         .text{
             text-align: center;
@@ -102,7 +105,7 @@
             <td style="text-align:right;vertical-align: top;"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
                     width="90px" height="40px"><br>
                 <h6 style="color:brown;font-size:10px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018</h6>
-                </td>
+                </td>   
         </tr>
        
     </table>
@@ -165,7 +168,7 @@
         </tr>
     </table>
 
-    <table style="width:100%;font-size:10px;margin-top:10px">
+    <table class="border_light" style="width:100%;font-size:10px;margin-top:10px">
             <tr>
                 <th style="text-align: center" class="head bordered">Paramètres</th>
                 <th style="text-align: center" class="head bordered">Sym. </th>
@@ -192,18 +195,18 @@
                 $zn = $analyse_data->Zn_ppm;
                 $mn = $analyse_data->Mn_ppm;
                 if (floatval($cu) <= 0.01) {
-                    $cu = 'Inf à 0,1';
+                    $cu = 'Inf à 0,01';
                 } elseif (floatval($zn) <= 0.01) {
-                    $zn = 'Inf à 0,1';
+                    $zn = 'Inf à 0,01';
                 } elseif (floatval($mn) <= 0.01) {
-                    $mn = 'Inf à 0,1';
+                    $mn = 'Inf à 0,01';
                 }
                 $fe = $analyse_data->Fe_ppm;
                 if (floatval($fe) <= 0.005) {
                     $fe = 'Inf à 0,005';
                 }
             @endphp
-            <tr>
+            <tr class="border_light">
                 <td class="bordered">Potentiel hydrogène(<h6 style='color:red;'>*</h6>)</td>
                 <td class="col-md-3 bordered">PH</td>
                 <td class="col-md-3 bordered">NM ISO 10523:V2012</td>
@@ -485,6 +488,8 @@
                 <td class="col-md-3 bordered"> <?= $mn ?></td>
                 <td class="col-md-3 bordered">
                     @php
+                    //////////////////// inf 
+
                         if ($mn > 8.5 or $mn < 6.5) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
@@ -523,7 +528,7 @@
     </table>
 
     <h5 style="font-size:11px;text-align:left;margin:2px;padding:0"> <u>Commentaire :</u> </h5>
-    <p style="font-size:10px; text-align:left;margin:2px;padding:0">{{ $commantair_analyse }}</p>
+    <p style="font-size:12px; text-align:left;margin:2px;padding:0">{{ $commantair_analyse }}</p>
     <p class="h4" style="font-size:11px;text-align:left"> Paramètre accrédité</p>
     <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:50px" width="560px">
     <p class="text" style="font-size:8px;">Laboratoire LACQ <br>

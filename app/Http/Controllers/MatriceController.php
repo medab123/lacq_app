@@ -17,7 +17,7 @@ class MatriceController extends Controller
     public static function index()
     {
         //
-        $listMatrice = Matrice::paginate(8);
+        $listMatrice = Matrice::paginate(20);
         $listMatrice->setPath('/matrices');
         return view("matrices.index",["listMatrice" => $listMatrice]);
     }

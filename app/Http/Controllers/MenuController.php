@@ -21,7 +21,7 @@ class MenuController extends Controller
         $listMenu = Menu::join('matrices', 'matrices.id', '=', 'menus.matrice_id')
         ->select("menus.*","matrices.name as matrice")
         ->orderBy('menus.id', 'asc')
-        ->paginate(8);
+        ->paginate(20);
         $listMenu->setPath('/menus');
         return view("menus.index",["listMenu" => $listMenu,"listMatrice" => $listMatrice]);
     }
