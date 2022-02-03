@@ -23,23 +23,39 @@ class AnalyseController extends Controller
     {
         
         $analyse_table = (empty($request["matrice"])) ? "analyse_eau_potable" : $request["matrice"];
+        $unite_table = "analyse_unite_eau_potable";
         $selectedMatrice = 2;
         if($analyse_table != 'analyse_eau_potable'){
             $selectedMatrice = $request["matrice"];
             $analyse_table = Matrice::find($analyse_table)['name'];
             $analyse_table = strtolower($analyse_table); 
             $analyse_table = str_replace(' ', '_', $analyse_table); 
+            $unite_table = "analyse_unite_".$analyse_table;
             $analyse_table = "analyse_".$analyse_table;
         }
         
         $listMatrices = Matrice::get();
         $columns =  Schema::getColumnListing($analyse_table);
+        $formatedListUnites = [];
+        
+        if (Schema::hasTable($unite_table)) {
+            $listUnites = DB::table($unite_table)->select("parametre","unite")->get();
+            for($i = 0 ; $i<count($listUnites);$i++){
+                foreach ($listUnites as $unite){
+                    array_push($formatedListUnites,[$unite->parametre => $unite->unite]);
+                }
+            }
+            $formatedListUnites= call_user_func_array('array_merge', $formatedListUnites);
+        }
+        
+
         $listData = DB::table($analyse_table)
         ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
         ->select($analyse_table.".*","commandes.code_commande")
         ->orderBy($analyse_table.".id","asc")
         ->paginate(8);
-        return view("analyses.index",["columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
+
+        return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
     }
     public function export($matrice_id) 
@@ -119,7 +135,7 @@ class AnalyseController extends Controller
         for($i = 0 ; $i<count($request["id"]);$i++){
             $analyseData = [];
             foreach ($columns as $column){
-                array_push($analyseData,[$column => $request[$column][$i]]);
+                array_push($analyseData,[$column => floatval(str_replace(",",".",trim($request[$column][$i])))]);
             }
             $analyseData = call_user_func_array('array_merge', $analyseData);
             $analyse = DB::table($table)
