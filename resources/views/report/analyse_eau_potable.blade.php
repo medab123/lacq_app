@@ -85,6 +85,11 @@
              height: 150px;
              
 }
+table.border_light tr>td {
+
+border-bottom: 1px solid rgb(228, 228, 228);
+
+}
 
     </style>
 
@@ -96,7 +101,7 @@
                 <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité ELEPHANT
                     VERT <br>MAROC S.A. </label>
                     <br>
-                    <label style="color:green;font-size:11px;">LAB03F132-Vb.</label>
+                    <label style="color:green;font-size:11px;">LAB03F132-Vb</label>
             </td>
             <td>
                 <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE PHYSICO-CHIMIQUE D'EAU
@@ -130,28 +135,28 @@
             <th class="head bordered" style="width: 150px;">Adresse :</th>
             <td class="bordered">{{ $client_info->address }}</td>
             <th class="head bordered" style="width: 150px;">Date de prélèvement :</th>
-            <td class="bordered">{{ $commande_info->date_prelevement }}</td>
+            <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_prelevement) @endphp</td>
         </tr>
 
         <tr>
             <th class="head bordered" style="width: 150px;">Référence client :</th>
             <td class="bordered">{{ $commande_info->ref_client }}</td>
             <th class="head bordered" style="width: 150px;">Date de réception :</th>
-            <td class="bordered">{{ $commande_info->date_reception }}</td>
+            <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_reception) @endphp </td>
         </tr>
 
         <tr>
             <th class="head bordered" style="width: 150px;">Nature déchantillon :</th>
             <td class="bordered">{{ $commande_info->nature }}</td>
             <th class="head bordered">Date d'analyse :</th>
-            <td class="bordered" style="width: 150px;">{{ $commande_info->date_edition }}</td>
+            <td class="bordered" style="width: 150px;"> @php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp  </td>
         </tr>
 
         <tr>
             <th class="head bordered" style="width: 150px;">Température à la réception :</th>
-            <td class="bordered">{{ $commande_info->temperature }}</td>
+            <td class="bordered">{{ $commande_info->temperature }} °C</td>
             <th class="head bordered" style="width: 150px;">Date d'édition :</th>
-            <td class="bordered">{{ $commande_info->date_edition }}</td>
+            <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp </td>
         </tr>
 
         <tr>
@@ -168,7 +173,7 @@
         </tr>
     </table>
 
-    <table class="border_light" style="width:100%;font-size:10px;margin-top:10px">
+    <table style="width:100%;font-size:10px;margin-top:10px" class="border_light ">
             <tr>
                 <th style="text-align: center" class="head bordered">Paramètres</th>
                 <th style="text-align: center" class="head bordered">Sym. </th>
@@ -179,43 +184,29 @@
                 <th style="text-align: center" class="head bordered">Critères</th>
             </tr>
             @php
-                $nitra = $analyse_data->NO3_ppm;
+                $nitra = $analyse_data->NO3;
                 $commantair_analyse = $commantair[0];
-                if (floatval($nitra) <= 0.5) {
-                    $nitra = 'Inf à 0,5';
-                }
-                $nitri = $analyse_data->NO2_ppm;
-                $ammon = $analyse_data->NH4_ppm;
-                if (floatval($nitri) <= 0.1) {
-                    $nitri = 'Inf à 0,1';
-                } elseif (floatval($ammon) <= 0.1) {
-                    $ammon = 'Inf à 0,1';
-                }
-                $cu = $analyse_data->Cu_ppm;
-                $zn = $analyse_data->Zn_ppm;
-                $mn = $analyse_data->Mn_ppm;
-                if (floatval($cu) <= 0.01) {
-                    $cu = 'Inf à 0,01';
-                } elseif (floatval($zn) <= 0.01) {
-                    $zn = 'Inf à 0,01';
-                } elseif (floatval($mn) <= 0.01) {
-                    $mn = 'Inf à 0,01';
-                }
-                $fe = $analyse_data->Fe_ppm;
-                if (floatval($fe) <= 0.005) {
-                    $fe = 'Inf à 0,005';
-                }
+                
+                $nitri = $analyse_data->NO2;
+                $ammon = $analyse_data->NH4;
+                
+                $cu = $analyse_data->Cu;
+                $zn = $analyse_data->Zn;
+                $mn = $analyse_data->Mn;
+                $fe = $mn = $analyse_data->Fe;
+                
+                
             @endphp
             <tr class="border_light">
                 <td class="bordered">Potentiel hydrogène(<h6 style='color:red;'>*</h6>)</td>
                 <td class="col-md-3 bordered">PH</td>
                 <td class="col-md-3 bordered">NM ISO 10523:V2012</td>
                 <td class="col-md-3 bordered">Unités pH</td>
-                <td class="col-md-3 bordered">{{ $analyse_data->PH_Unité_PH }}</td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->PH ) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
                        
-                        if ($analyse_data->PH_Unité_PH > 8.5 or $analyse_data->PH_Unité_PH < 6.5) {
+                        if ($analyse_data->PH > 8.5 or $analyse_data->PH < 6.5) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -229,10 +220,10 @@
                 <td class="col-md-3 bordered">EC</td>
                 <td class="col-md-3 bordered"> NF EN 27888:V2001</td>
                 <td class="col-md-3 bordered">uS/cm</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->EC_mS_Cm * 1000 ?></td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->EC * 1000 ) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($analyse_data->EC_mS_Cm * 1000 > 8.5 or $analyse_data->EC_mS_Cm * 1000 < 6.5) {
+                        if ($analyse_data->EC * 1000 > 2700 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -246,10 +237,10 @@
                 <td class="col-md-3 bordered">NO3</td>
                 <td class="col-md-3 bordered">NF EN ISO 13395:V1996</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $nitra ?></td>
+                <td class="col-md-3 bordered"><? (floatval($nitra) <=0.1) ? "INF à 0,5":Archivos::ft3nb($nitra) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($nitra > 8.5 or $nitra < 6.5) {
+                        if ($nitra > 50 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -263,10 +254,10 @@
                 <td class="col-md-3 bordered">NO2</td>
                 <td class="col-md-3 bordered">NF EN ISO 13395:V1996</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <?= $nitri ?></td>
+                <td class="col-md-3 bordered"> <? (floatval($nitri  ) <=0.1) ? "INF à 0,1":Archivos::ft3nb($nitri) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($nitri > 8.5 or $nitri < 6.5) {
+                        if ($nitri > 0.5 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -280,10 +271,10 @@
                 <td class="col-md-3 bordered">NH4</td>
                 <td class="col-md-3 bordered">NF EN ISO 11732:V2005</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $ammon ?></td>
+                <td class="col-md-3 bordered"><? (floatval($ammon ) <=0.1) ? "INF à 0,1":Archivos::ft3nb($ammon) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($ammon > 8.5 or $ammon < 6.5) {
+                        if ($ammon > 0.5 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -297,10 +288,10 @@
                 <td class="col-md-3 bordered">Cl</td>
                 <td class="col-md-3 bordered"> NF EN ISO 15682:V2001</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->Cl_ppm ?></td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->Cl) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($analyse_data->Cl_ppm > 8.5 or $analyse_data->Cl_ppm < 6.5) {
+                        if ($analyse_data->Cl > 750 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -314,10 +305,10 @@
                 <td class="col-md-3 bordered">SO4</td>
                 <td class="col-md-3 bordered"> NF T 90_040:V1986</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->SO4_ppm ?></td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->SO4) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($analyse_data->SO4_ppm > 8.5 or $analyse_data->SO4_ppm < 6.5) {
+                        if ($analyse_data->SO4 > 400 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -331,16 +322,8 @@
                 <td class="col-md-3 bordered">Ca</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <?= $analyse_data->Ca_ppm ?></td>
-                <td class="col-md-3 bordered">
-                    @php
-                        if ($analyse_data->Ca_ppm > 8.5 or $analyse_data->Ca_ppm < 6.5) {
-                            echo "<h6 style='color:red;'>◉</h6>";
-                            $commantair_analyse = $commantair[1];
-                        }
-                    @endphp
-
-                </td>
+                <td class="col-md-3 bordered"> @php echo Archivos::ft3nb($analyse_data->Ca) @endphp</td>
+                <td class="col-md-3 bordered"></td>
                 <td class="col-md-3 bordered"> Non spécifié</td>
             </tr>
 
@@ -349,15 +332,8 @@
                 <td class="col-md-3 bordered">Mg</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <?= $analyse_data->Mg_ppm ?></td>
-                <td class="col-md-3 bordered">
-                    @php
-                        if ($analyse_data->Mg_ppm > 8.5 or $analyse_data->Mg_ppm < 6.5) {
-                            echo "<h6 style='color:red;'>◉</h6>";
-                            $commantair_analyse = $commantair[1];
-                        }
-                    @endphp
-                </td>
+                <td class="col-md-3 bordered"> @php echo Archivos::ft3nb($analyse_data->Mg) @endphp</td>
+                <td class="col-md-3 bordered"></td>
                 <td class="col-md-3 bordered">Non spécifié</td>
             </tr>
 
@@ -366,15 +342,8 @@
                 <td class="col-md-3 bordered">THt</td>
                 <td class="col-md-3 bordered"> Calcul.</td>
                 <td class="col-md-3 bordered">°f</td>
-                <td class="col-md-3 bordered"> <?= round(($analyse_data->Ca_ppm / 20 + $analyse_data->Mg_ppm / 12) * 5,2) ?></td>
-                <td class="col-md-3 bordered">
-                    @php
-                        if (($analyse_data->Ca_ppm / 20 + $analyse_data->Mg_ppm / 12) * 5 > 8.5 or ($analyse_data->Ca_ppm / 20 + $analyse_data->Mg_ppm / 12) * 5 < 6.5) {
-                            echo "<h6 style='color:red;'>◉</h6>";
-                            $commantair_analyse = $commantair[1];
-                        }
-                    @endphp
-                </td>
+                <td class="col-md-3 bordered"> @php echo Archivos::ft3nb(($analyse_data->Ca / 20 + $analyse_data->Mg / 12) * 5,2) @endphp</td>
+                <td class="col-md-3 bordered"></td>
                 <td class="col-md-3 bordered"> Non spécifié</td>
             </tr>
 
@@ -383,15 +352,8 @@
                 <td class="col-md-3 bordered">HCO3</td>
                 <td class="col-md-3 bordered"> MN ISO 9963-1:V2001</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->HCO3_ppm ?></td>
-                <td class="col-md-3 bordered">
-                    @php
-                        if ($analyse_data->HCO3_ppm > 8.5 or $analyse_data->HCO3_ppm < 6.5) {
-                            echo "<h6 style='color:red;'>◉</h6>";
-                            $commantair_analyse = $commantair[1];
-                        }
-                    @endphp
-                </td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->HCO3) @endphp</td>
+                <td class="col-md-3 bordered"></td>
                 <td class="col-md-3 bordered"> Non spécifié</td>
             </tr>
 
@@ -400,15 +362,8 @@
                 <td class="col-md-3 bordered">TAC</td>
                 <td class="col-md-3 bordered"> MN ISO 9963-1 </td>
                 <td class="col-md-3 bordered">°f</td>
-                <td class="col-md-3 bordered"> <?= round($analyse_data->HCO3_ppm / 12.2 ,2) ?></td>
-                <td class="col-md-3 bordered">
-                    @php
-                        if ($analyse_data->HCO3_ppm / 12.2 > 8.5 or $analyse_data->HCO3_ppm / 12.2 < 6.5) {
-                            echo "<h6 style='color:red;'>◉</h6>";
-                            $commantair_analyse = $commantair[1];
-                        }
-                    @endphp
-                </td>
+                <td class="col-md-3 bordered"> @php echo Archivos::ft3nb($analyse_data->HCO3 / 12.2 ,2) @endphp</td>
+                <td class="col-md-3 bordered"></td>
                 <td class="col-md-3 bordered"> Non spécifié</td>
             </tr>
 
@@ -417,10 +372,10 @@
                 <td class="col-md-3 bordered">-</td>
                 <td class="col-md-3 bordered"> MN 03 7 015 </td>
                 <td class="col-md-3 bordered">mgO2/L</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->Oxydabilite ?></td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->Oxydabilite) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($analyse_data->Oxydabilite > 8.5 or $analyse_data->Oxydabilite < 6.5) {
+                        if ($analyse_data->Oxydabilite > 5 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -434,10 +389,10 @@
                 <td class="col-md-3 bordered"> -</td>
                 <td class="col-md-3 bordered"> MN 03 7 010</td>
                 <td class="col-md-3 bordered">NTU</td>
-                <td class="col-md-3 bordered"><?= $analyse_data->Turbidite ?></td>
+                <td class="col-md-3 bordered">@php echo Archivos::ft3nb($analyse_data->Turbidite) @endphp</td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($analyse_data->Turbidite > 8.5 or $analyse_data->Turbidite < 6.5) {
+                        if ($analyse_data->Turbidite > 5 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -451,10 +406,10 @@
                 <td class="col-md-3 bordered">Cu</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $cu ?></td>
+                <td class="col-md-3 bordered"><?  (floatval($cu) <=0.01) ? "INF à 0,01":Archivos::ft3nb($cu) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($cu > 8.5 or $cu < 6.5) {
+                        if ($cu > 2 ) {
                             echo "<h6 style='color:red;'>◉</h5>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -468,10 +423,10 @@
                 <td class="col-md-3 bordered">Zn</td>
                 <td class="col-md-3 bordered">NF EN ISO 11885:V2009 </td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $zn ?></td>
+                <td class="col-md-3 bordered"><? (floatval($zn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($zn) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($zn > 8.5 or $zn < 6.5) {
+                        if ($zn > 3 ) {
                             echo "<h6 style='color:red;' >◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -481,16 +436,14 @@
             </tr>
 
             <tr>
-                <td class="bordered">Mangénèse(<h6 style='color:red;'>*</h6>)</td>
+                <td class="bordered">Manganèse(<h6 style='color:red;'>*</h6>)</td>
                 <td class="col-md-3 bordered"> Mn</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"> <?= $mn ?></td>
+                <td class="col-md-3 bordered"> <? (floatval($mn) <=0.01) ? "INF à 0,01":Archivos::ft3nb($mn) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                    //////////////////// inf 
-
-                        if ($mn > 8.5 or $mn < 6.5) {
+                        if ($mn > 0.5 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }
@@ -504,10 +457,10 @@
                 <td class="col-md-3 bordered"> Fe</td>
                 <td class="col-md-3 bordered"> NF EN ISO 11885:V2009</td>
                 <td class="col-md-3 bordered">mg/L</td>
-                <td class="col-md-3 bordered"><?= $fe ?></td>
+                <td class="col-md-3 bordered"><? (floatval($fe) < 0.005) ? "INF à 0,005 ":Archivos::ft3nb($fe) ?></td>
                 <td class="col-md-3 bordered">
                     @php
-                        if ($fe > 8.5 or $fe < 6.5) {
+                        if ($fe > 0.30 ) {
                             echo "<h6 style='color:red;'>◉</h6>";
                             $commantair_analyse = $commantair[1];
                         }

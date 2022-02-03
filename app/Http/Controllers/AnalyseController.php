@@ -30,8 +30,6 @@ class AnalyseController extends Controller
             $analyse_table = strtolower($analyse_table); 
             $analyse_table = str_replace(' ', '_', $analyse_table); 
             $analyse_table = "analyse_".$analyse_table;
-            //echo  $analyse_table;
-            //dd($request);
         }
         
         $listMatrices = Matrice::get();
