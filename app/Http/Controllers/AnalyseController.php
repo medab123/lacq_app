@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnalyseExport;
 use App\Imports\AnalyseImport;
 use App\Http\Controllers\ActivityController;
+use App\Services\PayUService\Exception;
 
 
 class AnalyseController extends Controller
@@ -69,8 +70,16 @@ class AnalyseController extends Controller
     {   
         $import = new AnalyseImport();
         $import->getTableName($matrice_id);
-        Excel::import($import, $request->file('analyse_import')->store('temp'));
-        return redirect()->back()->with('success','Les analyses importer avec succès')->with('selectedMatrice', $matrice_id);
+        try{
+            $stat = Excel::import($import, $request->file('analyse_import')->store('temp'));
+        }catch(\Exception $e){
+            if(env('APP_DEBUG') == false){
+                return redirect()->back()->with('error','Les analyses importer ne pas compatible ' )->with('selectedMatrice', $matrice_id);
+            }
+            return redirect()->back()->with('error','Les analyses importer ne pas compatible '.$e->getMessage() )->with('selectedMatrice', $matrice_id);
+
+        }
+        return redirect()->back()->with('success','Les analyses importer avec succès '.($stat))->with('selectedMatrice', $matrice_id);
     }
 
 
