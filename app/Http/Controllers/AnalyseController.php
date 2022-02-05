@@ -77,9 +77,8 @@ class AnalyseController extends Controller
                 return redirect()->back()->with('error','Les analyses importer ne pas compatible ' )->with('selectedMatrice', $matrice_id);
             }
             return redirect()->back()->with('error','Les analyses importer ne pas compatible '.$e->getMessage() )->with('selectedMatrice', $matrice_id);
-
         }
-        return redirect()->back()->with('success','Les analyses importer avec succès '.($stat))->with('selectedMatrice', $matrice_id);
+        return redirect()->back()->with('success','Les analyses importer avec succès ')->with('selectedMatrice', $matrice_id);
     }
 
 
