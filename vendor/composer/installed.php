@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '71de5cbfd2c1e4617385f1268041dd4cb89234e7',
+        'reference' => 'a978a0f7b552652dcb63bb074b990112a090efd1',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -427,7 +427,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '71de5cbfd2c1e4617385f1268041dd4cb89234e7',
+            'reference' => 'a978a0f7b552652dcb63bb074b990112a090efd1',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -579,9 +579,6 @@
             'aliases' => array(),
             'reference' => '776f831124e9c62e1a2c601ecc52e776d8bb7220',
             'dev_requirement' => true,
-            'replaced' => array(
-                0 => '1.10.2',
-            ),
         ),
         'myclabs/php-enum' => array(
             'pretty_version' => '1.8.3',
