@@ -92,6 +92,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/analyses', [AnalyseController::class,'index']);
     Route::get('/analyses', [AnalyseController::class,'index']);
     Route::get('/analyses/export/{matrice_id}', [AnalyseController::class, 'export']);
+    Route::post('/analyses/import/{matrice_id}', [AnalyseController::class, 'import']);
+
 
     Route::get('report/{commande_id}', [ReportController::class, 'index']);
 

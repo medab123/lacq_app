@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -26,6 +26,8 @@
         sizes="16x16 32x32 48x48 64x64 128x128">
     <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="shortcut icon"
         type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </head>
 
 <body class="scrollbar CostumScrolBar">
