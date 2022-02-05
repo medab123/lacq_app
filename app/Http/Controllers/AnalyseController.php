@@ -9,6 +9,7 @@ use App\Models\Lieu;
 use App\Models\Analys; 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnalyseExport;
+use App\Imports\AnalyseImport;
 use App\Http\Controllers\ActivityController;
 
 
@@ -63,6 +64,13 @@ class AnalyseController extends Controller
         $export = new AnalyseExport();
         $export->getTableName($matrice_id);
         return Excel::download($export, 'analyse_export.xlsx');
+    }
+    public function import(Request $request,$matrice_id) 
+    {   
+        $import = new AnalyseImport();
+        $import->getTableName($matrice_id);
+        Excel::import($import, $request->file('analyse_import')->store('temp'));
+        return redirect()->back()->with('success','Les analyses importer avec succès')->with('selectedMatrice', $matrice_id);
     }
 
 
@@ -135,7 +143,11 @@ class AnalyseController extends Controller
         for($i = 0 ; $i<count($request["id"]);$i++){
             $analyseData = [];
             foreach ($columns as $column){
-                array_push($analyseData,[$column => floatval(str_replace(",",".",trim($request[$column][$i])))]);
+                $value = (str_replace(",",".",trim($request[$column][$i])));
+                if(empty($value)){
+                    $value = null;
+                }
+                array_push($analyseData,[$column => $value]);
             }
             $analyseData = call_user_func_array('array_merge', $analyseData);
             $analyse = DB::table($table)
@@ -143,7 +155,7 @@ class AnalyseController extends Controller
             ->update($analyseData);
             ActivityController::updateActivity(new Analys(),"analyse ".$request["id"][$i]." update");
         }
-        return redirect()->back()->with('success','Les analyses modifiée avec succès');
+        return redirect()->back()->with('success','Les analyses modifiée avec succès')->with('selectedMatrice', $request["selectedMatrice"]);
     }
 
     /**

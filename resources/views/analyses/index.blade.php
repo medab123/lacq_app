@@ -13,7 +13,17 @@
         .btnAction {
             font-size: 10px;
         }
-
+        .div-upload {
+    position: relative;
+    overflow: hidden;
+  }
+  .input-upload {
+    position: absolute;
+    font-size: 10px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+  }
     </style>
     <!----------------------------------------- modal foem ------------------------------------------------>
 
@@ -39,7 +49,7 @@
         </div>
 
     @endif
-    <form action="/analyses" method="POST">
+   
 
         <div class="card " style=" background-color: rgb(255, 255, 255)">
             <div class="card-header d-inline ">{{ __('La liste des analyses') }}
@@ -47,17 +57,23 @@
                     class="ml-3 d-inline  form-control form-control-sm col-2 float-right">
                     @foreach ($listMatrices as $matrice)
                         <option value="{{ $matrice->id }}"
-                            {{ $matrice->id == $selectedMatrice || $selectedMatrice == null ? 'selected' : '' }}>
+                            {{ ($matrice->id == $selectedMatrice || $selectedMatrice == null || $matrice->id == session('selectedMatrice') ) ? 'selected' : '' }}>
                             {{ $matrice->name }}</option>
                     @endforeach
                 </select>
                 <button class="btn btn-success btn-sm float-right mr-2 py-1" type="button" onclick="analyses_export()"><i class="fa fa-download" aria-hidden="true"></i></button>
-                <a class="btn btn-primary btn-sm float-right mr-2 py-1" href="{{url('/Biens/import')}}" ><i class="fa fa-upload" aria-hidden="true"></i></a>
-            </div>
-
+                
+                <form action="{{url('/analyse/import')}}" method="POST" enctype="multipart/form-data" class="d-inline form-upload float-right">
+                    @csrf
+                    <div class="d-inline div-upload">
+                      <i class="fa fa-upload btn btn-primary btn-sm px-2 mr-2" style="padding: 7px 0px; " aria-hidden="true"></i>
+                      <input type="file" class="input-upload"  name="analyse_import" >
+                    </div>
+                </form>
+        <form action="/analyses" method="POST" id="formAnalyse">
             @csrf
             @method('patch')
-
+            <input type="hidden" name="selectedMatrice" id="hiddenselectedMatrice" value="{{ $selectedMatrice }}">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-sm ">
@@ -96,30 +112,54 @@
                 <center><button id="save" type="submit"
                         class="btn btn-success btn-sm d-lg-none mt-3 px-5">Sauvegarder</button></center>
             </div>
-
+        </form>
         </div>
 
         </div>
-    </form>
+    
     <div class="d-flex justify-content-center mt-2">
     </div>
     <script>
+        $( document ).ready(function() {
+            $("#matriceFilter").trigger('change');
+        });
+        
         var cadenas_is_open = false;
-
+        $(".input-upload").change(function() {
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Simple confirm!',
+                buttons: {
+                    confirm: function () {
+                        $.alert('File sended !');
+                        $(".form-upload").submit();
+                    },
+                    cancel: function () {
+                        $.alert('Uploade Canceled!');
+                        $(".input-upload").val(null)
+                    },
+                }
+            });
+        })
+        $(".form-upload").submit(function( event ) {
+            //event.preventDefault()
+            $(this).attr('action', "{{url('/analyses/import')}}/"+$("#matriceFilter").val());
+        });
         function cadenasLock() {
             cadenas_is_open = !cadenas_is_open;
             cadenas_is_open ? arrayToInputs() : InputsToArray()
         }
+        
 
         function arrayToInputs() {
             $("td").each(function() {
                 if (this.id == "id_analyse")
                     $(this).html(
-                        "<input  style='width:100px;' class='form-control form-control-sm' name='id[]' value='" + $(
-                            this).html() + "' readonly='readonly' >");
+                        "<input  style='width:100px;' class='form-control form-control-sm' name='id[]' value='" + $.trim($(
+                            this).html()) + "' readonly='readonly' >");
                 else if (this.id !== "notModifiable")
-                    $(this).html("<input style='width:100px;' class='form-control form-control-sm' name='" + this
-                        .id + "[]' value='" + $(this).html() + "' >");
+                    $(this).html("<input style='width:100px;' class='form-control form-control-sm' name='" + this 
+                        .id + "[]' value='" + $.trim($(this).html()) + "' >");
             });
             $("#cadenas").html(
                 '<div class="alert alert-danger py-2" role="alert"><i class="fa fa-unlock mr-2" aria-hidden="true"></i>Cadenas ouvertes </div>'
@@ -140,6 +180,7 @@
             $("html").preloader({
                 text: 'Loading'
             });
+            $("#hiddenselectedMatrice").val($("#matriceFilter").val())
             $.ajax({
                 url: "{{ url('/analyses') }}",
                 type: "POST",
