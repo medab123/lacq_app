@@ -121,10 +121,10 @@
               <th class="head bordered" style="width:125px;">Référence client:</th>
               <td class="bordered">{{ $commande_info->ref_client}}</td>
               <th class="head bordered" style="width: 150px;">Quantité récéptionnée:</th>
-              <td class="bordered">{{ $commande_info->quantite }}</td>
+              <td class="bordered">{{ $commande_info->quantite }}</td> 
           </tr>
       </table>
-  
+    
       <table style="width:100%;font-size:9px;margin-top:" >
           <tr>
             <th class="head bordered" style="text-align:center">RENSEIGNEMENTS RELATIFS A L'ECHANTILLON</th>
@@ -137,7 +137,7 @@
         {
           $etat="présence";
         }
-        else
+        elseif(strtolower($etat)=="a")
         $etat="absence";
         @endphp
   
@@ -186,7 +186,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Refus}}</td>
                   <td style="border-right:1px solid black;"></td>
           </tr>
           <tr >
@@ -195,8 +195,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ $analyse_data->MS_% }}</td>
-                  <td style="border-right:1px solid black;">Humidité: 25,0 %</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->MS,1)}}</td>
+                  <td style="border-right:1px solid black;">Humidité: {{round(100 - $analyse_data->MS,1)}}%</td>
               </tr>
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Masse volumique</td>
@@ -204,7 +204,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Kg/m3</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->M_V_G_L}}</td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->M_V}}</td>
                   <td style="border-right:1px solid black;font-size:9px;;"></td>
               </tr>
               <tr>
@@ -213,8 +213,30 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">-</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{$analyse_data->PH_Unité_PH}}</td>
-                  <td style="border-right:1px solid black;"></td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PH,1)}}</td>
+                  <td style="border-right:1px solid black;">
+                    @php
+                    if($analyse_data->PH<5)
+                    {
+                    echo "Produit extrèmement acide";
+                    }
+                    elseif ($analyse_data->PH<6) {
+                        echo "Produit très acide";
+                    }
+                    elseif ($analyse_data->PH<6.6) {
+                        echo "Produit acide";
+                    }
+                    elseif ($analyse_data->PH<7.4) {
+                        echo "Produit pratiquement neutre";
+                    }
+                    elseif ($analyse_data->PH<7.8) {
+                        echo "Produit légèrement alcalin";
+                    }
+                    elseif ($analyse_data->PH>8) {
+                        echo "Produit alcalin";
+                    }
+                    @endphp
+                    </td>
               </tr>
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Conductivité électrique</td>
@@ -222,7 +244,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mS/cm</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13038:V2000</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{$analyse_data->EC_mS_Cm}}</td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{round($analyse_data->EC,1)}}</td>
                   <td style="border-right:1px solid black;"></td>
               </tr>
       </table>
@@ -237,19 +259,19 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">M.O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13039:V2011</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="border-right:1px solid black;"></td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->M_O,1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->M_O * ($analyse_data->MS/100),1)}}</td>
+                  <td style="border-right:1px solid black;">Carb.org en % ms: {{round($analyse_data->M_O/1.72,1)}}%</td>
           </tr>
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Azote total Kjeldahl <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">NTK</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/NF EN 11261:V1995</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="border-right:1px solid black;"></td>
-          </tr>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->NTK}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->NTK * ($analyse_data->MS/100),2)}}</td>
+                  <td style="border-right:1px solid black;">Rapport C/N: {{round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
+          
           </table><br>
           
           <table style="width:100%;font-size:9px;border:1px solid black;" >
@@ -258,8 +280,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">P2O5</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT  * 2.29,2)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -267,8 +289,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">K2O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->K  * 1.205,2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->K * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -276,8 +298,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">MgO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mg * 1.658, 2) }}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mg * ($analyse_data->MS/100), 2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -285,8 +307,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">CaO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ca * 1.399, 2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ca * ($analyse_data->MS/100), 2)}} </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           </table>
@@ -299,29 +321,20 @@
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Fer <h6 style='color:red;'>(*)</h6></td>
-                  <td style="width:32px;text-align:center;border-right:1px solid black;">FR</td>
-                  <td style="width:30px;text-align:center;border-right:1px solid black;">%</td> 
-                  <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="border-right:1px solid black;"></td>
-          </tr>
-          <tr >
-                  <td style="width:160px;border-right:1px solid black;">Fer <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Fe</td>
-                  <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
+                  <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Fe}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Fe * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
-              </tr>
+          </tr>
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Zinc <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">311,5</td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">233,6</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Zn}}</td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Zn * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -329,8 +342,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Cu</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">81,8</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">61,4</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cu}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cu * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -338,8 +351,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Mn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">-</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Mn}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mn * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -355,8 +368,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">As</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">1,86</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">1,40</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->As}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->As * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr >
@@ -364,8 +377,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cd</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">0,52</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">0,39</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cd}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cd * ($analyse_data->MS/100),2)}} </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -373,8 +386,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cr</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">14,3</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">10,8</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cr}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cr * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -382,8 +395,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Hg</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">Inf à 0,10</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">Inf à 0,10</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Hg}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Hg * ($analyse_data->MS/100),2)}} </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -391,8 +404,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Ni</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">11,0</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">8,2</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Ni}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ni * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -400,8 +413,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Pb</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">4,26</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">3,20</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Pb}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Pb * ($analyse_data->MS/100),2)}} </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -409,8 +422,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Se</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">3,7</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">2,8</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Se}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Se * ($analyse_data->MS/100),2)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>

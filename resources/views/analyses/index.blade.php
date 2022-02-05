@@ -131,7 +131,6 @@
                 content: 'Simple confirm!',
                 buttons: {
                     confirm: function () {
-                        $.alert('File sended !');
                         $(".form-upload").submit();
                     },
                     cancel: function () {
