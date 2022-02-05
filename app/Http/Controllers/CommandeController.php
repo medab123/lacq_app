@@ -181,12 +181,36 @@ class CommandeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function genirationCodeCommande($id,$matrice_id = null){
+        if($matrice_id == null){
+             $codeMatrice = Commande::join("menus","commandes.menu_id","=","menus.id")
+            ->join("matrices","menus.matrice_id","=","matrices.id")
+            ->select("matrices.code as startCode")
+            ->where("commandes.id","=",$id)
+            ->first()["startCode"];
+        }else{
+            $codeMatrice = Matrice::find($matrice_id)["code"];
+        }
+       
+        
+        $lastCode = Commande::select("code_commande as code")
+        ->where("code_commande","like",$codeMatrice."%")
+        ->orderByRaw('id desc')
+        ->first();
+        (!empty($lastCode)) ? $code = $lastCode["code"] + 1 : $code = $codeMatrice."001";
+        return  $code;
+    }
+
     public function update(Request $request, $id)
     {
         //
+        $old_matrice_id = Menu::find(Commande::find($id)["menu_id"])["matrice_id"];
+        $new_matrice_id = Menu::find($request->input("menu"))["matrice_id"];
+        $code_commande = ($old_matrice_id == $new_matrice_id) ? Commande::find($id)["code_commande"] : self::genirationCodeCommande(null,$new_matrice_id);
         $commercial = $request->input("commercial");
         $id_commercial = Commercial::select("id")->where("name","=",$commercial)->first()["id"];
         $commande = Commande::find($id);
+        $commande->code_commande = $code_commande;
         $commande->client_id = $request->input("client");
         $commande->commercial_id = $id_commercial;
         $commande->menu_id = $request->input("menu");
@@ -289,19 +313,7 @@ class CommandeController extends Controller
     }
 
     /////////////////////////////////////////////////////////
-    public function genirationCodeCommande($id){
-        $codeMatrice = Commande::join("menus","commandes.menu_id","=","menus.id")
-        ->join("matrices","menus.matrice_id","=","matrices.id")
-        ->select("matrices.code as startCode")
-        ->where("commandes.id","=",$id)
-        ->first()["startCode"];
-        $lastCode = Commande::select("code_commande as code")
-        ->where("code_commande","like",$codeMatrice."%")
-        ->orderByRaw('id desc')
-        ->first();
-        (!empty($lastCode)) ? $code = $lastCode["code"] + 1 : $code = $codeMatrice."001";
-        return  $code;
-    }
+    
     public static function search(Request $request){
         $buffer = $request->input("buffer");
         $listCommandes = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
