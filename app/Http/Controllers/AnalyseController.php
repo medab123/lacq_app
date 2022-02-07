@@ -70,11 +70,13 @@ class AnalyseController extends Controller
     {   
         $import = new AnalyseImport();
         $import->getTableName($matrice_id);
+        //Excel::import($import, $request->file('analyse_import')->store('temp'));
+
         try{
-            $stat = Excel::import($import, $request->file('analyse_import')->store('temp'));
+            Excel::import($import, $request->file('analyse_import')->store('temp'));
         }catch(\Exception $e){
             if(env('APP_DEBUG') == false){
-                return redirect()->back()->with('error','Les analyses importer ne pas compatible ' )->with('selectedMatrice', $matrice_id);
+                return redirect()->back()->with('error','Les analyses importer ne pas compatible ' .$e->getMessage() )->with('selectedMatrice', $matrice_id);
             }
             return redirect()->back()->with('error','Les analyses importer ne pas compatible '.$e->getMessage() )->with('selectedMatrice', $matrice_id);
         }
