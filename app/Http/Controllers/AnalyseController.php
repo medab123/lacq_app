@@ -29,7 +29,7 @@ class AnalyseController extends Controller
         $selectedMatrice = 2;
         if($analyse_table != 'analyse_eau_potable'){
             $selectedMatrice = $request["matrice"];
-            $analyse_table = Matrice::find($analyse_table)['name'];
+            $analyse_table = Matrice::find($selectedMatrice)['name'];
             $analyse_table = strtolower($analyse_table); 
             $analyse_table = str_replace(' ', '_', $analyse_table); 
             $unite_table = "analyse_unite_".$analyse_table;

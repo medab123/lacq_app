@@ -49,8 +49,9 @@ class AnalyseExport implements FromCollection,WithHeadings
         
         $count = count($columns);
         
-        array_unshift($columns,"code commande");
+        
         unset($columns[$count]);
+        array_unshift($columns,"code commande");
         for($i = 0 ; $i<$count;$i++){
             $column = $columns[$i];
             if($column == "id" || $column == "commande_id" || $column == "deleted_at" || $column == "created_at"){

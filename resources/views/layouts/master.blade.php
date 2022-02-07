@@ -36,7 +36,7 @@
 
     <div class="navbarList">
         <div class='navbarItimes'>
-            <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
+           <!--- <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">--->
             <a class="dropbtn ml-5 mr-2" href="{{ url('/') }}" style="border-radius: 3px;">Accueil</a>
 
             <a class="dropbtn" href="{{ url('/clients') }}" style="border-radius: 3px; ">Clients</a>
@@ -65,7 +65,7 @@
             <div class="dropdownList">
                 <div class='userInfoAvatar'>
                     <a class="imgUser "><img style="border-radius:50%"
-                            src="{{ asset('img/' . Auth::user()->avatar) }}"></a>
+                            src="{{ asset('img/avatar/' . Auth::user()->avatar) }}"></a>
                     <div class="dropdownList-one" style=" right: 0px; ">
                         <a class="dItem" href="{{ url('users/edit') }}">Mon compte</a>
                         <a style="color:Black;" class="dItem" href="{{ route('logout') }}"

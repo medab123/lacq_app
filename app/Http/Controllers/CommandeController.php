@@ -206,6 +206,23 @@ class CommandeController extends Controller
         //
         $old_matrice_id = Menu::find(Commande::find($id)["menu_id"])["matrice_id"];
         $new_matrice_id = Menu::find($request->input("menu"))["matrice_id"];
+        $analyse_table = "analyse_".str_replace(' ', '_', strtolower(Matrice::find($old_matrice_id)["name"]));
+        if (Schema::hasTable($analyse_table)) {
+            if(DB::table($analyse_table)->where("commande_id",$id)->first()){
+                DB::table($analyse_table)->where("commande_id",$id)->delete();
+            }
+        }
+        $analyse_table = "analyse_".str_replace(' ', '_', strtolower(Matrice::find($new_matrice_id)["name"]));
+        if (Schema::hasTable($analyse_table)) {
+            if(!DB::table($analyse_table)->where("commande_id","=",$id)->first()){
+                DB::table($analyse_table)->insert([
+                    'commande_id' => $id,
+                ]);
+            }
+        }
+
+
+
         $code_commande = ($old_matrice_id == $new_matrice_id) ? Commande::find($id)["code_commande"] : self::genirationCodeCommande(null,$new_matrice_id);
         $commercial = $request->input("commercial");
         $id_commercial = Commercial::select("id")->where("name","=",$commercial)->first()["id"];

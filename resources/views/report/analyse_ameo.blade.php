@@ -186,8 +186,9 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Refus}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->Refus)? "-" : $analyse_data->Refus }}</td>
                   <td style="border-right:1px solid black;"></td>
+                  
           </tr>
           <tr >
                   <td style="width:160px;border-right:1px solid black;">Matière sèche à 103°C <h6 style='color:red;'>(*)</h6></td>
@@ -195,7 +196,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->MS,1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->MS,1))? "-" : round($analyse_data->MS,1)}}</td>
                   <td style="border-right:1px solid black;">Humidité: {{round(100 - $analyse_data->MS,1)}}%</td>
               </tr>
               <tr>
@@ -204,7 +205,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Kg/m3</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->M_V}}</td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->M_V)? "-" : $analyse_data->M_V }}</td>
                   <td style="border-right:1px solid black;font-size:9px;;"></td>
               </tr>
               <tr>
@@ -213,7 +214,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">-</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PH,1)}}</td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->PH)? "-" : $analyse_data->PH }}</td>
                   <td style="border-right:1px solid black;">
                     @php
                     if($analyse_data->PH<5)
@@ -244,7 +245,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mS/cm</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13038:V2000</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{round($analyse_data->EC,1)}}</td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->EC,1))? "-" : round($analyse_data->EC,1)}}</td>
                   <td style="border-right:1px solid black;"></td>
               </tr>
       </table>
@@ -259,8 +260,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">M.O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13039:V2011</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->M_O,1)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->M_O * ($analyse_data->MS/100),1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->M_O,1))? "-" : round($analyse_data->M_O,1) }}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->M_O * ($analyse_data->MS/100),1))? "-" :round($analyse_data->M_O* ($analyse_data->MS/100),1) }} </td> 
                   <td style="border-right:1px solid black;">Carb.org en % ms: {{round($analyse_data->M_O/1.72,1)}}%</td>
           </tr>
           <tr>
@@ -268,20 +269,18 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">NTK</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/NF EN 11261:V1995</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->NTK}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->NTK * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK,1))? "-" : round($analyse_data->NTK,1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK * ($analyse_data->MS/100),1))? "-" :round($analyse_data->NTK * ($analyse_data->MS/100),1) }} </td>  
                   <td style="border-right:1px solid black;">Rapport C/N: {{round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
-          
           </table><br>
-          
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Phosphore <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">P2O5</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT  * 2.29,2)}} </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT,1)? "-" : round($analyse_data->PT,1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->PT * ($analyse_data->MS/100),1))? "-" : round($analyse_data->PT * ($analyse_data->MS/100),1)}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -289,8 +288,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">K2O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->K  * 1.205,2)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->K * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->K,1))? "-" : round($analyse_data->K,1)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->K * ($analyse_data->MS/100),1))? "-" : round($analyse_data->K * ($analyse_data->MS/100),1) }}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -298,8 +297,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">MgO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mg * 1.658, 2) }}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mg * ($analyse_data->MS/100), 2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->Mg * 1.658, 2))? "-" : round($analyse_data->Mg * 1.658, 2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Mg * ($analyse_data->MS/100), 2)))? "-" : Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -307,8 +306,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">CaO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ca * 1.399, 2)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ca * ($analyse_data->MS/100), 2)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->Ca * 1.399, 2))? "-" : round($analyse_data->Ca * 1.399, 2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Ca * ($analyse_data->MS/100), 2)))? "-" : Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           </table>
@@ -324,8 +323,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Fe</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Fe}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Fe * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Fe)? "-" : $analyse_data->Fe}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Fe * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
               <tr>
@@ -333,8 +332,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Zn}}</td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Zn * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Zn)? "-" : $analyse_data->Zn}}</td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Zn * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -342,8 +341,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Cu</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cu}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cu * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cu)? "-" : $analyse_data->Cu}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cu * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -351,8 +350,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Mn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Mn}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Mn * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Mn)? "-" : $analyse_data->Mn}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Mn * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -368,8 +367,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">As</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->As}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->As * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->As)? "-" : $analyse_data->As}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->As * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr >
@@ -377,8 +376,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cd</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cd}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cd * ($analyse_data->MS/100),2)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cd)? "-" : $analyse_data->Cd}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cd * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -386,8 +385,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cr</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Cr}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Cr * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cr)? "-" : $analyse_data->Cr}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cr * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cr * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -395,8 +394,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Hg</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Hg}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Hg * ($analyse_data->MS/100),2)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Hg)? "-" : $analyse_data->Hg}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Hg * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -404,8 +403,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Ni</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Ni}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Ni * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Ni)? "-" : empty($analyse_data->Ni)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Ni * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -413,8 +412,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Pb</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Pb}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Pb * ($analyse_data->MS/100),2)}} </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Pb)? "-" :$analyse_data->Pb}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Pb * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100),2)) }}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -422,8 +421,8 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Se</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{$analyse_data->Se}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->Se * ($analyse_data->MS/100),2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Se)? "-" : $analyse_data->Se}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Se * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100),2))}}</td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -439,8 +438,7 @@
          <p class="text" style="font-size:8px;">1/2<br>
                              ------------------------------<br>
                           AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
-                          Tél:+212 538 00 49 20/ www.elephantvert.ch / contactmaroc@elephantvert.ch
-         
+                          Tél:+212 538 00 49 20/ www.elephantvert.ch / contactmaroc@elephantvert.ch         
           </p>
           
          <table border="0">
@@ -482,11 +480,10 @@
                 width="600px" height="500px" style="margin-top:5;"></th>            
               </tr>
             </table>
-            <p class="text" style="font-size:8px;">2/2 <br>
+            <p class="text" style="font-size:8px;font-weight:lighter;">2/2 <br>
                              ------------------------------<br>
              AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
             Tél:+212 538 00 49 20/ www.elephantvert.ch / contactmaroc@elephantvert.ch
-         
           </p>
   </body>
   </html>
