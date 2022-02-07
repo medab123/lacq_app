@@ -36,7 +36,7 @@
 
     <div class="navbarList">
         <div class='navbarItimes'>
-           <!--- <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">--->
+            <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
             <a class="dropbtn ml-5 mr-2" href="{{ url('/') }}" style="border-radius: 3px;">Accueil</a>
 
             <a class="dropbtn" href="{{ url('/clients') }}" style="border-radius: 3px; ">Clients</a>
