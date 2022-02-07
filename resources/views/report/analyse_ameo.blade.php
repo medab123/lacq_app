@@ -271,7 +271,7 @@
                   <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/NF EN 11261:V1995</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK,1))? "-" : round($analyse_data->NTK,1)}}</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK * ($analyse_data->MS/100),1))? "-" :round($analyse_data->NTK * ($analyse_data->MS/100),1) }} </td>  
-                  <td style="border-right:1px solid black;">Rapport C/N: {{round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
+                  <td style="border-right:1px solid black;">Rapport C/N: {{ ($analyse_data->NTK == 0)  ? "_": round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
           </table><br>
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
