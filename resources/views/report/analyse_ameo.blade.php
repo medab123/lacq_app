@@ -97,25 +97,25 @@
               <th class="head bordered" style="width:125px;">N° RC :</th>
               <td class="bordered">{{ $client_info->cin_rc }}</td>
               <th class="head bordered" style="width:110px;">Date de prélèvement:</th>
-              <td class="bordered">{{$commande_info->date_prelevement }} </td>
+              <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_prelevement) @endphp</td>
           </tr>
           <tr>
               <th class="head bordered" style="width:125px;">Adresse :</th>
               <td class="bordered">{{ $client_info->address }}</td>
               <th class="head bordered" style="width:110px;">Date de réception:</th>
-              <td class="bordered">{{ $commande_info->date_reception }}</td>
+              <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_reception) @endphp</td>
           </tr>
           <tr>
               <th class="head bordered" style="width:125px;">Lieu d'exécution des essais :</th>
               <td class="bordered">{{ $commande_info->lieu}}</td>
               <th class="head bordered" style="width:110px;">Date d'analyse :</th>
-              <td class="bordered">{{ $commande_info->date_edition }}</td>
+              <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_reception) @endphp</td>
           </tr>
           <tr>
               <th class="head bordered" style="width:125px;">Dossier suivi par :</th>
               <td class="bordered">{{ $commande_info->commercial}}</td>
               <th class="head bordered" style="width:110px;">Date d'édition :</th>
-              <td class="bordered" >{{ $commande_info->date_edition }}</td>
+              <td class="bordered" >@php echo Archivos::costomDateFormate($commande_info->date_edition ) @endphp</td>
           </tr>
           <tr>
               <th class="head bordered" style="width:125px;">Référence client:</th>
@@ -186,7 +186,19 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->Refus)? "-" : $analyse_data->Refus }}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                  @php
+                    if(empty($analyse_data->Refus)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Refus < 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Refus;
+                    } 
+                    @endphp
+                  </td>
                   <td style="border-right:1px solid black;"></td>
                   
           </tr>
@@ -196,7 +208,19 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->MS,1))? "-" : round($analyse_data->MS,1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->MS,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->MS,1) < 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->MS,1);
+                    } 
+                    @endphp
+                  </td>
                   <td style="border-right:1px solid black;">Humidité: {{round(100 - $analyse_data->MS,1)}}%</td>
               </tr>
               <tr>
@@ -205,7 +229,19 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Kg/m3</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->M_V)? "-" : $analyse_data->M_V }}</td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->M_V)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->M_V < 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->M_V;
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;font-size:9px;;"></td>
               </tr>
               <tr>
@@ -214,7 +250,19 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">-</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{ empty($analyse_data->PH)? "-" : $analyse_data->PH }}</td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->PH)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->PH < 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->PH;
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">
                     @php
                     if($analyse_data->PH<5)
@@ -245,7 +293,19 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mS/cm</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13038:V2000</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->EC,1))? "-" : round($analyse_data->EC,1)}}</td>
+                  <td style="width:60px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->EC,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->EC,1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->EC,1);
+                    } 
+                    @endphp
+                   </td>
                   <td style="border-right:1px solid black;"></td>
               </tr>
       </table>
@@ -260,8 +320,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">M.O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13039:V2011</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->M_O,1))? "-" : round($analyse_data->M_O,1) }}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->M_O * ($analyse_data->MS/100),1))? "-" :round($analyse_data->M_O* ($analyse_data->MS/100),1) }} </td> 
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->M_O,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->M_O,1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->M_O,1);
+                    } 
+                    @endphp    
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->M_O * ($analyse_data->MS/100),1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->M_O * ($analyse_data->MS/100),1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1);
+                    } 
+                    @endphp
+                    </td> 
                   <td style="border-right:1px solid black;">Carb.org en % ms: {{round($analyse_data->M_O/1.72,1)}}%</td>
           </tr>
           <tr>
@@ -269,9 +353,33 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">NTK</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/NF EN 11261:V1995</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK,1))? "-" : round($analyse_data->NTK,1)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->NTK * ($analyse_data->MS/100),1))? "-" :round($analyse_data->NTK * ($analyse_data->MS/100),1) }} </td>  
-                  <td style="border-right:1px solid black;">Rapport C/N: {{round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->NTK,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->NTK,1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->NTK,1);
+                    } 
+                    @endphp
+                   </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->NTK * ($analyse_data->MS/100),1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->NTK * ($analyse_data->MS/100),1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->NTK * ($analyse_data->MS/100),1);
+                    } 
+                    @endphp
+                    </td>  
+                  <td style="border-right:1px solid black;">Rapport C/N: {{ ($analyse_data->NTK == 0)  ? "_": round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
           </table><br>
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
@@ -279,8 +387,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">P2O5</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{round($analyse_data->PT,1)? "-" : round($analyse_data->PT,1)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->PT * ($analyse_data->MS/100),1))? "-" : round($analyse_data->PT * ($analyse_data->MS/100),1)}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->PT,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->PT,1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->PT,1);
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->PT * ($analyse_data->MS/100),1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->PT * ($analyse_data->MS/100),1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->PT * ($analyse_data->MS/100),1);
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -288,8 +420,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">K2O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->K,1))? "-" : round($analyse_data->K,1)}} </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{ empty(round($analyse_data->K * ($analyse_data->MS/100),1))? "-" : round($analyse_data->K * ($analyse_data->MS/100),1) }}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->K,1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->K,1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->K,1);
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->K * ($analyse_data->MS/100),1))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->K * ($analyse_data->MS/100),1)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->K * ($analyse_data->MS/100),1);
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -297,8 +453,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">MgO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->Mg * 1.658, 2))? "-" : round($analyse_data->Mg * 1.658, 2)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Mg * ($analyse_data->MS/100), 2)))? "-" : Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->Mg * 1.658, 2))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->Mg * 1.658, 2)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->Mg * 1.658, 2);
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Mg * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -306,8 +486,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">CaO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty(round($analyse_data->Ca * 1.399, 2))? "-" : round($analyse_data->Ca * 1.399, 2)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Ca * ($analyse_data->MS/100), 2)))? "-" : Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty(round($analyse_data->Ca * 1.399, 2))){
+                        echo "-";
+                    }
+                    elseif (round($analyse_data->Ca * 1.399, 2)< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo round($analyse_data->Ca * 1.399, 2);
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Ca* ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                   </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           </table>
@@ -323,8 +527,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Fe</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Fe)? "-" : $analyse_data->Fe}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Fe * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Fe)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Fe< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Fe;
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Fe * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
               <tr>
@@ -332,8 +560,32 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Zn)? "-" : $analyse_data->Zn}}</td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Zn * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Zn)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Zn< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Zn;
+                    } 
+                    @endphp
+                  </td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Zn * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -341,8 +593,30 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Cu</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cu)? "-" : $analyse_data->Cu}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cu * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">   @php
+                    if(empty($analyse_data->Cu)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Cu< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Cu;
+                    } 
+                    @endphp</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Cu * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                  </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -350,8 +624,32 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Mn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Mn)? "-" : $analyse_data->Mn}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Mn * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Mn)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Mn< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Mn;
+                    } 
+                    @endphp
+                    </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Mn * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                 </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -367,8 +665,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">As</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->As)? "-" : $analyse_data->As}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->As * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->As)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->As< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->As;
+                    } 
+                    @endphp
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->As * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr >
@@ -376,8 +698,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cd</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cd)? "-" : $analyse_data->Cd}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cd * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Cd)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Cd< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Cd;
+                    } 
+                    @endphp
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Cd * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100), 2)) < 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -385,8 +731,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cr</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Cr)? "-" : $analyse_data->Cr}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Cr * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Cr * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Cr)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Cr< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Cr;
+                    } 
+                    @endphp    
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Cr * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Cr* ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Cr * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                    </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -394,8 +764,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Hg</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Hg)? "-" : $analyse_data->Hg}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Hg * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Hg)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Hg< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Hg;
+                    } 
+                    @endphp    
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Hg * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -403,8 +797,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Ni</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Ni)? "-" : empty($analyse_data->Ni)}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Ni * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Ni)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Ni< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Ni;
+                    } 
+                    @endphp  
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Ni * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -412,8 +830,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Pb</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Pb)? "-" :$analyse_data->Pb}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Pb * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100),2)) }}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Pb)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Pb< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Pb;
+                    } 
+                    @endphp    
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Pb * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -421,8 +863,32 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Se</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{empty($analyse_data->Se)? "-" : $analyse_data->Se}}</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">{{Archivos::ft3nb(empty(round($analyse_data->Se * ($analyse_data->MS/100),2)))? "-" : Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100),2))}}</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(empty($analyse_data->Se)){
+                        echo "-";
+                    }
+                    elseif ($analyse_data->Se< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo $analyse_data->Se;
+                    } 
+                    @endphp  
+                </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;">
+                    @php
+                    if(Archivos::ft3nb(empty(round($analyse_data->Se * ($analyse_data->MS/100), 2)))){
+                        echo "-";
+                    }
+                    elseif (Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100), 2))< 0.10) {
+                        echo "INF à 0,10";
+                    }
+                    else {
+                        echo Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100), 2));
+                    } 
+                    @endphp
+                </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -467,7 +933,7 @@
               <th class="head bordered" style="width:125px;">Dossier suivi par :</th>
               <td class="bordered">{{ $commande_info->commercial}}</td>
               <th class="head bordered" style="width:110px;">Date d'édition :</th>
-              <td class="bordered">{{ $commande_info->date_edition }} </td>
+              <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp  </td>
           </tr>
       </table>
       <br>
