@@ -12,8 +12,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-  
-  
       <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
       <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
       <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/preloader.css') }}">
@@ -63,9 +61,7 @@
   font-family: DejaVu Sans;
   }
       </style>
-  
       @php use App\Custom\Archivos; @endphp
-      
       <table border="0">
           <tr>
               <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="130px" height="40px">
@@ -77,7 +73,7 @@
               </td>
               <td>
                   <h5 style="color:green;text-align:center; font-size:12px;">RAPPORT D'ANALYSE AMENDEMENT ORGANIQUE ET SUPPORT DE CULTURE
-                      <br>N° {{$commande_info->code_commande }}</h5>
+                      <br>N° PO {{$commande_info->code_commande }} </h5>
               </td>
               <td style="text-align:right;vertical-align:top"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
                       width="80px" height="40px"><br>
@@ -160,17 +156,17 @@
                <tr>
                   <th class="head bordered" style="text-align:center" colspan="7">CARACTERISATION DE LA VALEUR AGRONOMIQUE</th>
               </tr>
-              <tr>
-                    <th class=" bordered" style="background:rgb(230, 230, 230);width:153px;" rowspan="2">Paramètres</th>
-                    <th class=" bordered" style="background:rgb(230, 230, 230);width:22px;"rowspan="2">Sym.</th>
-                    <th class=" bordered" style="background:rgb(230, 230, 230);width:18px;"rowspan="2">Unité</th>
-                    <th class=" bordered" style="background:rgb(230, 230, 230);width:105px;"rowspan="2">Méthodes</th>
-                    <th class=" bordered" colspan="2" style="background:rgb(230, 230, 230);">Résultats</th>
-                    <th class=" bordered" style="background:rgb(230, 230, 230);"rowspan="2">Observations et paramètres calculés</th>
+              <tr style="background:rgb(230, 230, 230);">
+                    <th class=" bordered" style="width:153px;" rowspan="2">Paramètres</th>
+                    <th class=" bordered" style="width:22px;"rowspan="2">Sym.</th>
+                    <th class=" bordered" style="width:18px;"rowspan="2">Unité</th>
+                    <th class=" bordered" style="width:105px;"rowspan="2">Méthodes</th>
+                    <th class=" bordered" colspan="2" >Résultats</th>
+                    <th class=" bordered" rowspan="2">Observations et paramètres calculés</th>
               </tr>
-              <tr>
-                    <td class=" bordered" style="background:rgb(230, 230, 230);width:60px;text-align:center;">Sec</td>
-                    <td class=" bordered" style="background:rgb(230, 230, 230);width:60px;text-align:center;">Brut</td>
+              <tr style="background:rgb(230, 230, 230);">
+                    <th class=" bordered" style="width:60px;text-align:center;">Sec</th>
+                    <th class=" bordered" style="width:60px;text-align:center;">Brut</th>
               </tr>
       </table>
       <table style="width:100%;font-size:9px;" >
@@ -186,42 +182,51 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                  @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Refus)){
                         echo "-";
                     }
                     elseif ($analyse_data->Refus < 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Refus;
                     } 
-                    @endphp
-                  </td>
-                  <td style="border-right:1px solid black;"></td>
-                  
+                    @endphp </td>
+                  <td style="border-right:1px solid black;"></td>     
           </tr>
-          <tr >
+          <tr>
                   <td style="width:160px;border-right:1px solid black;">Matière sèche à 103°C <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">MS</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->MS,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->MS,1) < 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
-                        echo round($analyse_data->MS,1);
+                    elseif (ctype_digit(round($analyse_data->MS,1)))
+                    {
+                        echo round($analyse_data->MS,1). ".0";
                     } 
-                    @endphp
-                  </td>
-                  <td style="border-right:1px solid black;">Humidité: {{round(100 - $analyse_data->MS,1)}}%</td>
+                    else 
+                    {
+                        echo round($analyse_data->MS,1);
+                    }
+                    @endphp </td>      
+                  <td style="border-right:1px solid black;">@php
+                      if (ctype_digit(round(100 - $analyse_data->MS,1)))
+                    {
+                        echo round(100 - $analyse_data->MS,1);
+                    } 
+                    else 
+                    {
+                        echo "Humidité: ", round(100 - $analyse_data->MS,1), ".0";
+                    }
+                    @endphp </td>
               </tr>
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Masse volumique</td>
@@ -229,19 +234,22 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Kg/m3</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->M_V)){
                         echo "-";
                     }
                     elseif ($analyse_data->M_V < 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
-                        echo $analyse_data->M_V;
+                    elseif (ctype_digit(round($analyse_data->M_V,1)))
+                    {
+                        echo round($analyse_data->M_V,1);
                     } 
-                    @endphp
-                    </td>
+                    else 
+                    {
+                        echo round($analyse_data->M_V,1), ".0";
+                    }
+                    @endphp </td>
                   <td style="border-right:1px solid black;font-size:9px;;"></td>
               </tr>
               <tr>
@@ -250,21 +258,23 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">-</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13040:V2007</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:60px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->PH)){
                         echo "-";
                     }
                     elseif ($analyse_data->PH < 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
-                        echo $analyse_data->PH;
+                    elseif (ctype_digit(round($analyse_data->PH,1)))
+                    {
+                        echo round($analyse_data->PH,1);
                     } 
-                    @endphp
-                </td>
-                  <td style="border-right:1px solid black;">
-                    @php
+                    else 
+                    {
+                        echo round($analyse_data->PH,1), ".0";
+                    }
+                    @endphp </td>
+                  <td style="border-right:1px solid black;"> @php
                     if($analyse_data->PH<5)
                     {
                     echo "Produit extrèmement acide";
@@ -284,8 +294,7 @@
                     elseif ($analyse_data->PH>8) {
                         echo "Produit alcalin";
                     }
-                    @endphp
-                    </td>
+                    @endphp </td>
               </tr>
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Conductivité électrique</td>
@@ -293,19 +302,22 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mS/cm</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13038:V2000</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"></td>
-                  <td style="width:60px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:60px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->EC,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->EC,1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
+                    elseif (ctype_digit(round($analyse_data->EC,1)))
+                    {
                         echo round($analyse_data->EC,1);
                     } 
-                    @endphp
-                   </td>
+                    else 
+                    {
+                        echo round($analyse_data->EC,1), ".0";
+                    }
+                    @endphp </td>
                   <td style="border-right:1px solid black;"></td>
               </tr>
       </table>
@@ -320,66 +332,89 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">M.O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN 13039:V2011</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->M_O,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->M_O,1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
+                    elseif (ctype_digit(round($analyse_data->M_O,1)))
+                    {
                         echo round($analyse_data->M_O,1);
                     } 
-                    @endphp    
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    else 
+                    {
+                        echo round($analyse_data->M_O,1), ".0";
+                    }
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->M_O * ($analyse_data->MS/100),1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->M_O * ($analyse_data->MS/100),1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
-                    else {
-                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1);
+                    elseif (ctype_digit(round($analyse_data->M_O * ($analyse_data->MS/100),1)))
+                    {
+                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1), ".0";
                     } 
+                    else 
+                    {
+                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1);
+                    }
+                    @endphp </td> 
+
+                  <td style="border-right:1px solid black;">@php
+                  if(empty(round($analyse_data->M_O,1))){
+                        echo " ";
+                    }
+                    elseif (ctype_digit(round($analyse_data->M_O/1.72, 1)))
+                    {
+                        echo  "Carb.org en % ms: ", round($analyse_data->M_O/1.72, 1), ".0";
+                    }
+                    else 
+                    {
+                        echo "Carb.org en % ms: ", round($analyse_data->M_O/1.72, 1);
+                    }
                     @endphp
-                    </td> 
-                  <td style="border-right:1px solid black;">Carb.org en % ms: {{round($analyse_data->M_O/1.72,1)}}%</td>
+                    </td>
           </tr>
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Azote total Kjeldahl <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">NTK</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
-                  <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/NF EN 11261:V1995</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:113px;border-right:1px solid black;">NF EN 13654-1:V2002/<br>NF EN 11261:V1995</td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->NTK,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->NTK,1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->NTK,1);
                     } 
-                    @endphp
-                   </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->NTK * ($analyse_data->MS/100),1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->NTK * ($analyse_data->MS/100),1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->NTK * ($analyse_data->MS/100),1);
                     } 
-                    @endphp
-                    </td>  
-                  <td style="border-right:1px solid black;">Rapport C/N: {{ ($analyse_data->NTK == 0)  ? "_": round($analyse_data->M_O/$analyse_data->NTK,2)}}</td>
+                    @endphp </td>  
+                  <td style="border-right:1px solid black;"> @php
+                    if(empty(round($analyse_data->M_O,1))){
+                        echo " ";
+                    }
+                    else {
+                    echo "Rapport C/N: " ,  ($analyse_data->NTK == 0)  ? "_": round($analyse_data->M_O/$analyse_data->NTK,2);
+                }
+                      @endphp </td>
           </table><br>
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
@@ -387,32 +422,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">P2O5</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->PT,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->PT,1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->PT,1);
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->PT * ($analyse_data->MS/100),1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->PT * ($analyse_data->MS/100),1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->PT * ($analyse_data->MS/100),1);
                     } 
-                    @endphp
-                    </td>
+                    @endphp</td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -420,32 +451,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">K2O</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->K,1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->K,1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->K,1);
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->K * ($analyse_data->MS/100),1))){
                         echo "-";
                     }
                     elseif (round($analyse_data->K * ($analyse_data->MS/100),1)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->K * ($analyse_data->MS/100),1);
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -453,32 +480,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">MgO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->Mg * 1.658, 2))){
                         echo "-";
                     }
                     elseif (round($analyse_data->Mg * 1.658, 2)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->Mg * 1.658, 2);
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Mg * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr>
@@ -486,32 +509,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">CaO</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">%</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty(round($analyse_data->Ca * 1.399, 2))){
                         echo "-";
                     }
                     elseif (round($analyse_data->Ca * 1.399, 2)< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo round($analyse_data->Ca * 1.399, 2);
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Ca* ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Ca * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                   </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
           </table>
@@ -520,39 +539,34 @@
             <th style="border:0px;text-align:left;color:green">OLEGO-ELEMENTS</th>
           </tr>
           </table>
-  
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Fer <h6 style='color:red;'>(*)</h6></td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Fe</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Fe)){
                         echo "-";
                     }
                     elseif ($analyse_data->Fe< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Fe;
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Fe * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Fe * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
               <tr>
@@ -560,32 +574,28 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Zn)){
                         echo "-";
                     }
                     elseif ($analyse_data->Zn< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Zn;
                     } 
-                    @endphp
-                  </td>
-                  <td  style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td  style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Zn * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Zn * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -593,30 +603,28 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Cu</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">   @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Cu)){
                         echo "-";
                     }
                     elseif ($analyse_data->Cu< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Cu;
                     } 
                     @endphp</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Cu * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Cu * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                  </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -624,32 +632,28 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">Mn</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Mn)){
                         echo "-";
                     }
                     elseif ($analyse_data->Mn< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Mn;
                     } 
-                    @endphp
-                    </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Mn * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Mn * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                 </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -658,39 +662,34 @@
             <th style="border:0px;text-align:left;color:green">ELEMENTS TRACES METALIQUES</th>
           </tr>
           </table>
-  
           <table style="width:100%;font-size:9px;border:1px solid black;" >
           <tr>
                   <td style="width:160px;border-right:1px solid black;">Arsenic</td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">As</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->As)){
                         echo "-";
                     }
                     elseif ($analyse_data->As< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->As;
                     } 
-                    @endphp
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->As * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->As * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
           </tr>
           <tr >
@@ -698,32 +697,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cd</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Cd)){
                         echo "-";
                     }
                     elseif ($analyse_data->Cd< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Cd;
                     } 
-                    @endphp
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Cd * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100), 2)) < 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Cd * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -731,32 +726,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Cr</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Cr)){
                         echo "-";
                     }
                     elseif ($analyse_data->Cr< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Cr;
                     } 
-                    @endphp    
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Cr * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Cr* ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Cr * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                    </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -764,32 +755,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Hg</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Hg)){
                         echo "-";
                     }
                     elseif ($analyse_data->Hg< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Hg;
                     } 
-                    @endphp    
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Hg * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Hg * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -797,32 +784,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Ni</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Ni)){
                         echo "-";
                     }
                     elseif ($analyse_data->Ni< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Ni;
                     } 
-                    @endphp  
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Ni * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Ni * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -830,32 +813,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Pb</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Pb)){
                         echo "-";
                     }
                     elseif ($analyse_data->Pb< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Pb;
                     } 
-                    @endphp    
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Pb * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Pb * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
               <tr>
@@ -863,32 +842,28 @@
                   <td style="width:32px;text-align:center;border-right:1px solid black;">Se</td>
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(empty($analyse_data->Se)){
                         echo "-";
                     }
                     elseif ($analyse_data->Se< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo $analyse_data->Se;
                     } 
-                    @endphp  
-                </td>
-                  <td style="width:68px;text-align:center;border-right:1px solid black;">
-                    @php
+                    @endphp </td>
+                  <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->Se * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }
                     elseif (Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100), 2))< 0.10) {
-                        echo "INF à 0,10";
+                        echo "inf à 0.10";
                     }
                     else {
                         echo Archivos::ft3nb(round($analyse_data->Se * ($analyse_data->MS/100), 2));
                     } 
-                    @endphp
-                </td>
+                    @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
       </table>
@@ -903,32 +878,31 @@
          <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:10px" width="400px">
          <p class="text" style="font-size:8px;">1/2<br>
                              ------------------------------<br>
-                          AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
-                          Tél:+212 538 00 49 20/ www.elephantvert.ch / contactmaroc@elephantvert.ch         
-          </p>
-          
+                             Laboratoire LACQ <br>
+                             AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
+                             Tel:+212 535 52 94 01 <br>
+                             contact.lacq@elephant-vert.com <br>        
+          </p>  
          <table border="0">
           <tr>
               <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="130px" height="40px">
                   <br>
-                  <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité ELEPHANT
+                  <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité  
                       VERT MAROC S.A. </label>
                       <br>
-                      <label style="color:green;font-size:11px;">LAB03F63-VE.</label>
+                      <label style="color:green;font-size:11px;">LAB03F63-Ve</label>
               </td>
               <td>
                   <h5 style="color:green;text-align:center; font-size:12px;">ANNEXE</td> 
           </tr>
       </table>
       <table style="width:100%;font-size:9px;margin-top:">
-       
           <tr>
               <th class="head bordered" style="width:125px;">Référence client :</th>
               <td class=" bordered">{{ $commande_info->ref_client  }}</td>
               <th class=" head bordered" style="width:110px;">Référence d'échantillon:</th>
               <td class="bordered">{{ $commande_info->code_commande}}</td>
           </tr>
-  
           <tr>
               <th class="head bordered" style="width:125px;">Dossier suivi par :</th>
               <td class="bordered">{{ $commande_info->commercial}}</td>
@@ -937,19 +911,20 @@
           </tr>
       </table>
       <br>
-     
       <table style="width:100%;font-size:9px;margin-top:;border:1px solid black;" >
       <label style="text-align:top;color:green;font-size:11px;">Photo prise lors de la préparation de l'échantillon</label>
               <tr >
-                <th style="width:180px;height:150px">
+                <th style="width:180px;height:150px;">
                   <img src='{{ Archivos::imagenABase64(public_path("img/commande/ameo/{$commande_info->img_1}")) }}'
-                width="600px" height="500px" style="margin-top:5;"></th>            
+                width="600px" height="500px" style="margin-top:6;"></th>            
               </tr>
             </table>
             <p class="text" style="font-size:8px;font-weight:lighter;">2/2 <br>
                              ------------------------------<br>
-             AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
-            Tél:+212 538 00 49 20/ www.elephantvert.ch / contactmaroc@elephantvert.ch
+                             Laboratoire LACQ <br>
+                             AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
+                             Tel:+212 535 52 94 01 <br>
+                             contact.lacq@elephant-vert.com <br>
           </p>
   </body>
   </html>
