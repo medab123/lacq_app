@@ -50,7 +50,7 @@ class userController extends Controller
         if($request->hasFile('uAvatar')){
             $data=$request->input('uAvatar');
             $photo=$request->file('uAvatar')->getClientOriginalName();
-            $destination=base_path().'/public/img';
+            $destination=base_path().'/public/img/avatar';
             $request->file('uAvatar')->move($destination, $photo);
             $input = $request->all();
         }else{
@@ -136,7 +136,7 @@ class userController extends Controller
         if($request->hasFile('uAvatar')){
             $data=$request->input('uAvatar');
             $photo=$request->file('uAvatar')->getClientOriginalName();
-            $destination=base_path().'/public/img';
+            $destination=base_path().'/public/img/avatar';
             $request->file('uAvatar')->move($destination, $photo);
             $input = $request->all();
         }else{

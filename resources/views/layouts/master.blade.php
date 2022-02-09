@@ -65,7 +65,7 @@
             <div class="dropdownList">
                 <div class='userInfoAvatar'>
                     <a class="imgUser "><img style="border-radius:50%"
-                            src="{{ asset('img/' . Auth::user()->avatar) }}"></a>
+                            src="{{ asset('img/avatar/' . Auth::user()->avatar) }}"></a>
                     <div class="dropdownList-one" style=" right: 0px; ">
                         <a class="dItem" href="{{ url('users/edit') }}">Mon compte</a>
                         <a style="color:Black;" class="dItem" href="{{ route('logout') }}"

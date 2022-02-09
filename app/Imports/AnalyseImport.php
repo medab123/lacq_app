@@ -7,6 +7,8 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\Commande;
 use App\Models\Matrice;
+use App\Services\PayUService\Exception;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -27,18 +29,34 @@ class AnalyseImport implements ToCollection,WithHeadingRow
     {
         foreach ($collection as $key => $value) {
             $code_commande = $collection[$key]["code_commande"];
-            $commande_id = Commande::where("code_commande","=",$code_commande)->first()["id"];
-            unset($collection[$key]["code_commande"]);
-            $collection[$key]->put("commande_id",$commande_id);
+            if(Commande::where('code_commande', $code_commande)->exists()){
+                $commande_id = Commande::where("code_commande","=",$code_commande)->first()["id"];
+                unset($collection[$key]["code_commande"]);
+                $collection[$key]->put("commande_id",$commande_id);
+            }else{
+                throw new \ErrorException('Commande n\'appartien pas a l\'analyse selectione');
+                //unset($collection[$key]);
+            }
+            
             //array_unshift($collection[$key],["commande_id" => 1]);
         }
-        
+        //dd($collection);
         foreach($collection->toArray() as $row){
-            if (DB::table($this->analyse_table)->where('commande_id', $row["commande_id"] )->exists()) {
-                DB::table($this->analyse_table)->where("commande_id",'=',$row["commande_id"] )->update($row);
+            //dd($row);
+            if(Commande::where('id', $row["commande_id"])->exists()){
+                if(Commande::find($row["commande_id"])["state"] == "Valid"){
+                    if (DB::table($this->analyse_table)->where('commande_id', $row["commande_id"] )->exists()) {
+                        DB::table($this->analyse_table)->where("commande_id",'=',$row["commande_id"] )->update($row);
+                    }else{
+                        DB::table($this->analyse_table)->insert($row);
+                    }
+                }else{ 
+                    throw new \ErrorException('Commande not valide');
+                }
             }else{
-                DB::table($this->analyse_table)->insert($row);
+                throw new \ErrorException('Commande not found');
             }
+            
             
         }
         

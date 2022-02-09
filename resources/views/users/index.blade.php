@@ -30,7 +30,7 @@
                         @csrf
                         <div class="container" style="position: relative;text-align: center;">
                             <img style="border-radius:50%; margin: 30px;" id="output" width="150" height="150"
-                                src="{{ asset('img/user.png') }}" />
+                                src="{{ asset('img/avatar/user.png') }}" />
                             <div class="bottom-left"
                                 style="background-color:rgba(255,255,255,0.7); border-radius: 50%;width: 38px;height: 38px;padding-top: 0px;margin-right: 0 ;position: absolute;top: 140px;left:50% ;transform: translateX(-50%)">
                                 <div class="file btn" style="position: relative;overflow: hidden;">
@@ -148,7 +148,7 @@
                                 @continue
                             @endif
                             <tr>
-                                <td><img class="rounded-circle" width="40px" src="{{ asset('img/' . $user->avatar) }}">
+                                <td><img class="rounded-circle" width="40px" src="{{ asset('img/avatar/' . $user->avatar) }}">
                                 </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->last_name }}</td>
