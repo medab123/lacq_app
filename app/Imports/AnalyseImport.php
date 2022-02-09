@@ -34,7 +34,8 @@ class AnalyseImport implements ToCollection,WithHeadingRow
                 unset($collection[$key]["code_commande"]);
                 $collection[$key]->put("commande_id",$commande_id);
             }else{
-                unset($collection[$key]);
+                throw new \ErrorException('Commande n\'appartien pas a l\'analyse selectione');
+                //unset($collection[$key]);
             }
             
             //array_unshift($collection[$key],["commande_id" => 1]);
@@ -49,10 +50,11 @@ class AnalyseImport implements ToCollection,WithHeadingRow
                     }else{
                         DB::table($this->analyse_table)->insert($row);
                     }
-                }else{
-                    
+                }else{ 
                     throw new \ErrorException('Commande not valide');
                 }
+            }else{
+                throw new \ErrorException('Commande not found');
             }
             
             

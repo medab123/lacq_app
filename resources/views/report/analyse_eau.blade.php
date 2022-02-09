@@ -183,7 +183,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <table style="width:100%;font-size:12px;margin-top:;border:1px solid black;" >
       
        <tr class="head bordered">
-             <th class=" bordered" style="width:157px;" rowspan="2">Paramètres</th>
+             <th class=" bordered" style="width:160px;" rowspan="2">Paramètres</th>
              <th class=" bordered" style="width:54px;" rowspan="2">Sym.</th>
              <th class=" bordered" rowspan="2">Méthodes</th>
              <th class=" bordered" rowspan="2">Résultats (Unité) </th>
@@ -205,7 +205,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
         <tr>
                 <td style="width:130px;border-right:1px solid black;">Potentiel hydrogène<h6 style='color:red;'>(*)</h6> à 25°C</td>
                 <td style="width:20px;text-align:center;border-right:1px solid black;">pHAAA</td>
-                <td style="width:80px;border-right:1px solid black;">NM ISO 10523:V2001</td> 
+                <td style="width:89px;border-right:1px solid black;">NM ISO 10523:V2001</td> 
                 <td style="width:113px;border-right:1px solid black;">7.05</td>
                 <td style="width:68px;text-align:center;border-right:1px solid black;">6,50 à 8,40</td>
                 <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
@@ -213,7 +213,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
         <tr>
             <td style="width:130px;border-right:1px solid black;">Conductivité éléctrique à 25°C </td>
             <td style="width:20px;text-align:center;border-right:1px solid black;">EC</td>
-            <td style="width:30px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
+            <td style="width:89px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
             <td style="width:113px;border-right:1px solid black;">1.835 (mS/cm)</td>
             <td style="width:68px;text-align:center;border-right:1px solid black;">0,70 à 3,00</td>
             <td style="width:68px;text-align:center;border-right:1px solid black;"></td>   
@@ -221,7 +221,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <tr>
         <td style="width:130px;border-right:1px solid black;">Conductivité éléctrique<h6 style='color:red;'>(*)</h6> à 25°C</td>
         <td style="width:20px;text-align:center;border-right:1px solid black;">EC</td>
-        <td style="width:30px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
+        <td style="width:89px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
         <td style="width:113px;border-right:1px solid black;">1830 (μS/cm)</td>
         <td style="width:68px;text-align:center;border-right:1px solid black;">1.39(g/l)</td>
         <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
@@ -229,7 +229,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
 <tr>
     <td style="width:130px;border-right:1px solid black;">Salinité (teneur en sels totaux) </td>
     <td style="width:20px;text-align:center;border-right:1px solid black;">TDS</td>
-    <td style="width:30px;border-right:1px solid black;text-align:center;">Calcul.</td> 
+    <td style="width:89px;border-right:1px solid black;text-align:center;">Calcul.</td> 
     <td style="width:113px;border-right:1px solid black;">1.39(g/l)</td>
     <td style="width:68px;text-align:center;border-right:1px solid black;">0,56 à 2,54</td>
     <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
