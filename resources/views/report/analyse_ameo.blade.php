@@ -208,24 +208,14 @@
                     elseif (round($analyse_data->MS,1) < 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->MS,1)))
-                    {
-                        echo round($analyse_data->MS,1). ".0";
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->MS,1);
+                    else {
+                        echo number_format($analyse_data->MS, 1);
                     }
                     @endphp </td>      
                   <td style="border-right:1px solid black;">@php
-                      if (ctype_digit(round(100 - $analyse_data->MS,1)))
-                    {
-                        echo round(100 - $analyse_data->MS,1);
-                    } 
-                    else 
-                    {
-                        echo "Humidité: ", round(100 - $analyse_data->MS,1), ".0";
-                    }
+                      
+                        echo "Humidité: ", number_format(100 - $analyse_data->MS,1);
+                    
                     @endphp </td>
               </tr>
               <tr>
@@ -499,8 +489,15 @@
                         echo "inf à 0.10";
                     }
                     else {
+                        if(ctype_digit(Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2))))
+                    {
+                        echo Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2)). ".0";
+                    } else 
+                    {
                         echo Archivos::ft3nb(round($analyse_data->Mg * ($analyse_data->MS/100), 2));
-                    } 
+                    }
+                }
+                    
                     @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650: V2002 eau régale Dos.ICP OES</td>
           </tr>
@@ -738,15 +735,21 @@
                     } 
                     @endphp </td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                    if(Archivos::ft3nb(empty(round($analyse_data->Cr * ($analyse_data->MS/100), 2)))){
+                    if(Archivos::ft3nb(empty($analyse_data->Cr * ($analyse_data->MS/100)))){
                         echo "-";
                     }
-                    elseif (Archivos::ft3nb(round($analyse_data->Cr* ($analyse_data->MS/100), 2))< 0.10) {
+                    elseif (Archivos::ft3nb($analyse_data->Cr* ($analyse_data->MS/100))< 0.10) {
                         echo "inf à 0.10";
                     }
                     else {
-                        echo Archivos::ft3nb(round($analyse_data->Cr * ($analyse_data->MS/100), 2));
-                    } 
+                        if(ctype_digit(Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100))))
+                    {
+                        echo Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100)). ".0";
+                    } else 
+                    {
+                        echo Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100));
+                    }
+                }
                     @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
