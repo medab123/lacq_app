@@ -12,6 +12,8 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\AnalyseController;
+use App\Http\Controllers\DashboardAdminController;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -98,7 +100,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('report/{commande_id}', [ReportController::class, 'index']);
 
     Route::get('/', function () {
-        return view('layouts.master');
+        return view('welcome');
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/CommandeByMatrice', [DashboardAdminController::class,'CommandeByMatrice']);
+    Route::get('/AmountCommercial', [DashboardAdminController::class,'AmountCommercial']);
+    Route::get('/commercialTable', [DashboardAdminController::class,'commercialTable']);
+    Route::get('/top5Commercial', [DashboardAdminController::class,'top5Commercial']);
+
+
+
+
 });
