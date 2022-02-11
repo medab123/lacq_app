@@ -212,12 +212,10 @@
                         echo number_format($analyse_data->MS, 1);
                     }
                     @endphp </td>      
-                  <td style="border-right:1px solid black;">@php
-                      
-                        echo "Humidité: ", number_format(100 - $analyse_data->MS,1);
-                    
+                  <td style="border-right:1px solid black;">@php 
+                  echo "Humidité: ", number_format(100 - $analyse_data->MS,1);
                     @endphp </td>
-              </tr>
+              </tr>  
               <tr>
                   <td style="width:160px;border-right:1px solid black;">Masse volumique</td>
                   <td style="width:32px;text-align:center;border-right:1px solid black;">M/V</td>
@@ -231,13 +229,8 @@
                     elseif ($analyse_data->M_V < 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->M_V,1)))
-                    {
-                        echo round($analyse_data->M_V,1);
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->M_V,1), ".0";
+                    else {
+                        echo number_format($analyse_data->M_V, 1);
                     }
                     @endphp </td>
                   <td style="border-right:1px solid black;font-size:9px;;"></td>
@@ -255,17 +248,15 @@
                     elseif ($analyse_data->PH < 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->PH,1)))
-                    {
-                        echo round($analyse_data->PH,1);
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->PH,1), ".0";
+                    else {
+                        echo number_format($analyse_data->PH, 1);
                     }
                     @endphp </td>
                   <td style="border-right:1px solid black;"> @php
-                    if($analyse_data->PH<5)
+                  if(empty($analyse_data->PH)){
+                        echo " ";
+                    }
+                    elseif($analyse_data->PH<5)
                     {
                     echo "Produit extrèmement acide";
                     }
@@ -299,13 +290,8 @@
                     elseif (round($analyse_data->EC,1)< 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->EC,1)))
-                    {
-                        echo round($analyse_data->EC,1);
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->EC,1), ".0";
+                    else {
+                        echo number_format($analyse_data->EC, 1);
                     }
                     @endphp </td>
                   <td style="border-right:1px solid black;"></td>
@@ -329,13 +315,8 @@
                     elseif (round($analyse_data->M_O,1)< 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->M_O,1)))
-                    {
-                        echo round($analyse_data->M_O,1);
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->M_O,1), ".0";
+                    else {
+                        echo number_format($analyse_data->M_O, 1);
                     }
                     @endphp </td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
@@ -345,13 +326,8 @@
                     elseif (round($analyse_data->M_O * ($analyse_data->MS/100),1)< 0.10) {
                         echo "inf à 0.10";
                     }
-                    elseif (ctype_digit(round($analyse_data->M_O * ($analyse_data->MS/100),1)))
-                    {
-                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1), ".0";
-                    } 
-                    else 
-                    {
-                        echo round($analyse_data->M_O * ($analyse_data->MS/100),1);
+                    else {
+                        echo number_format($analyse_data->M_O * ($analyse_data->MS/100),1);
                     }
                     @endphp </td> 
 
@@ -359,13 +335,8 @@
                   if(empty(round($analyse_data->M_O,1))){
                         echo " ";
                     }
-                    elseif (ctype_digit(round($analyse_data->M_O/1.72, 1)))
-                    {
-                        echo  "Carb.org en % ms: ", round($analyse_data->M_O/1.72, 1), ".0";
-                    }
-                    else 
-                    {
-                        echo "Carb.org en % ms: ", round($analyse_data->M_O/1.72, 1);
+                    else {
+                        echo "Carb.org en % ms: ", number_format($analyse_data->M_O/1.72, 1);
                     }
                     @endphp
                     </td>
@@ -666,6 +637,8 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td> 
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
+                   $fonc=$analyse_data->As;
+
                     if(empty($analyse_data->As)){
                         echo "-";
                     }
@@ -673,8 +646,10 @@
                         echo "inf à 0.10";
                     }
                     else {
-                        echo $analyse_data->As;
-                    } 
+                     $compt=strlen($fonc)-is_float($fonc);
+                     }
+                     echo  $compt;
+                      echo number_format($fonc,4-$compt);
                     @endphp </td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
                     if(Archivos::ft3nb(empty(round($analyse_data->As * ($analyse_data->MS/100), 2)))){
@@ -735,21 +710,17 @@
                     } 
                     @endphp </td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                    if(Archivos::ft3nb(empty($analyse_data->Cr * ($analyse_data->MS/100)))){
-                        echo "-";
-                    }
-                    elseif (Archivos::ft3nb($analyse_data->Cr* ($analyse_data->MS/100))< 0.10) {
-                        echo "inf à 0.10";
-                    }
-                    else {
-                        if(ctype_digit(Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100))))
-                    {
-                        echo Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100)). ".0";
-                    } else 
-                    {
-                        echo Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100));
-                    }
+
+                  $fonc=Archivos::ft3nb($analyse_data->Cr * ($analyse_data->MS/100));
+                 
+                  if(is_float($fonc)){
+                  $compt=strlen($fonc)-1;
+                }else {
+                    $compt=strlen($fonc);
                 }
+                
+                       echo number_format($fonc,4-$compt);
+                       
                     @endphp </td>
                   <td style="border-right:1px solid black;">NF EN 13650:V2002 eau régale Dos.ICP OES</td>
               </tr>
@@ -846,6 +817,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
+                    
                     if(empty($analyse_data->Se)){
                         echo "-";
                     }
@@ -857,6 +829,7 @@
                     } 
                     @endphp </td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
+                    
                     if(Archivos::ft3nb(empty(round($analyse_data->Se * ($analyse_data->MS/100), 2)))){
                         echo "-";
                     }

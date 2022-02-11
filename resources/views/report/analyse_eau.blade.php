@@ -180,14 +180,14 @@ border-bottom: 1px solid rgb(228, 228, 228);
         </tr>
     </table>
 
-    <table style="width:100%;font-size:12px;margin-top:;border:1px solid black;" >
+    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;" >
       
        <tr class="head bordered">
-             <th class=" bordered" style="width:160px;" rowspan="2">Paramètres</th>
-             <th class=" bordered" style="width:54px;" rowspan="2">Sym.</th>
-             <th class=" bordered" rowspan="2">Méthodes</th>
-             <th class=" bordered" rowspan="2">Résultats (Unité) </th>
-             <th class=" bordered" rowspan="2">Seuils (mg/L)</th>
+             <th class=" bordered" style="width:131px;" rowspan="2">Paramètres</th>
+             <th class=" bordered" style="width:39px;" rowspan="2">Sym.</th>
+             <th class=" bordered" rowspan="2" style="width:107px;">Méthodes</th>
+             <th class=" bordered" rowspan="2" style="width:140px;">Résultats <h6 style="font-size:6px;"> (Unité)</h6></th>
+             <th class=" bordered" rowspan="2" style="width:58px;">Seuils <h6 style="font-size:6px;"> (mg/L)</h6></th>
              <th class=" bordered" colspan="3">Appréciation</th>
        </tr>
        <tr class="head bordered" style="font-size:9px;">
@@ -196,46 +196,226 @@ border-bottom: 1px solid rgb(228, 228, 228);
              <th  style="text-align:center;">Fort</th>
        </tr>
 </table>
-<table style="width:100%;font-size:12px;" >
+<table style="width:100%;font-size:10px;" >
     <tr>
       <th style="border:0px;text-align:left;color:green">CARACTERISTIQUES DE L'EAU</th>
     </tr>
     </table>
-    <table style="width:100%;font-size:11px;border:1px solid black;" >
+    <table style="width:100%;font-size:9px;border:1px solid black;" >
         <tr>
-                <td style="width:130px;border-right:1px solid black;">Potentiel hydrogène<h6 style='color:red;'>(*)</h6> à 25°C</td>
-                <td style="width:20px;text-align:center;border-right:1px solid black;">pHAAA</td>
-                <td style="width:89px;border-right:1px solid black;">NM ISO 10523:V2001</td> 
-                <td style="width:113px;border-right:1px solid black;">7.05</td>
-                <td style="width:68px;text-align:center;border-right:1px solid black;">6,50 à 8,40</td>
-                <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
+            <td style="width:121px;border-right:1px solid black;">Potentiel hydrogène<h6 style='color:red;'>(*)</h6> à 25°C</td>
+            <td style="width:30px;text-align:center;border-right:1px solid black;">pH</td>
+            <td style="width:97px;border-right:1px solid black;">NM ISO 10523:V2001</td> 
+            <td style="width:130px;border-right:1px solid black;text-align:center;">7.05</td>
+            <td style="width:48px;text-align:center;border-right:1px solid black;">6,50 à 8,40</td>
+            <td style="border-right:1px solid black;"> <h6 style='color:green;'>IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</h6></td>   
         </tr>
         <tr>
-            <td style="width:130px;border-right:1px solid black;">Conductivité éléctrique à 25°C </td>
-            <td style="width:20px;text-align:center;border-right:1px solid black;">EC</td>
-            <td style="width:89px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
-            <td style="width:113px;border-right:1px solid black;">1.835 (mS/cm)</td>
-            <td style="width:68px;text-align:center;border-right:1px solid black;">0,70 à 3,00</td>
-            <td style="width:68px;text-align:center;border-right:1px solid black;"></td>   
+            <td style="border-right:1px solid black;">Conductivité éléctrique à 25°C </td>
+            <td style="text-align:center;border-right:1px solid black;">EC</td>
+            <td style="border-right:1px solid black;">NM ISO 7888:V2001</td> 
+            <td style="border-right:1px solid black;text-align:center;">1.835 (mS/cm)</td>
+            <td style="text-align:center;border-right:1px solid black;">0,70 à 3,00</td>
+            <td style="border-right:1px solid black;"></td>   
     </tr>
     <tr>
-        <td style="width:130px;border-right:1px solid black;">Conductivité éléctrique<h6 style='color:red;'>(*)</h6> à 25°C</td>
-        <td style="width:20px;text-align:center;border-right:1px solid black;">EC</td>
-        <td style="width:89px;border-right:1px solid black;">NM ISO 7888:V2001</td> 
-        <td style="width:113px;border-right:1px solid black;">1830 (μS/cm)</td>
-        <td style="width:68px;text-align:center;border-right:1px solid black;">1.39(g/l)</td>
-        <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
+            <td style="border-right:1px solid black;">Conductivité éléctrique<h6 style='color:red;'>(*)</h6> à 25°C</td>
+            <td style="text-align:center;border-right:1px solid black;">EC</td>
+            <td style="border-right:1px solid black;">NM ISO 7888:V2001</td> 
+            <td style="border-right:1px solid black;text-align:center;">1830 (μS/cm)</td>
+            <td style="text-align:center;border-right:1px solid black;">1.39(g/l)</td>
+            <td style="border-right:1px solid black;"> </td>   
 </tr>
 <tr>
-    <td style="width:130px;border-right:1px solid black;">Salinité (teneur en sels totaux) </td>
-    <td style="width:20px;text-align:center;border-right:1px solid black;">TDS</td>
-    <td style="width:89px;border-right:1px solid black;text-align:center;">Calcul.</td> 
-    <td style="width:113px;border-right:1px solid black;">1.39(g/l)</td>
-    <td style="width:68px;text-align:center;border-right:1px solid black;">0,56 à 2,54</td>
-    <td style="width:68px;text-align:center;border-right:1px solid black;"> </td>   
+            <td style="border-right:1px solid black;background:rgb(230, 230, 230);">Salinité (teneur en sels totaux) </td>
+            <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">TDS</td>
+            <td style="border-right:1px solid black;text-align:center;background:rgb(230, 230, 230);">Calcul.</td> 
+            <td style="border-right:1px solid black;background:rgb(230, 230, 230);text-align:center;">1.39(g/l)</td>
+            <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">0,56 à 2,54</td>
+            <td style="border-right:1px solid black;background:rgb(230, 230, 230);"> </td>   
 </tr>
-       
     </table>
+
+    <table style="width:100%;font-size:10px;" >
+        <tr>
+          <th style="border:0px;text-align:left;color:green">BILAN IONIQUE</th>
+        </tr>
+        </table>
+        <table style="width:100%;font-size:9px;border:1px solid black;" >
+            <tr>
+                <td style="width:121px;border-right:1px solid black;">Nitrates </td>
+                <td style="width:30px;text-align:center;border-right:1px solid black;">NO3</td>
+                <td style="width:97px;border-right:1px solid black;">NF EN ISO 13395:V1996</td> 
+                <td style="width:62px;border-right:1px solid gray;">38,0 (mg/l) </td>
+                <td style="width:48px;border-right:1px solid black;font-size:8px;">0,61 (méq/L) </td>
+                <td style="width:48px;text-align:center;border-right:1px solid black;">22 à 33</td>
+                <td style="border-right:1px solid black;"> <h6 style='color:green;'></h6></td>   
+            </tr>
+            <tr>
+                <td style="border-right:1px solid black;border-bottom:1px solid gray;">Ammonium </td>
+                <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid gray;">NH4</td>
+                <td style="border-right:1px solid black;border-bottom:1px solid gray;">NF EN ISO 11732:V2005</td> 
+                <td style="border-right:1px solid gray;border-bottom:1px solid gray;"> Inf à 0,10 (mg/l)</td>
+                <td style="border-right:1px solid black;border-bottom:1px solid gray;font-size:8px;">0,02 (méq/L) </td>
+                <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid gray;">7 à 44 </td>
+                <td style="border-right:1px solid black;border-bottom:1px solid gray;"></td>   
+        </tr>
+        <tr>
+            <td style="border-right:1px solid black;">Calcium<h6 style='color:red;'>(*)</h6></td>
+            <td style="text-align:center;border-right:1px solid black;">Ca</td>
+            <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
+            <td style="border-right:1px solid gray;">103 (mg/l) </td>
+            <td style="border-right:1px solid black;font-size:8px;">5,13 (méq/L) </td>
+            <td style="text-align:center;border-right:1px solid black;">70 à 120</td>
+            <td style="border-right:1px solid black;"></td>   
+    </tr>
+    <tr>
+        <td style="border-right:1px solid black;">Magnésium<h6 style='color:red;'>(*)</h6></td>
+        <td style="text-align:center;border-right:1px solid black;">Mg</td>
+        <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
+        <td style="border-right:1px solid gray;">69.5 (mg/l) </td>
+        <td style="border-right:1px solid black;font-size:8px;">5,79 (méq/L)  </td>
+        <td style="text-align:center;border-right:1px solid black;">20 à 50</td>
+        <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Potassium<h6 style='color:red;'>(*)</h6></td>
+    <td style="text-align:center;border-right:1px solid black;">K</td>
+    <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
+    <td style="border-right:1px solid gray;">3.16 (mg/l) </td>
+    <td style="border-right:1px solid black;font-size:8px;">0.08 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid black;">50 à 150</td>
+    <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Sodium<h6 style='color:red;'>(*)</h6></td>
+    <td style="text-align:center;border-right:1px solid black;">Na</td>
+    <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
+    <td style="border-right:1px solid gray;">171(mg/l) </td>
+    <td style="border-right:1px solid black;font-size:8px;">7,44 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid black;">Inf à 1357</td>
+    <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;background:rgb(230, 230, 230);">Sodium absorption Ratio</td>
+    <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">SAR</td>
+    <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">Calcul. </td> 
+    <td style="text-align:center;background:rgb(230, 230, 230);">2.6 </td>
+    <td style="border-right:1px solid black;font-size:8px;background:rgb(230, 230, 230);"></td>
+    <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">-</td>
+    <td style="border-right:1px solid black;background:rgb(230, 230, 230);"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Phosphates</td>
+    <td style="text-align:center;border-right:1px solid black;">H2PO4</td>
+    <td style="border-right:1px solid black;">NM ISO 15681-2: V2007 </td> 
+    <td style="border-right:1px solid gray;">Inf à 0,20 (mg/l) </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">- </td>
+    <td style="text-align:center;border-right:1px solid black;">3 à 6</td>
+    <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Chlorure </td>
+    <td style="text-align:center;border-right:1px solid black;">Cl</td>
+    <td style="border-right:1px solid black;">NF EN ISO 15682:V2001 </td> 
+    <td style="border-right:1px solid gray;">281 (mg/l) </td>
+    <td style="border-right:1px solid black;font-size:8px;">7,90 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid black;">Inf à 335</td>
+    <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Sulfates</td>
+    <td style="text-align:center;border-right:1px solid black;">SO4</td>
+    <td style="border-right:1px solid black;">NF T 90-040: V1986 </td> 
+    <td style="border-right:1px solid gray;">102 (mg/l) </td>
+    <td style="border-right:1px solid black;font-size:8px;">5,69 (méq/L)  </td>
+    <td style="text-align:center;border-right:1px solid black;">35 à 250</td>
+    <td style="border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Bicarbonates</td>
+    <td style="text-align:center;border-right:1px solid black;">HCO3</td>
+    <td style="border-right:1px solid black;">NM ISO 9963-1:V2001 </td> 
+    <td style="border-right:1px solid gray;">418 (mg/l) </td>
+    <td style="border-right:1px solid black;font-size:8px;">6,85 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid black;">92 à 510</td>
+    <td style="text-align:center;border-right:1px solid black;"></td>   
+</tr>
+<tr>
+    <td style="border-right:1px solid black;">Carbonates </td>
+    <td style="text-align:center;border-right:1px solid black;">CO3</td>
+    <td style="border-right:1px solid black;">NM ISO 9963-1:V2001 </td> 
+    <td style="text-align:center;border-right:1px solid gray;">- </td>
+    <td style="border-right:1px solid black;font-size:8px;">-</td>
+    <td style="text-align:center;border-right:1px solid black;">-</td>
+    <td style="text-align:center;border-right:1px solid black;"></td>   
+</tr>     
+</table>
+
+<table style="width:100%;font-size:10px;" >
+    <tr>
+      <th style="border:0px;text-align:left;color:green">OLIGO-ELEMENTS</th>
+    </tr>
+    </table>
+    <table style="width:100%;font-size:9px;border:1px solid black;" >
+        <tr>
+            <td style="width:121px;border-right:1px solid black;">Zinc<h6 style='color:red;'>(*)</h6> </td>
+            <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
+            <td style="width:97px;border-right:1px solid black;">NF EN ISO 11885:V2009</td> 
+            <td style="width:130px;border-right:1px solid black;text-align:center;">0,010 (mg/l)</td>
+            <td style="width:48px;text-align:center;border-right:1px solid black;">0,01 à 2</td>
+            <td style="border-right:1px solid black;"> <h6 style='color:green;'></h6></td>   
+        </tr>
+        <tr>
+            <td style="border-right:1px solid black;">Cuivre<h6 style='color:red;'>(*)</h6> </td>
+            <td style="text-align:center;border-right:1px solid black;">Cu</td>
+            <td style="border-right:1px solid black;">NF EN ISO 11885:V2009</td> 
+            <td style="border-right:1px solid black;text-align:center;">Inf à 0,015 (mg/l)</td>
+            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,2</td>
+            <td style="border-right:1px solid black;"></td>   
+    </tr>
+    <tr>
+            <td style="border-right:1px solid black;">Manganèse<h6 style='color:red;'>(*)</h6></td>
+            <td style="text-align:center;border-right:1px solid black;">Mn</td>
+            <td style="border-right:1px solid black;">NF EN ISO 11885:V2009</td> 
+            <td style="border-right:1px solid black;text-align:center;">Inf à 0,015 (mg/l)</td>
+            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,2</td>
+            <td style="border-right:1px solid black;"> </td>   
+</tr>
+<tr>
+            <td style="border-right:1px solid black;">Fer<h6 style='color:red;'>(*)</h6></td>
+            <td style="text-align:center;border-right:1px solid black;">Fe</td>
+            <td style="border-right:1px solid black;text-align:center;">NF EN ISO 11885:V2009</td> 
+            <td style="border-right:1px solid black;text-align:center;">Inf à 0,005 (mg/l)</td>
+            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,5</td>
+            <td style="border-right:1px solid black;"> </td>   
+</tr>
+<tr>
+            <td style="border-right:1px solid black;">Bore</td>
+            <td style="text-align:center;border-right:1px solid black;">B</td>
+            <td style="border-right:1px solid black;text-align:center;">NF EN ISO 11885:V2009</td> 
+            <td style="border-right:1px solid black;text-align:center;">-</td>
+            <td style="text-align:center;border-right:1px solid black;">0,7 à 3</td>
+            <td style="border-right:1px solid black;"> </td>   
+</tr>
+    </table>
+    <p style="font-size:9px;text-align:left;">Echantillon prélevé et conservé selon les recommondations de la norme NF ISO 5667-1.<br>
+        L'échantillonnage est réalisé selon les recommandations de la norme NF ISO 5667-3 relatives aux eaux naturelles et souterraines.<br>
+        La technique d'échantillonnage utilisée : Echantillonnage ponctuel.
+        Si l'échantillonnage est assuré par le client, le laboratoire dégage toute résponsablité par rapport à la technique d'échantillonnage utilisée.<br>
+        Le présent rapport ne concerne que les objets soumis à l'essai. Il comporte une seule page et ne doit pas être reproduit partiellement sans
+        l’approbation du laboratoire. Seule une reproduction sous sa forme intégrale est autorisée.<br>
+        Les échantillons sont conservés au Laboratoire 7 jours maximum après communication des résultats aux clients.<br>
+        Les avis et interprétations contenus dans ce rapport ne sont pas couverts par l'accréditation.</p>
+        <p class="h4" style="font-size:9px;text-align:left"> : Paramètre accrédité</p>
+        <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px" width="500px">
+        <p class="text" style="font-size:8px;">FIN DE PAGE<br>
+                            ------------------------------<br>
+                            Laboratoire LACQ <br>
+                            AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
+                            Tel:+212 535 52 94 01 <br>
+                            contact.lacq@elephant-vert.com <br>        
+         </p>  
 
     
 
