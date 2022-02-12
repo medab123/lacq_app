@@ -26,7 +26,7 @@ class CommandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public static function index()
     {
         //
@@ -58,7 +58,7 @@ class CommandeController extends Controller
         $listCommandes->setPath('/commandes');
 
         $table = view('commandes.table', compact('listCommandes'))->render();
-        return response()->json(compact('table')); 
+        return response()->json(compact('table'));
     }
 
     /**
@@ -191,8 +191,8 @@ class CommandeController extends Controller
         }else{
             $codeMatrice = Matrice::find($matrice_id)["code"];
         }
-       
-        
+
+
         $lastCode = Commande::select("code_commande as code")
         ->where("code_commande","like",$codeMatrice."%")
         ->orderByRaw('id desc')
@@ -260,8 +260,8 @@ class CommandeController extends Controller
         $commande->save();
         ActivityController::updateActivity(new Commande(),$id);
         return redirect()->back()->with('success','Commande modifiée avec succès');
-       
-        
+
+
     }
 
     /**
@@ -277,7 +277,7 @@ class CommandeController extends Controller
         $commande->delete();
         ActivityController::deleteActivity(new Commande(),$id);
         return response()->json(['status' => true, 'message' =>'Commande supprimée avec succès']);
-        
+
     }
     public function notifCommandeValider($idCommande)
     {
@@ -327,7 +327,7 @@ class CommandeController extends Controller
     }
 
     /////////////////////////////////////////////////////////
-    
+
     public static function search(Request $request){
         $buffer = $request->input("buffer");
         $listCommandes = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
@@ -376,7 +376,7 @@ class CommandeController extends Controller
         return view("commandes.index",["listLieus" => $listLieus,"listCommandes" => $listCommandes ,"listMatrices" => $listMatrices,"listCultures" => $listCultures ,"listNatures" => $listNatures , "listVarites" => $listVarites, "listCommercials" => $listCommercials,"listClients" => $listClients,"state" => $state]);
     }
     public function valider($id){
-        
+
         try{
             $commande = Commande::find($id);
             $codeCommande = self::genirationCodeCommande($id);
@@ -390,8 +390,8 @@ class CommandeController extends Controller
             ->where("commandes.id","=",$id)
             ->first()["matrice"];
             $analyse_table = $commandeMatrice;
-            $analyse_table = strtolower($analyse_table); 
-            $analyse_table = str_replace(' ', '_', $analyse_table); 
+            $analyse_table = strtolower($analyse_table);
+            $analyse_table = str_replace(' ', '_', $analyse_table);
             $analyse_table = "analyse_".$analyse_table;
             if (Schema::hasTable($analyse_table)) {
                 if(!DB::table($analyse_table)->where("commande_id","=",$id)->first()){
@@ -406,11 +406,11 @@ class CommandeController extends Controller
             }catch(\Exception $e){
                 return response()->json([['status' => false,'message' => 'Mail not sended'],['status' => true,'message' => 'Commande validée avec succès']]);
             }
-            return response()->json([['status' => true,'message' => 'Commande validée avec succès']]); 
+            return response()->json([['status' => true,'message' => 'Commande validée avec succès']]);
         }catch(\Exception $e){
             echo $e->getMessage();
             //return redirect()->back()->with('error','Commande n\'pas valider !');
-            
+
         }
     }
     public function reject(Request $request){
@@ -428,8 +428,8 @@ class CommandeController extends Controller
         $commande->save();
         $commandeMatrice = Matrice::find(Menu::find($commande->menu_id)["matrice_id"])["name"];
         $analyse_table = $commandeMatrice;
-        $analyse_table = strtolower($analyse_table); 
-        $analyse_table = str_replace(' ', '_', $analyse_table); 
+        $analyse_table = strtolower($analyse_table);
+        $analyse_table = str_replace(' ', '_', $analyse_table);
         $analyse_table = "analyse_".$analyse_table;
         if (Schema::hasTable($analyse_table)) {
             if(DB::table($analyse_table)->where("commande_id",$commande->id)->first()){
