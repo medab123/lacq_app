@@ -17,7 +17,7 @@ class CreateAnalyseUniteAmeoTable extends Migration
             $table->id();
             $table->string("parametre")->nullable();
             $table->string("unite")->nullable();
-            $table->timestamps();
+            $table->timestamps(); 
         });
 
         DB::table('analyse_unite_ameo')->insert(
