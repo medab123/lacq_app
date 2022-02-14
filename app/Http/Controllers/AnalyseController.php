@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use App\Models\Matrice;
+use App\Models\Commande;
+
 use Illuminate\Http\Request;
 use App\Models\Lieu;
-use App\Models\Analys; 
+use App\Models\Analys;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnalyseExport;
 use App\Imports\AnalyseImport;
 use App\Http\Controllers\ActivityController;
 use App\Services\PayUService\Exception;
-
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class AnalyseController extends Controller
 {
@@ -23,23 +25,23 @@ class AnalyseController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $analyse_table = (empty($request["matrice"])) ? "analyse_eau_potable" : $request["matrice"];
         $unite_table = "analyse_unite_eau_potable";
         $selectedMatrice = 2;
         if($analyse_table != 'analyse_eau_potable'){
             $selectedMatrice = $request["matrice"];
             $analyse_table = Matrice::find($selectedMatrice)['name'];
-            $analyse_table = strtolower($analyse_table); 
-            $analyse_table = str_replace(' ', '_', $analyse_table); 
+            $analyse_table = strtolower($analyse_table);
+            $analyse_table = str_replace(' ', '_', $analyse_table);
             $unite_table = "analyse_unite_".$analyse_table;
             $analyse_table = "analyse_".$analyse_table;
         }
-        
+
         $listMatrices = Matrice::get();
         $columns =  Schema::getColumnListing($analyse_table);
         $formatedListUnites = [];
-        
+
         if (Schema::hasTable($unite_table)) {
             $listUnites = DB::table($unite_table)->select("parametre","unite")->get();
             for($i = 0 ; $i<count($listUnites);$i++){
@@ -49,7 +51,7 @@ class AnalyseController extends Controller
             }
             $formatedListUnites= call_user_func_array('array_merge', $formatedListUnites);
         }
-        
+
 
         $listData = DB::table($analyse_table)
         ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
@@ -60,14 +62,14 @@ class AnalyseController extends Controller
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
     }
-    public function export($matrice_id) 
+    public function export($matrice_id)
     {
         $export = new AnalyseExport();
         $export->getTableName($matrice_id);
         return Excel::download($export, 'analyse_export.xlsx');
     }
-    public function import(Request $request,$matrice_id) 
-    {   
+    public function import(Request $request,$matrice_id)
+    {
         $import = new AnalyseImport();
         $import->getTableName($matrice_id);
         //Excel::import($import, $request->file('analyse_import')->store('temp'));
@@ -138,8 +140,8 @@ class AnalyseController extends Controller
     {
         $table = $request["selectedMatrice"];
         $table = Matrice::find($table)['name'];
-        $table = strtolower($table); 
-        $table = str_replace(' ', '_', $table); 
+        $table = strtolower($table);
+        $table = str_replace(' ', '_', $table);
         $table = "analyse_".$table;
         $columns =  Schema::getColumnListing($table);
         $count = count($columns);
@@ -149,7 +151,7 @@ class AnalyseController extends Controller
             if($column == "deleted_at" || $column == "id" || $column == "created_at" || $column == "updated_at" || $column == "commande_id"){
                 unset($columns[$i]);
             }
-        }        
+        }
         for($i = 0 ; $i<count($request["id"]);$i++){
             $analyseData = [];
             foreach ($columns as $column){
@@ -177,5 +179,28 @@ class AnalyseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function refresh(Request $request){
+        $matrice_id = $request->input("matrice");
+        $table = $matrice_id;
+        $table = Matrice::find($table)['name'];
+        $table = strtolower($table);
+        $table = str_replace(' ', '_', $table);
+        $table = "analyse_".$table;
+        $commandes = Commande::select("commandes.id as commande_id")
+        ->join("menus" ,"menus.id","=","commandes.menu_id")
+        ->join("matrices" ,"matrices.id","=","menus.matrice_id")
+        ->leftJoin($table, 'commandes.id', '=', $table.'.commande_id')
+        ->where("matrices.id" ,"=",$matrice_id)
+        ->where($table.".commande_id","=",null)
+        ->where("commandes.state","=","valid")
+        ->get();
+        DB::table($table)->insert($commandes->ToArray());
+       // return response()->json(compact('commandes'));
+        return redirect()->back()->with('success','Les analyses modifiée avec succès')->with('selectedMatrice', $matrice_id);
+
+
+
     }
 }
