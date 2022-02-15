@@ -64,7 +64,7 @@
       @php use App\Custom\Archivos; @endphp
       <table border="0">
           <tr>
-              <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="130px" height="40px">
+              <td><img src="{{ Archivos::imagenABase64(public_path('img\LacqLogo.jpg')) }}" width="130px" height="40px">
                   <br>
                   <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité ELEPHANT
                       VERT MAROC S.A. </label>
@@ -75,7 +75,7 @@
                   <h5 style="color:green;text-align:center; font-size:12px;">RAPPORT D'ANALYSE AMENDEMENT ORGANIQUE ET SUPPORT DE CULTURE
                       <br>N° PO {{$commande_info->code_commande }} </h5>
               </td>
-              <td style="text-align:right;vertical-align:top"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
+              <td style="text-align:right;vertical-align:top"><img src="{{ Archivos::imagenABase64(public_path('img\semac.png')) }}"
                       width="80px" height="40px"><br>
                       <label style="color:brown;font-size:11px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018</label>
               </td>
@@ -140,7 +140,7 @@
           <table style="width:100%;font-size:9px;margin-top:;border:1px solid black;background:rgb(230, 230, 230);" >
               <tr >
                 <th style="width:180px;border:1px solid black;height:150px"><label style="text-align:top;color:green">Photo prise à la réception</label>
-                  <img src='{{ Archivos::imagenABase64(public_path("img/commande/ameo/{$commande_info->img_1}")) }}'
+                  <img src='{{ Archivos::imagenABase64(public_path("img\commande\ameo\{$commande_info->img_1}")) }}'
                 width="150px" height="120px" style="margin-top:5;border:0.01em solid black"></th>
                 <th class="bordred" style="text-align:left;vertical-align:top;color:green;padding:8px 0px 0px 5px;">Observations :<br>
                <p> <label style="text-align:top;color:black;font-size:9px;">Echantillon reçu dans un emballage en plastique fermé en <?php echo "$etat" ?> des corps étrangers
@@ -460,12 +460,12 @@
                     @endphp </td>
 
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                  
+
                     if(empty($analyse_data->Mg * ($analyse_data->MS/100))){
                         echo "-";
                     }
                     elseif ($analyse_data->Mg * ($analyse_data->MS/100)< 0.10) {
-                        
+
                         echo "inf à 0.10";
                     }
                     else{
@@ -641,7 +641,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                  
+
                     if(empty($analyse_data->As)){
                         echo "-";
                     }
@@ -851,7 +851,7 @@
          Ce rapport d'analyse concerne seulement l'échantillon soumis aux analyses. Ce rapport ne doit pas être reproduit sans l'approbation
          du laboratoire d'essai. La reproduction de ce rapport d'essai n'est autorisé que sous sa forme intégrale.</p>
          <p class="h4" style="font-size:9px;text-align:left"> Paramètre accrédité</p>
-         <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:10px" width="400px">
+         <img src="{{ Archivos::imagenABase64(public_path('img\signature.png')) }}" style="margin-top:10px" width="400px">
          <p class="text" style="font-size:8px;">1/2<br>
                              ------------------------------<br>
                              Laboratoire LACQ <br>
@@ -861,7 +861,7 @@
           </p>
          <table border="0">
           <tr>
-              <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="130px" height="40px">
+              <td><img src="{{ Archivos::imagenABase64(public_path('img\LacqLogo.jpg')) }}" width="130px" height="40px">
                   <br>
                   <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité
                       VERT MAROC S.A. </label>
@@ -891,7 +891,7 @@
       <label style="text-align:top;color:green;font-size:11px;">Photo prise lors de la préparation de l'échantillon</label>
               <tr >
                 <th style="width:180px;height:150px;">
-                  <img src='{{ Archivos::imagenABase64(public_path("img/commande/ameo/{$commande_info->img_1}")) }}'
+                  <img src='{{ Archivos::imagenABase64(public_path("img\commande\ameo\{$commande_info->img_1}")) }}'
                 width="600px" height="500px" style="margin-top:6;"></th>
               </tr>
             </table>
