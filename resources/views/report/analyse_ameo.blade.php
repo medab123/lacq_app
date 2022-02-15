@@ -144,7 +144,7 @@
                 width="150px" height="120px" style="margin-top:5;border:0.01em solid black"></th>
                 <th class="bordred" style="text-align:left;vertical-align:top;color:green;padding:8px 0px 0px 5px;">Observations :<br>
                <p> <label style="text-align:top;color:black;font-size:9px;">Echantillon reçu dans un emballage en plastique fermé en <?php echo "$etat" ?> des corps étrangers
-                                                                            susceptibles d’avoir une influence
+                                                                             susceptibles d’avoir une influence
                                                                             sur la qualité des analyses .(Annexe page 2)<br>
                   <p style="text-align:top;color:black;font-size:9px;"> L'échantillon sera conservé au Laboratoire 4 jours maximum après communication des résultats.</p><br>
                   <p style="text-align:top;color:black;font-size:9px;">Quantité de l'échantillon réceptionné est suffisante.</p></label></p>

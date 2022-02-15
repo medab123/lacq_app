@@ -29,6 +29,7 @@ class CreateAnalyseEauTable extends Migration
             $table->float("HCO3")->nullable();
             $table->float("CO3")->nullable();
             $table->float("K")->nullable();
+            $table->float("Na")->nullable();
             $table->float("Ca")->nullable();
             $table->float("Mg")->nullable();
             $table->float("Zn")->nullable();
