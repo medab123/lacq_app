@@ -500,7 +500,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">Calcul. </td> 
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);" colspan="2">
         @php
-              if(empty($analyse_data->Na/(sqrt($analyse_data->Ca+$analyse_data->Mg)/2)))
+              if(empty($analyse_data->Na))
         {
            echo "-";    
         }
