@@ -2,14 +2,9 @@
 @section('content')
 
     <style>
-        th {
-            font-size: 11px;
-        }
-
         td {
             font-size: 13px;
         }
-
         .btnAction {
             font-size: 10px;
         }
@@ -21,6 +16,7 @@
     position: absolute;
     font-size: 10px;
     opacity: 0;
+    width: 30px;
     right: 0;
     top: 0;
   }
@@ -49,10 +45,11 @@
         </div>
 
     @endif
-   
+
 
         <div class="card " style=" background-color: rgb(255, 255, 255)">
             <div class="card-header d-inline ">{{ __('La liste des analyses') }}
+
                 <select name="selectedMatrice" id="matriceFilter"
                     class="ml-3 d-inline  form-control form-control-sm col-2 float-right">
                     @foreach ($listMatrices as $matrice)
@@ -62,7 +59,6 @@
                     @endforeach
                 </select>
                 <button class="btn btn-success btn-sm float-right mr-2 py-1" type="button" onclick="analyses_export()"><i class="fa fa-download" aria-hidden="true"></i></button>
-                
                 <form action="{{url('/analyse/import')}}" method="POST" enctype="multipart/form-data" class="d-inline form-upload float-right">
                     @csrf
                     <div class="d-inline div-upload">
@@ -70,6 +66,8 @@
                       <input type="file" class="input-upload"  name="analyse_import" >
                     </div>
                 </form>
+                <button class="btn btn-success btn-sm float-right mr-2 py-1" type="button" onclick="refresh_table()">Actualiser  <i class="fa fa-refresh"></i></button>
+
         <form action="/analyses" method="POST" id="formAnalyse">
             @csrf
             @method('patch')
@@ -116,15 +114,32 @@
         </div>
 
         </div>
-    
+
     <div class="d-flex justify-content-center mt-2">
     </div>
     <script>
         $( document ).ready(function() {
             $("#matriceFilter").trigger('change');
         });
-        
         var cadenas_is_open = false;
+        function refresh_table(){
+            $("html").preloader({ text: 'Loading'});
+            $.ajax({
+                url: "{{ url('/analyses/refresh') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    matrice: $("#matriceFilter").val(),
+                },
+                success: function(response) {
+                    $.when( $(".card-body").html($(response).find(".card-body").html()) ).done(function() {
+                        $.when( $("#matriceFilter").trigger('change') ).done(function() {
+                            $('table').preloader('remove')
+                        });
+                    });
+                },
+            });
+        }
         $(".input-upload").change(function() {
             $.confirm({
                 title: 'Confirm!',
@@ -148,7 +163,7 @@
             cadenas_is_open = !cadenas_is_open;
             cadenas_is_open ? arrayToInputs() : InputsToArray()
         }
-        
+
 
         function arrayToInputs() {
             $("td").each(function() {
@@ -157,7 +172,7 @@
                         "<input  style='width:100px;' class='form-control form-control-sm' name='id[]' value='" + $.trim($(
                             this).html()) + "' readonly='readonly' >");
                 else if (this.id !== "notModifiable")
-                    $(this).html("<input style='width:100px;' class='form-control form-control-sm' name='" + this 
+                    $(this).html("<input style='width:100px;' class='form-control form-control-sm' name='" + this
                         .id + "[]' value='" + $.trim($(this).html()) + "' >");
             });
             $("#cadenas").html(

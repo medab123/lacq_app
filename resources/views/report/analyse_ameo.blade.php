@@ -82,7 +82,7 @@
           </tr>
       </table>
 
-      <table style="width:100%;font-size:9px;margin-top:">
+      <table style="width:100%;font-size:9px;margin-top:"> 
           <tr>
               <th class="head bordered" style="width:125px;">Client :</th>
               <td class=" bordered">{{ $client_info->exploiteur }}</td>
@@ -144,7 +144,7 @@
                 width="150px" height="120px" style="margin-top:5;border:0.01em solid black"></th>
                 <th class="bordred" style="text-align:left;vertical-align:top;color:green;padding:8px 0px 0px 5px;">Observations :<br>
                <p> <label style="text-align:top;color:black;font-size:9px;">Echantillon reçu dans un emballage en plastique fermé en <?php echo "$etat" ?> des corps étrangers
-                                                                            susceptibles d’avoir une influence
+                                                                             susceptibles d’avoir une influence
                                                                             sur la qualité des analyses .(Annexe page 2)<br>
                   <p style="text-align:top;color:black;font-size:9px;"> L'échantillon sera conservé au Laboratoire 4 jours maximum après communication des résultats.</p><br>
                   <p style="text-align:top;color:black;font-size:9px;">Quantité de l'échantillon réceptionné est suffisante.</p></label></p>
@@ -460,12 +460,12 @@
                     @endphp </td>
 
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                  
+
                     if(empty($analyse_data->Mg * ($analyse_data->MS/100))){
                         echo "-";
                     }
                     elseif ($analyse_data->Mg * ($analyse_data->MS/100)< 0.10) {
-                        
+
                         echo "inf à 0.10";
                     }
                     else{
@@ -641,7 +641,7 @@
                   <td style="width:30px;text-align:center;border-right:1px solid black;">mg/kg</td>
                   <td style="width:113px;border-right:1px solid black;">NF EN ISO 11885:V2009</td>
                   <td style="width:68px;text-align:center;border-right:1px solid black;"> @php
-                  
+
                     if(empty($analyse_data->As)){
                         echo "-";
                     }

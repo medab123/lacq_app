@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
+
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="px-3 mx-auto mt-5">
+    <div class="content px-3 mx-auto mt-5">
         @yield("content")
     </div>
     <!------------------------------------------------------------------------->

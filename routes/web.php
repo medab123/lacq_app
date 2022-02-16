@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth']], function() {
 //
 
 
-    
+
 
 
 
@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/analyses', [AnalyseController::class,'index']);
     Route::get('/analyses/export/{matrice_id}', [AnalyseController::class, 'export']);
     Route::post('/analyses/import/{matrice_id}', [AnalyseController::class, 'import']);
+    Route::post('/analyses/refresh', [AnalyseController::class, 'refresh']);
+
 
 
     Route::get('report/{commande_id}', [ReportController::class, 'index']);
@@ -107,6 +109,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/AmountCommercial', [DashboardAdminController::class,'AmountCommercial']);
     Route::get('/commercialTable', [DashboardAdminController::class,'commercialTable']);
     Route::get('/top5Commercial', [DashboardAdminController::class,'top5Commercial']);
+    Route::get('/statistiqueLabo', [DashboardAdminController::class,'statistiqueLabo']);
+
+
 
 
 

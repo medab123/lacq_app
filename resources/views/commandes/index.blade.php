@@ -2,9 +2,6 @@
 @section('content')
 
     <style>
-        th {
-            font-size: 11px;
-        }
 
         td {
             font-size: 13px;

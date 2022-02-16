@@ -227,10 +227,34 @@ border-bottom: 1px solid rgb(228, 228, 228);
             <td style="border-right:1px solid black;"> </td>   
 </tr>
 <tr>
+
             <td style="border-right:1px solid black;background:rgb(230, 230, 230);">Salinité (teneur en sels totaux) </td>
             <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">TDS</td>
             <td style="border-right:1px solid black;text-align:center;background:rgb(230, 230, 230);">Calcul.</td> 
-            <td style="border-right:1px solid black;background:rgb(230, 230, 230);text-align:center;">1.39(g/l)</td>
+            <td style="border-right:1px solid black;background:rgb(230, 230, 230);text-align:center;">@php
+                if($analyse_data->EC<0.05)
+                {
+                    echo round($analyse_data->EC*1.365079, 2);
+                }
+                elseif($analyse_data->EC<0.166)
+                {
+                    echo round($analyse_data->EC*0.947658, 2);
+                }
+                elseif($analyse_data->EC<0.333)
+                {
+                    echo round($analyse_data->EC*0.769574, 2);
+                }
+                elseif($analyse_data->EC<0.833)
+                {
+                    echo round($analyse_data->EC*0.71592, 2);
+                }
+                elseif($analyse_data->EC<10)
+                {
+                    echo round($analyse_data->EC*0.758544, 2);
+                }
+            @endphp
+
+            </td>
             <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">0,56 à 2,54</td>
             <td style="border-right:1px solid black;background:rgb(230, 230, 230);"> </td>   
 </tr>
@@ -246,8 +270,28 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td style="width:121px;border-right:1px solid black;">Nitrates </td>
                 <td style="width:30px;text-align:center;border-right:1px solid black;">NO3</td>
                 <td style="width:97px;border-right:1px solid black;">NF EN ISO 13395:V1996</td> 
-                <td style="width:62px;border-right:1px solid gray;">38,0 (mg/l) </td>
-                <td style="width:48px;border-right:1px solid black;font-size:8px;">0,61 (méq/L) </td>
+                <td style="text-align:center;width:62px;border-right:1px solid gray;">
+                    @php
+                    if(empty($analyse_data->NO3))
+                    {
+                       echo "-";    
+                    }
+                    else {
+                        echo $analyse_data->NO3," (mg/l)"; 
+                    }
+                @endphp
+                </td>
+                <td style="text-align:center;width:48px;border-right:1px solid black;font-size:8px;">
+                    @php
+                            if(empty($analyse_data->NO3/62))
+                            {
+                            echo "-";    
+                            }
+                            else {
+                                echo round($analyse_data->NO3/62, 2) ," (méq/L)"; 
+                            }
+                    @endphp
+                </td>
                 <td style="width:48px;text-align:center;border-right:1px solid black;">22 à 33</td>
                 <td style="border-right:1px solid black;"> <h6 style='color:green;'></h6></td>   
             </tr>
@@ -255,8 +299,28 @@ border-bottom: 1px solid rgb(228, 228, 228);
                 <td style="border-right:1px solid black;border-bottom:1px solid gray;">Ammonium </td>
                 <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid gray;">NH4</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid gray;">NF EN ISO 11732:V2005</td> 
-                <td style="border-right:1px solid gray;border-bottom:1px solid gray;"> Inf à 0,10 (mg/l)</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid gray;font-size:8px;">0,02 (méq/L) </td>
+                <td style="text-align:center;border-right:1px solid gray;border-bottom:1px solid gray;"> 
+                    @php
+                    if(empty($analyse_data->NH4))
+                    {
+                       echo "-";    
+                    }
+                    else {
+                        echo $analyse_data->NH4," (mg/l)"; 
+                    }
+                @endphp
+                </td>
+                <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid gray;font-size:8px;">
+                    @php
+                            if(empty($analyse_data->NH4/18))
+                            {
+                            echo "-";    
+                            }
+                            else {
+                                echo round($analyse_data->NH4/18, 2) ," (méq/L)"; 
+                            }
+                    @endphp
+                     </td>
                 <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid gray;">7 à 44 </td>
                 <td style="border-right:1px solid black;border-bottom:1px solid gray;"></td>   
         </tr>
@@ -264,17 +328,57 @@ border-bottom: 1px solid rgb(228, 228, 228);
             <td style="border-right:1px solid black;">Calcium<h6 style='color:red;'>(*)</h6></td>
             <td style="text-align:center;border-right:1px solid black;">Ca</td>
             <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
-            <td style="border-right:1px solid gray;">103 (mg/l) </td>
-            <td style="border-right:1px solid black;font-size:8px;">5,13 (méq/L) </td>
-            <td style="text-align:center;border-right:1px solid black;">70 à 120</td>
+            <td style="text-align:center;border-right:1px solid gray;">
+                @php
+                if(empty($analyse_data->Ca))
+                {
+                   echo "-";    
+                }
+                else {
+                    echo $analyse_data->Ca," (mg/l)"; 
+                }
+            @endphp
+            </td>
+            <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+                @php
+                if(empty($analyse_data->Ca/20))
+                {
+                echo "-";    
+                }
+                else {
+                    echo round($analyse_data->Ca/20, 2) ," (méq/L)"; 
+                }
+        @endphp
+        </td>
+            <td style="text-align:center;text-align:center;border-right:1px solid black;">70 à 120</td>
             <td style="border-right:1px solid black;"></td>   
     </tr>
     <tr>
         <td style="border-right:1px solid black;">Magnésium<h6 style='color:red;'>(*)</h6></td>
         <td style="text-align:center;border-right:1px solid black;">Mg</td>
         <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
-        <td style="border-right:1px solid gray;">69.5 (mg/l) </td>
-        <td style="border-right:1px solid black;font-size:8px;">5,79 (méq/L)  </td>
+        <td style="text-align:center;border-right:1px solid gray;">
+            @php
+            if(empty($analyse_data->Mg))
+            {
+               echo "-";    
+            }
+            else {
+                echo $analyse_data->Mg," (mg/l)"; 
+            }
+        @endphp
+        </td>
+        <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+            @php
+            if(empty($analyse_data->Mg/12))
+            {
+            echo "-";    
+            }
+            else {
+                echo round($analyse_data->Mg/12, 2) ," (méq/L)"; 
+            }
+    @endphp
+    </td>
         <td style="text-align:center;border-right:1px solid black;">20 à 50</td>
         <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -282,8 +386,28 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Potassium<h6 style='color:red;'>(*)</h6></td>
     <td style="text-align:center;border-right:1px solid black;">K</td>
     <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
-    <td style="border-right:1px solid gray;">3.16 (mg/l) </td>
-    <td style="border-right:1px solid black;font-size:8px;">0.08 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid gray;">
+        @php
+        if(empty($analyse_data->K))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->K," (mg/l)"; 
+        }
+    @endphp
+    </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+        @php
+        if(empty($analyse_data->K/39))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->K/39, 2) ," (méq/L)"; 
+        }
+@endphp
+</td>
     <td style="text-align:center;border-right:1px solid black;">50 à 150</td>
     <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -291,8 +415,26 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Sodium<h6 style='color:red;'>(*)</h6></td>
     <td style="text-align:center;border-right:1px solid black;">Na</td>
     <td style="border-right:1px solid black;">NF EN ISO 11885:V2009 </td> 
-    <td style="border-right:1px solid gray;">171(mg/l) </td>
-    <td style="border-right:1px solid black;font-size:8px;">7,44 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid gray;">@php
+        if(empty($analyse_data->Na))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->Na ," (mg/l)"; 
+        }
+    @endphp
+    </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">@php
+         if(empty($analyse_data->Na/23))
+        {
+           echo "-";    
+        }
+        else {
+            echo round($analyse_data->Na/23, 2) ," (méq/L)"; 
+        }
+    @endphp
+     </td>
     <td style="text-align:center;border-right:1px solid black;">Inf à 1357</td>
     <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -300,8 +442,17 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;background:rgb(230, 230, 230);">Sodium absorption Ratio</td>
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">SAR</td>
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">Calcul. </td> 
-    <td style="text-align:center;background:rgb(230, 230, 230);">2.6 </td>
-    <td style="border-right:1px solid black;font-size:8px;background:rgb(230, 230, 230);"></td>
+    <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);" colspan="2">
+        @php
+              if(empty($analyse_data->Na/(sqrt($analyse_data->Ca+$analyse_data->Mg)/2)))
+        {
+           echo "-";    
+        }
+        else {
+            echo round($analyse_data->Na/(sqrt($analyse_data->Ca+$analyse_data->Mg)/2), 2) ," (mg/l)"; 
+        }
+    @endphp
+     </td>
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">-</td>
     <td style="border-right:1px solid black;background:rgb(230, 230, 230);"></td>   
 </tr>
@@ -309,8 +460,28 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Phosphates</td>
     <td style="text-align:center;border-right:1px solid black;">H2PO4</td>
     <td style="border-right:1px solid black;">NM ISO 15681-2: V2007 </td> 
-    <td style="border-right:1px solid gray;">Inf à 0,20 (mg/l) </td>
-    <td style="text-align:center;border-right:1px solid black;font-size:8px;">- </td>
+    <td style="text-align:center;border-right:1px solid gray;">
+        @php
+        if(empty($analyse_data->H2PO4))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->H2PO4 ," (mg/l)"; 
+        }
+    @endphp
+    </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+        @php
+        if(empty($analyse_data->H2PO4/97))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->H2PO4/97, 2) ," (méq/L)"; 
+        }
+@endphp
+</td>
     <td style="text-align:center;border-right:1px solid black;">3 à 6</td>
     <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -318,8 +489,28 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Chlorure </td>
     <td style="text-align:center;border-right:1px solid black;">Cl</td>
     <td style="border-right:1px solid black;">NF EN ISO 15682:V2001 </td> 
-    <td style="border-right:1px solid gray;">281 (mg/l) </td>
-    <td style="border-right:1px solid black;font-size:8px;">7,90 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid gray;">
+        @php
+        if(empty($analyse_data->Cl))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->Cl," (mg/l)"; 
+        }
+    @endphp
+    </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+        @php
+        if(empty($analyse_data->Cl/35.5))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->Cl/35.5, 2) ," (méq/L)"; 
+        }
+@endphp
+ </td>
     <td style="text-align:center;border-right:1px solid black;">Inf à 335</td>
     <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -327,8 +518,27 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Sulfates</td>
     <td style="text-align:center;border-right:1px solid black;">SO4</td>
     <td style="border-right:1px solid black;">NF T 90-040: V1986 </td> 
-    <td style="border-right:1px solid gray;">102 (mg/l) </td>
-    <td style="border-right:1px solid black;font-size:8px;">5,69 (méq/L)  </td>
+    <td style="text-align:center;border-right:1px solid gray;">
+        @php
+        if(empty($analyse_data->SO4))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->SO4," (mg/l)"; 
+        }
+    @endphp
+     </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">@php
+        if(empty($analyse_data->SO4/96.06))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->SO4/96.06, 2) ," (méq/L)"; 
+        }
+@endphp
+ </td>
     <td style="text-align:center;border-right:1px solid black;">35 à 250</td>
     <td style="border-right:1px solid black;"></td>   
 </tr>
@@ -336,19 +546,56 @@ border-bottom: 1px solid rgb(228, 228, 228);
     <td style="border-right:1px solid black;">Bicarbonates</td>
     <td style="text-align:center;border-right:1px solid black;">HCO3</td>
     <td style="border-right:1px solid black;">NM ISO 9963-1:V2001 </td> 
-    <td style="border-right:1px solid gray;">418 (mg/l) </td>
-    <td style="border-right:1px solid black;font-size:8px;">6,85 (méq/L) </td>
+    <td style="text-align:center;border-right:1px solid gray;">@php
+        if(empty($analyse_data->HCO3))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->HCO3," (mg/l)"; 
+        }
+    @endphp
+     </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">@php
+        if(empty($analyse_data->HCO3/61))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->HCO3/61, 2) ," (méq/L)"; 
+        }
+@endphp
+</td>
     <td style="text-align:center;border-right:1px solid black;">92 à 510</td>
-    <td style="text-align:center;border-right:1px solid black;"></td>   
+    <td style="border-right:1px solid black;"></td>   
 </tr>
 <tr>
     <td style="border-right:1px solid black;">Carbonates </td>
     <td style="text-align:center;border-right:1px solid black;">CO3</td>
     <td style="border-right:1px solid black;">NM ISO 9963-1:V2001 </td> 
-    <td style="text-align:center;border-right:1px solid gray;">- </td>
-    <td style="border-right:1px solid black;font-size:8px;">-</td>
+    <td style="text-align:center;border-right:1px solid gray;">@php
+        if(empty($analyse_data->CO3))
+        {
+           echo "-";    
+        }
+        else {
+            echo $analyse_data->CO3," (mg/l)"; 
+        }
+    @endphp
+    </td>
+    <td style="text-align:center;border-right:1px solid black;font-size:8px;">
+        @php
+        if(empty($analyse_data->CO3/100))
+        {
+        echo "-";    
+        }
+        else {
+            echo round($analyse_data->CO3/100, 2) ," (méq/L)"; 
+        }
+@endphp
+</td>
     <td style="text-align:center;border-right:1px solid black;">-</td>
-    <td style="text-align:center;border-right:1px solid black;"></td>   
+    <td style="border-right:1px solid black;"></td>   
 </tr>     
 </table>
 

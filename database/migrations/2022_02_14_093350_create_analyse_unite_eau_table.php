@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnalyseUniteEauPotableTable extends Migration
+class CreateAnalyseUniteEauTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAnalyseUniteEauPotableTable extends Migration
      */
     public function up()
     {
-        Schema::create('analyse_unite_eau_potable', function (Blueprint $table) {
+        Schema::create('analyse_unite_eau', function (Blueprint $table) {
             $table->id();
             $table->string("parametre")->nullable();
             $table->string("unite")->nullable();
             $table->timestamps();
         });
 
-        DB::table('analyse_unite_eau_potable')->insert(
+        DB::table('analyse_unite_eau')->insert(
             array(
                 array(
                     'id' => '1',
@@ -29,102 +29,97 @@ class CreateAnalyseUniteEauPotableTable extends Migration
                 ),
                 array(
                     'id' => '2',
-                    'parametre' => "Cl2",
-                    "unite" => "ppm",
-                ),
-                array(
-                    'id' => '3', 
-                    'parametre' => "O2",
-                    "unite" => "ppm",
-                ),
-                array(
-                    'id' => '4',
                     'parametre' => "PH",
                     "unite" => "Unite_pH",
                 ),
                 array(
-                    'id' => '5',
+                    'id' => '3', 
                     'parametre' => "EC",
                     "unite" => "mS_Cm",
                 ),
-                
                 array(
-                    'id' => '6',
+                    'id' => '4',
                     'parametre' => "NO3",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '7',
+                    'id' => '5',
                     'parametre' => "NO2",
                     "unite" => "ppm",
                 ),
+                
                 array(
-                    'id' => '8',
+                    'id' => '6',
                     'parametre' => "NH4",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '9',
+                    'id' => '7',
                     'parametre' => "Cl",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '10',
+                    'id' => '8',
                     'parametre' => "SO4",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '11',
+                    'id' => '9',
+                    'parametre' => "H2PO4",
+                    "unite" => "ppm",
+                ),
+                array(
+                    'id' => '10',
                     'parametre' => "HCO3",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '12',
+                    'id' => '11',
                     'parametre' => "CO3",
                     "unite" => "ppm",
                 ),
                 array(
+                    'id' => '12',
+                    'parametre' => "K",
+                    "unite" => "ppm",
+                ),
+                array(
                     'id' => '13',
-                    'parametre' => "Ca",
+                    'parametre' => "Na",
                     "unite" => "ppm",
                 ),
                 array(
                     'id' => '14',
-                    'parametre' => "Mg",
+                    'parametre' => "Ca",
                     "unite" => "ppm",
                 ),
                 array(
                     'id' => '15',
-                    'parametre' => "Oxydabilite",
+                    'parametre' => "Mg",
                     "unite" => "ppm",
                 ),
                 array(
                     'id' => '16',
-                    'parametre' => "Turbidite",
-                    "unite" => "NTU",
-                ),
-                array(
-                    'id' => '17',
                     'parametre' => "Zn",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '18',
+                    'id' => '17',
                     'parametre' => "Cu",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '19',
+                    'id' => '18',
                     'parametre' => "Mn",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '20',
+                    'id' => '19',
                     'parametre' => "Fe",
                     "unite" => "ppm",
                 ),
                 array(
-                    'id' => '21',
+                    'id' => '20',
                     'parametre' => "B",
                     "unite" => "ppm",
                 )
@@ -139,6 +134,6 @@ class CreateAnalyseUniteEauPotableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('analyse_unite_eau_potable');
+        Schema::dropIfExists('analyse_unite_eau');
     }
 }
