@@ -17,7 +17,7 @@ class CreateAnalyseEauTable extends Migration
             $table->id();
             $table->unsignedBigInteger("commande_id");
             $table->float("plus_moins")->nullable();
-            $table->float("temp")->nullable();
+            $table->float("temp")->nullable(); 
             $table->float("PH")->nullable();
             $table->float("EC")->nullable();
             $table->float("NO3")->nullable();
