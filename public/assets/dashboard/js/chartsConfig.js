@@ -32,22 +32,44 @@ setTimeout(function() {
     });
     $.getJSON('http://localhost:8000/statistiqueLabo', function(repnce) {
         const data = {
-            labels: repnce.map(({ Moi }) => Moi),
+            labels: repnce.map(({ month }) => month),
             datasets: [{
-                label: 'Matrices',
-                data: repnce.map(({ commandes }) => commandes),
-                fill: true,
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                type: 'bar',
+                label: 'Echontillion par moi',
+                data: repnce.map(({ value }) => value),
+                //fill: true,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(255, 205, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(201, 203, 207, 0.5)'
+                ],
                 borderColor: 'rgb(255, 159, 64)',
                 pointBackgroundColor: 'rgb(255, 99, 132)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(255, 159, 64)'
+                //pointBorderColor: '#fff',
+                //pointHoverBackgroundColor: '#fff',
+                //pointHoverBorderColor: 'rgb(255, 159, 64)'
+            }, {
+                type: 'line',
+                label: 'Line Dataset',
+                data: [250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250],
+                fill: false,
+                borderColor: 'rgb(54, 162, 235)'
             }]
         };
         const config = {
-            type: 'line',
+            type: 'scatter',
             data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         };
         const myChart = new Chart(
             document.getElementById('statistiqueLabo'),

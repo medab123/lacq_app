@@ -454,13 +454,9 @@
             if (matrice == "AMEO") {
                 $("#image_1Group").removeClass("d-none")
                 $("#image_2Group").removeClass("d-none")
-                $("#image_1").attr('required', '');
-                $("#image_2").attr('required', '');
             } else {
                 $("#image_1Group").addClass("d-none")
                 $("#image_2Group").addClass("d-none")
-                $("#image_1").removeAttr('required');
-                $("#image_2").removeAttr('required');
             }
         }
 
