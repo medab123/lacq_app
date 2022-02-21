@@ -110,6 +110,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/commercialTable', [DashboardAdminController::class,'commercialTable']);
     Route::get('/top5Commercial', [DashboardAdminController::class,'top5Commercial']);
     Route::get('/statistiqueLabo', [DashboardAdminController::class,'statistiqueLabo']);
+    Route::get('/withZone', [DashboardAdminController::class,'withZone']);
+    Route::get('/cabyzone', [DashboardAdminController::class,'CAbyZone']);
+
+
 
 
 

@@ -70,8 +70,33 @@ class DashboardAdminController extends Controller
         UNION SELECT 'October' as MONTH
         UNION SELECT 'November' as MONTH
         UNION SELECT 'December' as month ) AS m left  JOIN commandes c ON MONTHNAME(c.date_reception) = m.month
-        where (year(date_reception) = 2022 or year(date_reception) is null ) and (menu_id not in
-(select menus.id from menus inner join matrices on menus.matrice_id = matrices.id where matrices.name <> 'AMEO') or menu_id is null)   group by m.month;");
+        where (year(date_reception) = ".date("Y")." or year(date_reception) is null ) and (menu_id not in
+        (select menus.id from menus inner join matrices on menus.matrice_id = matrices.id where matrices.name <> 'AMEO') or menu_id is null)   group by m.month;");
         return response()->json($statistiqueLabo);
+    }
+    public function withZone(){
+        $statistiqueLaboParZone = DB::select(
+            "select count(c.id) as value ,c2.zone as zone
+            from commandes c
+            right join commercials c2 on c.commercial_id = c2.id
+            where year (c.date_reception ) = ".date("Y")." or year (c.date_reception ) is null
+            group by c2.zone
+            order by c2.zone;"
+        );
+        return response()->json($statistiqueLaboParZone);
+    }
+    public function CAbyZone(){
+        $statistiqueLaboParZone = DB::select(
+            "select a.zone,COALESCE(sum(a.totalparMENU), 0) as value from (select commercials.zone as zone ,(menus.prix_ht+menus.prix_supv)*count(menu_id) as totalparMENU
+            from commercials
+            left join commandes on commandes.commercial_id = commercials.id
+            left join  menus on commandes.menu_id = menus.id
+            left join matrices on  menus.matrice_id =matrices.id
+            where year(commandes.date_reception) = ".date("Y")." or commandes.date_reception is null
+            group by matrices.name ,commercials.zone) a
+            group by a.zone
+            ; "
+        );
+        return response()->json($statistiqueLaboParZone);
     }
 }

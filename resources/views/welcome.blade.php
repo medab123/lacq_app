@@ -18,9 +18,14 @@
 <script src="assets/dashboard/js/dashboard.init.js"></script>
 <script src="assets/dashboard/js/chartsConfig.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/dashboard/js/chart.js"></script>
+
 <!-- App js -->
 <script src="assets/dashboard/js/app.js"></script>
+
+<script src="assets/dashboard/js/chartjs-plugin-labels.min.js"></script>
+
+
 
 <body>
     @extends('layouts.master')
@@ -125,23 +130,57 @@
                             </div>
                         </div>-->
                         <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card m-b-30 " style="padding-bottom: 22px;background-color: white !important">
-                                    <div class="card-body ">
-                                        <canvas style="background-color: white;" id="matricesRadar"></canvas>
+                            <div class="col-xl-6 ">
+                                <div class="card m-b-30 " style="background-color:white !important">
+                                    <div class="card-body">
+                                        <h4 class="mt-0 header-title mb-4" style="color:rgb(100, 69, 30)">Réceptions {{ date("Y") }} par moi</h4>
+                                        <canvas id="echontionParZone" ></canvas>
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-xl-6">
-                                <div class="card m-b-30 " style="padding-bottom: 22px;background-color: white !important">
-                                    <div class="card-body ">
+                                <div class="card m-b-30 " style="background-color: white !important">
+                                    <div class="card-body " >
+                                        <h4 class="mt-0 header-title mb-4" style="color:rgb(100, 69, 30)">Réceptions année {{ date("Y") }}  par zone</h4>
                                         <canvas style="background-color: white;" id="statistiqueLabo"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card m-b-30 " style="background-color: white !important">
+                                    <h4 class="mt-0 header-title mb-4" style="color:rgb(100, 69, 30)">Réceptions année {{ date("Y") }}  par zone</h4>
+
+                                    <div class="card-body ">
+                                        <canvas style="background-color: white;height:600px"  id="CAbyZone"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card m-b-30 " style="background-color: white !important">
+                                    <div class="card-body ">
+                                        <canvas style="background-color: white;" id="matricesRadar"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card m-b-30 " style="background-color: white !important">
+                                    <div class="card-body ">
+                                        <canvas style="background-color: white;" class="m-5" id="matricesPie"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
                         <div class="row">
                             <!--<div class="col-xl-8">
                                 <div class="card m-b-30">
@@ -171,6 +210,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- end col -->
+                        </div>
+                        <div class="row">
+                            <!--<div class="col-xl-8">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <h4 class="mt-0 header-title mb-4">Area Chart</h4>
+                                        <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!-- end col -->
+
                             <!-- end col -->
                         </div>
                         <!-- end row -->
