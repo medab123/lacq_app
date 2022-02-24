@@ -7,7 +7,6 @@ class Archivos
 {
     public static function imagenABase64($ruta_relativa_al_public)
     {
-
         if(File::exists($ruta_relativa_al_public)){
             $path = $ruta_relativa_al_public;
             //dd($path);
@@ -21,60 +20,36 @@ class Archivos
             }
             return $base64;
         }
-
     }
 
-
-public static function ft3nb($num,$force = false){
-
-    $count = strlen(intval($num));
-
-    if(is_float($num)){
-
-        if($force){
-
-            if($count < 3){
-
-                $num2 = number_format($num, 3-$count);
-
-            }else if($count == 3){
-
-                $num2 = round($num, 3-$count,PHP_ROUND_HALF_ODD);
-
+    public static function ft3nb($num,$force = false){
+        $count = strlen(intval($num));
+        if(is_float($num)){
+            if($force){
+                if($count < 3){
+                    $num2 = number_format($num, 3-$count);
+                }else if($count == 3){
+                    $num2 = round($num, 3-$count,PHP_ROUND_HALF_ODD);
+                }else{
+                    $num2 = round($num, 0,PHP_ROUND_HALF_ODD);
+                }
             }else{
-
-                $num2 = round($num, 0,PHP_ROUND_HALF_ODD);
-
+                if($count < 3){
+                    $num2 = round($num, 3-$count,PHP_ROUND_HALF_ODD);
+                }else{
+                    $num2 = round($num, 0,PHP_ROUND_HALF_ODD);
+                }
             }
-
         }else{
-
-            if($count < 3){
-
-                $num2 = round($num, 3-$count,PHP_ROUND_HALF_ODD);
-
-            }else{
-
-                $num2 = round($num, 0,PHP_ROUND_HALF_ODD);
-
-            }
-
+            $num2=($force && $count < 3 ) ?  number_format($num, 3-$count):$num;
         }
-
-    }else{
-
-        $num2=($force && $count < 3 ) ?  number_format($num, 3-$count):$num;
-
+        return $num2;
     }
 
-    return $num2;
 
-}
-
-
-        public static function costomDateFormate($original_date){
-            $timestamp = strtotime($original_date);
-            $new_date = date("d-m-Y", $timestamp);
-            return $new_date;
-            }
+    public static function costomDateFormate($original_date){
+        $timestamp = strtotime($original_date);
+        $new_date = date("d-m-Y", $timestamp);
+        return $new_date;
+    }
 }

@@ -52,12 +52,21 @@ class AnalyseController extends Controller
             $formatedListUnites= call_user_func_array('array_merge', $formatedListUnites);
         }
 
+        if($analyse_table == "analyse_eau"){
+            $listData = DB::table($analyse_table)
+            ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
+            ->select($analyse_table.".*","commandes.code_commande",DB::raw("CONCAT(CONCAT('test',sum(Na-Mg)),CONCAT('test',sum(Na+Mg)))  as plus_moins"))
+            ->orderBy($analyse_table.".id","asc")
+            ->paginate(8);
+        }
+        else{
+            $listData = DB::table($analyse_table)
+            ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
+            ->select($analyse_table.".*","commandes.code_commande")
+            ->orderBy($analyse_table.".id","asc")
+            ->paginate(8);
+        }
 
-        $listData = DB::table($analyse_table)
-        ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
-        ->select($analyse_table.".*","commandes.code_commande")
-        ->orderBy($analyse_table.".id","asc")
-        ->paginate(8);
 
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
