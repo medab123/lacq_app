@@ -1,3 +1,6 @@
+var echontionParZoneChart = null
+var statistiqueLaboChart = null
+
 setTimeout(function() {
     $.getJSON('http://localhost:8000/CommandeByMatrice', function(repnce) {
         const data = {
@@ -26,7 +29,7 @@ setTimeout(function() {
                 }
             },
         };
-        const myChart = new Chart(
+        const MatriceChart = new Chart(
             document.getElementById('matricesPie'),
             config
         );
@@ -67,7 +70,6 @@ setTimeout(function() {
                         layout: {
                             padding: '30'
                         },
-
                     },
                     layout: {
                         padding: '30',
@@ -154,26 +156,15 @@ setTimeout(function() {
             labels: repnce.map(({ month }) => month),
             datasets: [{
                 type: 'bar',
-                label: 'Echontillion par moi',
+                label: 'month',
                 data: repnce.map(({ value }) => value),
                 //fill: true,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 205, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(201, 203, 207, 0.5)'
+
                 ],
                 borderColor: [
                     'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
                 ],
                 pointBackgroundColor: 'rgb(255, 99, 132)',
                 borderWidth: 2
@@ -205,7 +196,7 @@ setTimeout(function() {
             config
         );
     });
-    $.getJSON('/withZone', function(repnce) {
+    $.getJSON('/withZone?chekcked=false', function(repnce) {
         const data = {
             labels: repnce.map(({ zone }) => zone),
             datasets: [{
@@ -214,21 +205,11 @@ setTimeout(function() {
                 fill: true,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 205, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(201, 203, 207, 0.5)'
+
                 ],
                 borderColor: [
                     'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
+
                 ],
                 pointBackgroundColor: 'rgb(255, 99, 132)',
                 pointBorderColor: '#fff',
@@ -254,9 +235,30 @@ setTimeout(function() {
                 }
             },
         };
-        const myChart = new Chart(
+        echontionParZoneChart = new Chart(
             document.getElementById('echontionParZone'),
             config
         );
+
     });
-}, 1000);
+
+
+
+
+}, 500);
+
+function echontionParZone(chekcked) {
+    $.getJSON('/withZone?chekcked=' + chekcked, function(repnce) {
+        echontionParZoneChart.data.labels = repnce.map(({ zone }) => zone)
+        echontionParZoneChart.data.datasets[0].data = repnce.map(({ value }) => value)
+        echontionParZoneChart.update();
+    })
+}
+
+function statistiqueLabo(chekcked) {
+    $.getJSON('/statistiqueLabo?chekcked=' + chekcked, function(repnce) {
+        statistiqueLaboChart.data.labels = repnce.map(({ zone }) => zone)
+        statistiqueLaboChart.data.datasets[0].data = repnce.map(({ value }) => value)
+        statistiqueLaboChart.update();
+    })
+}

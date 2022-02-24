@@ -74,15 +74,17 @@ class DashboardAdminController extends Controller
         (select menus.id from menus inner join matrices on menus.matrice_id = matrices.id where matrices.name <> 'AMEO') or menu_id is null)   group by m.month;");
         return response()->json($statistiqueLabo);
     }
-    public function withZone(){
-        $statistiqueLaboParZone = DB::select(
-            "select count(c.id) as value ,c2.zone as zone
-            from commandes c
-            right join commercials c2 on c.commercial_id = c2.id
-            where year (c.date_reception ) = ".date("Y")." or year (c.date_reception ) is null
-            group by c2.zone
-            order by c2.zone;"
-        );
+    public function withZone(Request $request){
+        $chekcked = $request->input("chekcked");
+        $sql =  "select count(c.id) as value ,c2.zone as zone
+        from commandes c
+        right join commercials c2 on c.commercial_id = c2.id
+        where (year (c.date_reception )  = ".date("Y")." or year (c.date_reception ) is null )";
+        ($chekcked == 'false') ? $sql .= ' and c2.zone not in ("EV MAROC","EV MALI","EVM","EVM DéVELOPPEMENT","EV SENEGAL","EV CôTE D\'IVOIRE")': $sql .= "";
+        $sql .= "group by c2.zone
+        order by c2.zone;";
+        //dd($sql,$chekcked);
+        $statistiqueLaboParZone = DB::select($sql);
         return response()->json($statistiqueLaboParZone);
     }
     public function CAbyZone(){
