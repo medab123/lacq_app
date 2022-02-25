@@ -52,12 +52,35 @@ class AnalyseController extends Controller
             $formatedListUnites= call_user_func_array('array_merge', $formatedListUnites);
         }
 
+        if($analyse_table == "analyse_eau"){
 
-        $listData = DB::table($analyse_table)
-        ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
-        ->select($analyse_table.".*","commandes.code_commande")
-        ->orderBy($analyse_table.".id","asc")
-        ->paginate(8);
+            $listData = DB::table($analyse_table) 
+
+            ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
+
+            ->select($analyse_table.".*","commandes.code_commande",DB::raw("group_concat('-',round((NO3/62) + (NO2/46) + (CL/35.5) + (SO4/96.06)
+
+            + (H2PO4/97) + (HCO3/61), 2), '/', '+', round((K/39) + (Na/23) + (Ca/20) + (Mg/12) + (NH4/18),2), ' (EC ', round(EC*10, 2), ')') as moins_plus"))
+
+            ->orderBy($analyse_table.".id","asc")
+
+            ->paginate(8);
+
+        }
+
+        else{
+
+            $listData = DB::table($analyse_table)
+
+            ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
+
+            ->select($analyse_table.".*","commandes.code_commande")
+
+            ->orderBy($analyse_table.".id","asc")
+
+            ->paginate(8);
+
+        }
 
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 

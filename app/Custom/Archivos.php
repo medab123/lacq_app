@@ -77,4 +77,83 @@ public static function ft3nb($num,$force = false){
             $new_date = date("d-m-Y", $timestamp);
             return $new_date;
             }
+
+            public static function afficherBar($r,$min,$max,$prifix = null){
+
+                //SI(R25<=$L25-($M25-$L25)
+            
+                if($r <= $min-($max-$min)){
+            
+                    echo "<h6 style='color:#FFA500;font-size:8px'>IIIIII</h6>";
+            
+                }else{
+            
+                    //SI(R25>=$M25+($M25-$L25);REPT("I";60)&"I"
+            
+                    if($r>=$max+($max-$min)){
+            
+                        echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", 57);
+            
+                    }
+            
+                    //REPT("I";27+(K27-$L27)/($M27-$L27)*13)&"I")
+            
+                    else{
+            
+                        $calcul=20+($r-$min)/($max-$min)*19;
+                       if($r<=$min){
+                           echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$calcul);
+                       }
+                       elseif($r>$min && $r<=$max){
+                           echo str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$calcul);
+                       }
+                       elseif($r>$max){
+                        echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$calcul);
+                    }
+            
+                    }
+            
+                }
+            
+            }
+
+            public static function EAP($r,$min,$max,$prifix = null){
+
+                //SI(R25<=$L25-($M25-$L25)
+            
+                if($r <= $min-($max-$min)){
+            
+                    echo "<h6 style='color:#FFA500;font-size:8px'>IIIIII</h6>";
+            
+                }else{
+            
+                    //SI(R25>=$M25+($M25-$L25);REPT("I";60)&"I"
+            
+                    if($r>=$max+($max-$min)){
+            
+                        echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",88);
+            
+                    }
+            
+                    //REPT("I";27+(K27-$L27)/($M27-$L27)*13)&"I")
+            
+                    else{
+            
+                        $calcul=30+($r-$min)/($max-$min)*29;
+                        $calcul=($calcul<0)? 0:$calcul;
+                       if($r<=$min){
+                           echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$calcul);
+                       }
+                       elseif($r>$min && $r<=$max){
+                           echo str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$calcul);
+                       }
+                       elseif($r>$max){
+                        echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$calcul);
+                    }
+            
+                    }
+            
+                }
+            
+            }
 }

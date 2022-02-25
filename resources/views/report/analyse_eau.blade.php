@@ -185,12 +185,12 @@
              <th class=" bordered" colspan="3">Appréciation</th>
        </tr>
        <tr class="head bordered" style="font-size:10px;">
-             <td  style="text-align:center;color:#FFD700">Faible</td>
+             <td  style="text-align:center;color:#FFA500">Faible</td>
              <td  style="color:green">Moyen</td>
              <td  style="color:red">Fort</td>
        </tr>
 </table>
-<table style="width:100%;font-size:10px;" >
+<table style="width:100%;font-size:10px;">
     <tr>
       <th style="border:0px;text-align:left;color:green">CARACTERISTIQUES DE L'EAU</th>
     </tr>
@@ -212,8 +212,19 @@
                 }
             @endphp
             </td>
-            <td style="width:48px;text-align:center;border-right:1px solid black;">6,50 à 8,40</td>
-            <td  style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td> 
+            <td style="width:48px;text-align:center;border-right:1px solid black;">6.50 à 8.40</td>
+            <td  style="z-index:10;padding:0px !important;width:58px;"><div style="position:absolute;padding:0px;margin:0px;">
+                @php
+               if(empty($analyse_data->PH)){
+
+                echo " ";
+                }
+                else
+                {
+                echo Archivos::afficherBar($analyse_data->PH,6.50,8.40);
+                  }
+            @endphp
+            </div></td> 
             <td  style="background:#b5feb4;"></td> 
             <td ></td>   
         </tr>
@@ -234,8 +245,19 @@
                 }
             @endphp
                  </td>
-            <td style="text-align:center;border-right:1px solid black;">0,70 à 3,00</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">0.70 à 3.00</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                 if(empty($analyse_data->EC)){
+
+                echo " ";
+                }
+                else
+                {
+                echo Archivos::afficherBar($analyse_data->EC,0.70,3.00);
+                  }
+            @endphp
+                </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td>
     </tr>
@@ -256,8 +278,19 @@
                 }
             @endphp
                </td>
-            <td style="text-align:center;border-right:1px solid black;">1.39(g/l)</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">700 à 3000</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                  if(empty($analyse_data->EC)){
+
+                echo " ";
+                }
+                else
+                {
+                echo Archivos::afficherBar($analyse_data->EC * 1000,700,3000);
+                  }
+            @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td> 
 </tr>
@@ -269,33 +302,46 @@
             <td style="border-right:1px solid black;background:rgb(230, 230, 230);text-align:center;">@php
                 if(empty($analyse_data->EC))
                 {
-                    echo "-";
+                    $var= "-";
                 }
                 elseif($analyse_data->EC<0.05)
                 {
-                    echo Archivos::ft3nb($analyse_data->EC*1.365079,true);
+                    $var= Archivos::ft3nb($analyse_data->EC*1.365079,true);
                 }
                 elseif($analyse_data->EC<0.166)
                 {
-                    echo Archivos::ft3nb($analyse_data->EC*0.947658,true);
+                    $var= Archivos::ft3nb($analyse_data->EC*0.947658,true);
                 }
                 elseif($analyse_data->EC<0.333)
                 {
-                    echo Archivos::ft3nb($analyse_data->EC*0.769574,true);
+                    $var= Archivos::ft3nb($analyse_data->EC*0.769574,true);
                 }
                 elseif($analyse_data->EC<0.833)
                 {
-                    echo Archivos::ft3nb($analyse_data->EC*0.71592,true);
+                    $var= Archivos::ft3nb($analyse_data->EC*0.71592,true);
                 }
                 elseif($analyse_data->EC<10)
                 {
-                    echo Archivos::ft3nb($analyse_data->EC*0.758544,true);
-                }
+                    $var= Archivos::ft3nb($analyse_data->EC*0.758544,true);
+                } 
+                echo $var;
             @endphp
 
             </td>
-            <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">0,56 à 2,54</td>
-            <td style="background:rgb(230, 230, 230);color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">0.56 à 2.54</td>
+            <td style="background:rgb(230, 230, 230);z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                 if(empty($analyse_data->EC)){
+
+                echo " ";
+                }
+                else
+                {
+                echo Archivos::afficherBar($var,0.56,2.54);
+                  }
+            @endphp
+            </div>
+            </td>   
             <td style="background:rgb(230, 230, 230);"></td>
             <td style="background:rgb(230, 230, 230);"></td>
 
@@ -318,6 +364,10 @@
                     {
                        echo "-";    
                     }
+                    elseif($analyse_data->NO3<0.5)
+                    {
+                        echo "inf à 0.50 (mg/l)";
+                    } 
                     else {
                         echo Archivos::ft3nb($analyse_data->NO3,true)," (mg/l)";
                     }
@@ -335,7 +385,18 @@
                     @endphp
                 </td>
                 <td style="width:48px;text-align:center;border-right:1px solid black;">22 à 33</td>
-                <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+                <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                    @php
+                   if(empty($analyse_data->NO3)){
+
+                        echo " ";
+                        }
+                        else
+                        {
+                        echo Archivos::afficherBar($analyse_data->NO3,22,33);
+                          }
+                          @endphp
+                </div></td>   
                 <td style="background:#b5feb4;"></td>
                 <td ></td> 
             </tr>
@@ -348,6 +409,10 @@
                     if(empty($analyse_data->NH4))
                     {
                        echo "-";    
+                    }
+                    elseif($analyse_data->NH4<0.5)
+                    {
+                       echo "inf à 0.10 (mg/l)";    
                     }
                     else {
                         echo Archivos::ft3nb($analyse_data->NH4,true)," (mg/l)";
@@ -366,7 +431,18 @@
                     @endphp
                      </td>
                 <td style="text-align:center;border-right:1px solid black;border-bottom:1px solid rgb(228, 228, 228);">7 à 44 </td>
-                <td style="border-bottom:1px solid rgb(228, 228, 228);color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+                <td style="border-bottom:1px solid rgb(228, 228, 228);z-index:10;padding:0px !important;"><div style="position:absolute;">
+                    @php
+                   if(empty($analyse_data->NH4)){
+
+                        echo " ";
+                        }
+                        else
+                        {
+                        echo Archivos::afficherBar($analyse_data->NH4,7,44);
+                          }
+                          @endphp
+                </div></td>   
                 <td style="border-bottom:1px solid rgb(228, 228, 228);background:#b5feb4;"></td>
                 <td style="border-bottom:1px solid rgb(228, 228, 228);"></td> 
         </tr>
@@ -397,7 +473,18 @@
         @endphp
         </td>
             <td style="text-align:center;text-align:center;border-right:1px solid black;">70 à 120</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                if(empty($analyse_data->Ca)){
+
+                    echo " ";
+                    }
+                    else
+                    {
+                    echo Archivos::afficherBar($analyse_data->Ca,70,120);
+                      }
+                      @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td>  
     </tr>
@@ -429,7 +516,18 @@
     @endphp
     </td>
         <td style="text-align:center;border-right:1px solid black;">20 à 50</td>
-        <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+        <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+            @php
+           if(empty($analyse_data->Mg)){
+
+                echo " ";
+                }
+                else
+                {
+                echo Archivos::afficherBar($analyse_data->Mg,20,50);
+                  }
+                  @endphp
+        </div></td>   
         <td style="background:#b5feb4;"></td>
         <td ></td> 
 </tr>
@@ -460,7 +558,18 @@
 @endphp
 </td>
     <td style="text-align:center;border-right:1px solid black;">50 à 150</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+        @php
+        if(empty($analyse_data->K)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->K,50,150);
+              }
+              @endphp
+    </div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td> 
 </tr>
@@ -488,8 +597,26 @@
         }
     @endphp
      </td>
-    <td style="text-align:center;border-right:1px solid black;">Inf à 1357</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="text-align:center;border-right:1px solid black;">
+        @php
+            $max=Archivos::ft3nb(23*9*(sqrt($analyse_data->Ca+$analyse_data->Mg)/2),true);
+            echo "Inf à ",$max;
+        @endphp
+       </td>
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+       @php
+       
+        if(empty($analyse_data->Na)){
+
+            echo " ";
+            }
+            else
+            {
+                $max=Archivos::ft3nb(23*9*(sqrt($analyse_data->Ca+$analyse_data->Mg)/2),true);
+            echo Archivos::afficherBar($analyse_data->Na,1357,$max);
+            }
+              @endphp
+              </div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td>
 </tr>
@@ -509,7 +636,7 @@
     @endphp
      </td>
     <td style="text-align:center;border-right:1px solid black;background:rgb(230, 230, 230);">-</td>
-    <td style="background:rgb(230, 230, 230);color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="background:rgb(230, 230, 230);color:#FFD700;z-index:10;"><div style="position:absolute;"></div></td>   
     <td style="background:rgb(230, 230, 230);"></td> 
     <td style="background:rgb(230, 230, 230);"></td> 
 </tr>
@@ -523,7 +650,12 @@
         {
            echo "-";    
         }
-        else {
+        elseif($analyse_data->H2PO4<0.2)
+        {
+        echo "inf à 0.02 (mg/l)";    
+        }
+        else 
+        {
             echo Archivos::ft3nb($analyse_data->H2PO4, true), " (mg/l)"; 
         }
     @endphp
@@ -540,7 +672,18 @@
 @endphp
 </td>
     <td style="text-align:center;border-right:1px solid black;">3 à 6</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+        @php
+       if(empty($analyse_data->H2PO4)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->H2PO4,3,6);
+              }
+              @endphp
+              </div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td> 
 </tr>
@@ -571,7 +714,19 @@
 @endphp
  </td>
     <td style="text-align:center;border-right:1px solid black;">Inf à 335</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+        @php
+       
+        if(empty($analyse_data->Cl)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->Na,0,335);
+            }
+              @endphp
+</div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td>
 </tr>
@@ -601,7 +756,18 @@
 @endphp
  </td>
     <td style="text-align:center;border-right:1px solid black;">35 à 250</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+        @php
+        if(empty($analyse_data->SO4)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->SO4,35,250);
+              }
+              @endphp
+              </div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td>
 </tr>
@@ -630,7 +796,18 @@
 @endphp
 </td>
     <td style="text-align:center;border-right:1px solid black;">92 à 510</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+        @php
+       if(empty($analyse_data->HCO3)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->HCO3,92,510);
+              }
+              @endphp
+              </div></td>   
     <td style="background:#b5feb4;"></td>
      <td ></td> 
 </tr>
@@ -660,7 +837,7 @@
 @endphp
 </td>
     <td style="text-align:center;border-right:1px solid black;">-</td>
-    <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+    <td style="z-index:10;"><div style="position:absolute;"></div></td>   
     <td style="background:#b5feb4;"></td>
     <td ></td>
 </tr>     
@@ -682,14 +859,30 @@
                     {
                         echo "-";
                     }
+                    elseif($analyse_data->Zn<0.01)
+                    {
+                        echo "inf à 0.010 (mg/l)";
+                    }
                     else
                     {
                         echo Archivos::ft3nb($analyse_data->Zn,true)," (mg/l)"; 
                     }
                 @endphp
                 </td>
-            <td style="width:48px;text-align:center;border-right:1px solid black;">0,01 à 2</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="width:48px;text-align:center;border-right:1px solid black;">0.01 à 2</td>
+            <td style="z-index:10;padding:0px !important;width:58px;"><div style="position:absolute;">
+                @php
+                 
+                if(empty($analyse_data->Zn)){
+
+                        echo " ";
+                        }
+                        else
+                        {
+                        echo Archivos::afficherBar($analyse_data->Zn,0.01,2);
+                        }
+            @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td>
         </tr>
@@ -703,14 +896,31 @@
                 {
                     echo "-";
                 }
+                elseif($analyse_data->Cu<0.01)
+                    {
+                        echo "inf à 0.020 (mg/l)";
+                    }
                 else
                 {
                     echo Archivos::ft3nb($analyse_data->Cu,true)," (mg/l)"; 
                 }
             @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,2</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">0.01 à 0.2</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                if(empty($analyse_data->Cu)){
+        
+                    echo " ";
+                    }
+                    else
+                    {
+                    echo Archivos::afficherBar($analyse_data->Cu,0.01,0.2);
+                      }
+                      @endphp
+             
+                
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td> 
     </tr>
@@ -724,14 +934,29 @@
                 {
                     echo "-";
                 }
+                elseif($analyse_data->Mn<0.01)
+                    {
+                        echo "inf à 0.015 (mg/l)";
+                    }
                 else
                 {
                     echo Archivos::ft3nb($analyse_data->Mn,true)," (mg/l)"; 
                 }
             @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,2</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">0.01 à 0.2</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+       if(empty($analyse_data->Mn)){
+
+            echo " ";
+            }
+            else
+            {
+            echo Archivos::afficherBar($analyse_data->Mn,0.01,0.2);
+              }
+              @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td> 
 </tr>
@@ -745,14 +970,29 @@
                     {
                         echo "-";
                     }
+                    elseif($analyse_data->Fe<0.01)
+                    {
+                        echo "inf à 0.010 (mg/l)";
+                    }
                     else
                     {
                         echo Archivos::ft3nb($analyse_data->Fe,true)," (mg/l)"; 
                     }
                 @endphp
                 </td>
-            <td style="text-align:center;border-right:1px solid black;">0,01 à 0,5</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">0.01 à 0.5</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+                if(empty($analyse_data->Fe)){
+        
+                    echo " ";
+                    }
+                    else
+                    {
+                    echo Archivos::afficherBar($analyse_data->Fe,0.01,0.5);
+                      }
+                      @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td> 
 </tr>
@@ -765,15 +1005,30 @@
                     if(empty($analyse_data->B))
                     {
                         echo "-";
+                    } 
+                    elseif($analyse_data->Zn<0.01)
+                    {
+                        echo "inf à 0.100 (mg/l)";
                     }
-                    else
+                    else 
                     {
                         echo Archivos::ft3nb($analyse_data->B,true)," (mg/l)"; 
                     }
                 @endphp
                 </td>
-            <td style="text-align:center;border-right:1px solid black;">0,7 à 3</td>
-            <td style="color:#FFD700;z-index:10;"><div style="position:absolute;">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</div></td>   
+            <td style="text-align:center;border-right:1px solid black;">0.7 à 3</td>
+            <td style="z-index:10;padding:0px !important;"><div style="position:absolute;">
+                @php
+               if(empty($analyse_data->B)){
+        
+                    echo " ";
+                    }
+                    else
+                    {
+                    echo Archivos::afficherBar($analyse_data->B,0.7,3);
+                      }
+                      @endphp
+            </div></td>   
             <td style="background:#b5feb4;"></td>
             <td ></td>
 </tr>
@@ -795,9 +1050,5 @@
                             Tel:+212 535 52 94 01 <br>
                             contact.lacq@elephant-vert.com <br>        
          </p>  
-
-    
-
 </body>
-
 </html>
