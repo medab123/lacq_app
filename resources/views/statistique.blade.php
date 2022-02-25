@@ -152,6 +152,7 @@
                             <div class="col-xl-12">
                                 <div class="card m-b-30 " style="background-color: white !important">
                                     <div class="card-body ">
+                                        <div class="float-right"> AMIO <input type="checkbox" id="amioCheckboxCaByZone"></div>
                                         <h4 class="mt-0 header-title mb-4" style="color:rgb(100, 69, 30)">CA par zone {{ date("Y") }}</h4>
                                         <div>
                                             <canvas style="background-color: white;height:600px"  id="CAbyZone"></canvas>
@@ -296,6 +297,9 @@
     <script>
         $("#amioCheckboxRz").on('change', function () {
             echontionParZone($("#amioCheckboxRz").is(":checked"));
+        });
+        $("#amioCheckboxCaByZone").on('change', function () {
+            cabyzone($("#amioCheckboxCaByZone").is(":checked"));
         });
     </script>
     </html>

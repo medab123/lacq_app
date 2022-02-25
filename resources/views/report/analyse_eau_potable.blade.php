@@ -94,7 +94,7 @@ border-bottom: 1px solid rgb(228, 228, 228);
     </style>
 
     @php use App\Custom\Archivos; @endphp
-    <table border="0">
+    <table border="0" >
         <tr>
             <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="160px" height="40px">
                 <br>

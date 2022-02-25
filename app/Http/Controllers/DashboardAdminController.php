@@ -87,18 +87,18 @@ class DashboardAdminController extends Controller
         $statistiqueLaboParZone = DB::select($sql);
         return response()->json($statistiqueLaboParZone);
     }
-    public function CAbyZone(){
-        $statistiqueLaboParZone = DB::select(
-            "select a.zone,COALESCE(sum(a.totalparMENU), 0) as value from (select commercials.zone as zone ,(menus.prix_ht+menus.prix_supv)*count(menu_id) as totalparMENU
-            from commercials
-            left join commandes on commandes.commercial_id = commercials.id
-            left join  menus on commandes.menu_id = menus.id
-            left join matrices on  menus.matrice_id =matrices.id
-            where year(commandes.date_reception) = ".date("Y")." or commandes.date_reception is null
-            group by matrices.name ,commercials.zone) a
-            group by a.zone
-            ; "
-        );
+    public function CAbyZone(Request $request){
+        $chekcked = $request->input("chekcked");
+        $sql = "select a.zone,COALESCE(sum(a.totalparMENU), 0) as value from (select commercials.zone as zone ,(menus.prix_ht+menus.prix_supv)*count(menu_id) as totalparMENU
+        from commercials
+        left join commandes on commandes.commercial_id = commercials.id
+        left join  menus on commandes.menu_id = menus.id
+        left join matrices on  menus.matrice_id =matrices.id
+        where (year(commandes.date_reception) = ".date("Y")." or commandes.date_reception is null)";
+        ($chekcked == 'false') ? $sql .= ' and commercials.zone not in ("EV MAROC","EV MALI","EVM","EVM DéVELOPPEMENT","EV SENEGAL","EV CôTE D\'IVOIRE")': $sql .= "";
+        $sql .=  " group by matrices.name ,commercials.zone) a group by a.zone;";
+
+        $statistiqueLaboParZone = DB::select($sql);
         return response()->json($statistiqueLaboParZone);
     }
 }

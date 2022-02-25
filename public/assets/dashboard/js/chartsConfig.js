@@ -1,5 +1,5 @@
 var echontionParZoneChart = null
-var statistiqueLaboChart = null
+var cabyzoneChart = null
 
 setTimeout(function() {
     $.getJSON('http://localhost:8000/CommandeByMatrice', function(repnce) {
@@ -96,7 +96,7 @@ setTimeout(function() {
             config
         );
     });
-    $.getJSON('/cabyzone', function(repnce) {
+    $.getJSON('/cabyzone?chekcked=false', function(repnce) {
         const data = {
             labels: repnce.map(({ zone }) => zone),
             datasets: [{
@@ -104,27 +104,17 @@ setTimeout(function() {
                 data: repnce.map(({ value }) => value),
                 fill: true,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
                     'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 205, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(201, 203, 207, 0.5)'
+
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
+                    'rgba(255, 159, 64)',
                 ],
-                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgba(255, 159, 64)',
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(255, 99, 132)',
+                pointHoverBorderColor: 'rgba(255, 159, 64)',
+
                 borderWidth: 2
             }]
         };
@@ -133,7 +123,6 @@ setTimeout(function() {
             data: data,
             options: {
                 maintainAspectRatio: false,
-
                 plugins: {
                     labels: {
                         render: 'value',
@@ -146,12 +135,12 @@ setTimeout(function() {
                 }
             },
         };
-        const myChart = new Chart(
+        cabyzoneChart = new Chart(
             document.getElementById('CAbyZone'),
             config
         );
     });
-    $.getJSON('http://localhost:8000/statistiqueLabo', function(repnce) {
+    $.getJSON('http://localhost:8000/statistiqueLabo?chekcked=false', function(repnce) {
         const data = {
             labels: repnce.map(({ month }) => month),
             datasets: [{
@@ -160,13 +149,14 @@ setTimeout(function() {
                 data: repnce.map(({ value }) => value),
                 //fill: true,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
 
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132)',
+                    'rgba(75, 192, 192)',
                 ],
-                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgba(75, 192, 192)',
+
                 borderWidth: 2
 
                 //pointBorderColor: '#fff',
@@ -191,6 +181,7 @@ setTimeout(function() {
                 }
             }
         };
+        config
         const myChart = new Chart(
             document.getElementById('statistiqueLabo'),
             config
@@ -255,10 +246,10 @@ function echontionParZone(chekcked) {
     })
 }
 
-function statistiqueLabo(chekcked) {
-    $.getJSON('/statistiqueLabo?chekcked=' + chekcked, function(repnce) {
-        statistiqueLaboChart.data.labels = repnce.map(({ zone }) => zone)
-        statistiqueLaboChart.data.datasets[0].data = repnce.map(({ value }) => value)
-        statistiqueLaboChart.update();
+function cabyzone(chekcked) {
+    $.getJSON('/cabyzone?chekcked=' + chekcked, function(repnce) {
+        cabyzoneChart.data.labels = repnce.map(({ zone }) => zone)
+        cabyzoneChart.data.datasets[0].data = repnce.map(({ value }) => value)
+        cabyzoneChart.update();
     })
 }
