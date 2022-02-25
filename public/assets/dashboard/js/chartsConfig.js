@@ -232,10 +232,6 @@ setTimeout(function() {
         );
 
     });
-
-
-
-
 }, 500);
 
 function echontionParZone(chekcked) {
@@ -245,7 +241,6 @@ function echontionParZone(chekcked) {
         echontionParZoneChart.update();
     })
 }
-
 function cabyzone(chekcked) {
     $.getJSON('/cabyzone?chekcked=' + chekcked, function(repnce) {
         cabyzoneChart.data.labels = repnce.map(({ zone }) => zone)
