@@ -103,11 +103,11 @@
             </td>
             <td style="text-align:right;vertical-align:top;"><img src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}"
                     width="90px" height="40px"><br>
-                <h6 style="color:brown;font-size:10px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018</h6>
+                <h6 style="color:brown;font-size:10px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018 </h6>
                 </td>   
         </tr>
        
-    </table>
+    </table>          
 
     <table style="width:100%;font-size:10px;margin-top:">
 

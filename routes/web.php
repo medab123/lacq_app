@@ -83,12 +83,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     ///////////////////////////////////////////////////////////////////////////////
 //
-
-
-
-
-
-
     Route::get('/activitys', [ActivityController::class,'index'])->middleware('is_admin');
     Route::PATCH('/analyses', [AnalyseController::class,'update']);
     Route::post('/analyses', [AnalyseController::class,'index']);
@@ -104,16 +98,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get('/statistique', function () {
+        return view('statistique');
+    });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/CommandeByMatrice', [DashboardAdminController::class,'CommandeByMatrice']);
     Route::get('/AmountCommercial', [DashboardAdminController::class,'AmountCommercial']);
     Route::get('/commercialTable', [DashboardAdminController::class,'commercialTable']);
     Route::get('/top5Commercial', [DashboardAdminController::class,'top5Commercial']);
     Route::get('/statistiqueLabo', [DashboardAdminController::class,'statistiqueLabo']);
-
-
-
-
-
+    Route::get('/withZone', [DashboardAdminController::class,'withZone']);
+    Route::get('/cabyzone', [DashboardAdminController::class,'CAbyZone']);
 
 });

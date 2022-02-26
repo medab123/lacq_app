@@ -1,243 +1,143 @@
 <!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="assets/dashboard/css/morris.css">
-<link href="assets/dashboard/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="assets/dashboard/css/metismenu.min.css" rel="stylesheet" type="text/css">
-<link href="assets/dashboard/css/icons.css" rel="stylesheet" type="text/css">
-<link href="assets/dashboard/css/style.css" rel="stylesheet" type="text/css">
-<!-- jQuery  -->
-<script src="assets/dashboard/js/jquery.min.js"></script>
-<script src="assets/dashboard/js/bootstrap.bundle.min.js"></script>
-<script src="assets/dashboard/js/metismenu.min.js"></script>
-<script src="assets/dashboard/js/jquery.slimscroll.js"></script>
-<script src="assets/dashboard/js/waves.min.js"></script>
-<!--Morris Chart-->
-<script src="assets/dashboard/js/morris.min.js"></script>
-<script src="assets/dashboard/js/raphael.min.js"></script>
-<script src="assets/dashboard/js/dashboard.init.js"></script>
-<script src="assets/dashboard/js/chartsConfig.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- App js -->
-<script src="assets/dashboard/js/app.js"></script>
-
-<body>
-    @extends('layouts.master')
-    @section('content')
-        <!-- Begin page -->
-        <div id="wrapper">
-            <!-- Top Bar Start -->
-
-            <!-- Top Bar End -->
-            <!-- ========== Left Sidebar Start ========== -->
-
-            <!-- Left Sidebar End -->
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="page-title-box">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6">
-                                    <h4 class="page-title" style="color:bisque">Dashboard Vente</h4>
-                                </div>
-
-                            </div>
-                            <!-- end row -->
-                        </div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title trspan="authPortal"></title>
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/preloader.css') }}">
+    <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}">
+    </script>
+    <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"
+        sizes="16x16 32x32 48x48 64x64 128x128">
+    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="shortcut icon"
+        type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+</head>
 
-                        <a href=""></a>
-                        <!-- end page-title -->
-                        <!--<div class="row">
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-heading p-4">
-                                        <div class="mini-stat-icon float-right">
-                                            <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-16">Active Sessions</h5>
-                                        </div>
-                                        <h3 class="mt-4">43,225</h3>
-                                        <div class="progress mt-4" style="height: 4px;">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 20%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="text-muted mt-2 mb-0">Previous period<span class="float-right">75%</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-heading p-4">
-                                        <div class="mini-stat-icon float-right">
-                                            <i class="mdi mdi-briefcase-check bg-success text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-16">Total Revenue</h5>
-                                        </div>
-                                        <h3 class="mt-4">$73,265</h3>
-                                        <div class="progress mt-4" style="height: 4px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 88%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="text-muted mt-2 mb-0">Previous period<span class="float-right">88%</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-heading p-4">
-                                        <div class="mini-stat-icon float-right">
-                                            <i class="mdi mdi-tag-text-outline bg-warning text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-16">Average Price</h5>
-                                        </div>
-                                        <h3 class="mt-4">447</h3>
-                                        <div class="progress mt-4" style="height: 4px;">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="text-muted mt-2 mb-0">Previous period<span class="float-right">68%</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-heading p-4">
-                                        <div class="mini-stat-icon float-right">
-                                            <i class="mdi mdi-buffer bg-danger text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-16">Add to Card</h5>
-                                        </div>
-                                        <h3 class="mt-4">86%</h3>
-                                        <div class="progress mt-4" style="height: 4px;">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="text-muted mt-2 mb-0">Previous period<span class="float-right">82%</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card m-b-30 " style="padding-bottom: 22px;background-color: white !important">
-                                    <div class="card-body ">
-                                        <canvas style="background-color: white;" id="matricesRadar"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+<body class="scrollbar CostumScrolBar">
+    <!------------------------------------------------------------------------->
+    <!--   ****** NavBar ****** -->
 
-
-                            <div class="col-xl-6">
-                                <div class="card m-b-30 " style="padding-bottom: 22px;background-color: white !important">
-                                    <div class="card-body ">
-                                        <canvas style="background-color: white;" id="statistiqueLabo"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!--<div class="col-xl-8">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-                                        <h4 class="mt-0 header-title mb-4">Area Chart</h4>
-                                        <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
-                                    </div>
-                                </div>
-                            </div>-->
-                            <!-- end col -->
-                            <div class="col-xl-6 ">
-                                <div class="card m-b-30 "
-                                    style="padding-bottom: 22px;background-color: rgb(5, 11, 54) !important">
-                                    <div class="card-body ">
-                                        <h4 class="mt-0 header-title mb-4" style="color:bisque">Les analyses par matrice
-                                        </h4>
-                                        <div id="morris-donut-example" class="morris-charts morris-chart-height"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 ">
-                                <div class="card m-b-30 " style="background-color: rgb(5, 11, 54) !important">
-                                    <div class="card-body">
-                                        <h4 class="mt-0 header-title mb-4" style="color:bisque">Top 5 Commercials</h4>
-                                        <div id="top5commercial" class="friends-suggestions">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end col -->
-                        </div>
-                        <!-- end row -->
-                        <div class="row">
-
-                            <!---<div class="col-xl-4">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-                                        <h4 class="mt-0 header-title mb-4">Sales Analytics</h4>
-                                        <div id="morris-line-example" class="morris-chart" style="height: 360px"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-                                        <h4 class="mt-0 header-title mb-4">Recent Activity</h4>
-                                        <ol class="activity-feed mb-0">
-                                            <li class="feed-item">
-                                                <div class="feed-item-list">
-                                                    <p class="text-muted mb-1">Now</p>
-                                                    <p class="font-15 mt-0 mb-0">Jassa magna Jassa, risus posted a new article: <b class="text-primary">Forget UX Rowland</b></p>
-                                                </div>
-                                            </li>
-                                            <li class="feed-item">
-                                                <p class="text-muted mb-1">Yesterday</p>
-                                                <p class="font-15 mt-0 mb-0">Jassa posted a new article: <b class="text-primary">Designer Alex</b></p>
-                                            </li>
-                                            <li class="feed-item">
-                                                <p class="text-muted mb-1">2:30PM</p>
-                                                <p class="font-15 mt-0 mb-0">Jassa, Jassa, Jassa Commented <b class="text-primary"> Developer Moreno</b></p>
-                                            </li>
-                                            <li class="feed-item pb-1">
-                                                <p class="text-muted mb-1">12:48 PM</p>
-                                                <p class="font-15 mt-0 mb-2">Jassa, Jassa Commented <b class="text-primary">UX Murphy</b></p>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>--->
-                        </div>
-                        <!-- START ROW -->
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card m-b-30" style="background-color: rgb(5, 11, 54) !important">
-                                    <div class="card-body">
-                                        <h4 class="mt-0 header-title mb-4" style="color:bisque">CA par Commercials</h4>
-                                        <div id="tableCommercial" class="table-responsive">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END ROW -->
-                    </div>
-                    <!-- container-fluid -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Menu Labo </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <!-- content -->
+                <div class="modal-body">
+                    <a class="btn btn-light w-100" href="{{ url('/commandes') }}"> Commandes </a>
+                    <a class="btn btn-light w-100" href="{{ url('/dashboard') }}"> Dashboard </a>
+                    <a class="btn btn-light w-100" href="{{ url('/analyses') }}"> Analyses </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalMenuAdmin" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Administration</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a class="btn btn-light w-100" href="{{ url('/activitys') }}"> Audit Acces </a>
+                    <a class="btn btn-light w-100" href="{{ url('/users') }}"> Utilisateurs </a>
+                </div>
 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
         </div>
-        <!-- END wrapper -->
-    </body>
+    </div>
 
-    </html>
-@endsection
+
+
+    <div class="navbarList">
+        <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
+
+        <!-- Modal -->
+
+        <div style="float:right;">
+            <a style=" color: #f1f3ce;padding:16px;font-size: 14px;" class="text-uppercase"> {{ Auth::user()->name }}
+                {{ Auth::user()->last_name }}</a>
+            <div class="dropdownList">
+                <div class='userInfoAvatar'>
+                    <a class="imgUser "><img style="border-radius:50%"
+                            src="{{ asset('img/avatar/' . Auth::user()->avatar) }}"></a>
+                    <div class="dropdownList-one" style=" right: 0px; ">
+                        <a class="dItem" href="{{ url('users/edit') }}">Mon compte</a>
+                        <a style="color:Black;" class="dItem" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center w-100 mt-5">
+        <div class="col-xl-2">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top" src="{{ asset('img/ascending-graph-1173935.png') }}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text w-100 rounded-3 p-1" style="background-color: rgba(29, 134, 73, 0.6);">Des
+                        Graphs
+                        simplifiant la lecture des KPI LACQ</p>
+                    <a href="{{ url("statistique") }}" class="btn btn-primary">Statistique</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top mx-auto mt-1" src="{{ asset('img/laboratoire-logo-design-template.jpg') }}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text w-100 rounded p-1"
+                        style="background-color: rgba(29, 134, 73, 0.6);margin-top:12px;">Procesus & Activites </br>LACQ
+
+                    </p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModalCenter">Analyse labo</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top mx-auto pt-3" style="width: 163px !important"
+                    src="{{ asset('img/administration.png') }}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text w-100 rounded p-1"
+                        style="background-color: rgba(29, 134, 73, 0.6);;margin-top:12px">Menu permettant d´auditer les
+                        acces LACQ</p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#modalMenuAdmin">Administration</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>

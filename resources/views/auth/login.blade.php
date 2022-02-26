@@ -8,7 +8,7 @@
   /* Center vertically and horizontally */
   width: 70%;
   position: absolute;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   top: 40%;
   left: 50%;
   /*margin: -25px 0 0 -25px; /* Apply negative top and left margins to truly center the element */
@@ -16,7 +16,12 @@
 </style>
 @if ($errors->any())
     @foreach ($errors->all() as $error)
-        <div>{{$error}}</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ $error }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endforeach
 @endif
 <div class="container">
@@ -89,7 +94,7 @@
 </div>
 <script>
     $('form').on('submit', function(e) {
-        
+
         if($("#email").val().includes("@elephant-vert.com") === false){
             $("#email").val($("#email").val()+"@elephant-vert.com")
             //e.preventDefault();

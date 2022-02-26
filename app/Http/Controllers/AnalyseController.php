@@ -54,7 +54,7 @@ class AnalyseController extends Controller
 
         if($analyse_table == "analyse_eau"){
 
-            $listData = DB::table($analyse_table) 
+            $listData = DB::table($analyse_table)
 
             ->join("commandes","commandes.id","=", $analyse_table.".commande_id")
 
