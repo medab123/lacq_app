@@ -19,7 +19,7 @@ class userController extends Controller
     {
         $listUsers = User::join('roles', 'roles.id', '=', 'users.role_id')
         ->select('users.*', 'roles.role')
-        ->paginate(8);
+        ->paginate(20);
         return view("users.index",["listUsers" => $listUsers]);
     }
 
@@ -46,7 +46,7 @@ class userController extends Controller
         $user->last_name = $request->input("last_name");
         $user->email = $request->input("email");
         $user->role_id = $request->input("user_role");
-        $user->password = Hash::make($request->input("password"));        
+        $user->password = Hash::make($request->input("password"));
         if($request->hasFile('uAvatar')){
             $data=$request->input('uAvatar');
             $photo=$request->file('uAvatar')->getClientOriginalName();
@@ -80,9 +80,9 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //  
+        //
         $user = User::join('roles', 'roles.id', '=', 'users.role_id')
-        ->select('users.name','users.role_id',"users.id",'users.last_name','users.email','users.avatar')
+        ->select('users.name','users.role_id',"users.id",'users.last_name','users.email','users.avatar','users.is_active')
         ->where('users.id', '=', $id)
         ->first();
         echo json_encode($user);
@@ -123,16 +123,18 @@ class userController extends Controller
             if($passwordValidation["valid"] == false)
             return redirect()->back()->with('error',$passwordValidation["msg"]);
         }
-        
+        $is_active  = ($request->has('is_active')) ? true : false;
         ($id == null) ? $id = Auth::user()->id : $id = $id;
         $user = User::find($id);
         $user->name = $request->input("name");
         $user->last_name = $request->input("last_name");
         $user->email = $request->input("email");
+        $user->is_active = $is_active;
+
         if(Auth::user()->id == $id) $user->role_id = Auth::user()->role_id;
         else $user->role_id = $request->input("user_role");
-        
-        $user->password = Hash::make($request->input("password"));        
+        if(!empty($request->input("password")))
+        $user->password = Hash::make($request->input("password"));
         if($request->hasFile('uAvatar')){
             $data=$request->input('uAvatar');
             $photo=$request->file('uAvatar')->getClientOriginalName();
