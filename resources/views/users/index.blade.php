@@ -81,6 +81,10 @@
                                 <option value="4">receptionniste</option>
                             </select>
                         </div>
+                        <div class="form-group input-group-sm">
+                            <label for="Role">{{ __('Active') }}</label>
+                            <input type="checkbox" name="is_active" id="is_active">
+                        </div>
                         <div class="form-row alert alert-danger">
                             <div class="form-group input-group-sm col-md-6">
                                 <label for="password">{{ __('Password') }}</label>
@@ -109,7 +113,6 @@
         </div>
     </form>
     <!------------------------------------------------------------------------->
-    <div class="container">
         @if ($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>{{ $message }}</strong>
@@ -126,7 +129,8 @@
                 </button>
             </div>
         @endif
-        <div class="card" style="background-color: rgb(255, 255, 255)">
+
+        <div class="card " style="background-color: rgb(255, 255, 255)">
             <div class="card-header">{{ __('La liste des utilisateurs') }}
                 <button class="btn btn-success btn-sm float-right" onclick="addUserBlade()">Ajouter un utilisateur</button>
             </div>
@@ -135,12 +139,14 @@
                     <table class="table table-striped table-sm ">
                         <thead class="thead-light">
                             <tr>
+                                <th>#</th>
                                 <th>Avatar</th>
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Role</th>
                                 <th>Email</th>
-                                <th>Actions</th>
+                                <th>Etat</th>
+                                <th class="text-center pr-4">Actions</th>
                             </tr>
                         </thead>
                         @foreach ($listUsers as $user)
@@ -148,6 +154,8 @@
                                 @continue
                             @endif
                             <tr>
+                                <td id="id">{{ $user->id }}</td>
+
                                 <td><img class="rounded-circle" width="40px" src="{{ asset('img/avatar/' . $user->avatar) }}">
                                 </td>
                                 <td>{{ $user->name }}</td>
@@ -155,21 +163,26 @@
                                 <td><span class="badge badge-pill badge-success"> {{ $user->role }}</span></td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col">
+                                    @if($user->is_active)
+                                        <span class='badge badge-pill badge-success'>Active</span>
+                                    @else
+                                        <span class='badge badge-pill badge-danger'>Inactive</span>
+                                    @endif
+
+                                </td>
+
+                                <td class="text-right text-nowrap">
+
+                                        <div class="d-inline p-0">
                                             <button class="btn btn-primary btn-sm btnAction"
                                                 onclick="openEditUserModal({{ $user->id }})"><i
                                                     class="fa fa-edit"></i></button>
                                         </div>
-                                        <div class="col">
-                                            <form method="POST" class="formDelete" action="{{ url('/users/' . $user->id) }}">
-                                                @csrf
-                                                {{ @method_field('DELETE') }}
-                                                <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
-                                                        class="fa fa-trash" aria-hidden="true"></i></button>
-                                            </form>
+                                        <div class="d-inline p-0">
+                                                <button type="supmit" class="btn btn-danger btn-sm btnAction" onclick="remove({{ $user->id }})"><i
+                                                        class="fa fa-trash" aria-hidden="true" ></i></button>
                                         </div>
-                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -192,18 +205,25 @@
         };
     </script>
     <script>
-        $(document).ready(function() {
-            $(".formDelete").click(function(event) {
-                if(!confirm('Are you sure that you want to delete this user') ){
-                    event.preventDefault();
-                } 
-            });
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        });
+       function remove(user_id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer les données de manière permanente')) {
+                $('table').preloader({
+                    text: 'Loading'
+                })
+                data = "_method=DELETE&_token={{ csrf_token() }}"
+                $.ajax({
+                    url: '/users/' + user_id,
+                    type: "POST",
+                    data: data,
+                    success: function(response) {
+                        $(".content").html($(response).filter(".content").html())
+                        $('table').preloader('remove')
+
+
+                    },
+                });
+            }
+        }
 
         //_method:PATCH
         function addUserBlade() {
@@ -223,6 +243,7 @@
             $.get('/users/' + user_id + '/edit', function(data) {
                 data = JSON.parse(data);
                 $('#modalModal').attr('action', '{{ url('/users') }}' + "/" + data.id);
+                $('#is_active').prop('checked', data.is_active);
                 $("#name").val(data.name);
                 $("#last_name").val(data.last_name);
                 $("#email").val(data.email);
