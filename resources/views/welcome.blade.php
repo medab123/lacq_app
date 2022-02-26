@@ -37,7 +37,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Administration</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Menu Labo </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -56,7 +56,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Menu Labo</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Administration</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -96,8 +96,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row justify-content-center w-100 mt-5">
         <div class="col-xl-2">
             <div class="card text-center" style="width: 18rem;">
@@ -114,19 +112,6 @@
         </div>
         <div class="col-xl-2">
             <div class="card text-center" style="width: 18rem;">
-                <img class="card-img-top mx-auto pt-3" style="width: 163px !important"
-                    src="{{ asset('img/administration.png') }}" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text w-100 rounded p-1"
-                        style="background-color: rgba(29, 134, 73, 0.6);;margin-top:12px">Menu permettant d´auditer les
-                        acces & la gestion de BD LACQ</p>
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#modalMenuAdmin">Administration</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2">
-            <div class="card text-center" style="width: 18rem;">
                 <img class="card-img-top mx-auto mt-1" src="{{ asset('img/laboratoire-logo-design-template.jpg') }}"
                     alt="Card image cap">
                 <div class="card-body">
@@ -136,6 +121,19 @@
                     </p>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#exampleModalCenter">Analyse labo</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top mx-auto pt-3" style="width: 163px !important"
+                    src="{{ asset('img/administration.png') }}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text w-100 rounded p-1"
+                        style="background-color: rgba(29, 134, 73, 0.6);;margin-top:12px">Menu permettant d´auditer les
+                        acces LACQ</p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#modalMenuAdmin">Administration</button>
                 </div>
             </div>
         </div>
