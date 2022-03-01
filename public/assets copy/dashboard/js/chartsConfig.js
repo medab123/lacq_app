@@ -2,7 +2,7 @@ var echontionParZoneChart = null
 var cabyzoneChart = null
 
 setTimeout(function() {
-    $.getJSON('/CommandeByMatrice', function(repnce) {
+    $.getJSON('http://localhost:8000/CommandeByMatrice', function(repnce) {
         const data = {
             labels: repnce.map(({ label }) => label),
             datasets: [{
@@ -140,7 +140,7 @@ setTimeout(function() {
             config
         );
     });
-    $.getJSON('/statistiqueLabo?chekcked=false', function(repnce) {
+    $.getJSON('http://localhost:8000/statistiqueLabo?chekcked=false', function(repnce) {
         const data = {
             labels: repnce.map(({ month }) => month),
             datasets: [{
@@ -232,6 +232,10 @@ setTimeout(function() {
         );
 
     });
+
+
+
+
 }, 500);
 
 function echontionParZone(chekcked) {
@@ -241,6 +245,7 @@ function echontionParZone(chekcked) {
         echontionParZoneChart.update();
     })
 }
+
 function cabyzone(chekcked) {
     $.getJSON('/cabyzone?chekcked=' + chekcked, function(repnce) {
         cabyzoneChart.data.labels = repnce.map(({ zone }) => zone)
