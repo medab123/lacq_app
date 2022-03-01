@@ -2,7 +2,7 @@ var echontionParZoneChart = null
 var cabyzoneChart = null
 
 setTimeout(function() {
-    $.getJSON('http://localhost:8000/CommandeByMatrice', function(repnce) {
+    $.getJSON('{{ url("CommandeByMatrice") }}', function(repnce) {
         const data = {
             labels: repnce.map(({ label }) => label),
             datasets: [{

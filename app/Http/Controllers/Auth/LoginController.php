@@ -41,10 +41,9 @@ class LoginController extends Controller
         public function authenticated()
         {
             ActivityController::loginActivity();
-            
+
             if (!Auth::user()->is_active) {
                 Auth::logout();
-                
                 return redirect('login')->withErrors(['Your account is inactive']);
             }
         }
