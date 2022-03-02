@@ -201,7 +201,7 @@
                                             <div class="imgUp">
                                                 <div class="imagePreview"></div>
                                                 <label class="btn btn-primary btn-primary-upload">
-                                                    Upload<input type="file" class="uploadFile img" 
+                                                    Upload<input type="file" class="uploadFile img"
                                                         style="width: 0px;height: 0px;overflow: hidden;">
                                                 </label>
                                             </div>
@@ -444,7 +444,8 @@
             //$("#password-confirm").hide();
             var commande_id = id;
             $.get('/commandes/' + commande_id + '/edit', function(data) {
-                data = JSON.parse(data);
+                data = JSON.parse(data);10@
+                
                 $('#modalModal').attr('action', '{{ url('/commandes') }}' + "/" + data.id);
                 $("#client").val(data.client_id);
                 $("#commercial").val(data.commercial);

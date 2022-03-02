@@ -22,19 +22,27 @@ class CreateRolesTable extends Migration
             array(
                 array(
                     'id' => '1',
-                    'role' => "administrateur"
+                    'role' => "super administrateur"
                 ),
                 array(
                     'id' => '2',
-                    'role' => "responsable"
+                    'role' => "administrateur"
                 ),
                 array(
                     'id' => '3',
-                    'role' => "cordinateur"
+                    'role' => "responsable"
                 ),
                 array(
                     'id' => '4',
+                    'role' => "cordinateur"
+                ),
+                array(
+                    'id' => '5',
                     'role' => "receptionniste"
+                ),
+                array(
+                    'id' => '6',
+                    'role' => "visiteur"
                 )
             )
         );
