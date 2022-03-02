@@ -1,14 +1,35 @@
 @extends('layouts.master')
 @section('content')
-
     <style>
-
         td {
             font-size: 13px;
         }
 
         .btnAction {
             font-size: 8px;
+        }
+
+        .imagePreview {
+            width: 100%;
+            height: 180px;
+            background-position: center center;
+            background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+            background-color: #fff;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: inline-block;
+            box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary-upload {
+            display: block;
+            border-radius: 0px;
+            box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+            margin-top: -5px;
+        }
+
+        .imgUp {
+            margin-bottom: 15px;
         }
 
     </style>
@@ -55,7 +76,6 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-
                         <div class="card px-2 py-2 mb-2 ">
                             <span class="mb-4">Client</span>
                             <div class="row">
@@ -174,15 +194,28 @@
                                         <input id="temperateur" type="number" class="form-control form-control-sm "
                                             name="temperateur" autocomplete="temperateur" step="any">
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div id="image_1Group" class="form-group col d-none">
-                                        <label for="image_1">{{ __('Image 1') }}</label>
-                                        <input id="image_1" type="file" class="form-control form-control-sm " name="image_1"
-                                            accept="image/*">
+                                        <label for="image_2">{{ __('Image 2') }}</label>
+                                            <div class="imgUp">
+                                                <div class="imagePreview"></div>
+                                                <label class="btn btn-primary btn-primary-upload">
+                                                    Upload<input type="file" class="uploadFile img" 
+                                                        style="width: 0px;height: 0px;overflow: hidden;">
+                                                </label>
+                                            </div>
                                     </div>
                                     <div id="image_2Group" class="form-group col d-none">
                                         <label for="image_2">{{ __('Image 2') }}</label>
-                                        <input id="image_2" type="file" class="form-control form-control-sm " name="image_2"
-                                            accept="image/*">
+                                        <div class="imgUp">
+                                            <div class="imagePreview"></div>
+                                            <label class="btn btn-primary btn-primary-upload">
+                                                Upload<input type="file" class="uploadFile img" value="Upload Photo"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -261,6 +294,24 @@
 
 
     <script>
+        $(function() {
+            $(document).on("change", ".uploadFile", function() {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader)
+                    return; // no file selected, or no FileReader support
+                if (/^image/.test(files[0].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function() { // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image",
+                            "url(" + this.result + ")");
+                    }
+                }
+            });
+        });
+
         function remove(btn) {
             if (confirm('Êtes-vous sûr de vouloir supprimer les données de manière permanente')) {
                 commande_id = $(btn).parent().parent().parent().children("#id").html();
@@ -415,6 +466,7 @@
                 $("#temperateur").val(data.temperature);
                 $("#horizon_2").val(data.horizon_2);
                 $('#modalEditCommande').modal('show');
+
                 $('html').preloader('remove')
             })
         }
@@ -525,6 +577,4 @@
             $("#notification").append(html);
         }
     </script>
-
-
 @endsection
