@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Auth;
 */
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['is_visiteur']], function() {
     //
     Route::post('/users/update', [userController::class,'update']);
     Route::get('/users/edit', function(){

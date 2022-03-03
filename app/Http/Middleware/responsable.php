@@ -18,7 +18,7 @@ class responsable
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role_id == 2 || Auth::user()->role_id == 1){
+        if(Auth::user()->role_id <= 3){
             return $next($request);
         }else{
             abort(403);
