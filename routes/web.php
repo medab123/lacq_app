@@ -13,7 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\AnalyseController;
 use App\Http\Controllers\DashboardAdminController;
-
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -31,8 +31,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
+Route::group(['middleware' => ['auth']], function() {
 
-Route::group(['middleware' => ['is_visiteur']], function() {
+Route::group(['middleware' => ['auth']], function() {
     //
     Route::post('/users/update', [userController::class,'update']);
     Route::get('/users/edit', function(){
@@ -101,6 +102,8 @@ Route::group(['middleware' => ['is_visiteur']], function() {
     Route::get('/statistique', function () {
         return view('statistique');
     });
+    Route::resource('roles', RoleController::class);
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/CommandeByMatrice', [DashboardAdminController::class,'CommandeByMatrice']);
     Route::get('/AmountCommercial', [DashboardAdminController::class,'AmountCommercial']);
@@ -110,4 +113,5 @@ Route::group(['middleware' => ['is_visiteur']], function() {
     Route::get('/withZone', [DashboardAdminController::class,'withZone']);
     Route::get('/cabyzone', [DashboardAdminController::class,'CAbyZone']);
 
+});
 });

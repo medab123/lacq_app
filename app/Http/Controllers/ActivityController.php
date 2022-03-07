@@ -32,51 +32,51 @@ class ActivityController extends Controller
         return view("activitys.index",["Activitys" => $Activitys]);
     }
     public static  function updateActivity($model = null,$msg){
-        activity("update")
+        /*activity("update")
         ->causedBy(Auth::user()->id)
         ->performedOn($model)
-        ->log($msg);
+        ->log($msg);*/
     }
     public static  function deleteActivity($model,$msg){
 
-        activity("delete")
+        /*activity("delete")
         ->causedBy(Auth::user()->id)
         ->performedOn($model)
-        ->log($msg);
+        ->log($msg);*/
     }
     public static function addActivity($model,$msg){
-        activity("add")
+        /*activity("add")
         ->causedBy(Auth::user()->id)
         ->performedOn($model)
-        ->log($msg);
+        ->log($msg);*/
     }
     public static function CommandeValider($commandeId){
-        activity("commande valider")
+        /*activity("commande valider")
         ->causedBy(Auth::user()->id)
         ->performedOn(new commande())
-        ->log($commandeId);
+        ->log($commandeId);*/
     }
     public static function CommandeRejter($commandeId){
-        activity("Commande rejeter")
+        /*activity("Commande rejeter")
         ->causedBy(Auth::user()->id)
         ->performedOn(new commande())
-        ->log($commandeId);
+        ->log($commandeId);*/
     }
     /////////////////---------------------------------------------------------------///////////////////
 
     public static function loginActivity(){
 
-        activity("Login")
+        /*activity("Login")
         ->causedBy(Auth::user()->id)
         ->performedOn(new User())
-        ->log('Loged in ');
+        ->log('Loged in ');*/
     }
     public static function logoutActivity(){
 
-        activity("Logout")
+        /*activity("Logout")
         ->causedBy(Auth::user()->id)
         ->performedOn(new User())
-        ->log('Loged Out');
+        ->log('Loged Out');*/
     }
-    
+
 }
