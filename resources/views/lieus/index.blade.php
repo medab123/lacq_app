@@ -49,10 +49,10 @@
     <!------------------------------------------------------------------------->
     <div class="card" style="background-color: rgb(255, 255, 255)">
         <div class="card-header">{{ __('La liste des lieus') }}
-            @if (Auth::user()->role_id <= 2)
+            @can('lieu-create')
                 <button class="btn btn-success btn-sm float-right" onclick="addClientBlade()">Ajouter un nouveau
                     Lieu</button>
-            @endif
+            @endcan
         </div>
         <div class="card-body">
             <div class="table-responsive-sm ">
@@ -64,7 +64,7 @@
             $(document).ready(function() {
                 btnSaveRole = null;
                 idLieu = null;
-                
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -115,7 +115,7 @@
                 if(confirm('Are you sure that you want to delete this lieu') ){
                     idLieu = $(btn).parent().parent().parent().children("#id").children("span").html();
                     $('table').preloader({text: 'Loading'})
-                    data = "_method=DELETE&_token={{ csrf_token() }}" 
+                    data = "_method=DELETE&_token={{ csrf_token() }}"
                     $.ajax({
                         url: '/lieus/'+idLieu,
                         type: "POST",
@@ -126,7 +126,7 @@
                             $('#modalEditLieu').modal('hide');
                         },
                     });
-                } 
+                }
             }
             function renderTable() {
                 var $request = $.get('{{ url("lieus/json") }}'); // make request

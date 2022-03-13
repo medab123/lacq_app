@@ -197,21 +197,21 @@
                                 </div>
                                 <div class="row">
                                     <div id="image_1Group" class="form-group col d-none">
-                                        <label for="image_2">{{ __('Image 2') }}</label>
-                                            <div class="imgUp">
-                                                <div class="imagePreview"></div>
-                                                <label class="btn btn-primary btn-primary-upload">
-                                                    Upload<input type="file" class="uploadFile img"
-                                                        style="width: 0px;height: 0px;overflow: hidden;">
-                                                </label>
-                                            </div>
+                                        <label for="image_1">{{ __('Image 1') }}</label>
+                                        <div class="imgUp">
+                                            <div id="img-1" class="imagePreview"></div>
+                                            <label class="btn btn-primary btn-primary-upload">
+                                                Upload<input type="file" class="uploadFile img" name="image_1"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+                                            </label>
+                                        </div>
                                     </div>
                                     <div id="image_2Group" class="form-group col d-none">
                                         <label for="image_2">{{ __('Image 2') }}</label>
                                         <div class="imgUp">
-                                            <div class="imagePreview"></div>
+                                            <div id="img-2" class="imagePreview"></div>
                                             <label class="btn btn-primary btn-primary-upload">
-                                                Upload<input type="file" class="uploadFile img" value="Upload Photo"
+                                                Upload<input type="file" class="uploadFile img" name="image_2"
                                                     style="width: 0px;height: 0px;overflow: hidden;">
                                             </label>
                                         </div>
@@ -252,7 +252,6 @@
             <option value="{{ $commercial->name }}">{{ $commercial->zone }}</option>
         @endforeach
     </datalist>
-
     <!------------------------------------------------------------------------->
     <div id="notification">
         @if ($message = Session::get('success'))
@@ -285,9 +284,7 @@
                 Commande</a>
         </div>
         <div class="card-body">
-
             @include('commandes.table')
-
         </div>
     </div>
 
@@ -444,8 +441,8 @@
             //$("#password-confirm").hide();
             var commande_id = id;
             $.get('/commandes/' + commande_id + '/edit', function(data) {
-                data = JSON.parse(data);10@
-                
+                data = JSON.parse(data);
+
                 $('#modalModal').attr('action', '{{ url('/commandes') }}' + "/" + data.id);
                 $("#client").val(data.client_id);
                 $("#commercial").val(data.commercial);
@@ -467,6 +464,8 @@
                 $("#temperateur").val(data.temperature);
                 $("#horizon_2").val(data.horizon_2);
                 $('#modalEditCommande').modal('show');
+                $('#img-1').css("background","url({{ url('/img/commande/ameo') }}/"+data.img_1+')');
+                $('#img-2').css("background","url({{ url('/img/commande/ameo') }}/"+data.img_2+')');
 
                 $('html').preloader('remove')
             })
@@ -519,7 +518,6 @@
                 zIndex: '1'
             });
             statiqueInputs()
-            console.log(matrice_id)
             if (matrice_id == "") {
                 let options = "<option value=''>select..</option>";
                 $("#menu").empty().append(options);

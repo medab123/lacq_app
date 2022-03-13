@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role_id')->unsigned();
             $table->boolean('is_active');
             $table->string('avatar')->nullable();
             $table->rememberToken();
@@ -31,22 +30,11 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert(
             array(
                 array(
-                    'id' => '1',
-                    'name' => "mohammed",
-                    "last_name" => "el-abidi",
-                    "email" => "mohammed.el-abidi@elephant-vert.com",
-                    "password" =>  Hash::make("Xwgpdz1ds5@"),
-                    "role_id" => 1,
-                    "is_active" => true,
-                    "avatar" => "user.png"
-                ),
-                array(
                     'id' => '2',
                     'name' => "faical",
                     "last_name" => "rouissi",
                     "email" => "faical.rouissi@elephant-vert.com",
                     "password" =>  Hash::make("Xwgpdz1ds5@"),
-                    "role_id" => 1,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
@@ -56,7 +44,6 @@ class CreateUsersTable extends Migration
                     "last_name" => "mousaouy",
                     "email" => "m-o.el-mousaouy@elephant-vert.com",
                     "password" =>  Hash::make("Xwgpdz1ds5@"),
-                    "role_id" => 1,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
@@ -66,7 +53,6 @@ class CreateUsersTable extends Migration
                     "last_name" => "el-kabous",
                     "email" => "amal.el-kabous@elephant-vert.com",
                     "password" =>  Hash::make("Meknes2021"),
-                    "role_id" => 1,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
@@ -76,18 +62,16 @@ class CreateUsersTable extends Migration
                     "last_name" => "bouslamti",
                     "email" => "amine.bouslamti@elephant-vert.com",
                     "password" =>  Hash::make("Lacq2021"),
-                    "role_id" => 1,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
-                
+
                 array(
                     'id' => '6',
                     'name' => "asmaa",
                     "last_name" => "benhida",
                     "email" => "asmaa.benhida@elephant-vert.com",
                     "password" =>  Hash::make("Lacq2021"),
-                    "role_id" => 2,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
@@ -97,7 +81,6 @@ class CreateUsersTable extends Migration
                     "last_name" => "amzad",
                     "email" => "mohamed.amzad@elephant-vert.com",
                     "password" =>  Hash::make("Lacq2021"),
-                    "role_id" => 3,
                     "is_active" => true,
                     "avatar" => "user.png"
                 ),
@@ -107,7 +90,6 @@ class CreateUsersTable extends Migration
                     "last_name" => "zarrouk",
                     "email" => "fatima.zarrouk@elephant-vert.com",
                     "password" =>  Hash::make("Lacq2021"),
-                    "role_id" => 4,
                     "is_active" => true,
                     "avatar" => "user.png"
                 )

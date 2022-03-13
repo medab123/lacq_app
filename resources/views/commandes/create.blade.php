@@ -1,5 +1,31 @@
 @extends('layouts.master')
 @section('content')
+<style>
+
+    .imagePreview {
+        width: 100%;
+        height: 180px;
+        background-position: center center;
+        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: inline-block;
+        box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary-upload {
+        display: block;
+        border-radius: 0px;
+        box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+        margin-top: -5px;
+    }
+
+    .imgUp {
+        margin-bottom: 15px;
+    }
+
+</style>
     <form id="clientModalForm">
         <div class="modal fade bd-example-modal-lg" id="modalEditClient" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -128,7 +154,7 @@
                                 <div class="form-group col">
                                     <label for="nature">{{ __('Nature') }}</label>
                                     <input list="listNatures" id="nature" type="text" class="form-control form-control-sm" name="nature[]" value="{{ old('nature') }}" required autocomplete="nature" autofocus>
-                                </div>                            
+                                </div>
                                 <div class="form-group col">
                                     <label for="culture" >{{ __('Culture') }}</label>
                                     <input list="listCultures" id="culture" type="text" class="form-control form-control-sm " name="culture[]" required autocomplete="culture">
@@ -174,13 +200,42 @@
                                 </div>
                                 <div id="image_1Group" class="form-group col d-none">
                                     <label for="image_1">{{ __('Image 1') }}</label>
-                                    <input id="image_1" type="file" class="form-control form-control-sm "
-                                        name="image_1[]" accept="image/*">
+                                    <div class="imgUp">
+                                        <div id="img-1" class="imagePreview"></div>
+                                        <label class="btn btn-primary btn-primary-upload">
+                                            Upload<input type="file" class="uploadFile img" name="image_1"
+                                                style="width: 0px;height: 0px;overflow: hidden;">
+                                        </label>
+                                    </div>
                                 </div>
-                                <div id="image_2Group" class="form-group col d-none">
+                                </div>
+                                <div id="image_2Group-" class="form-group col d-none">
                                     <label for="image_2">{{ __('Image 2') }}</label>
-                                    <input id="image_2" type="file" class="form-control form-control-sm "
+                                    <input id="image_2-" type="file" class="form-control form-control-sm "
                                         name="image_2[]" accept="image/*">
+                                </div>
+                                <div class="row">
+                                    <div id="image_1Group" class="form-group col d-none">
+                                        <label for="image_1">{{ __('Image 1') }}</label>
+                                        <div class="imgUp">
+                                            <div id="img-1" class="imagePreview"></div>
+                                            <label class="btn btn-primary btn-primary-upload">
+                                                Upload<input type="file" class="uploadFile img" name="image_1"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="image_2Group" class="form-group col d-none">
+                                        <label for="image_2">{{ __('Image 2') }}</label>
+                                        <div class="imgUp">
+                                            <div id="img-2" class="imagePreview"></div>
+                                            <label class="btn btn-primary btn-primary-upload">
+                                                Upload<input type="file" class="uploadFile img" name="image_2"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+                                            </label>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -238,44 +293,50 @@
             if (text == "SOL") {
                 $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").removeClass("d-none")
                 $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").removeClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").children("#horizon_1")
-                    .attr('required', '');
-                $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").children("#horizon_2")
-                    .attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").children("#horizon_1").attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").children("#horizon_2").attr('required', '');
             } else {
                 $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").addClass("d-none")
                 $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").addClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").children("#horizon_1")
-                    .removeAttr('required');
-                $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").children("#horizon_2")
-                    .removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#horizon1Group").children("#horizon_1").removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#horizon2Group").children("#horizon_2").removeAttr('required');
             }
             if (text == "EAU" || text == "EAU POTABLE") {
                 $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").removeClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").children(
-                    "#temperateur").attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").children("#temperateur").attr('required', '');
             } else {
                 $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").addClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").children(
-                    "#temperateur").removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#temperateurGroup").children("#temperateur").removeAttr('required');
             }
             if (text == "AMEO") {
                 $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").removeClass("d-none")
                 $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").removeClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1")
-                    .attr('required', '');
-                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2")
-                    .attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1").attr('required', '');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2").attr('required', '');
             } else {
                 $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").addClass("d-none")
                 $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").addClass("d-none")
-                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1")
-                    .removeAttr('required');
-                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2")
-                    .removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_1Group").children("#image_1").removeAttr('required');
+                $(matrice).parent().parent().parent().children(".row2").children("#image_2Group").children("#image_2").removeAttr('required');
             }
         }
-
+        $(function() {
+            $(document).on("change", ".uploadFile", function() {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader)
+                    return; // no file selected, or no FileReader support
+                if (/^image/.test(files[0].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function() { // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image",
+                            "url(" + this.result + ")");
+                    }
+                }
+            });
+        });
         function addClient() {
             $("#clientModalForm")[0].reset();
             $("#ModalTitle").text("Ajouter un client");
@@ -285,7 +346,6 @@
 
         function menuOfMatrice(matrice_id) {
             statiqueInputs(matrice_id)
-            console.log(matrice_id.value)
             if (matrice_id.value == "") {
                 let options = "<option value=''>select..</option>";
                 $("#menu").empty().append(options);
@@ -306,7 +366,6 @@
     <script type="text/javascript">
         const client = [...document.querySelectorAll('#listClients option')].map(option => option.value)
         //$("#cliantValidation").
-        console.log(client);
         document.getElementById("client").addEventListener("keyup", e => {
             if (client.includes(e.target.value)) {
                 $("#cliantValidation").addClass("d-none");

@@ -23,6 +23,10 @@ class AnalyseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:analyses-list', ['only' => ['index','export','import']]);
+    }
     public function index(Request $request)
     {
 

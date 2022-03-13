@@ -34,12 +34,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="text-center">#</th>
-                            <th class="text-center">log_name</th>
-                            <th class="text-center">description</th>
-                            <th class="text-center">subject_type</th>
-                            <th class="text-center">causer_type</th>
-                            <th class="text-center">causer_id</th>
-                            <th class="text-center">Couser Name</th>
+                            <th class="text-center">User</th>
+                            <th class="text-center">Ip</th>
                             <th class="text-center">created_at</th>
                         </tr>
                     </thead>
@@ -93,7 +89,7 @@
 
             $("#name").val(name);
             $("#prix_ht").val(prix_ht);
-            $("#prix_supv").val(prix_supv);        
+            $("#prix_supv").val(prix_supv);
             btnSaveRole = "PATCH";
             $('#modalEditMenu').modal('show');
           });*/
@@ -109,7 +105,7 @@
         function openEditMenuModal(id){
             $("#modalModal")[0].reset();
             $("#ModalTitle").text("Modifier");
-            $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>"); 
+            $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>");
             var user_id = id;
             $.get('/menus/' + user_id +'/edit', function (data) {
                 data = JSON.parse(data);
@@ -118,7 +114,7 @@
                 $("#matrice").val(data.matrice_id);
                 $("#prix_ht").val(data.prix_ht);
                 $("#prix_supv").val(data.prix_supv);
-                
+
             })
             $('#modalEditMenu').modal('show');
         }
@@ -132,7 +128,7 @@
                   buffer : $("#searchInput").val(),
               },
               success:function(response){
-                 
+
                   $(".card-body").html($(response).find( ".card-body" ).html())
                   $('table').preloader('remove')
               },

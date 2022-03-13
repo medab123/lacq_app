@@ -10,7 +10,7 @@ use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Spatie\Activitylog\Contracts\Activity;
 
-class is_visiteur
+class log
 {
     /**
      * Handle an incoming request.
@@ -42,11 +42,14 @@ class is_visiteur
     {
         //abort(500);
         //return $next($request);
-        $defaultAction = ["LoginController@showLoginForm","LoginController@login","Closure","LoginController@logout","RoleController@index"];
+        //$defaultAction = ["LoginController@showLoginForm","LoginController@login","Closure","LoginController@logout","RoleController@index"];
+
         $action = explode('\\', $request->route()->getActionName());
         $action = $action[count($action)-1];
-        echo $action;
-        if(in_array($action, $defaultAction)){
+        //echo $action;
+        return $next($request);
+
+        /*if(in_array($action, $defaultAction)){
             return $next($request);
         }
 
@@ -71,6 +74,7 @@ class is_visiteur
         if($alowd) return $next($request);
         else abort(403);
         dd($action,$action_id,$userId,$userRole,$ip,$alowdActivitys,$alowd);
+        */
     }
 }
 
