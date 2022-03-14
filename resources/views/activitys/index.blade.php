@@ -34,6 +34,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="text-center">#</th>
+                            <th class="text-center">Action</th>
+
                             <th class="text-center">User</th>
                             <th class="text-center">Ip</th>
                             <th class="text-center">created_at</th>
@@ -43,13 +45,11 @@
                         @foreach ($Activitys as $activity)
                             <tr>
                                 <td class="text-center">{{ $activity->id }}</td>
+                                <td class="text-center">{{ $activity->action }}</td>
+
                                 <td class="text-center"><span
-                                        class="badge badge-success">{{ $activity->log_name }}</span></td>
-                                <td class="text-center">{{ $activity->description }}</td>
-                                <td class="text-center">{{ $activity->subject_type }}</td>
-                                <td class="text-center">{{ $activity->causer_type }}</td>
-                                <td class="text-center">{{ $activity->causer_id }}</td>
-                                <td class="text-center">{{ $activity->name }} {{ $activity->last_name }}</td>
+                                        class="badge badge-success">{{ $activity->name }}</span></td>
+                                <td class="text-center">{{ $activity->ip }}</td>
                                 <td class="text-center">{{ $activity->created_at }}</td>
                             </tr>
                         @endforeach

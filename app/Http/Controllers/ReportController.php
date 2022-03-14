@@ -31,9 +31,7 @@ class ReportController extends Controller
         $analyse_table = str_replace(' ', '_', $analyse_table);
         $analyse_table = "analyse_".$analyse_table;
         $analyse_blade = "report/".$analyse_table;
-        if (!View::exists($analyse_blade)) {
-            abort(404);
-        }
+        if (!View::exists($analyse_blade)) abort(404);
 
         $client_info = Commande::join("clients","clients.id","commandes.client_id")
         ->select("commandes.*","clients.*")
@@ -47,7 +45,6 @@ class ReportController extends Controller
         $commantair = ["Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) répondent aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine. ","Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) ne répondent pas aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine."];
 
         return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data])->setOptions(['defaultFont' => 'sans-serif'])->stream();
-        return $pdf->download('test.pdf');
     }
 
 

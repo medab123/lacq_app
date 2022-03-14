@@ -9,6 +9,8 @@ use  Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Spatie\Activitylog\Contracts\Activity;
+use App\Models\Commantaire;
+use App\Models\Log as ModelsLog;
 
 class log
 {
@@ -46,7 +48,14 @@ class log
 
         $action = explode('\\', $request->route()->getActionName());
         $action = $action[count($action)-1];
-        //echo $action;
+        $ip = self::getIp();
+        $userId = Auth::user()->id ?? null;
+        $toLog = new ModelsLog();
+        $toLog->user_id = $userId;
+        $toLog->action = $action;
+        $toLog->ip = $ip;
+        $toLog->save();
+        //dd($action,$ip,$userId);
         return $next($request);
 
         /*if(in_array($action, $defaultAction)){
