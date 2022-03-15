@@ -38,6 +38,7 @@ class DashboardController extends Controller
             $row->tempReel = $tempReel;
         }
         //dd($listCommandes);
+        $listCommandes->setPath('/dashboard');
 
         return view("dashboard.index",["listCommandes" => $listCommandes]);
     }

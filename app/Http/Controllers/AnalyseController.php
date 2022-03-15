@@ -85,7 +85,7 @@ class AnalyseController extends Controller
             ->paginate(8);
 
         }
-        $listData->setPath('/dashboard');
+        
 
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
