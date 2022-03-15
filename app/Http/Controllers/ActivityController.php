@@ -33,6 +33,7 @@ class ActivityController extends Controller
         ->orderBy('id', 'desc')
         ->paginate(10);
         //dd($Activitys);
+        $Activitys->setPath('/activitys');
         return view("activitys.index",["Activitys" => $Activitys]);
     }
 
