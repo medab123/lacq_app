@@ -40,7 +40,7 @@ class CreateCommandesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        DB::table('commandes')->insert(
+        /*DB::table('commandes')->insert(
             array(
                 array(
                     'id' => '1',
@@ -211,7 +211,7 @@ class CreateCommandesTable extends Migration
                     'state' => 'En cours'
                 ),
             )
-        );
+        );*/
     }
 
     /**
