@@ -64,7 +64,6 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex justify-content-center mt-2">
-                    {!! $data->links('pagination::bootstrap-4') !!}
-                </div>
+                
+                
             @endsection
