@@ -25,7 +25,7 @@ class AnalyseController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:analyses-list', ['only' => ['index','export','import']]);
+         $this->middleware('permission:analyses-list', ['only' => ['index','export','import','update','refresh']]);
     }
     public function index(Request $request)
     {
@@ -85,6 +85,7 @@ class AnalyseController extends Controller
             ->paginate(8);
 
         }
+        $listData->setPath('/dashboard');
 
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
