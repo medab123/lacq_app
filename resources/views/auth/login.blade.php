@@ -94,10 +94,8 @@
 </div>
 <script>
     $('form').on('submit', function(e) {
-
         if($("#email").val().includes("@elephant-vert.com") === false){
             $("#email").val($("#email").val()+"@elephant-vert.com")
-            //e.preventDefault();
         }
     });
 </script>

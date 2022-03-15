@@ -24,8 +24,8 @@
         sizes="16x16 32x32 48x48 64x64 128x128">
     <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="shortcut icon"
         type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </head>
 
 <body class="scrollbar CostumScrolBar">
@@ -34,28 +34,48 @@
 
     <div class="navbarList">
         <div class='navbarItimes'>
-            <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
-            <a class="dropbtn ml-5 mr-2" href="{{ url('/') }}" style="border-radius: 3px;">Accueil</a>
-
+            <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;" class="mr-5">
+            @can('dashboard-admin-list')
+            <a class="dropbtn  mr-2" href="{{ url('/') }}" style="border-radius: 3px;">Accueil</a>
+            @endcan
+            @can('client-list')
             <a class="dropbtn" href="{{ url('/clients') }}" style="border-radius: 3px; ">Clients</a>
+            @endcan
+            @can('commande-list')
             <a class="dropbtn" href="{{ url('/commandes') }}" style="border-radius: 3px; ">Commandes</a>
+            @endcan
+            @can('dashboard-list')
             <a class="dropbtn" href="{{ url('/dashboard') }}" style="border-radius: 3px; ">Dashboard</a>
-
-            <div class="dropdownList">
-                <a class="dropbtn mr-2" style="border-radius: 3px;padding: 18px 15px;color:white;">Base de donnée <div
-                        class="separ"></div><i class="fa fa-caret-down" aria-hidden="true"></i> </a>
-                <div class="dropdownList-one" style=" max-width: 150px;">
-                    <a class="dItem" href="{{ url('/matrices') }}">Matrice</a>
-                    <a class="dItem" href="{{ url('/menus') }}">Menu</a>
-                    <a class="dItem" href="{{ url('/commercials') }}">Commercial</a>
-                    <a class="dItem" href="{{ url('/lieus') }}">Lieu</a>
-
+            @endcan
+            @canany(['matrice-list','menu-list','commercial-list','lieu-list'])
+                <div class="dropdownList">
+                    <a class="dropbtn mr-2" style="border-radius: 3px;padding: 18px 15px;color:white;">Base de donnée <div
+                            class="separ"></div><i class="fa fa-caret-down" aria-hidden="true"></i> </a>
+                    <div class="dropdownList-one" style=" max-width: 150px;">
+                        @can('matrice-list')
+                            <a class="dItem" href="{{ url('/matrices') }}">Matrice</a>
+                        @endcan
+                        @can('menu-list')
+                            <a class="dItem" href="{{ url('/menus') }}">Menu</a>
+                        @endcan
+                        @can('commercial-list')
+                            <a class="dItem" href="{{ url('/commercials') }}">Commercial</a>
+                        @endcan
+                        @can('lieu-list')
+                            <a class="dItem" href="{{ url('/lieus') }}">Lieu</a>
+                        @endcan
+                    </div>
                 </div>
-            </div>
-            @if (Auth::user()->role_id == 1)
+            @endcan
+            @can('user-list')
                 <a class="dropbtn" href="{{ url('/users') }}" style="border-radius: 3px; ">Utilisateurs</a>
+            @endcan
+            @can('activity-list')
                 <a class="dropbtn" href="{{ url('/activitys') }}" style="border-radius: 3px; ">Log</a>
-            @endif
+            @endcan
+            @can('role-list')
+                <a class="dropbtn" href="{{ url('/roles') }}" style="border-radius: 3px; ">Roles</a>
+            @endcan
         </div>
         <div style="float:right;">
             <a style=" color: #f1f3ce;padding:16px;font-size: 14px;" class="text-uppercase"> {{ Auth::user()->name }}
