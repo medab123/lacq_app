@@ -35,7 +35,6 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Action</th>
-
                             <th class="text-center">User</th>
                             <th class="text-center">Ip</th>
                             <th class="text-center">created_at</th>
@@ -46,14 +45,12 @@
                             <tr>
                                 <td class="text-center">{{ $activity->id }}</td>
                                 <td class="text-center">{{ $activity->action }}</td>
-
                                 <td class="text-center"><span
                                         class="badge badge-success">{{ $activity->name }}</span></td>
                                 <td class="text-center">{{ $activity->ip }}</td>
                                 <td class="text-center">{{ $activity->created_at }}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
