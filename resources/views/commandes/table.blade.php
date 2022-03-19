@@ -60,7 +60,7 @@
                             class="badge badge-warning">{{ $commande->state }}</td>
                 @endif
                 <td class="text-right text-nowrap">
-                    @if (Auth::user()->role_id <= 2)
+                    @can('commande-valider')
                         @if ($commande->state != 'Valid')
                             <div class="d-inline p-0">
                                 <button class="btn btn-success btn-sm btnAction"
@@ -68,6 +68,8 @@
                                         class="fa fa-check" aria-hidden="true"></i></button>
                             </div>
                         @endif
+                    @endcan
+                    @can('commande-reject')
                         @if ($commande->state != 'Rejete')
                             <div class="d-inline p-0">
                                 <button class="btn btn-warning btn-sm btnAction"
@@ -75,6 +77,7 @@
                                         class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         @endif
+                    @endcan
                         @if ($commande->state == 'Rejete')
                             <div class="d-inline p-0">
                                 <button class="btn btn-warning btn-sm btnAction"
@@ -82,19 +85,20 @@
                                         class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                             </div>
                         @endif
-                    @endif
+                    
+                   
                     <div class="d-inline p-0">
                         <button class="btn btn-primary btn-sm btnAction"
                             onclick="openEditCommandeModal({{ $commande->id }})"><i
                                 class="fa fa-edit"></i></button>
                     </div>
-                    @if (Auth::user()->role_id == 1)
-                    <div class="d-inline p-2">
-                        <button  class="btn btn-danger btn-sm btnAction" onclick="remove(this)">
-                            <i class="fa fa-trash" aria-hidden="true">
-                        </i></button>
-                    </div>
-                    @endif
+                    @can('commande-delete')
+                        <div class="d-inline p-2">
+                            <button  class="btn btn-danger btn-sm btnAction" onclick="remove(this)">
+                                <i class="fa fa-trash" aria-hidden="true">
+                            </i></button>
+                        </div>
+                    @endcan
                 </td>
             </tr>
         @endforeach

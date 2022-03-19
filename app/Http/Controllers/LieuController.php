@@ -13,6 +13,13 @@ class LieuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:lieu-list|lieu-edit|lieu-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:lieu-create', ['only' => ['create','store']]);
+         $this->middleware('permission:lieu-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:lieu-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $listLieus = Lieu::paginate(8);
@@ -20,14 +27,14 @@ class LieuController extends Controller
         $listLieus->setPath('/lieus');
         return view("lieus.index",["listLieus" => $listLieus]);
     }
-    
+
     public function json()
     {
         $listLieus = Lieu::paginate(8);
         $listLieus->setPath('/lieus');
 
         $table = view('lieus.table', compact('listLieus'))->render();
-        return response()->json(compact('table')); 
+        return response()->json(compact('table'));
     }
 
     /**
@@ -51,9 +58,9 @@ class LieuController extends Controller
         //
 
         $lieu= new Lieu();
-        $lieu->lieu = $request->input("lieu");     
+        $lieu->lieu = $request->input("lieu");
         $lieu->save();
-        return response()->json(['status' => true,'message' => 'Lieu ajoutée avec succès']); 
+        return response()->json(['status' => true,'message' => 'Lieu ajoutée avec succès']);
 
     }
 
@@ -78,7 +85,7 @@ class LieuController extends Controller
     {
         $lieu = Lieu::find($id);
 
-        return response()->json($lieu); 
+        return response()->json($lieu);
 
 
     }
@@ -94,9 +101,9 @@ class LieuController extends Controller
     {
 
         $lieu = Lieu::find($id);
-        $lieu->lieu = $request->input("lieu");     
+        $lieu->lieu = $request->input("lieu");
         $lieu->save();
-        return response()->json(['status' => true,'message' => 'Lieu modifiée avec succès']); 
+        return response()->json(['status' => true,'message' => 'Lieu modifiée avec succès']);
 
     }
 
@@ -110,7 +117,7 @@ class LieuController extends Controller
     {
         $lieu = Lieu::find($id);
         $lieu->delete();
-        return response()->json(['status' => true,'message' => 'Lieu supprimée avec succès']); 
+        return response()->json(['status' => true,'message' => 'Lieu supprimée avec succès']);
 
     }
 }

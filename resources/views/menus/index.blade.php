@@ -78,9 +78,9 @@
     <div class="card" style="background-color: rgb(255, 255, 255)">
         <div class="card-header">{{ __('La liste des Menus') }}
             <input id="searchInput" type="text" class="ml-3 d-inline  form-control form-control-sm col-2">
-            @if (Auth::user()->role_id <= 2)
+            @can('menu-create')
                 <button class="btn btn-success btn-sm float-right" onclick="addMenuBlade()">Ajouter un menu</button>
-            @endif
+            @endcan
         </div>
         <div class="card-body">
             <div class="table-responsive-sm ">
@@ -92,7 +92,7 @@
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prix hor tax</th>
                             <th class="text-center">Prix Supvendioner</th>
-                            @if (Auth::user()->role_id <= 2)
+                            @canany(['menu-edit','menu-delete'])
                                 <th class="text-right pr-4">Actions</th>
                             @endif
                         </tr>
@@ -106,13 +106,16 @@
                                 <td class="text-center" id="name">{{ $menu->name }}</td>
                                 <td class="text-center" id="prix_ht">{{ $menu->prix_ht }}</td>
                                 <td class="text-center" id="prix_supv">{{ $menu->prix_supv }}</td>
-                                @if (Auth::user()->role_id <= 2)
+                                @canany(['menu-edit','menu-delete'])
                                     <td class="text-right text-nowrap">
+                                        @can('menu-edit')
                                         <div class="d-inline p-2">
                                             <button class="btn btn-primary btn-sm editBtn btnAction"
                                                 onclick="openEditMenuModal({{ $menu->id }})"><i
                                                     class="fa fa-edit"></i></button>
                                         </div>
+                                        @endcan
+                                        @can('menu-delete')
                                         <form class="d-inline p-2 formDelete" method="POST"
                                             action="{{ url('/menus/' . $menu->id) }}">
                                             @csrf
@@ -120,8 +123,9 @@
                                             <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
                                                     class="fa fa-trash" aria-hidden="true"></i></button>
                                         </form>
+                                        @endcan
                                     </td>
-                                @endif
+                                @endcan
                             </tr>
                         @endforeach
 
@@ -139,9 +143,9 @@
     <script>
         $(document).ready(function() {
             $(".formDelete").click(function(event) {
-                if(!confirm('Are you sure that you want to delete this menu') ){
+                if (!confirm('Are you sure that you want to delete this menu')) {
                     event.preventDefault();
-                } 
+                }
             });
             $.ajaxSetup({
                 headers: {
@@ -165,7 +169,7 @@
 
             $("#name").val(name);
             $("#prix_ht").val(prix_ht);
-            $("#prix_supv").val(prix_supv);        
+            $("#prix_supv").val(prix_supv);
             btnSaveRole = "PATCH";
             $('#modalEditMenu').modal('show');
           });*/

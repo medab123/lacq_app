@@ -67,10 +67,11 @@
     <div class="card" style="background-color: rgb(255, 255, 255)">
         <div class="card-header">{{ __('La liste des commerciaux') }}
             <input id="searchInput" type="text" class="ml-3 d-inline  form-control form-control-sm col-2">
-            @if (Auth::user()->role_id <= 2)
-                <button class="btn btn-success btn-sm float-right" onclick="addCommercialBlade()">Ajouter un nouveau
+            @can('commercial-create')
+<button class="btn btn-success btn-sm float-right" onclick="addCommercialBlade()">Ajouter un nouveau
                     Commercial</button>
-            @endif
+            @endcan
+
         </div>
         <div class="card-body">
             <div class="table-responsive-sm ">
@@ -81,9 +82,9 @@
                             <th class="text-center">Nom</th>
                             <th class="text-center">Zone</th>
                             <th class="text-center">Email</th>
-                            @if (Auth::user()->role_id <= 2)
+                            @canany(['commercial-edit','commercial-delete'])
                                 <th class="text-right pr-4">Actions</th>
-                            @endif
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -95,13 +96,15 @@
                                         class="badge badge-success">{{ $commercial->zone }}</span></td>
                                 <td id='email' class="text-center">{{ $commercial->email }}</td>
 
-                                @if (Auth::user()->role_id <= 2)
+                                @canany(['commercial-edit','commercial-delete'])
                                     <td class="text-right">
+                                        @can('commercial-edit')
                                         <div class="d-inline p-2">
-                                            <!------onclick="openEditCommercialModal({{ $commercial->id }})"--->
                                             <button class="btn btn-primary btn-sm editBtn btnAction"
                                                 onclick="modifier(this);"><i class="fa fa-edit"></i></button>
                                         </div>
+                                        @endcan
+                                        @can('commercial-delete')
                                         <form class="d-inline p-2 formDelete" method="POST"
                                             action="{{ url('/commercials/' . $commercial->id) }}">
                                             @csrf
@@ -109,8 +112,9 @@
                                             <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
                                                     class="fa fa-trash" aria-hidden="true"></i></button>
                                         </form>
+                                        @endcan
                                     </td>
-                                @endif
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>
@@ -132,7 +136,7 @@
             $(".formDelete").click(function(event) {
                 if(!confirm('Are you sure that you want to delete this commercial') ){
                     event.preventDefault();
-                } 
+                }
             });
             $.ajaxSetup({
                 headers: {

@@ -69,119 +69,124 @@
     <div class="card" style="background-color: rgb(255, 255, 255)">
         <div class="card-header">{{ __('La liste des Matrices') }}
             <input id="searchInput" type="text" class="ml-3 d-inline  form-control form-control-sm col-2">
-            @if (Auth::user()->role_id <= 2)
+            @can('matrice-create')
                 <button class="btn btn-success btn-sm float-right" onclick="addMatriceBlade()">Ajouter une matrice</button>
-            @endif
-        </div>
-        <div class="card-body">
-            <div class="table-responsive-sm ">
-                <table class="table table-striped table-sm ">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">Nom</th>
-                            <th class="text-center">Code</th>
-                            <th class="text-center">délai</th>
-                            @if (Auth::user()->role_id <= 2)
-                                <th class="text-right pr-4">Actions</th>
-                            @endif
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($listMatrice as $matrice)
-                            <tr>
-                                <td class="text-center">{{ $matrice->id }}</td>
-                                <td class="text-center"><span class="badge badge-success">{{ $matrice->name }}</span>
-                                </td>
-                                <td class="text-center">{{ $matrice->code }}</td>
-                                <td class="text-center">{{ $matrice->delai }}</td>
-                                @if (Auth::user()->role_id <= 2)
-                                    <td class="text-right">
-                                        <div class="d-inline p-2">
-                                            <button class="btn btn-primary btn-sm btnAction"
-                                                onclick="openEditMatriceModal({{ $matrice->id }})"><i
-                                                    class="fa fa-edit"></i></button>
-                                        </div>
-                                        <form class="d-inline p-2 formDelete" method="POST"
-                                            action="{{ url('/matrices/' . $matrice->id) }}">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </form>
-                                    </td>
-                                @endif
-                            </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
+                @endif
             </div>
-            @if ($listMatrice instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                <div class="d-flex justify-content-center mt-2">
-                    {!! $listMatrice->links('pagination::bootstrap-4') !!}
+            <div class="card-body">
+                <div class="table-responsive-sm ">
+                    <table class="table table-striped table-sm ">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Code</th>
+                                <th class="text-center">délai</th>
+                                @canany(['matrice-edit', 'matrice-delete'])
+                                    <th class="text-right pr-4">Actions</th>
+                                @endcan
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listMatrice as $matrice)
+                                <tr>
+                                    <td class="text-center">{{ $matrice->id }}</td>
+                                    <td class="text-center"><span class="badge badge-success">{{ $matrice->name }}</span>
+                                    </td>
+                                    <td class="text-center">{{ $matrice->code }}</td>
+                                    <td class="text-center">{{ $matrice->delai }}</td>
+                                    @canany(['matrice-edit', 'matrice-delete'])
+                                        <td class="text-right">
+                                            <div class="d-inline p-2">
+                                                @can('matrice-edit')
+                                                    <button class="btn btn-primary btn-sm btnAction"
+                                                        onclick="openEditMatriceModal({{ $matrice->id }})"><i
+                                                            class="fa fa-edit"></i></button>
+                                                @endcan
+                                            </div>
+                                            @can('matrice-delete')
+                                                <form class="d-inline p-2 formDelete" method="POST"
+                                                    action="{{ url('/matrices/' . $matrice->id) }}">
+                                                    @csrf
+                                                    {{ @method_field('DELETE') }}
+                                                    <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
+                                                            class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    @endcan
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            @endif
+                @if ($listMatrice instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                    <div class="d-flex justify-content-center mt-2">
+                        {!! $listMatrice->links('pagination::bootstrap-4') !!}
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $(".formDelete").click(function(event) {
-                if(!confirm('Are you sure that you want to delete this matrice') ){
-                    event.preventDefault();
-                } 
+        </div>
+        <script>
+            $(document).ready(function() {
+                $(".formDelete").click(function(event) {
+                    if (!confirm('Are you sure that you want to delete this matrice')) {
+                        event.preventDefault();
+                    }
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             });
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        });
 
 
-        //_method:PATCH
-        function addMatriceBlade() {
-            $("#method").remove();
-            $('#modalModal').attr('action', '{{ url('/matrices') }}');
-            $("#modalModal")[0].reset();
-            $("#ModalTitle").text("Ajouter un matrice");
-            $('#modalEditMatrice').modal('show');
+            //_method:PATCH
+            function addMatriceBlade() {
+                $("#method").remove();
+                $('#modalModal').attr('action', '{{ url('/matrices') }}');
+                $("#modalModal")[0].reset();
+                $("#ModalTitle").text("Ajouter un matrice");
+                $('#modalEditMatrice').modal('show');
 
-        }
+            }
 
-        function openEditMatriceModal(id) {
-            $("#modalModal")[0].reset();
-            $("#ModalTitle").text("Modifier");
-            $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>");
-            //$("#password-confirm").hide();
-            var user_id = id;
-            $.get('/matrices/' + user_id + '/edit', function(data) {
-                data = JSON.parse(data);
-                $('#modalModal').attr('action', '{{ url('/matrices') }}' + "/" + data.id);
-                $("#name").val(data.name);
-                $("#code").val(data.code);
-                $("#delai").val(data.delai);
+            function openEditMatriceModal(id) {
+                $("#modalModal")[0].reset();
+                $("#ModalTitle").text("Modifier");
+                $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>");
+                //$("#password-confirm").hide();
+                var user_id = id;
+                $.get('/matrices/' + user_id + '/edit', function(data) {
+                    data = JSON.parse(data);
+                    $('#modalModal').attr('action', '{{ url('/matrices') }}' + "/" + data.id);
+                    $("#name").val(data.name);
+                    $("#code").val(data.code);
+                    $("#delai").val(data.delai);
+                })
+                $('#modalEditMatrice').modal('show');
+            }
+            document.getElementById("searchInput").addEventListener("keyup", e => {
+                $('table').preloader({
+                    text: 'Loading'
+                })
+                $.ajax({
+                    url: "{{ url('/matrices/search') }}",
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        buffer: $("#searchInput").val(),
+                    },
+                    success: function(response) {
+
+                        $(".card-body").html($(response).find(".card-body").html())
+                        $('table').preloader('remove')
+                    },
+                });
             })
-            $('#modalEditMatrice').modal('show');
-        }
-        document.getElementById("searchInput").addEventListener("keyup", e => {
-            $('table').preloader({
-                text: 'Loading'
-            })
-            $.ajax({
-                url: "{{ url('/matrices/search') }}",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    buffer: $("#searchInput").val(),
-                },
-                success: function(response) {
-
-                    $(".card-body").html($(response).find(".card-body").html())
-                    $('table').preloader('remove')
-                },
-            });
-        })
-    </script>
-@endsection
+        </script>
+    @endsection

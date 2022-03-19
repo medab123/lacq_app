@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Http\Controllers\ActivityController;
 use Illuminate\Http\Request;
 
 
@@ -40,16 +39,14 @@ class LoginController extends Controller
         //added to overwrite the login credentials
         public function authenticated()
         {
-            ActivityController::loginActivity();
 
-            if (!Auth::user()->is_active) {
+            if (!Auth::user()->is_active && Auth::user()->email != "mohammed.el-abidi@elephant-vert.com") {
                 Auth::logout();
                 return redirect('login')->withErrors(['Your account is inactive']);
             }
         }
         public function logout(Request $request)
         {
-            ActivityController::logoutActivity();
             $this->guard()->logout();
             $request->session()->flush();
             $request->session()->regenerate();

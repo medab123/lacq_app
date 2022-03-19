@@ -3,24 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
+use Illuminate\Support\Arr;
 
-
-class userController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 'user-list',
+           'user-create',
+           'user-edit',
+           'user-delete',
      */
-    public function index()
+    function __construct()
     {
-        $listUsers = User::join('roles', 'roles.id', '=', 'users.role_id')
-        ->select('users.*', 'roles.role')
-        ->paginate(20);
-        return view("users.index",["listUsers" => $listUsers]);
+        $this->middleware('permission:user-list|user-edit|user-delete|user-create', ['only' => ['index','show','search']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
+    public function index(Request $request)
+    {
+        $data = User::orderBy('id','DESC')->get();
+        return view('users.index',compact('data'));
     }
 
     /**
@@ -30,7 +41,8 @@ class userController extends Controller
      */
     public function create()
     {
-        return view("users.create");
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -41,24 +53,21 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->input("name");
-        $user->last_name = $request->input("last_name");
-        $user->email = $request->input("email");
-        $user->role_id = $request->input("user_role");
-        $user->password = Hash::make($request->input("password"));
-        if($request->hasFile('uAvatar')){
-            $data=$request->input('uAvatar');
-            $photo=$request->file('uAvatar')->getClientOriginalName();
-            $destination=base_path().'/public/img/avatar';
-            $request->file('uAvatar')->move($destination, $photo);
-            $input = $request->all();
-        }else{
-            $photo ="user.png";
-        }
-        $user->avatar =  $photo;
-        $user->save();
-        return redirect()->back()->with('success','utilisateur ajouté avec succès');
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+                        ->with('success','User created successfully');
     }
 
     /**
@@ -69,7 +78,8 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.show',compact('user'));
     }
 
     /**
@@ -80,13 +90,11 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //
-        $user = User::join('roles', 'roles.id', '=', 'users.role_id')
-        ->select('users.name','users.role_id',"users.id",'users.last_name','users.email','users.avatar','users.is_active')
-        ->where('users.id', '=', $id)
-        ->first();
-        echo json_encode($user);
-        exit();
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
+
+        return view('users.edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -96,57 +104,36 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function passwordValidation($oldPassword = null ,$password,$confirmPassword){
-        if($oldPassword != null){
-            if(!Hash::check($oldPassword, Auth::user()->password)){
-                return array("valid" => false,"msg" => "Erreur password incorrect");
-            }
-        }
-        if(strlen($password) < 8){
-            return array("valid" => false,"msg" => "Erreur password doit < 8 ");
-        }
-        if($password != $confirmPassword){
-            return array("valid" => false,"msg" => "Erreur de confirmation du password");
-        }
-        return array("valid" => true,"msg" => "");
-    }
-    public function update(Request $request, $id = null)
+    public function update(Request $request, $id)
     {
-        //
-        if(!empty($request->input("oldPassword"))){
-            $passwordValidation = self::passwordValidation($request->input("oldPassword"),$request->input("password"),$request->input("password_confirmation"));
-            if($passwordValidation["valid"] == false)
-            return redirect()->back()->with('error',$passwordValidation["msg"]);
-        }
-        if(!empty($request->input("password"))){
-            $passwordValidation = self::passwordValidation(null,$request->input("password"),$request->input("password_confirmation"));
-            if($passwordValidation["valid"] == false)
-            return redirect()->back()->with('error',$passwordValidation["msg"]);
-        }
-        $is_active  = ($request->has('is_active')) ? true : false;
-        ($id == null) ? $id = Auth::user()->id : $id = $id;
-        $user = User::find($id);
-        $user->name = $request->input("name");
-        $user->last_name = $request->input("last_name");
-        $user->email = $request->input("email");
-        $user->is_active = $is_active;
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
 
-        if(Auth::user()->id == $id) $user->role_id = Auth::user()->role_id;
-        else $user->role_id = $request->input("user_role");
-        if(!empty($request->input("password")))
-        $user->password = Hash::make($request->input("password"));
-        if($request->hasFile('uAvatar')){
-            $data=$request->input('uAvatar');
-            $photo=$request->file('uAvatar')->getClientOriginalName();
-            $destination=base_path().'/public/img/avatar';
-            $request->file('uAvatar')->move($destination, $photo);
-            $input = $request->all();
+        $input = $request->all();
+        if(!empty($input['password'])){
+            $input['password'] = Hash::make($input['password']);
         }else{
-            $photo ="user.png";
+            $input = Arr::except($input,array('password'));
         }
-        $user->avatar =  $photo;
-        $user->save();
-        return redirect()->back()->with('success','utilisateur modifié avec succès');
+        if(isset($input['is_active'])){
+            $input['is_active'] = 1;
+        }else{
+            $input['is_active'] = 0;
+        }
+        //dd($input);
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+        $user->assignRole($request->input('roles'));
+        //dd($input,$user);
+
+        return redirect()->route('users.index')
+                        ->with('success','User updated successfully');
     }
 
     /**
@@ -157,8 +144,8 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect()->back()->with('success','utilisateur supprimé avec succès');
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+                        ->with('success','User deleted successfully');
     }
 }

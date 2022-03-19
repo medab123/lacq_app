@@ -23,6 +23,10 @@ class AnalyseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:analyses-list', ['only' => ['index','export','import','update','refresh']]);
+    }
     public function index(Request $request)
     {
 
@@ -81,6 +85,7 @@ class AnalyseController extends Controller
             ->paginate(8);
 
         }
+        
 
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 

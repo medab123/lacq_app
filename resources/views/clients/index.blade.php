@@ -74,10 +74,10 @@
     @endif
     <div class="card" style="background-color: rgb(255, 255, 255)">
         <div class="card-header">{{ __('La liste des Clients') }}
-            @if (Auth::user()->role_id <= 2)
+            @can('client-create')
                 <button class="btn btn-success btn-sm float-right" onclick="addClientBlade()">Ajouter un nouveau
                     client</button>
-            @endif
+            @endcan
         </div>
         <div class="card-body">
             <div class="table-responsive-sm ">
@@ -88,84 +88,87 @@
                             <th class="text-center">Adresse</th>
                             <th class="text-center ">Exploiteur</th>
                             <th class="text-center ">Organisme</th>
-                            @if (Auth::user()->role_id <= 2 || Auth::user()->role_id == 4)
+                            @canany(['client-delete', 'client-edit'])
                                 <th class="text-right pr-4">Actions</th>
-                            @endif
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($listClients as $client)
-                            <tr>
-                                <td class="text-center"><span class="badge badge-success">{{ $client->cin_rc }}</span>
-                                </td>
-                                <td class="text-center">{{ $client->address }}</td>
-                                <td class="text-center">{{ $client->exploiteur }}</td>
-                                <td class="text-center">{{ $client->organisme }}</td>
-                                @if (Auth::user()->role_id <= 2 || Auth::user()->role_id == 4)
-                                    <td class="text-right">
-                                        <div class="d-inline p-2">
-                                            <button class="btn btn-primary btn-sm btnAction"
-                                                onclick="openEditClientModal({{ $client->id }})"><i
-                                                    class="fa fa-edit"></i></button>
-                                        </div>
-                                        <form class="d-inline p-2 formDelete" method="POST"
-                                            action="{{ url('/clients/' . $client->id) }}">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </form>
-                                    </td>
                                 @endif
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($listClients as $client)
+                                <tr>
+                                    <td class="text-center"><span class="badge badge-success">{{ $client->cin_rc }}</span>
+                                    </td>
+                                    <td class="text-center">{{ $client->address }}</td>
+                                    <td class="text-center">{{ $client->exploiteur }}</td>
+                                    <td class="text-center">{{ $client->organisme }}</td>
+                                    @canany(['client-delete', 'client-edit'])
+                                        <td class="text-right">
+                                            @can('client-edit')
+                                                <div class="d-inline p-2">
+                                                    <button class="btn btn-primary btn-sm btnAction"
+                                                        onclick="openEditClientModal({{ $client->id }})"><i
+                                                            class="fa fa-edit"></i></button>
+                                                </div>
+                                            @endcan
+                                            @can('client-delete')
+                                                <form class="d-inline p-2 formDelete" method="POST"
+                                                    action="{{ url('/clients/' . $client->id) }}">
+                                                    @csrf
+                                                    {{ @method_field('DELETE') }}
+                                                    <button type="supmit" class="btn btn-danger btn-sm btnAction"><i
+                                                            class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    @endcan
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>
 
-    <div class="d-flex justify-content-center mt-2">
-        {!! $listClients->links('pagination::bootstrap-4') !!}
-        <script>
-            $(document).ready(function() {
-                $(".formDelete").click(function(event) {
-                    if(!confirm('Are you sure that you want to delete this client') ){
-                        event.preventDefault();
-                    } 
+        <div class="d-flex justify-content-center mt-2">
+            {!! $listClients->links('pagination::bootstrap-4') !!}
+            <script>
+                $(document).ready(function() {
+                    $(".formDelete").click(function(event) {
+                        if (!confirm('Are you sure that you want to delete this client')) {
+                            event.preventDefault();
+                        }
+                    });
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
                 });
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-            });
 
-            //_method:PATCH
-            function addClientBlade() {
-                $("#modalModal")[0].reset();
-                $("#ModalTitle").text("Ajouter un client");
-                $('#modalEditClient').modal('show');
-            }
+                //_method:PATCH
+                function addClientBlade() {
+                    $("#modalModal")[0].reset();
+                    $("#ModalTitle").text("Ajouter un client");
+                    $('#modalEditClient').modal('show');
+                }
 
-            function openEditClientModal(id) {
-                $("#modalModal")[0].reset();
-                $("#ModalTitle").text("Modifier");
-                $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>");
-                //$("#password-confirm").hide();
-                var user_id = id;
-                $.get('/clients/' + user_id + '/edit', function(data) {
-                    data = JSON.parse(data);
-                    $('#modalModal').attr('action', '{{ url('/clients') }}' + "/" + data.id);
-                    $("#cin_rc").val(data.cin_rc);
-                    $("#address").val(data.address);
-                    $("#exploiteur").val(data.exploiteur);
-                    $("#organisme").val(data.organisme);
-                    $("#ref_client").val(data.ref_client);
-                })
-                $('#modalEditClient').modal('show');
-            }
-        </script>
-    @endsection
+                function openEditClientModal(id) {
+                    $("#modalModal")[0].reset();
+                    $("#ModalTitle").text("Modifier");
+                    $('#modalModal').append("<input id='method' type='hidden' name='_method' value='PATCH'/>");
+                    //$("#password-confirm").hide();
+                    var user_id = id;
+                    $.get('/clients/' + user_id + '/edit', function(data) {
+                        data = JSON.parse(data);
+                        $('#modalModal').attr('action', '{{ url('/clients') }}' + "/" + data.id);
+                        $("#cin_rc").val(data.cin_rc);
+                        $("#address").val(data.address);
+                        $("#exploiteur").val(data.exploiteur);
+                        $("#organisme").val(data.organisme);
+                        $("#ref_client").val(data.ref_client);
+                    })
+                    $('#modalEditClient').modal('show');
+                }
+            </script>
+        @endsection

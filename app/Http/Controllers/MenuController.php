@@ -14,6 +14,13 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:menu-list|menu-edit|menu-delete', ['only' => ['index','show','search']]);
+         $this->middleware('permission:menu-create', ['only' => ['create','store']]);
+         $this->middleware('permission:menu-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:menu-delete', ['only' => ['destroy']]);
+    }
     public static function index()
     {
         //
@@ -50,8 +57,8 @@ class MenuController extends Controller
         $menu= new Menu();
         $menu->name = $request->input("name");
         $menu->matrice_id = $request->input("matrice");
-        $menu->prix_ht = $request->input("prix_ht");     
-        $menu->prix_supv = $request->input("prix_supv");   
+        $menu->prix_ht = $request->input("prix_ht");
+        $menu->prix_supv = $request->input("prix_supv");
         $menu->save();
         return redirect()->back()->with('success','Menu ajouté avec succès');
     }
@@ -96,8 +103,8 @@ class MenuController extends Controller
         $menu= Menu::find($id);
         $menu->name = $request->input("name");
         $menu->matrice_id = $request->input("matrice");
-        $menu->prix_ht = $request->input("prix_ht");     
-        $menu->prix_supv = $request->input("prix_supv");   
+        $menu->prix_ht = $request->input("prix_ht");
+        $menu->prix_supv = $request->input("prix_supv");
         $menu->save();
         return redirect()->back()->with('success','Menu modifié avec succès');
     }
