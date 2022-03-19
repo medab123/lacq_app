@@ -117,11 +117,11 @@ class Archivos
                         $calcul=($calcul<0)? 0:$calcul;
                        if($r<=$min){
                            echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$calcul);
-                       }
-                       elseif($r>$min && $r<=$max){
+                         }
+                        elseif($r>$min && $r<=$max){
                            echo str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$calcul);
                        }
-                       elseif($r>$max){
+                        elseif($r>$max){
                         echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$calcul);
                     }
 
@@ -130,4 +130,20 @@ class Archivos
                 }
 
             }
+
+            public static function EAP2($value,$min,$max){
+                $X = $value*100/($max+$min);
+                $barre = $X*90/100;
+                
+                if($value < $min){
+                    return str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
+                }else if($value >= $min && $value <= $max){
+                    return str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
+                }else if($value > $max){
+                    return str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
+                }
+            }
+
+
+
 }
