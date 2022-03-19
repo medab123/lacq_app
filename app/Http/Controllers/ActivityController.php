@@ -31,11 +31,9 @@ class ActivityController extends Controller
         $Activitys = Log::join("users","users.id","=","logs.user_id")
         ->select("logs.*","users.name","users.last_name")
         ->orderBy('id', 'desc')
-        ->paginate(10);
+        ->paginate(50);
         //dd($Activitys);
         $Activitys->setPath('/activitys');
         return view("activitys.index",["Activitys" => $Activitys]);
     }
-
-
 }
