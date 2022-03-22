@@ -134,7 +134,6 @@ class Archivos
             public static function EAP2($value,$min,$max){
                 $X = $value*100/($max+$min);
                 $barre = $X*90/100;
-                
                 if($value < $min){
                     return str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
                 }else if($value >= $min && $value <= $max){
