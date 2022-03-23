@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>

@@ -170,29 +170,28 @@
         </tr>
     </table>
     <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
-
         <tr class="head bordered">
-            <th style="width:151px;">Paramètres</th>
-            <th style="width:39px;">Sym.</th>
-            <th class=" bordered" style="width:50px;">Unité</th>
-            <th class=" bordered" style="width:91px;">Résultats</th>
-            <th class=" bordered" style="width:70px;">Niveau souhaitable</th>
-            <th class=" bordered">Appréciation</th>
+              <th style="width:151px;">Paramètres</th>
+              <th style="width:39px;">Sym.</th>
+              <th class=" bordered" style="width:50px;">Unité</th>
+              <th class=" bordered" style="width:91px;">Résultats</th>
+              <th class=" bordered" style="width:70px;">Niveau souhaitable</th>
+              <th class=" bordered"> Appréciation</th>
         </tr>
+ </table>
+ <table style="width:100%;font-size:10px;" >
+    <tr style="font-size:10px;">
+        <td style="width:114px;"></td>
+        <td style="width:30px;"></td>
+        <td style="width:42px;"></td>
+        <td style=" width:162px;"></td>
 
+        <td  style="width:70px;text-align:center; color:orange; font-weight: 900;">Faible</td>
+        <td  style="width:70px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
+        <td  style="text-align:center; color:red; font-weight: 900;">Elevé</td>
+  </tr>
     </table>
-    <table style="width:100%;font-size:10px;">
-        <tr style="font-size:10px;">
-            <td style="width:114px;"></td>
-            <td style="width:30px;"></td>
-            <td style="width:42px;"></td>
-            <td style=" width:162px;"></td>
 
-            <td style="width:70px;text-align:center; color:orange; font-weight: 900;">Faible</td>
-            <td style="width:70px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
-            <td style="text-align:center; color:red; font-weight: 900;">Elevé</td>
-        </tr>
-    </table>
     <table style="width:100%;font-size:9px;border:1px solid black;">
         <tr>
             <td style="width:123px;">pH H2O à 25°C <h6 style='color:red;'>(*)</h6>

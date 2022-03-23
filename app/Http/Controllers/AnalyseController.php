@@ -193,7 +193,7 @@ class AnalyseController extends Controller
             $analyse = DB::table($table)
             ->where('id', '=', $request["id"][$i])
             ->update($analyseData);
-            ActivityController::updateActivity(new Analys(),"analyse ".$request["id"][$i]." update");
+            //ActivityController::updateActivity(new Analys(),"analyse ".$request["id"][$i]." update");
         }
         return redirect()->back()->with('success','Les analyses modifiée avec succès')->with('selectedMatrice', $request["selectedMatrice"]);
     }

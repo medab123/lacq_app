@@ -32,6 +32,8 @@ class CreateAdminUserSeeder extends Seeder
         $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
+        User::find(2)->assignRole([$role->id]);
+        User::find(3)->assignRole([$role->id]);
         $role = Role::create(['id' => 2,'name' => 'Admin']);
         $role = Role::create(['id' => 3,'name' => 'Responsable']);
         $role = Role::create(['id' => 4,'name' => 'Coordinateur']);
