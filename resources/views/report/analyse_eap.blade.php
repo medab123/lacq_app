@@ -1016,8 +1016,11 @@
                         @php
                         //(NNO3+NNH4)/(Ca*1,4)
                       $X = ((Archivos::ft3nb($analyse_data->NO3,true)*5)+(Archivos::ft3nb($analyse_data->NH4,true)*5))/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
-                      
-                      if ($X<0.4 || $X>0.15){
+                      if ($X==0) {
+                         echo $X;
+                      }
+                      else {
+                          if ($X<0.4 || $X>0.15){
   
                           echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
                       }
@@ -1037,7 +1040,9 @@
                       }
                       else {
                       echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';  
+                      } 
                       }
+                     
                       @endphp
                       </tr>
                       <tr>
@@ -1046,8 +1051,10 @@
                         @php
                         //'=(K*1,2)/(Ca*1,4)
                       $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
-                      
-                      if ($X>0.9){
+                      if ($X==0) {
+                         echo $X;
+                      }else {
+                            if ($X>0.9){
   
                           echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
                       }
@@ -1067,7 +1074,9 @@
                       }
                       else {
                       echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';  
+                      }  
                       }
+                  
                       @endphp
                       </tr>
                       <tr>
@@ -1075,9 +1084,12 @@
                         <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
                         @php
                         //(K*1,2)/(Mg*1,66)
+                        
                       $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
-                      
-                      if ($X>2.5){
+                      if ($X==0) {
+                         echo $X;
+                      }else {
+                           if ($X>2.5){
   
                           echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
                       }
@@ -1098,6 +1110,8 @@
                       else {
                       echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';  
                       }
+                      }
+                     
                       @endphp
 
                       </tr>
@@ -1108,8 +1122,11 @@
                         @php
                         //(Ca*1,4)/(Mg*1,66)
                       $X = (Archivos::ft3nb($analyse_data->Ca,true)*1.4*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
-                      
-                      if ($X<1.5){
+                      if ($X==0) {
+                         echo $X;
+                      }
+                      else {
+                           if ($X<1.5){
   
                           echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
                       }
@@ -1130,6 +1147,8 @@
                       else {
                       echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';  
                       }
+                      }
+                     
                       @endphp
 
                       </tr>

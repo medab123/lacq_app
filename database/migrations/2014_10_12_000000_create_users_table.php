@@ -57,7 +57,7 @@ class CreateUsersTable extends Migration
                     "avatar" => "user.png"
                 ),
                 array(
-                    'id' => '5',
+                    'id' > '5',
                     'name' => "amine",
                     "last_name" => "bouslamti",
                     "email" => "amine.bouslamti@elephant-vert.com",
