@@ -864,183 +864,163 @@
                     echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
                 }
 
-            @endphp
+                    //''=(NNO3+NNH4)/(Ca*1,4)
 
-        </tr>
-        <tr>
-            <td>N / K2O</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            @php
-                // '=(NNO3+NNH4)/(K*1,2)
-                $X = (5 * (Archivos::ft3nb($analyse_data->NO3, true) + Archivos::ft3nb($analyse_data->NH4, true))) / (Archivos::ft3nb($analyse_data->K, true) * 1.2 * 5);
+                  @endphp
+                    </tr>
+                    <tr>
+                        <td >N / CaO</td>
+                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+                        @php
+                        //(NNO3+NNH4)/(Ca*1,4)
+                      $X = ((Archivos::ft3nb($analyse_data->NO3,true)*5)+(Archivos::ft3nb($analyse_data->NH4,true)*5))/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
+                      if ($X==0) {
+                         echo $X;
+                      }
+                      else {
+                          if ($X<0.4 || $X>0.15){
 
-                if ($X < 0.5) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X > 0.8) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 0.22 || $X > 1.33) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
+                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X>0.65){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X>0.65){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      }
 
-            @endphp
-        </tr>
-        <tr>
-            <td>N / P2O5</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            @php
-                //''=(NNO3+NNH4)/(P*2,29)
-                $X = ((Archivos::ft3nb($analyse_data->NO3, true) + Archivos::ft3nb($analyse_data->NH4, true)) * 5) / ((Archivos::ft3nb($analyse_data->P, true) * 2.29 * 5 * 31) / 96);
+                      @endphp
+                      </tr>
+                      <tr>
+                        <td >K2O / CaO</td>
+                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+                        @php
+                        //'=(K*1,2)/(Ca*1,4)
+                      $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
+                      if ($X==0) {
+                         echo $X;
+                      }else {
+                            if ($X>0.9){
 
-                //dd($X,$analyse_data->NO3*5,$analyse_data->NH4*5,$analyse_data->P*5*31/96);
-                if ($X < 5) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X > 10) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X > 10) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
+                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X<0.6){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X<0.3 || $X>1.6){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      }
 
-                //''=(NNO3+NNH4)/(Ca*1,4)
+                      @endphp
+                      </tr>
+                      <tr>
+                        <td >K2O / MgO</td>
+                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+                        @php
+                        //(K*1,2)/(Mg*1,66)
 
-            @endphp
-        </tr>
-        <tr>
-            <td>N / CaO</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            @php
-                //(NNO3+NNH4)/(Ca*1,4)
-                $X = (Archivos::ft3nb($analyse_data->NO3, true) * 5 + Archivos::ft3nb($analyse_data->NH4, true) * 5) / (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5);
+                      $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
+                      if ($X==0) {
+                         echo $X;
+                      }else {
+                           if ($X>2.5){
 
-                if ($X < 0.4 || $X > 0.15) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X > 0.65) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X > 0.65) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-            @endphp
-        </tr>
-        <tr>
-            <td>K2O / CaO</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            @php
-                //'=(K*1,2)/(Ca*1,4)
-                $X = (Archivos::ft3nb($analyse_data->K, true) * 1.2 * 5) / (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5);
+                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X<2){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X<0.72 || $X>5.45){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      }
 
-                if ($X > 0.9) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 0.6) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 0.3 || $X > 1.6) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-            @endphp
-        </tr>
-        <tr>
-            <td>K2O / MgO</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            @php
-                //(K*1,2)/(Mg*1,66)
-                $X = (Archivos::ft3nb($analyse_data->K, true) * 1.2 * 5) / (Archivos::ft3nb($analyse_data->Mg, true) * 1.66 * 5);
+                      @endphp
 
-                if ($X > 2.5) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 2) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 0.72 || $X > 5.45) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-            @endphp
+                      </tr>
+                      <tr>
+                        <td >CaO / MgO</td>
+                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
 
-        </tr>
-        <tr>
-            <td>CaO / MgO</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+                        @php
+                        //(Ca*1,4)/(Mg*1,66)
+                      $X = (Archivos::ft3nb($analyse_data->Ca,true)*1.4*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
+                      if ($X==0) {
+                         echo $X;
+                      }
+                      else {
+                           if ($X<1.5){
 
-            @php
-                //(Ca*1,4)/(Mg*1,66)
-                $X = (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5) / (Archivos::ft3nb($analyse_data->Mg, true) * 1.66 * 5);
+                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      //
+                      if ($X<1.18){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
 
-                if ($X < 1.5) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-                //
-                if ($X < 1.18) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
+                      if ($X<0.18){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      }
 
-                if ($X < 0.18) {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                } else {
-                    echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                }
-            @endphp
+                      @endphp
+     echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
 
-        </tr>
-    </table>
-    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px" width="500px">
-    <p class="text" style="font-size:8px;"><strong> DE PAGE<br>
-            ------------------------------<br>
-            Laboratoire LACQ <br>
-            AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
-            Tel:+212 535 52 94 01 <br>
-            contact.lacq@elephant-vert.com
-    </p> </strong>
+                      if ($X<0.18){
+                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                      }
+                      else {
+                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                      }
+                      }
 
-</body>
-
-</html>
+                      @endphp
+>>>>>>> 156b2d26e0acd6b388de867bfda2e9897b67af72
