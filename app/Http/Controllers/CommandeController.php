@@ -26,7 +26,16 @@ class CommandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:commande-list|commande-valider|commande-rejter|commande-edit|commande-delete', ['only' => ['index','show','search','getCommandesWhereState']]);
+         $this->middleware('permission:commande-create', ['only' => ['create','store']]);
+         $this->middleware('permission:commande-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:commande-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:commande-valider', ['only' => ['valider']]);
+         $this->middleware('permission:commande-reject', ['only' => ['reject']]);
 
+    }
     public static function index()
     {
         //
@@ -138,7 +147,6 @@ class CommandeController extends Controller
             }catch(\Exception $e){
                 $mailError = " [lacq-app not connected with serveur mail]";
             }
-            ActivityController::addActivity(new Commande(),$commande->id);
         }
         return redirect()->back()->with('success','Commande ajoutée avec succès'.$mailError);
     }
@@ -246,19 +254,18 @@ class CommandeController extends Controller
             $destination=base_path().'/public/img/commande/ameo';
             $request->file('image_1')->move($destination, $img_1);
         }else{
-            $img_1 = NULL;
+            $img_1 = $commande->img_1;
         }
         if($request->hasFile('image_2')){
             $img_2=md5($request->file('image_2')->getClientOriginalName(). time()).".".$request->file('image_2')->extension();
             $destination=base_path().'/public/img/commande/ameo';
             $request->file('image_2')->move($destination, $img_2);
         }else{
-            $img_2 = NULL;
+            $img_2 = $commande->img_2;
         }
         $commande->img_1 = $img_1;
         $commande->img_2 = $img_2;
         $commande->save();
-        ActivityController::updateActivity(new Commande(),$id);
         return redirect()->back()->with('success','Commande modifiée avec succès');
 
 
@@ -275,7 +282,6 @@ class CommandeController extends Controller
         //
         $commande = Commande::find($id);
         $commande->delete();
-        ActivityController::deleteActivity(new Commande(),$id);
         return response()->json(['status' => true, 'message' =>'Commande supprimée avec succès']);
 
     }
@@ -400,7 +406,6 @@ class CommandeController extends Controller
                     ]);
                 }
             }
-            ActivityController::CommandeValider($id);
             try{
                 self::notifCommandeValider($id);
             }catch(\Exception $e){
@@ -436,7 +441,6 @@ class CommandeController extends Controller
                 DB::table($analyse_table)->where("commande_id",$commande->id)->delete();
             }
         }
-        ActivityController::CommandeRejter($commande_id);
         return response()->json(['status' => true,'message' => 'Commande rejetée avec succès']);
     }
     public function menuOfMatrice($matrice_id){

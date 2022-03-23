@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:dashboard-list', ['only' => ['index']]);
+    }
     public function index(){
         $listCommandes  = Commande::join('clients', 'clients.id', '=', 'commandes.client_id')
         ->join('commercials', 'commercials.id', '=', 'commandes.commercial_id')
@@ -34,6 +38,7 @@ class DashboardController extends Controller
             $row->tempReel = $tempReel;
         }
         //dd($listCommandes);
+        $listCommandes->setPath('/dashboard');
 
         return view("dashboard.index",["listCommandes" => $listCommandes]);
     }

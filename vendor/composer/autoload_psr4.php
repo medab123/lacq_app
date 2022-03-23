@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
@@ -81,6 +81,7 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/laravel-cors/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
+    'Fideloper\\Proxy\\' => array($vendorDir . '/fideloper/proxy/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Facade\\Ignition\\' => array($vendorDir . '/facade/ignition/src'),
     'Facade\\IgnitionContracts\\' => array($vendorDir . '/facade/ignition-contracts/src'),
@@ -97,6 +98,7 @@ return array(
     'Database\\Factories\\' => array($baseDir . '/database/factories'),
     'Cron\\' => array($vendorDir . '/dragonmantank/cron-expression/src/Cron'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'Collective\\Html\\' => array($vendorDir . '/laravelcollective/html/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),

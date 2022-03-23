@@ -31,7 +31,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="/login">
                         @csrf
 
                         <div class="row mb-3">
@@ -94,10 +94,8 @@
 </div>
 <script>
     $('form').on('submit', function(e) {
-
         if($("#email").val().includes("@elephant-vert.com") === false){
             $("#email").val($("#email").val()+"@elephant-vert.com")
-            //e.preventDefault();
         }
     });
 </script>

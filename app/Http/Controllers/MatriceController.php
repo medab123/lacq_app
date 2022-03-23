@@ -14,6 +14,13 @@ class MatriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:matrice-list|matrice-edit|matrice-delete', ['only' => ['index','show','search']]);
+         $this->middleware('permission:matrice-create', ['only' => ['create','store']]);
+         $this->middleware('permission:matrice-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:matrice-delete', ['only' => ['destroy']]);
+    }
     public static function index()
     {
         //
@@ -48,7 +55,7 @@ class MatriceController extends Controller
         $matrice= new Matrice();
         $matrice->name = $request->input("name");
         $matrice->code = $request->input("code");
-        $matrice->delai = $request->input("delai");       
+        $matrice->delai = $request->input("delai");
         $matrice->save();
         return redirect()->back()->with('success','Matrice ajoutée avec succès');
     }
@@ -95,7 +102,7 @@ class MatriceController extends Controller
         $matrice=  Matrice::find($id);
         $matrice->name = $request->input("name");
         $matrice->code = $request->input("code");
-        $matrice->delai = $request->input("delai");       
+        $matrice->delai = $request->input("delai");
         $matrice->save();
         return redirect()->back()->with('success','Matrice modifiée avec succès');
 

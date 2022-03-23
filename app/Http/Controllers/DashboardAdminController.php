@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Commande;
-
-use App\Models\Commercial;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,7 +20,6 @@ class DashboardAdminController extends Controller
         ->join("commercials","commandes.commercial_id","=","commercials.id")
         ->select('commercials.name as commercial', DB::raw("count(*) as a"),DB::raw('YEAR(commandes.date_reception) as y'))->groupBy('commercials.name')->groupBy('y')->get();
         $AmountCommercial->transform(function ($AmountCommercial) {
-
             return [
                 "y" => $AmountCommercial->y,
                 $AmountCommercial->commercial => $AmountCommercial->a,
