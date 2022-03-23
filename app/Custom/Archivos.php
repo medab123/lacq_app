@@ -91,7 +91,7 @@ class Archivos
 
             }
 
-            public static function EAP($r,$min,$max,$prifix = null){
+            public static function EAP2($r,$min,$max,$prifix = null){
 
                 //SI(R25<=$L25-($M25-$L25)
 
@@ -131,16 +131,16 @@ class Archivos
 
             }
 
-            public static function EAP2($value,$min,$max){
+            public static function EAP($value,$min,$max){
                 $X = $value*100/($max+$min);
-                $barre = $X*90/100;
-                
+                if($X>100) $X=100;
+                $barre = (int)$X*88/100;
                 if($value < $min){
-                    return str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
+                    echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
                 }else if($value >= $min && $value <= $max){
-                    return str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
+                    echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
                 }else if($value > $max){
-                    return str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
+                    echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
                 }
             }
 
