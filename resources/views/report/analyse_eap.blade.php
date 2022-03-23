@@ -171,25 +171,25 @@
     </table>
     <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
         <tr class="head bordered">
-              <th style="width:151px;">Paramètres</th>
-              <th style="width:39px;">Sym.</th>
-              <th class=" bordered" style="width:50px;">Unité</th>
-              <th class=" bordered" style="width:91px;">Résultats</th>
-              <th class=" bordered" style="width:70px;">Niveau souhaitable</th>
-              <th class=" bordered"> Appréciation</th>
+            <th style="width:151px;">Paramètres</th>
+            <th style="width:39px;">Sym.</th>
+            <th class=" bordered" style="width:50px;">Unité</th>
+            <th class=" bordered" style="width:91px;">Résultats</th>
+            <th class=" bordered" style="width:70px;">Niveau souhaitable</th>
+            <th class=" bordered"> Appréciation</th>
         </tr>
- </table>
- <table style="width:100%;font-size:10px;" >
-    <tr style="font-size:10px;">
-        <td style="width:114px;"></td>
-        <td style="width:30px;"></td>
-        <td style="width:42px;"></td>
-        <td style=" width:162px;"></td>
+    </table>
+    <table style="width:100%;font-size:10px;">
+        <tr style="font-size:10px;">
+            <td style="width:114px;"></td>
+            <td style="width:30px;"></td>
+            <td style="width:42px;"></td>
+            <td style=" width:162px;"></td>
 
-        <td  style="width:70px;text-align:center; color:orange; font-weight: 900;">Faible</td>
-        <td  style="width:70px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
-        <td  style="text-align:center; color:red; font-weight: 900;">Elevé</td>
-  </tr>
+            <td style="width:70px;text-align:center; color:orange; font-weight: 900;">Faible</td>
+            <td style="width:70px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
+            <td style="text-align:center; color:red; font-weight: 900;">Elevé</td>
+        </tr>
     </table>
 
     <table style="width:100%;font-size:9px;border:1px solid black;">
@@ -864,163 +864,141 @@
                     echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
                 }
 
-                    //''=(NNO3+NNH4)/(Ca*1,4)
+                //''=(NNO3+NNH4)/(Ca*1,4)
 
-                  @endphp
-                    </tr>
-                    <tr>
-                        <td >N / CaO</td>
-                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-                        @php
-                        //(NNO3+NNH4)/(Ca*1,4)
-                      $X = ((Archivos::ft3nb($analyse_data->NO3,true)*5)+(Archivos::ft3nb($analyse_data->NH4,true)*5))/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
-                      if ($X==0) {
-                         echo $X;
-                      }
-                      else {
-                          if ($X<0.4 || $X>0.15){
+            @endphp
+        </tr>
+        <tr>
+            <td>N / CaO</td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+            @php
+                //(NNO3+NNH4)/(Ca*1,4)
+                $X = (Archivos::ft3nb($analyse_data->NO3, true) * 5 + Archivos::ft3nb($analyse_data->NH4, true) * 5) / (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5);
+                if ($X == 0) {
+                    echo $X;
+                } else {
+                    if ($X < 0.4 || $X > 0.15) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                    //
+                    if ($X > 0.65) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                    //
+                    if ($X > 0.65) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                }
 
-                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X>0.65){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X>0.65){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      }
+            @endphp
+        </tr>
+        <tr>
+            <td>K2O / CaO</td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+            @php
+                //'=(K*1,2)/(Ca*1,4)
+$X = (Archivos::ft3nb($analyse_data->K, true) * 1.2 * 5) / (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5);
+if ($X == 0) {
+    echo $X;
+} else {
+    if ($X > 0.9) {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+    } else {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+    }
+    //
+    if ($X < 0.6) {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+    } else {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+    }
+    //
+    if ($X < 0.3 || $X > 1.6) {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+    } else {
+        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                }
 
-                      @endphp
-                      </tr>
-                      <tr>
-                        <td >K2O / CaO</td>
-                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-                        @php
-                        //'=(K*1,2)/(Ca*1,4)
-                      $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Ca,true)*1.4*5);
-                      if ($X==0) {
-                         echo $X;
-                      }else {
-                            if ($X>0.9){
+            @endphp
+        </tr>
+        <tr>
+            <td>K2O / MgO</td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+            @php
+                //(K*1,2)/(Mg*1,66)
 
-                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X<0.6){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X<0.3 || $X>1.6){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      }
+                $X = (Archivos::ft3nb($analyse_data->K, true) * 1.2 * 5) / (Archivos::ft3nb($analyse_data->Mg, true) * 1.66 * 5);
+                if ($X == 0) {
+                    echo $X;
+                } else {
+                    if ($X > 2.5) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                    //
+                    if ($X < 2) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                    //
+                    if ($X < 0.72 || $X > 5.45) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                }
 
-                      @endphp
-                      </tr>
-                      <tr>
-                        <td >K2O / MgO</td>
-                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-                        @php
-                        //(K*1,2)/(Mg*1,66)
+            @endphp
 
-                      $X = (Archivos::ft3nb($analyse_data->K,true)*1.2*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
-                      if ($X==0) {
-                         echo $X;
-                      }else {
-                           if ($X>2.5){
+        </tr>
+        <tr>
+            <td>CaO / MgO</td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
 
-                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X<2){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X<0.72 || $X>5.45){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      }
+            @php
+                //(Ca*1,4)/(Mg*1,66)
+                $X = (Archivos::ft3nb($analyse_data->Ca, true) * 1.4 * 5) / (Archivos::ft3nb($analyse_data->Mg, true) * 1.66 * 5);
+                if ($X == 0) {
+                    echo $X;
+                } else {
+                    if ($X < 1.5) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                    //
+                    if ($X < 1.18) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
 
-                      @endphp
+                    if ($X < 0.18) {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
+                    } else {
+                        echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+                    }
+                }
 
-                      </tr>
-                      <tr>
-                        <td >CaO / MgO</td>
-                        <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
+            @endphp
+            echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">
+                Défavorable</td>';
+            }
+            else {
+            echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
+            }
 
-                        @php
-                        //(Ca*1,4)/(Mg*1,66)
-                      $X = (Archivos::ft3nb($analyse_data->Ca,true)*1.4*5)/(Archivos::ft3nb($analyse_data->Mg,true)*1.66*5);
-                      if ($X==0) {
-                         echo $X;
-                      }
-                      else {
-                           if ($X<1.5){
-
-                          echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                          echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      //
-                      if ($X<1.18){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-
-                      if ($X<0.18){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      }
-
-                      @endphp
-     echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-
-                      if ($X<0.18){
-                      echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>';
-                      }
-                      else {
-                      echo  '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>';
-                      }
-                      }
-
-                      @endphp
->>>>>>> 156b2d26e0acd6b388de867bfda2e9897b67af72
+            if ($X<0.18){
+                echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black; color:red;">Défavorable</td>'
+                ; } else {
+                echo '<td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>' ;
+                } } @endphp>>>>>>> 156b2d26e0acd6b388de867bfda2e9897b67af72
