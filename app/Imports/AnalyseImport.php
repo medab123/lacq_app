@@ -20,24 +20,29 @@ class AnalyseImport implements ToCollection,WithHeadingRow
     public  $analyse_table = null;
     public function getTableName($matrice_id){
         $analyse_table = Matrice::find($matrice_id)['name'];
-        $analyse_table = strtolower($analyse_table); 
-        $analyse_table = str_replace(' ', '_', $analyse_table); 
+        $analyse_table = strtolower($analyse_table);
+        $analyse_table = str_replace(' ', '_', $analyse_table);
         $analyse_table = "analyse_".$analyse_table;
         $this->analyse_table = $analyse_table;
     }
     public function collection(Collection $collection)
     {
+        //dd($collection);
         foreach ($collection as $key => $value) {
             $code_commande = $collection[$key]["code_commande"];
-            if(Commande::where('code_commande', $code_commande)->exists()){
-                $commande_id = Commande::where("code_commande","=",$code_commande)->first()["id"];
-                unset($collection[$key]["code_commande"]);
-                $collection[$key]->put("commande_id",$commande_id);
+            if(!empty($code_commande)){
+                if(Commande::where('code_commande', $code_commande)->exists()){
+                    $commande_id = Commande::where("code_commande","=",$code_commande)->first()["id"];
+                    unset($collection[$key]["code_commande"]);
+                    $collection[$key]->put("commande_id",$commande_id);
+                }else{
+                    throw new \ErrorException('Commande n\'appartien pas a l\'analyse selectione');
+                    //unset($collection[$key]);
+                }
+
             }else{
-                throw new \ErrorException('Commande n\'appartien pas a l\'analyse selectione');
-                //unset($collection[$key]);
+                unset($collection[$key]);
             }
-            
             //array_unshift($collection[$key],["commande_id" => 1]);
         }
         //dd($collection);
@@ -50,16 +55,16 @@ class AnalyseImport implements ToCollection,WithHeadingRow
                     }else{
                         DB::table($this->analyse_table)->insert($row);
                     }
-                }else{ 
+                }else{
                     throw new \ErrorException('Commande not valide');
                 }
             }else{
                 throw new \ErrorException('Commande not found');
             }
-            
-            
+
+
         }
-        
+
 
         //dd($collection->toArray());
     }

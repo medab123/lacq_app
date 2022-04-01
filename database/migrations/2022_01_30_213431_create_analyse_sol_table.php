@@ -36,7 +36,7 @@ class CreateAnalyseSolTable extends Migration
             $table->float("pH_KCI")->nullable();
             $table->float("N_NO3")->nullable();
             $table->float("N_NH4")->nullable();
-            $table->float("Humidité")->nullable();
+            $table->float("Humidite")->nullable();
             $table->float("Agrile")->nullable();
             $table->float("Limon")->nullable();
             $table->float("Sable")->nullable();
