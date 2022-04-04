@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth']], function() {
                                 ////////////////////////////
     Route::resource('/commercials',CommercialController::class);
     Route::post('/commercials/search/',[CommercialController::class,'search']);
-    Route::get('/lieus/json', [LieuController::class,'json']);
+    Route::get('/lieus/json/{page}', [LieuController::class,'json']);
     Route::resource('/lieus',LieuController::class);
     Route::resource('/clients',ClientController::class);
     Route::resource('/lieus',LieuController::class);
