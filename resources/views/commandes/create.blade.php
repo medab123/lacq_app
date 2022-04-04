@@ -226,9 +226,10 @@
                         <div class="form-row">
 
                         </div>
-                        <button class="btn btn-warning btn-sm" class="add" type="button" name="add" id="add">
-                            Ajouter</button>
+                        
                     </div>
+                    <button class="btn btn-warning btn-sm col-12" class="add" type="button" name="add" id="add">
+                            Ajouter</button>
             </div>
             <div class="row mt-2">
                 <div class="col-md-2 offset-md-5 text-center">
@@ -406,7 +407,7 @@
     </script>
     <script>
         html = '<div class="formRow mt-2">' + $(".groupRow").clone(true).find('#add').remove().end().html() +
-            '<button  class="btn btn-danger btn-sm" type="boutton"  name="remove" id="remove" >Remove</button></div>'
+            '<button  class="btn btn-danger btn-sm  col-12" type="boutton"  name="remove" id="remove" >Remove</button></div>'
         //$(html).find("#add").remove();
         $("#add").click(function() {
             $(".groupRow").append(html);
