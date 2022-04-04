@@ -21,7 +21,7 @@ class CommercialController extends Controller
         ->paginate(20);
         //dd($listCommercials);
         $listCommercials->setPath('/commercials');
-        
+
         return view("commercials.index",["listCommercials" => $listCommercials]);
     }
 
@@ -51,7 +51,7 @@ class CommercialController extends Controller
         $commercial->zone = $request->input("zone");
         $commercial->email = $request->input("email");
         $commercial->save();
-        ActivityController::addActivity(new Commercial(),$commercial->id);
+        //ActivityController::addActivity(new Commercial(),$commercial->id);
         return redirect()->back()->with('success','Commercial ajouté avec succès');
 
     }
@@ -75,7 +75,7 @@ class CommercialController extends Controller
      */
     public function edit($id)
     {
-        
+
         $commercial = Commercial::find($id);
         echo json_encode($commercial);
     }
@@ -96,7 +96,7 @@ class CommercialController extends Controller
         $commercial->zone = $request->input("zone");
         $commercial->email = $request->input("email");
         $commercial->save();
-        ActivityController::updateActivity(new Commercial(),$id);
+        //ActivityController::updateActivity(new Commercial(),$id);
         return redirect()->back()->with('success','Commercial modifié avec succès');
     }
 
@@ -111,7 +111,7 @@ class CommercialController extends Controller
         //
         $commercial = Commercial::find($id);
         $commercial->delete();
-        ActivityController::deleteActivity(new Commercial(),$id);
+        //ActivityController::deleteActivity(new Commercial(),$id);
         return redirect()->back()->with('success','Commercial supprimé avec succès');
     }
     public static function search(Request $request){
