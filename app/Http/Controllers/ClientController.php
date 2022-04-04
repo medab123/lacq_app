@@ -47,10 +47,10 @@ class ClientController extends Controller
         $client= new Client();
         $client->cin_rc = $request->input("cin_rc");
         $client->address = $request->input("address");
-        $client->exploiteur = $request->input("exploiteur");   
-        $client->organisme = $request->input("organisme");    
+        $client->exploiteur = $request->input("exploiteur");
+        $client->organisme = $request->input("organisme");
         $client->save();
-        ActivityController::addActivity(new Client(),$client->id);
+        //ActivityController::addActivity(new Client(),$client->id);
 
         return redirect()->back()->with('success','Client ajouté avec succès');
     }
@@ -96,10 +96,10 @@ class ClientController extends Controller
         $client= Client::find($id);
         $client->cin_rc  = $request->input("cin_rc");
         $client->address  = $request->input("address");
-        $client->exploiteur = $request->input("exploiteur");   
-        $client->organisme = $request->input("organisme");    
+        $client->exploiteur = $request->input("exploiteur");
+        $client->organisme = $request->input("organisme");
         $client->save();
-        ActivityController::updateActivity(new Client(),$id);
+        //ActivityController::updateActivity(new Client(),$id);
 
         return redirect()->back()->with('success','Client modifié avec succès');
     }
@@ -110,19 +110,19 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function createPDF() {
+    /*public function createPDF() {
         $data = Employee::all();
         view()->share('employee',$data);
         $pdf = PDF::loadView('pdf_view', $data);
         return $pdf->download('pdf_file.pdf');
-    }
+    }*/
 
     public function destroy($id)
     {
         //
         $client = Client::find($id);
         $client->delete();
-        ActivityController::deleteActivity(new Client(),$id);
+        //ActivityController::deleteActivity(new Client(),$id);
         return redirect()->back()->with('success','Client supprimé avec succès');
     }
 }
