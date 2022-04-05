@@ -543,7 +543,7 @@
         }
 
         function renderTable() {
-            var $request = $.get('{{ url('commandes/json/').$_REQUEST['page'] }}'); // make request
+            var $request = $.get('{{ url('commandes/json/').(isset($_REQUEST['page']) == false) ? '' : $_REQUEST['page'] }}'); // make request
             var container = $('.card-body');
             container.preloader({
                 text: 'Loading'
