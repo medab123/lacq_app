@@ -132,22 +132,24 @@ class Archivos
             }
 
             public static function EAP($value,$min,$max){
-/* */
+
                 $X = $value*100/($max+$min);
+                //$X=35;
+                if($X>100);
 
-                if($X>100) $X=100;
-
-                $barre = (int)$X*88/100;
-
-                if($X <= 35){
+                $barre = (int)$X*90/100;
+                //echo $X;
+               //echo$max;
+               //35
+                if($X <= 30){
 
                     echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
-
-                }else if($X <= 68 && $X >= 35){
+//68 35
+                }else if($X <= 60 && $X >= 30){
 
                     echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
-
-                }else if($X > 68){
+//86
+                }else if($X > 66){
                     
                     echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
                 }
