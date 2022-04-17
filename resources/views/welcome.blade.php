@@ -17,6 +17,10 @@
     <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('img/favicon.ico') }}" rel="icon"
+        sizes="16x16 32x32 48x48 64x64 128x128">
+    <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon"
+         sizes="16x16 32x32 48x48 64x64 128x128">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </head>

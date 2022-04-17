@@ -18,14 +18,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-
+    <link href="{{ asset('img/favicon.ico') }}" rel="icon"
+    sizes="16x16 32x32 48x48 64x64 128x128">
+<link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon"
+     sizes="16x16 32x32 48x48 64x64 128x128">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app" >
-
-            @yield('content')
-
+        @yield('content')
     </div>
 </body>
 </html>

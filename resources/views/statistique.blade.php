@@ -6,6 +6,8 @@
 <link href="assets/dashboard/css/metismenu.min.css" rel="stylesheet" type="text/css">
 <link href="assets/dashboard/css/icons.css" rel="stylesheet" type="text/css">
 <link href="assets/dashboard/css/style.css" rel="stylesheet" type="text/css">
+<link href="{{ asset('img/favicon.ico') }}" rel="icon" sizes="16x16 32x32 48x48 64x64 128x128">
+<link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon" sizes="16x16 32x32 48x48 64x64 128x128">
 <!-- jQuery  -->
 <script src="assets/dashboard/js/jquery.min.js"></script>
 <script src="assets/dashboard/js/bootstrap.bundle.min.js"></script>
