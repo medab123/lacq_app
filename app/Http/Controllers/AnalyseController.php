@@ -66,9 +66,9 @@ class AnalyseController extends Controller
 
             + (H2PO4/97) + (HCO3/61), 2), '/', '+', round((K/39) + (Na/23) + (Ca/20) + (Mg/12) + (NH4/18),2), ' (EC ', round(EC*10, 2), ')') as moins_plus"))
 
-            ->orderBy($analyse_table.".id","asc")
+            ->orderBy("commandes.code_commande","asc")
 
-            ->paginate(8);
+            ->get();
 
         }
 
@@ -80,9 +80,9 @@ class AnalyseController extends Controller
 
             ->select($analyse_table.".*","commandes.code_commande")
 
-            ->orderBy($analyse_table.".id","asc")
+            ->orderBy("commandes.code_commande","asc")
 
-            ->paginate(8);
+            ->get();
 
         }
         

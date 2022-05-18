@@ -31,6 +31,7 @@ class AnalyseExport implements FromCollection,WithHeadings
         $listData = DB::table($this->analyse_table)
         ->join("commandes","commandes.id","=",$this->analyse_table.".commande_id")
         ->select("commandes.code_commande",$this->analyse_table.".*")
+	->orderBy("commandes.code_commande")
         ->get();
         $count = count($listData);
         for($i = 0 ; $i<$count;$i++){
