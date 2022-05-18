@@ -21,6 +21,11 @@
     top: 0;
   }
     </style>
+    <style>
+        .tableFixHead          { overflow: auto; max-height: 70vh; }
+        .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+        </style>
     <!----------------------------------------- modal foem ------------------------------------------------>
 
     <a href="javascript:void(0);" id="cadenas" onclick="cadenasLock();">
@@ -73,7 +78,7 @@
             @method('patch')
             <input type="hidden" name="selectedMatrice" id="hiddenselectedMatrice" value="{{ $selectedMatrice }}">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive tableFixHead">
                     <table class="table table-striped table-sm ">
                         <thead class="thead-light">
                             <tr>
