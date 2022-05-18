@@ -2,6 +2,7 @@
 namespace App\Custom;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Archivos
 {
@@ -142,5 +143,16 @@ class Archivos
                 }else if($X > 68){
                     echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
                 }
+            }
+
+            public static function GeneratTriengleTextural($argile,$limons,$sables){
+                $posx = 600;
+                $posy = 200;
+                $img = Image::make('img/TriengleTextural.PNG');
+                $img->rectangle($posx, $posy, $posx+30, $posy+30, function ($draw) {
+                    $draw->background('#008000');
+                });
+
+                return $img-> encode('data-url');
             }
 }

@@ -16,6 +16,8 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 
 
@@ -91,5 +93,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/statistiqueLabo', [DashboardAdminController::class,'statistiqueLabo']);
     Route::get('/withZone', [DashboardAdminController::class,'withZone']);
     Route::get('/cabyzone', [DashboardAdminController::class,'CAbyZone']);
+    Route::get('/image', function() {
+        return  '<img src="'.App\Custom\Archivos::GeneratTriengleTextural(10,2,1)->encode('data-url').'>"';
+    });
+
 
 });
