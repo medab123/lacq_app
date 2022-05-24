@@ -188,14 +188,17 @@
         <td  style="width:50px;text-align:center; color:orange; font-weight: 900;">Faible</td>
         <td  style="width:50px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
         <td  style="width:50px; text-align:center; color:red; font-weight: 900;">Elevé</td>
+        
   </tr>
+    
     </table>
+
 <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
       
     <tr>
-        <td style="width:123px;">Matière organqiue</td>
-        <td style="width:30px;text-align:center;border-right:1px solid black;">M.O</td>
-        <td style="width:42px;border-right:1px solid black;text-align:center;">g/kg</td> 
+        <td style="width:123px;">Azote total</td>
+        <td style="width:30px;text-align:center;border-right:1px solid black;">NTK</td>
+        <td style="width:42px;border-right:1px solid black;text-align:center;">%MS</td> 
         <td style="width:80px;border-right:1px solid black;text-align:center;">
         @php
             
@@ -203,7 +206,7 @@
         @endphp
 
         </td>
-        <td style="width:60px;text-align:center;border-right:1px solid black;">20.0 à 30.0</td>
+        <td style="width:60px;text-align:center;border-right:1px solid black;">php</td>
         <td  style="z-index:10;padding:0px !important;width:90px;"><div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
             @php
            
@@ -214,9 +217,60 @@
     </tr>
     <tr>
         <!---->
-        <td >Azote total  </td>
-        <td style="text-align:center;border-right:1px solid black;">NTK</td>
-        <td style="border-right:1px solid black;text-align:center;">g/kg</td> 
+        <td >Phosphore  </td>
+        <td style="text-align:center;border-right:1px solid black;">PT</td>
+        <td style="border-right:1px solid black;text-align:center;">%MS</td> 
+        <td style="border-right:1px solid black;text-align:center;">
+            @php
+        
+            @endphp
+             </td>
+        <td style="text-align:center;border-right:1px solid black;">php</td>
+        <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
+            @php
+                
+           
+             @endphp
+            </div>
+        </td> 
+        
+        
+
+        <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
+        <td style="width:50px;padding:0px !important"></td>   
+    </tr>
+
+
+    <tr>
+        <!---->
+        <td >Potassium </td>
+        <td style="text-align:center;border-right:1px solid black;">K</td>
+        <td style="border-right:1px solid black;text-align:center;">%MS</td> 
+        <td style="border-right:1px solid black;text-align:center;">
+            @php
+        
+            @endphp
+             </td>
+        <td style="text-align:center;border-right:1px solid black;">2.0 à 3.0</td>
+        <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
+            @php
+                
+                
+             @endphp
+            </div>
+        </td> 
+        
+        
+
+        <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
+        <td style="width:50px;padding:0px !important"></td>   
+    </tr>
+
+    <tr>
+        <!---->
+        <td >  Magnésium</td>
+        <td style="text-align:center;border-right:1px solid black;">Mg</td>
+        <td style="border-right:1px solid black;text-align:center;">%MS</td> 
         <td style="border-right:1px solid black;text-align:center;">
             @php
         
@@ -229,14 +283,17 @@
            
              @endphp
             </div>
-        </td>   
+        </td> 
+        
+        
+
         <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
         <td style="width:50px;padding:0px !important"></td>   
     </tr>
 <tr>
-        <td >Rapport C/N </td>
-        <td style="text-align:center;border-right:1px solid black;">C/N</td>
-        <td style="border-right:1px solid black;text-align:center">-</td> 
+        <td >Calcium</td>
+        <td style="text-align:center;border-right:1px solid black;">Ca</td>
+        <td style="border-right:1px solid black;text-align:center">%MS</td> 
         <td style="border-right:1px solid black;text-align:center;">
             @php
             
@@ -264,9 +321,9 @@
     <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;"  >
       
         <tr>
-            <td style="width:123px;">Azote nitrique </td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">NNO3</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg</td> 
+            <td style="width:123px;">Sodium </td>
+            <td style="width:30px;text-align:center;border-right:1px solid black;">Na</td>
+            <td style="width:42px;border-right:1px solid black;text-align:center;">% MS</td> 
             <td style="width:80px;border-right:1px solid black;text-align:center;">
             @php
               
@@ -284,9 +341,9 @@
         <td style="width:50px;padding:0px !important"></td>      
         </tr>
         <tr>
-            <td >Azote ammoniacal   </td>
-            <td style="text-align:center;border-right:1px solid black;">NNH4</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
+            <td >Azote ammoniacal  </td>
+            <td style="text-align:center;border-right:1px solid black;">Cl</td>
+            <td style="border-right:1px solid black;text-align:center;">% MS</td> 
             <td style="border-right:1px solid black;text-align:center;">
                 @php
                 if(empty($analyse_data->NH4))
@@ -314,294 +371,11 @@
                       }
                       @endphp
                 </div></td>   
-            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
+            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td>
         <td style="width:50px;padding:0px !important"></td>   
     </tr>
     </table>
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;"  >
-      
-        <tr>
-            <!---->
-            <td style="width:123px;">Phosphates</td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">PO4</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg</td> 
-            <td style="width:80px;border-right:1px solid black;text-align:center;">@php
-                if(empty($analyse_data->P))
-            {
-                echo "-";
-            }
-            else 
-            {
-                echo Archivos::ft3nb($analyse_data->P*5*31/96,true);
 
-               //dd(Archivos::ft3nb($analyse_data->P,true));
-                
-            }
-            @endphp
-            </td>
-            <td style="width:60px;text-align:center;border-right:1px solid black;">3.0 à 6.0</td>
-            <td  style="z-index:10;padding:0px !important;width:90px;"><div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
-                @php 
-                
-                if(empty($analyse_data->P)){
-    
-                    echo "";
-                    }
-                    else
-                    {
-                    echo Archivos::EAP($analyse_data->P*5*31/96,3.0,6.0);
-                      }
-                      @endphp
-            </div></td> 
-          <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>      
-        </tr>
-        <tr>
-            <td >Sulfates  </td>
-            <td style="text-align:center;border-right:1px solid black;">SO4</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
-            <td style="border-right:1px solid black;text-align:center;">
-             @php
-                  if(empty($analyse_data->SO4))
-            {
-                echo "-";
-            }
-            else 
-            {
-                echo Archivos::ft3nb($analyse_data->SO4*5,true);
-                
-            }
-             @endphp
-                 </td>
-            <td style="text-align:center;border-right:1px solid black;">35 à 120</td>
-            <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-                @php
-                
-                if(empty($analyse_data->SO4)){
-    
-                    echo " ";
-                    }
-                    else
-                    {
-                    echo Archivos::EAP($analyse_data->SO4*5,35,120);
-                      }
-                      @endphp
-            </div></td>   
-            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>   
-    </tr>
-    <tr>
-            <td >Chlorure </td>
-            <td style="text-align:center;border-right:1px solid black;">Cl</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
-            <td style="border-right:1px solid black;text-align:center;">
-                @php
-                if(empty($analyse_data->Cl))
-           {
-               echo "-";
-           }
-           else 
-           {
-               echo Archivos::ft3nb($analyse_data->Cl*5,true);
-               
-           }
-           @endphp
-           </td>
-            <td style="text-align:center;border-right:1px solid black;">inf à 100</td>
-            <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                    
-                    if(empty($analyse_data->Cl)){
-        
-                        echo " ";
-                        }
-                        else
-                        {
-                        echo Archivos::EAP($analyse_data->Cl*5,50,150);
-                        }
-                        @endphp
-            </div></td>   
-            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>    
-    </tr>
-    <tr>
-        <td >Bicarbonates</td>
-        <td style="text-align:center;border-right:1px solid black;">HCO3</td>
-        <td style="border-right:1px solid black;text-align:center;">mg/kg</td>
-        <td style="border-right:1px solid black;text-align:center;">
-            @php
-            if(empty($analyse_data->HCO3))
-       {
-           echo "-";
-       }
-       else 
-       {
-           echo Archivos::ft3nb($analyse_data->HCO3*5,true);
-           
-       }
-       @endphp
-       </td>
-        <td style="text-align:center;border-right:1px solid black;">100 à 360 </td>
-        <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-            @php
-                
-            if(empty($analyse_data->HCO3)){
-
-                echo " ";
-                }
-                else
-                {
-                echo Archivos::EAP($analyse_data->HCO3*5,100,360);
-                  }
-                  @endphp
-        </div></td>   
-        <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>    
-</tr>
-    </table>
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;"  >
-      
-        <tr>
-            <td style="width:123px;">Sodium</td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">Na</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg</td> 
-            <td style="width:80px;border-right:1px solid black;text-align:center;">@php
-                
-                 if(empty($analyse_data->Na))
-            {
-                echo "-";
-            }
-            else 
-            {
-                echo Archivos::ft3nb($analyse_data->Na*5,true);
-                
-            }
-      
-            @endphp
-            </td>
-            <td style="width:60px;text-align:center;border-right:1px solid black;">inf à 100</td>
-            <td  style="z-index:10;padding:0px !important;width:90px;"><div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
-                @php
-                     if(empty($analyse_data->Na)){
-    
-                    echo " ";
-                    }
-                    else
-                    {
-                    echo Archivos::EAP($analyse_data->Na*5,50,150);
-                    }
-                @endphp
-            </div></td> 
-          <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>      
-        </tr>
-        <tr>
-            <!---->
-            <td >Potassium</td>
-            <td style="text-align:center;border-right:1px solid black;">K</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td>
-            <td style="border-right:1px solid black;text-align:center;">
-                @php
-                if(empty($analyse_data->K))
-           {
-               echo "-";
-           }
-           else 
-           {
-               echo Archivos::ft3nb($analyse_data->K*5,true);
-               
-           }
-           @endphp
-                 </td>
-            <td style="text-align:center;border-right:1px solid black;">50 à 150</td>
-            <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-                @php
-                
-                if(empty($analyse_data->K)){
-    
-                    echo " ";
-                    }
-                    else
-                    {
-                    echo Archivos::EAP($analyse_data->K*5,50,150);
-                      }
-                      @endphp
-            </div></td>   
-            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>   
-    </tr>
-    <tr>
-            <td >Calcium </td>
-            <td style="text-align:center;border-right:1px solid black;">Ca</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
-            <td style="border-right:1px solid black;text-align:center;">
-                @php
-                if(empty($analyse_data->Ca))
-           {
-               echo "-";
-           }
-           else 
-           {
-               echo Archivos::ft3nb($analyse_data->Ca*5,true);
-               
-           }
-           @endphp
-           </td>
-            <td style="text-align:center;border-right:1px solid black;">70 à 120</td>
-            <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-                @php
-                
-                if(empty($analyse_data->Ca)){
-    
-                    echo " ";
-                    }
-                    else
-                    {
-                    echo Archivos::EAP($analyse_data->Ca*5,70,120);
-                        //dd($analyse_data->Ca*5,$analyse_data->Ca);
-                      }
-                      @endphp
-            </div></td>   
-            <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>    
-    </tr>
-    <tr>
-        <!---->
-        <td >Magnésium </td>
-        <td style="text-align:center;border-right:1px solid black;">Mg</td>
-        <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
-        <td style="border-right:1px solid black;text-align:center;">
-         @php
-            if(empty($analyse_data->Mg))
-       {
-           echo "-";
-       }
-       else 
-       {
-          echo Archivos::ft3nb($analyse_data->Mg*5,true);
-           
-       }
-       @endphp
-       </td>
-        <td style="text-align:center;border-right:1px solid black;">20 à 50</td>
-        <td style="z-index:10;padding:0px !important;width:50px;"><div style="position:absolute;padding:0px;margin:0px;">
-            @php
-                
-            if(empty($analyse_data->Mg)){
-
-                echo "";
-                }
-                else
-                {
-                echo Archivos::EAP($analyse_data->Mg*5,20,50);
-                //dd($analyse_data->Mg*5);
-                  }
-                  @endphp
-        </div></td>   
-        <td  style="background:#b5feb4;width:50px;padding:0px !important"></td> 
-        <td style="width:50px;padding:0px !important"></td>    
-</tr>
-    </table>
     <table style="width:100%;font-size:10px;" >
         <tr>
           <th style="border:0px;text-align:left;color:green">OLIGO-ELEMENTS</th>
@@ -612,7 +386,7 @@
             <tr>
                 <td style="width:123px;">Zinc</td>
                 <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
-                <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg</td> 
+                <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg MS</td> 
                 <td style="width:80px;border-right:1px solid black;text-align:center;">@php
                     
                  if(empty($analyse_data->Zn))
@@ -647,7 +421,7 @@
             <tr>
                 <td >Cuivre <h6 style='color:red;'>(*)</h6></td>
                 <td style="text-align:center;border-right:1px solid black;">Cu</td>
-                <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
+                <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td> 
                 <td style="border-right:1px solid black;text-align:center;">
                     @php
                     if(empty($analyse_data->Cu))
@@ -681,7 +455,7 @@
         <tr>
                 <td >Manganèse <h6 style='color:red;'>(*)</h6></td>
                 <td style="text-align:center;border-right:1px solid black;">Mn</td>
-                <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
+                <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td> 
                 <td style="border-right:1px solid black;text-align:center;">
                     @php
                     if(empty($analyse_data->Mn))
@@ -714,7 +488,7 @@
         <tr>
             <td >Fer <h6 style='color:red;'>(*)</h6></td>
             <td style="text-align:center;border-right:1px solid black;">Fe</td>
-            <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
+            <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td> 
             <td style="border-right:1px solid black;text-align:center;">
                 @php
                 if(empty($analyse_data->Fe))
@@ -747,7 +521,7 @@
     <tr>
         <td >Bore </td>
         <td style="text-align:center;border-right:1px solid black;">B</td>
-        <td style="border-right:1px solid black;text-align:center;">mg/kg</td> 
+        <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td> 
         <td style="border-right:1px solid black;text-align:center;">
             @php
             if(empty($analyse_data->Bore))
@@ -756,8 +530,7 @@
        }
        else 
        {
-           echo Archivos::ft3nb($analyse_data->Bore,true);
-           
+          echo Archivos::ft3nb($analyse_data->Bore,true);  
        }
        @endphp</td>
         <td style="text-align:center;border-right:1px solid black;">0.3 à 0.5</td>
@@ -833,14 +606,18 @@
                         
                         @endphp
                       </tr>
+
+
                       <tr>
                         <td >K2O / MgO</td>
+
                         <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
                         @php
                        
                         @endphp
 
                       </tr>
+
                       <tr>
                         <td >CaO / MgO</td>
                         <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
@@ -852,7 +629,7 @@
                       </tr>
                   </table>
                   <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px" width="500px">
-                  <p class="text" style="font-size:8px;"><strong> DE PAGE<br>
+                  <p class="text" style="font-size:8px;"><strong> FIN DE PAGE<br>
                                       ------------------------------<br>
                                       Laboratoire LACQ <br>
                                       AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>

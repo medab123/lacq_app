@@ -206,10 +206,11 @@ class AnalyseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
     }
 
     public function refresh(Request $request){
+
         $matrice_id = $request->input("matrice");
         $table = $matrice_id;
         $table = Matrice::find($table)['name'];
@@ -217,6 +218,7 @@ class AnalyseController extends Controller
         $table = str_replace(' ', '_', $table);
         $table = "analyse_".$table;
         $commandes = Commande::select("commandes.id as commande_id")
+
         ->join("menus" ,"menus.id","=","commandes.menu_id")
         ->join("matrices" ,"matrices.id","=","menus.matrice_id")
         ->leftJoin($table, 'commandes.id', '=', $table.'.commande_id')

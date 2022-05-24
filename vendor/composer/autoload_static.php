@@ -663,6 +663,7 @@ class ComposerStaticInitb2c676df023a5770086f6e7607dedc20
         'App\\Models\\Commande' => __DIR__ . '/../..' . '/app/Models/Commande.php',
         'App\\Models\\Commantaire' => __DIR__ . '/../..' . '/app/Models/Commantaire.php',
         'App\\Models\\Commercial' => __DIR__ . '/../..' . '/app/Models/Commercial.php',
+        'App\\Models\\Culture' => __DIR__ . '/../..' . '/app/Models/Culture.php',
         'App\\Models\\Lieu' => __DIR__ . '/../..' . '/app/Models/Lieu.php',
         'App\\Models\\Log' => __DIR__ . '/../..' . '/app/Models/Log.php',
         'App\\Models\\Matrice' => __DIR__ . '/../..' . '/app/Models/Matrice.php',

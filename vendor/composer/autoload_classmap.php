@@ -49,6 +49,7 @@ return array(
     'App\\Models\\Commande' => $baseDir . '/app/Models/Commande.php',
     'App\\Models\\Commantaire' => $baseDir . '/app/Models/Commantaire.php',
     'App\\Models\\Commercial' => $baseDir . '/app/Models/Commercial.php',
+    'App\\Models\\Culture' => $baseDir . '/app/Models/Culture.php',
     'App\\Models\\Lieu' => $baseDir . '/app/Models/Lieu.php',
     'App\\Models\\Log' => $baseDir . '/app/Models/Log.php',
     'App\\Models\\Matrice' => $baseDir . '/app/Models/Matrice.php',

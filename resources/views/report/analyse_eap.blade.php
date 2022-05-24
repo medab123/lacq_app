@@ -1160,7 +1160,7 @@
                       </tr>
                   </table>
                   <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px" width="500px">
-                  <p class="text" style="font-size:8px;"><strong> DE PAGE<br>
+                  <p class="text" style="font-size:8px;"><strong>FIN DE PAGE<br>
                                       ------------------------------<br>
                                       Laboratoire LACQ <br>
                                       AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>

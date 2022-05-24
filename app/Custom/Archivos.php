@@ -1,7 +1,11 @@
 <?php
 namespace App\Custom;
+
+use App\Models\Culture;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+
 
 class Archivos
 {
@@ -154,6 +158,23 @@ class Archivos
                     echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
                 }
             }
+        
+        
+            public static function SelectCultures(){
+
+                $cultures = "OLIVIER";
+                
+                $users = DB::table('OLIVIER')->get();
+ 
+                    foreach ($users as $user) {
+                        dd($user->id)   ;
+                    }
+                
+ 
+               
+
+            }
+            
 
 
 
