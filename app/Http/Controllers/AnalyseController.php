@@ -87,6 +87,7 @@ class AnalyseController extends Controller
         }
         
 
+
         return view("analyses.index",["listUnites" => $formatedListUnites, "columns" => $columns,"listData" => $listData,"listMatrices" => $listMatrices,"selectedMatrice" => $selectedMatrice]);
 
     }
@@ -206,7 +207,7 @@ class AnalyseController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        //
     }
 
     public function refresh(Request $request){

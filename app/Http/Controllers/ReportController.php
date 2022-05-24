@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CommandeController;
 use App\Models\Commande;
+use App\Models\Cultur;
+
 use Dompdf\Options as Options;
 use PDF;
 
@@ -43,8 +45,12 @@ class ReportController extends Controller
         ->first();
 
         $commantair = ["Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) répondent aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine. ","Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) ne répondent pas aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine."];
-
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data])->setOptions(['defaultFont' => 'sans-serif'])->stream();
+        $culturData = null;
+        if($commande_info->culture != "_"){
+            $cultur = strtolower($commande_info->culture);
+            $culturData = Cultur::select("prametre",$cultur."_min",$cultur."_max")->get();
+        }
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data,"cultureData" => $culturData])->setOptions(['defaultFont' => 'sans-serif'])->stream();
     }
 
 
