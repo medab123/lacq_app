@@ -29,8 +29,7 @@
     <!----------------------------------------- modal foem ------------------------------------------------>
 
     <a href="javascript:void(0);" id="cadenas" onclick="cadenasLock();">
-        <div class="alert alert-primary alert-sm alert-dismissible fade show py-2" role="alert"><i class="fa fa-lock"
-                aria-hidden="true"></i> Click here To open cadenas</div>
+        <div class="alert alert-primary alert-sm alert-dismissible fade show py-2" role="alert"><i class="fa fa-lock" aria-hidden="true"></i> Click here To open cadenas</div>
     </a>
 
     @if ($message = Session::get('success'))
@@ -190,9 +189,7 @@
             $("td").each(function() {
                 $(this).html($(this).children("input").val());
             });
-            $("#cadenas").html(
-                '<div class="alert alert-primary py-2" role="alert"><i class="fa fa-lock" aria-hidden="true"></i> Cliquez ici pour ouvrir les cadenas </div>'
-                );
+            $("#cadenas").html('<div class="alert alert-primary py-2" role="alert"><i class="fa fa-lock" aria-hidden="true"></i> Cliquez ici pour ouvrir les cadenas </div>');
             $("#save").addClass("d-lg-none");
         }
         $("#matriceFilter").change(function() {

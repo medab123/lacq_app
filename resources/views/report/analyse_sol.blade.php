@@ -11,14 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/preloader.css') }}">
     <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}">
-    </script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"
         sizes="16x16 32x32 48x48 64x64 128x128">
@@ -30,19 +27,16 @@
     <style>
         table {
             border-collapse: collapse;
-
         }
 
         h6 {
             display: inline !important;
             font-family: DejaVu Sans;
-
         }
 
         .head {
             text-align: left;
             background-color: #b5feb4 !important;
-
         }
 
         .h4::before {
@@ -175,178 +169,237 @@
             <td class="bordered">{{ $commande_info->quantite }}</td>
         </tr>
     </table>
-    <div style="font-size:9px; margin-top:10px;float:left;border-top:black 0.5pt solid;border-left:black 0.5pt solid;border-right:black 0.5pt solid;padding:2px 5px 2px 5px;width:300px;background-color:#b5feb4;font-family: Verdana, Geneva, sans-serif;font-weight: 700;">ETAT PHYSIQUE</div>
+    <div
+        style="font-size:9px; margin-top:10px;float:left;border-top:black 0.5pt solid;border-left:black 0.5pt solid;border-right:black 0.5pt solid;padding:2px 5px 2px 5px;width:300px;background-color:#b5feb4;font-family: Verdana, Geneva, sans-serif;font-weight: 700;">
+        ETAT PHYSIQUE</div>
     <table border="" style="width:100%;font-size:9px;margin-top:26px;border:0.1pt solid black;">
 
         <tr style="">
-            <td class="" style="text-align:left; width:150px">Argile ‰ (&lt; 2 µm): <span style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span></td>
-            <td class="" style="text-align:;" rowspan="3"><img src="{{ App\Custom\Archivos::GeneratTriengleTextural(10,2,1) }}" height="70px"></td>
-            <td class="" style="text-align:;">Indice de battance : <span style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span></td>
+            <td class="" style="text-align:left; width:150px">Argile ‰ (&lt; 2 µm): <span
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+            </td>
+            <td class="" style="text-align:;" rowspan="3"><img
+                    src="{{ App\Custom\Archivos::GeneratTriengleTextural(10, 2, 1) }}" height="70px"></td>
+            <td class="" style="text-align:;">Indice de battance : <span
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+            </td>
 
         </tr>
         <tr style="">
-            <td class="" style="text-align:left;width:150px ">Limons ‰ (2 à 50 µm): <span style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span></td>
-            <td class="" style="text-align:;">Indice de porosité : <span style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span></td>
+            <td class="" style="text-align:left;width:150px ">Limons ‰ (2 à 50 µm): <span
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+            </td>
+            <td class="" style="text-align:;">Indice de porosité : <span
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+            </td>
 
         </tr>
         <tr style="">
-            <td class="" style="text-align:left;width:150px ">Sables ‰ (50 à 2000 µm): <span style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span></td>
+            <td class="" style="text-align:left;width:150px ">Sables ‰ (50 à 2000 µm): <span
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+            </td>
             <td class="" style="text-align:;">Réserve Utile estimée :</td>
 
         </tr>
 
     </table>
-    <table style="width: 50%;font-size:10px;float:left;margin-top:10px" class="bordered">
-        <tr >
+    <table border="" style="margin:0;padding:0; width: 50%;font-size:10px;float:left;margin-top:5px;"
+        class="bordered">
+        <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">ETAT HUMIQUE</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Résultats</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Faible</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Seuils</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:148px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;"><small
+                    style="text-align: left;">Faible</small><small>Elevé</small></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Matière organique en g/kg (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 14235:V1998</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Matière organique en g/kg (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF ISO
+                    14235:V1998</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Matière organique en g/kg</span><br/><span style="color: gray;font-size:8px">NF ISO 14235: V1998 (MO=Carb. Org*1,72)</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Matière organique en g/kg</span><br /><span
+                    style="color: gray;font-size:8px">NF ISO 14235: V1998 (MO=Carb. Org*1,72)</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Azote total en g/kg</span><br/><span style="color: gray;font-size:8px">NF ISO 11261: V1995</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Azote
+                    total en g/kg</span><br /><span style="color: gray;font-size:8px">NF ISO 11261: V1995</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Rapport C/N</span><br/><span style="color: gray;font-size:8px">Calcul.</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Rapport C/N</span><br /><span
+                    style="color: gray;font-size:8px">Calcul.</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
     </table>
-    <table style="width: 50%;font-size:10px;float:right;margin-top:10px" class="bordered">
-        <tr >
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:5px" class="bordered">
+        <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">SALINITE</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Résultats</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Faible</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Seuils</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:135px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/cm (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">ISO 11265: V1995</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,40</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/cm (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">ISO 11265:
+                    V1995</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,40</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Sodium (Na2O) g/kg (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF × 31 -108: V2002</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,34</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Sodium (Na2O) g/kg (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF × 31 -108:
+                    V2002</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,34</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Chlorures (Cl ) mg/kg (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">Extrait aqueux  1/5 Flux continu</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 100</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Chlorures (Cl ) mg/kg (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">Extrait aqueux 1/5
+                    Flux continu</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 100</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/m (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">ISO 11265 :V1995</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 40</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/m (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">ISO 11265
+                    :V1995</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 40</td>
         </tr>
     </table>
-
-    <table style="width: 50%;font-size:10px;float:left;margin-top:160px" class="bordered">
-        <tr >
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:145px" class="bordered">
+        <tr>
+            <td class="head bordered" style="font-weight: 500" colspan="4">ELEMENTS MAJEURS</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Phosphore (P2O5) mg/kg (<b
+                        style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 11263: V1995 (Olsen)
+                        </span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Potasse (K2O) g/kg (<b
+                    style="color: red">*</b>)
+                </span><br /><span
+                    style="color: gray;font-size:8px">NF × 31 -108: V2002
+                </span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Magnésie (MgO) g/kg (<b
+                style="color: red">*</b>)
+            </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
+            </span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Rapport C/N</span><br /><span
+                    style="color: gray;font-size:8px">Calcul.</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+        </tr>
+    </table>
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:145px" class="bordered">
+        <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">STATUT ACIDO-BASIQUE</td>
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Résultats</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Faible</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Seuils</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Calcaire total g/kg</span><br/><span style="color: gray;font-size:8px">NF ISO 10693:V2014</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Calcaire total g/kg</span><br /><span
+                    style="color: gray;font-size:8px">NF ISO 10693:V2014</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Calcaire actif g/kg</span><br/><span style="color: gray;font-size:8px">NF X 31-106:V 2002</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Calcaire actif g/kg</span><br /><span
+                    style="color: gray;font-size:8px">NF X 31-106:V 2002</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH eau corrigé à 25°C (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH
+                    eau corrigé à 25°C (<b style="color: red">*</b>)</span><br /><span
+                    style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH KCl corrigé à 25°C (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH
+                    KCl corrigé à 25°C (<b style="color: red">*</b>)</span><br /><span
+                    style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Calcium (CaO) g/kg (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF × 31 -108: V2002</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Calcium (CaO) g/kg (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF × 31 -108:
+                    V2002</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
         <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">CEC Metson  Cmol/kg</span><br/><span style="color: gray;font-size:8px">NF × 31 -130:V 1999</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
-        </tr>
-    </table>
-    <table style="width: 50%;font-size:10px;float:right;margin-top:160px" class="bordered">
-        <tr >
-            <td class="head bordered" style="font-weight: 500" colspan="4">ETAT HUMIQUE</td>
-        </tr>
-        <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Résultats</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Faible</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Seuils</td>
-        </tr>
-        <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Matière organique en g/kg (<b style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 14235:V1998</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
-        </tr>
-        <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Matière organique en g/kg</span><br/><span style="color: gray;font-size:8px">NF ISO 14235: V1998 (MO=Carb. Org*1,72)</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
-        </tr>
-        <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Azote total en g/kg</span><br/><span style="color: gray;font-size:8px">NF ISO 11261: V1995</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
-        </tr>
-        <tr>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Rapport C/N</span><br/><span style="color: gray;font-size:8px">Calcul.</span></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td  style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">CEC
+                    Metson Cmol/kg</span><br /><span style="color: gray;font-size:8px">NF × 31 -130:V 1999</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
     </table>
 
@@ -354,13 +407,16 @@
 
 
 
-    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:400px" width="560px">
-    <p class="text" style="font-size:8px;">Laboratoire LACQ <br>
+
+    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:800px"
+        width="500px">
+    <p class="text" style="font-size:8px;color:black">FIN DE PAGE<br>
+        ------------------------------<br>
+        Laboratoire LACQ <br>
         AGROPOLIS-GI5 GI6, Commune de Mejjate, Meknes, Maroc <br>
         Tel:+212 535 52 94 01 <br>
         contact.lacq@elephant-vert.com <br>
-        <span style="margin-left: 650px;font-size:8px;">Fin de page</span>
-        </p>
+    </p>
 
 </body>
 
