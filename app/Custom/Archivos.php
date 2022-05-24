@@ -1,8 +1,12 @@
 <?php
 namespace App\Custom;
+
+use App\Models\Culture;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
+
 
 class Archivos
 {
@@ -133,17 +137,45 @@ class Archivos
             }
 
             public static function EAP($value,$min,$max){
+
                 $X = $value*100/($max+$min);
-                if($X>100) $X=100;
-                $barre = (int)$X*88/100;
-                if($X <= 35){
+                //$X=35;
+                if($X>100);
+
+                $barre = (int)$X*90/100;
+                //echo $X;
+               //echo$max;
+               //35
+                if($X <= 30){
+
                     echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
-                }else if($X <= 68 && $X > 35){
+//68 35
+                }else if($X <= 60 && $X >= 30){
+
                     echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
-                }else if($X > 68){
+//86
+                }else if($X > 66){
+
                     echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
                 }
             }
+
+
+            public static function SelectCultures(){
+
+                $cultures = "OLIVIER";
+
+                $users = DB::table('OLIVIER')->get();
+
+                    foreach ($users as $user) {
+                        dd($user->id)   ;
+                    }
+
+
+
+
+            }
+
 
             public static function GeneratTriengleTextural($argile,$limons,$sables){
                 $posx = 600;
