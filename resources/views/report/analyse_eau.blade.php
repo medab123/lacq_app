@@ -304,7 +304,7 @@
                 } elseif ($analyse_data->EC < 10) {
                     $var = Archivos::ft3nb($analyse_data->EC * 0.758544, true);
                 }
-                echo $var;
+             echo $var;
             @endphp
 
             </td>

@@ -149,11 +149,33 @@ class Archivos
                 if($X <= 30){
 
                     echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
-//68 35
+
                 }else if($X <= 60 && $X >= 30){
 
                     echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
-//86
+                }else if($X > 66){
+
+                    echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
+                }
+            }
+
+            public static function VEG($value,$min,$max){
+
+                $X = $value*100/($max+$min);
+                //$X=35;
+                if($X>100);
+
+                $barre = (int)$X*90/100;
+                //echo $X;
+               //echo$max;
+               //35
+                if($X <= 30){
+
+                    echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>",$barre);
+
+                }else if($X <= 60 && $X >= 30){
+
+                    echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>",$barre);
                 }else if($X > 66){
 
                     echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>",$barre);
