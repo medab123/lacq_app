@@ -17,8 +17,8 @@
     <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
-    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"
-        sizes="16x16 32x32 48x48 64x64 128x128">
+    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon"
+        type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
     <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="shortcut icon"
         type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
 </head>
@@ -80,7 +80,6 @@
             right: 0px;
             height: 150px;
         }
-
     </style>
 
     @php use App\Custom\Archivos; @endphp
@@ -233,7 +232,8 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Azote
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Azote
                     total en g/kg</span><br /><span style="color: gray;font-size:8px">NF ISO 11261: V1995</span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
@@ -279,7 +279,8 @@
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Chlorures (Cl ) mg/kg (<b
-                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">Extrait aqueux 1/5
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">Extrait aqueux
+                    1/5
                     Flux continu</span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
@@ -308,28 +309,27 @@
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Phosphore (P2O5) mg/kg (<b
-                        style="color: red">*</b>)</span><br/><span style="color: gray;font-size:8px">NF ISO 11263: V1995 (Olsen)
-                        </span></td>
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF ISO 11263:
+                    V1995 (Olsen)
+                </span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Potasse (K2O) g/kg (<b
-                    style="color: red">*</b>)
-                </span><br /><span
-                    style="color: gray;font-size:8px">NF × 31 -108: V2002
+                    style="font-weight: 500;font-size:9px">Potasse (K2O) g/kg (<b style="color: red">*</b>)
+                </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
                 </span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Magnésie (MgO) g/kg (<b
-                style="color: red">*</b>)
-            </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
-            </span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Magnésie (MgO) g/kg (<b style="color: red">*</b>)
+                </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
+                </span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
@@ -343,6 +343,30 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
     </table>
+
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:283px" class="bordered">
+        <tr>
+            <td class="head bordered" style="font-weight: 500" colspan="3">AZOTE MINERAL DU SOL</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Azote Nitrique N-NO3 (Kg/ha)
+                    <br /></span><span style="color: gray;font-size:8px">Extrait aqueux 1/5 Flux continu
+                </span>
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">27.4</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Azote Ammoniacal N-NH4 (Kg/ha)
+                </span><br /><span style="color: gray;font-size:8px">Extrait aqueux 1/5 Flux continu
+                </span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+        </tr>
+    </table>
+
     <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:145px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">STATUT ACIDO-BASIQUE</td>
@@ -395,7 +419,7 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">CEC
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 400;font-size:9px">CEC
                     Metson Cmol/kg</span><br /><span style="color: gray;font-size:8px">NF × 31 -130:V 1999</span></td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
@@ -403,14 +427,126 @@
         </tr>
 
     </table>
-
-
-
-
-
-
-    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:800px"
-        width="500px">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;margin-top:335px" class="bordered">
+        <tr>
+            <td class="head bordered" style="font-weight: 500" colspan="4">OLIGO-ELEMENTS</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Cuivre mg/kg (*)</span><br /><span
+                    style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Zinc mg/kg (*)</span><br /><span
+                    style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">6,36</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Manganèse mg/kg (<b
+                        style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">LAB03MO49:Vb du
+                    22/04/2019</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">4,85</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Fer
+                    mg/kg (<b style="color: red">*</b>)</span><br /><span
+                    style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">31.3</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Bore mg/kg</span><br /><span
+                    style="color: gray;font-size:8px">Méthode interne</span></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">_</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+        </tr>
+    </table>
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-140px" class="bordered">
+        <tr>
+            <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+    </table>
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-65" class="bordered">
+        <tr>
+            <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+        </tr>
+    </table>
+    <p style="font-size: 8; text-align:left"><b style="color: red">*</b>: Paramètres accrédités
+        "Echantillon séché à 40°C, broyé manuellement et tamisé à 2mm selon la norme NF ISO 11464. Moyens utilisés:
+        Diviseur multifentes.
+        Description de l’échantillon: Echantillon reçu dans un emballage en plastique fermé en absence des pierres,
+        fragments de verre ou toute substance susceptible d’avoir une influence sur la qualité des analyses . "
+        Si l'échantillonnage est assuré par le client, le laboratoire dégage toute résponsablité par rapport à la
+        technique d'échantillonnage utilisée.
+        Le présent rapport ne concerne que les objets soumis à l'essai. Il comporte une seule page et ne doit pas être
+        reproduit partiellement sans l’approbation du laboratoire. Seule une reproduction sous sa forme intégrale est
+        autorisée.
+        Les avis et interprétations contenus dans ce rapport ne sont pas couverts par l'accréditation.
+        Les échantillons sont conservés au Laboratoire 15 jours maximum après communication des résultats aux clients.
+    </p>
+    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:" width="500px">
     <p class="text" style="font-size:8px;color:black">FIN DE PAGE<br>
         ------------------------------<br>
         Laboratoire LACQ <br>
