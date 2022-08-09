@@ -175,10 +175,10 @@
 
         <tr style="">
             <td class="" style="text-align:left; width:150px">Argile ‰ (&lt; 2 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Agrile}}</span>
             </td>
             <td class="" style="text-align:;" rowspan="3"><img
-                    src="{{ App\Custom\Archivos::GeneratTriengleTextural(10, 2, 1) }}" height="70px"></td>
+                    src="{{ App\Custom\Archivos::GeneratTriengleTextural($analyse_data->Agrile , $analyse_data->Limon , $analyse_data->Sable ) }}" height="70px"></td>
             <td class="" style="text-align:;">Indice de battance : <span
                     style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
             </td>
@@ -186,7 +186,7 @@
         </tr>
         <tr style="">
             <td class="" style="text-align:left;width:150px ">Limons ‰ (2 à 50 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Limon}}</span>
             </td>
             <td class="" style="text-align:;">Indice de porosité : <span
                     style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
@@ -195,7 +195,7 @@
         </tr>
         <tr style="">
             <td class="" style="text-align:left;width:150px ">Sables ‰ (50 à 2000 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Sable}}</span>
             </td>
             <td class="" style="text-align:;">Réserve Utile estimée :</td>
 
@@ -500,7 +500,7 @@
     </table>
     <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-53" class="bordered">
         <tr>
-            <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
+            <td class="head bordered" style="font-weight: 500" colspan="4">EQUILIBRES</td>
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
@@ -510,27 +510,27 @@
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+                    style="font-weight: 500;font-size:9px">K/CEC (%)</span>
             </td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">3 à 5</td>
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+                    style="font-weight: 500;font-size:9px">Mg/CEC (%)</span>
             </td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 16</td>
         </tr>
         <tr>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
+                    style="font-weight: 500;font-size:9px">K/Mg</span>
             </td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">0,3 à 0,6</td>
         </tr>
     </table>
     <p style="font-size: 8; text-align:left"><b style="color: red">*</b>: Paramètres accrédités

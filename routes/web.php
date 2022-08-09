@@ -93,8 +93,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/statistiqueLabo', [DashboardAdminController::class,'statistiqueLabo']);
     Route::get('/withZone', [DashboardAdminController::class,'withZone']);
     Route::get('/cabyzone', [DashboardAdminController::class,'CAbyZone']);
-    Route::get('/image', function() {
-        return  '<img src="'.App\Custom\Archivos::GeneratTriengleTextural(10,2,1)->encode('data-url').'>"';
+    Route::get('/image/{a}/{l}/{s}', function($a,$l,$s) {
+        return  '<img src="'.App\Custom\Archivos::GeneratTriengleTextural($a,$l,$s)->encode('data-url').'>"';
     });
 
 
