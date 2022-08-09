@@ -47,7 +47,7 @@
         tr,
         td {
             margin: 0 !important;
-            padding: 2px 10px !important;
+            padding: 1px 10px !important;
 
         }
 
@@ -169,9 +169,9 @@
         </tr>
     </table>
     <div
-        style="font-size:9px; margin-top:10px;float:left;border-top:black 0.5pt solid;border-left:black 0.5pt solid;border-right:black 0.5pt solid;padding:2px 5px 2px 5px;width:300px;background-color:#b5feb4;font-family: Verdana, Geneva, sans-serif;font-weight: 700;">
+        style="font-size:9px; margin-top:5px;float:left;border-top:black 0.5pt solid;border-left:black 0.5pt solid;border-right:black 0.5pt solid;padding:2px 5px 2px 5px;width:300px;background-color:#b5feb4;font-family: Verdana, Geneva, sans-serif;font-weight: 700;">
         ETAT PHYSIQUE</div>
-    <table border="" style="width:100%;font-size:9px;margin-top:26px;border:0.1pt solid black;">
+    <table border="" style="width:100%;font-size:9px;margin-top:21px;border:0.1pt solid black;">
 
         <tr style="">
             <td class="" style="text-align:left; width:150px">Argile ‰ (&lt; 2 µm): <span
@@ -296,7 +296,7 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 40</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:145px" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:132px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">ELEMENTS MAJEURS</td>
         </tr>
@@ -344,7 +344,7 @@
         </tr>
     </table>
 
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:283px" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:257px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="3">AZOTE MINERAL DU SOL</td>
         </tr>
@@ -367,7 +367,7 @@
         </tr>
     </table>
 
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:145px" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:132px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">STATUT ACIDO-BASIQUE</td>
         </tr>
@@ -427,7 +427,7 @@
         </tr>
 
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;margin-top:335px" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;margin-top:305px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">OLIGO-ELEMENTS</td>
         </tr>
@@ -479,7 +479,7 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-140px" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-125px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
         </tr>
@@ -498,7 +498,7 @@
             <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-65" class="bordered">
+    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-53" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
         </tr>
