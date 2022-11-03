@@ -207,7 +207,7 @@ class Archivos
             $img->rectangle($posx, $posy, $posx + 30, $posy + 30, function ($draw) {
                 $draw->background('#008000');
             });
-            echo  '<img src="' . $img->encode('data-url') . '" height="500px">';
+            //echo  '<img src="' . $img->encode('data-url') . '" height="500px">';
             return $img->encode('data-url');
         }
     }
