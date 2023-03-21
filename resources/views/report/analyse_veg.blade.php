@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<head bordered>
+<head >
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title trspan="authPortal"></title>
     <meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -19,11 +19,11 @@
     <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
-    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"
-        sizes="16x16 32x32 48x48 64x64 128x128">
+    <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="icon"
+        type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
     <link href="https://auth.sso.elephant-vert.com/static/common/favicon.ico" rel="shortcut icon"
         type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128">
-</head bordered>
+</head >
 
 <body style="text-align: center;margin:0 auto">
     <style>
@@ -44,10 +44,7 @@
 
         }
 
-        .h4::before {
-            content: "*";
-            color: red
-        }
+        
 
         tr,
         td {
@@ -85,28 +82,28 @@
             right: 0px;
             height: 150px;
         }
-
     </style>
 
     @php use App\Custom\Archivos; @endphp
-    <table border="0">
+    <table border="0" style="width: 100%">
         <tr>
-            <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="160px" height="40px">
+            <td style="width: 55%;"><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}"
+                    width="160px" height="40px">
                 <br>
                 <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité ELEPHANT
                     VERT <br>MAROC S.A. </label>
                 <br>
                 <label style="color:green;font-size:11px;">LAB03F62-Vd</label>
             </td>
-            <td>
-                <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE DE SOL <br>N° EAP
-                    {{ $commande_info->code_commande }} <br>
-                    EXTRAIT AQUEUX EN POIDS 1/5</h5>
+            <td style="align-self: center;">
+                <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE DE
+                    VEGETAUX <br>N° VEG
+                    {{ $commande_info->code_commande }} <br></h5>
             </td>
-            <td style="text-align:right;vertical-align:top;"><img
+            <!--<td style="text-align:right;vertical-align:top;"><img
                     src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}" width="90px" height="40px"><br>
                 <h6 style="color:brown;font-size:10px;margin:0;padding:0;text-align:right;">N° MCI/CE AL 93/2018 </h6>
-            </td>
+            </td>-->
         </tr>
 
     </table>
@@ -147,30 +144,27 @@
             <th class="head bordered">Date d'analyse :</th>
             <td class="bordered" style="width: 150px;"> @php echo Archivos::costomDateFormate($commande_info->date_reception) @endphp </td>
         </tr>
-
-        <tr>
-            <th class="head bordered" style="width: 150px;">Référence client :</th>
-            <td class="bordered">{{ $commande_info->ref_client }}</td>
-            <th class="head bordered" style="width: 150px;">Date d'édition :</th>
-            <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp </td>
-        </tr>
-
         <tr>
             <th class="head bordered" style="width: 150px;">Coordonnées GPS :</th>
             <td class="bordered">{{ $commande_info->gps_1 }}</td>
-            <th class="head bordered" style="width: 150px;">Organisme :</th>
-            <td class="bordered">{{ $client_info->organisme }}</td>
+            <th class="head bordered" style="width: 150px;">Date d'édition :</th>
+            <td class="bordered">@php echo Archivos::costomDateFormate($commande_info->date_edition) @endphp </td>
+
         </tr>
         <tr>
-            <th class="head bordered" style="width: 150px;">Lieu d'exécution des essais :</th>
-            <td class="bordered">{{ $commande_info->lieu }}</td>
-            <th class="head bordered" style="width: 150px;">Quantité récéptionnée:</th>
-            <td class="bordered">{{ $commande_info->quantite }}</td>
+            <th class="head bordered" style="width: 150px;">Référence client :</th>
+            <td class="bordered" colspan="3">{{ $commande_info->ref_client }}</td>
+        </tr>
+        <tr>
+            <th class=" " style="width: 150px;"></th>
+            <td class=""></td>
+            <th class="head bordered" style="width: 150px;">Organisme :</th>
+            <td class="bordered">{{ $client_info->organisme }}</td>
         </tr>
     </table>
     <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
         <tr class="head bordered">
-            <th style="width:151px;">Paramètres</th>
+            <th style="width:151px;text-align: left;padding-left:10px ">Paramètres</th>
             <th style="width:39px;">Sym.</th>
             <th class=" bordered" style="width:50px;">Unité</th>
             <th class=" bordered" style="width:91px;">Résultats</th>
@@ -180,26 +174,22 @@
     </table>
     <table style="width:100%;font-size:10px;">
         <tr style="font-size:10px;">
-            <td style="width:114px;"></td>
-            <td style="width:30px;"></td>
-            <td style="width:42px;"></td>
-            <td style=" width:162px;"></td>
+            <td colspan="4" class="" style="padding: 0;text-align:left;color:green;"><strong
+                    style="margin-left:-10px;padding:0">ELEMENTS MAJEURS</strong></td>
 
-            <td style="width:50px;text-align:center; color:orange; font-weight: 900;">Faible</td>
-            <td style="width:50px;text-align:center; color:green; font-weight: 900;">Satisfaisant</td>
-            <td style="width:50px; text-align:center; color:red; font-weight: 900;">Elevé</td>
-
+            <td class="" style="width:65px;text-align:left; color:orange; font-weight: 900;">Faible</td>
+            <td class="" style="width:65px;text-align:center; color:green; font-weight: 900;">Correct</td>
+            <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
 
     </table>
 
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
-
+    <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
-            <td style="width:123px;">Azote total</td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">NTK</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">%MS</td>
-            <td style="width:80px;border-right:1px solid black;text-align:center;">
+            <td style="width:130px;">Azote total</td>
+            <td style="width:22px;text-align:center;border-right:1px solid black;">NTK</td>
+            <td style="width:40px;border-right:1px solid black;text-align:center;">%MS</td>
+            <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
                     if (empty($analyse_data->NTK)) {
                         echo '-';
@@ -209,27 +199,12 @@
                 @endphp
             </td>
             <td style="width:60px;text-align:center;border-right:1px solid black;">
-                {{ $cultureData[0][$culture . '_min'] }} à {{ $cultureData[0][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:90px;">
-                <div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
-                    @php
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Bore, 0.3, 0.5);
-                        }
-                    @endphp
-
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+                {{ $cultureData->NTK["min"] }} -
+                {{ $cultureData->NTK["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->NTK,$cultureData->NTK["min"] , $cultureData->NTK["max"]) !!}
+            
         </tr>
-
-
-
         <tr>
-            <!---->
             <td>Phosphore </td>
             <td style="text-align:center;border-right:1px solid black;">PT</td>
             <td style="border-right:1px solid black;text-align:center;">%MS</td>
@@ -245,207 +220,115 @@
 
 
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[1][$culture . '_min'] }} à
-                {{ $cultureData[1][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        if (empty($analyse_data->PT)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->PT, 0.3, 0.5);
-                        }
-                        
-                    @endphp
-                </div>
-            </td>
-
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->PT["min"] }} -
+                {{ $cultureData->PT["max"] }} </td>
+                {!! Archivos::VEG($analyse_data->PT,$cultureData->PT["min"] , $cultureData->PT["max"]) !!}
         </tr>
-
-
         <tr>
-
-            <!---->
             <td>Potassium </td>
             <td style="text-align:center;border-right:1px solid black;">K</td>
             <td style="border-right:1px solid black;text-align:center;">%MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->NTK)) {
+                    if (empty($analyse_data->K)) {
                         echo '-';
                     } else {
-                        echo Archivos::ft3nb($analyse_data->NTK, true);
+                        echo Archivos::ft3nb($analyse_data->K, true);
                     }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[2][$culture . '_min'] }} à
-                {{ $cultureData[2][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->PT, 0.3, 0.5);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
-
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->K["min"] }} -
+                {{ $cultureData->K["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->K,$cultureData->K["min"] , $cultureData->K["max"]) !!}
         </tr>
-
         <tr>
-            <!---->
             <td> Magnésium</td>
             <td style="text-align:center;border-right:1px solid black;">Mg</td>
             <td style="border-right:1px solid black;text-align:center;">%MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->NTK)) {
+                    if (empty($analyse_data->Mg)) {
                         echo '-';
                     } else {
-                        echo Archivos::ft3nb($analyse_data->NTK, true);
+                        echo Archivos::ft3nb($analyse_data->Mg, true);
                     }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[3][$culture . '_min'] }} à
-                {{ $cultureData[3][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->PT, 0.3, 0.5);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->Mg["min"] }} -
+                {{ $cultureData->Mg["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Mg,$cultureData->Mg["min"] , $cultureData->Mg["max"]) !!}
         </tr>
-
         <tr>
             <td>Calcium</td>
             <td style="text-align:center;border-right:1px solid black;">Ca</td>
             <td style="border-right:1px solid black;text-align:center">%MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->NTK)) {
+                    if (empty($analyse_data->Ca)) {
                         echo '-';
                     } else {
-                        echo Archivos::ft3nb($analyse_data->NTK, true);
+                        echo Archivos::ft3nb($analyse_data->Ca, true);
                     }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[4][$culture . '_min'] }} à
-                {{ $cultureData[4][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-
-                    @php
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->PT, 0.3, 0.5);
-                        }
-                    @endphp
-
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->Ca["min"] }} -
+                {{ $cultureData->Ca["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Ca,$cultureData->Ca["min"] , $cultureData->Ca["max"]) !!}
         </tr>
-
     </table>
     <table style="width:100%;font-size:10px;">
         <tr>
-            <th style="border:0px;text-align:left;color:green"><strong>Bilan ionique</strong></th>
+            <th style="border:0px;text-align:left;color:green"><strong>ELEMENTS NEFASTES</strong></th>
         </tr>
     </table>
-
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
-
+    <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
-            <td style="width:123px;">Sodium </td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">Na</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">% MS</td>
-            <td style="width:80px;border-right:1px solid black;text-align:center;">
+            <td style="width:130px;">Sodium </td>
+            <td style="width:22px;text-align:center;border-right:1px solid black;">Na</td>
+            <td style="width:40px;border-right:1px solid black;text-align:center;">% MS</td>
+            <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->NTK)) {
+                    if (empty($analyse_data->Na)) {
                         echo '-';
                     } else {
-                        echo Archivos::ft3nb($analyse_data->NTK, true);
+                        echo Archivos::ft3nb($analyse_data->Na, true);
                     }
                 @endphp
             </td>
-            <td style="width:60px;text-align:center;border-right:1px solid black;">
-                {{ $cultureData[5][$culture . '_min'] }} à {{ $cultureData[5][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:90px;">
-                <div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->PT, 0.3, 0.5);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="width: 60px;text-align:center;border-right:1px solid black;">{{ $cultureData->Na["min"] }} -
+                {{ $cultureData->Na["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Na,$cultureData->Na["min"] , $cultureData->Na["max"]) !!}
         </tr>
         <tr>
-            <td>Azote ammoniacal </td>
+            <td>Chlorure</td>
             <td style="text-align:center;border-right:1px solid black;">Cl</td>
             <td style="border-right:1px solid black;text-align:center;">% MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->NH4)) {
-                        echo '-';
-                    } else {
-                        echo Archivos::ft3nb($analyse_data->NH4 * 5, true);
-                    }
+                if (empty($analyse_data->Na)) {
+                    echo '-';
+                } else {
+                    echo Archivos::ft3nb($analyse_data->Na*1.3947534658436, true);
+                }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[6][$culture . '_min'] }} à
-                {{ $cultureData[6][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->NH4)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->NH4, 10.0, 20.0);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">
+                {{ $cultureData->Cl["min"] }} -
+                {{ $cultureData->Cl["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Na*1.3947534658436,$cultureData->Cl["min"] , $cultureData->Cl["max"]) !!}
         </tr>
     </table>
-
     <table style="width:100%;font-size:10px;">
         <tr>
             <th style="border:0px;text-align:left;color:green">OLIGO-ELEMENTS</th>
         </tr>
     </table>
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
-
+    <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
-            <td style="width:123px;">Zinc</td>
-            <td style="width:30px;text-align:center;border-right:1px solid black;">Zn</td>
-            <td style="width:42px;border-right:1px solid black;text-align:center;">mg/kg MS</td>
-            <td style="width:80px;border-right:1px solid black;text-align:center;">@php
+            <td style="width:130px;">Zinc</td>
+            <td style="width:22px;text-align:center;border-right:1px solid black;">Zn</td>
+            <td style="width:40px;border-right:1px solid black;text-align:center;">mg/kg MS</td>
+            <td style="width:75px;border-right:1px solid black;text-align:center;">@php
                 
                 if (empty($analyse_data->Zn)) {
                     echo '-';
@@ -456,24 +339,13 @@
             @endphp
             </td>
             <td style="width:60px;text-align:center;border-right:1px solid black;">
-                {{ $cultureData[7][$culture . '_min'] }} à {{ $cultureData[7][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:90px;">
-                <div style="position:absolute;padding:0px;margin:0px;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Zn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-                    @endphp
-                </div>
+                {{ $cultureData->Zn["min"] }} -
+                {{ $cultureData->Zn["max"] }}
             </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->Zn,$cultureData->Zn["min"] , $cultureData->Zn["max"]) !!}
         </tr>
         <tr>
-            <td>Cuivre <h6 style='color:red;'>(*)</h6>
+            <td>Cuivre 
             </td>
             <td style="text-align:center;border-right:1px solid black;">Cu</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -486,25 +358,12 @@
                     }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;">{{ round($cultureData[8][$culture . '_min']) }} à
-                {{ $cultureData[8][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Cu)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Cu, 2.0, 5.0);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->Cu["min"] }} -
+                {{ $cultureData->Cu["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Cu,$cultureData->Cu["min"] , $cultureData->Cu["max"]) !!}
         </tr>
         <tr>
-            <td>Manganèse <h6 style='color:red;'>(*)</h6>
+            <td>Manganèse 
             </td>
             <td style="text-align:center;border-right:1px solid black;">Mn</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -516,25 +375,12 @@
                         echo Archivos::ft3nb($analyse_data->Mn, true);
                     }
                 @endphp</td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[9][$culture . '_min'] }} à
-                {{ $cultureData[9][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Mn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Mn, 5.0, 20.0);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->Mn["min"] }} -
+                {{ $cultureData->Mn["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Mn,$cultureData->Mn["min"] , $cultureData->Mn["max"]) !!}
         </tr>
         <tr>
-            <td>Fer <h6 style='color:red;'>(*)</h6>
+            <td>Fer 
             </td>
             <td style="text-align:center;border-right:1px solid black;">Fe</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -546,22 +392,9 @@
                         echo Archivos::ft3nb($analyse_data->Fe, true);
                     }
                 @endphp</td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[10][$culture . '_min'] }} à
-                {{ $cultureData[10][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Fe)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Fe, 20, 50);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->Fe["min"] }} -
+                {{ $cultureData->Fe["max"] }}</td>
+                {!! Archivos::VEG($analyse_data->Fe,$cultureData->Fe["min"] , $cultureData->Fe["max"]) !!}
         </tr>
         <tr>
             <td>Bore </td>
@@ -569,28 +402,15 @@
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    if (empty($analyse_data->Bore)) {
+                    if (empty($analyse_data->B)) {
                         echo '-';
                     } else {
-                        echo Archivos::ft3nb($analyse_data->Bore, true);
+                        echo Archivos::ft3nb($analyse_data->B, true);
                     }
                 @endphp</td>
-            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData[11][$culture . '_min'] }} à
-                {{ $cultureData[11][$culture . '_max'] }}</td>
-            <td style="z-index:10;padding:0px !important;width:50px;">
-                <div style="position:absolute;padding:0px;margin:0px;">
-                    @php
-                        
-                        if (empty($analyse_data->Bore)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Bore, 0.3, 0.5);
-                        }
-                    @endphp
-                </div>
-            </td>
-            <td style="background:#b5feb4;width:50px;padding:0px !important"></td>
-            <td style="width:50px;padding:0px !important"></td>
+            <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->B["min"] }} -
+                {{ $cultureData->B["max"] }}</td>
+            {!! Archivos::VEG($analyse_data->B,$cultureData->B["min"] , $cultureData->B["max"]) !!}
         </tr>
     </table>
     <table style="width:100%;font-size:10px;">
@@ -598,203 +418,181 @@
             <th style="border:0px;text-align:left;color:green"><strong>EQUILIBRES NUTRITIONNELS</strong></th>
         </tr>
     </table>
-
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
-        <!----
-                    <tr>
-                      <th style="border-bottom:1px solid black;background:rgb(230, 230, 230);width:193px;z-index:10;padding:0px !important;"><div style="position:absolute;padding:0px;margin:0px;"> Equilibres /Stades physiologiques</div></th>
-                      <th style="border-bottom:1px solid black;background:rgb(230, 230, 230);width:61px;border-right:1px solid black;"></th>
-                      <th style="border-bottom:1px solid black;background:rgb(230, 230, 230);text-align:center;width:96px;border-right:1px solid black;">Croisssance</th>
-                      <th style="border-bottom:1px solid black;background:rgb(230, 230, 230);text-align:center;border-right:1px solid black;width:171px;">Mise en Fruit</th>
-                      <th style="border-bottom:1px solid black;background:rgb(230, 230, 230);text-align:center;border-right:1px solid black;">Maintien végétatif</th>
-                    </tr>
-                    -->
+    <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
-            <td>N/P</td>
-            <!-- ('=valeur NNO3*62/15)/(Valeur NNH4*18/14) -->
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
+            <td style="width: 130px">N/P</td>
+            <td style="width:22px;text-align:center;border-right:1px solid black;"></td>
+            <td style="width:40px;border-right:1px solid black;text-align:center;">-</td>
+            <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
-                if (empty($analyse_data->PT )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->PT)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->NTK / $analyse_data->PT, true);
+                    }
                 @endphp
 
 
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-
-            <td>
-                 @php
-                   if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-            @endphp
-            </td>
+            <td style="width:60px;text-align:center;border-right:1px solid black;">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->PT["min"]+$cultureData->PT["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed"></td>
+            <td style="width:121px;padding:0px !important"></td>
 
         </tr>
         <tr>
-            <td style="width: 195px">N/K </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; width:50px;" >-bola</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; width:90px;">
+            <td>N/K </td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; ">-
+            </td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; ">
                 @php
-                if (empty($analyse_data->PT )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->K)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->NTK / $analyse_data->K, true);
+                    }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; width:70px;">php</td>
-            <td>
-                @php
-                if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; ">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->K["min"]+$cultureData->K["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
 
         </tr>
         <tr>
-            <td style="border-right:1px solid black;border-left:1px solid black;">N/Ca</td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">hb-</td>
+            <td style="">N/Ca</td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
                 @php
-                if (empty($analyse_data->PT )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->PT)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->NTK / $analyse_data->Ca, true);
+                    }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            <td>
-                @php
-                 if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
-
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->Ca["min"]+$cultureData->Ca["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
         </tr>
         <tr>
             <td>Ca/P</td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                
+
                 @php
-                if (empty($analyse_data->PT )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->PT)) { 
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->Ca / $analyse_data->PT, true);
+                    }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-bb</td>
-            <td>
-                @php
-              if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->Ca["min"]+$cultureData->Ca["max"])/2)/(($cultureData->PT["min"]+$cultureData->PT["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
 
         </tr>
         <tr>
-            <td>K2O / CaO</td>
+            <td>K2O / Mg</td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                
+
                 @php
-                if (empty($analyse_data->PT )) {
-                        echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->Mg)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->K / $analyse_data->Mg, true);
+                    }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            <td>
-                @php
-            if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->K["min"]+$cultureData->K["max"])/2)/(($cultureData->Mg["min"]+$cultureData->Mg["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
 
         </tr>
 
 
         <tr>
-            <td>K2O / MgO</td>
+            <td>K2O / Ca</td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                
+
                 @php
-                if (empty($analyse_data->PT )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->NTK)/($analyse_data->PT), true);
-                     }
+                    if (empty($analyse_data->Ca)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->K / $analyse_data->Ca, true);
+                    }
                 @endphp
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
-            <td>
-                @php
-                if (empty($analyse_data->Znn)) {
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
-
-
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->K["min"]+$cultureData->K["max"])/2)/(($cultureData->Ca["min"]+$cultureData->Ca["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
         </tr>
 
         <tr>
-            <td>CaO / MgO</td>
+            <td>CaO / Mg</td>
+            <td style="text-align:center;border-right:1px solid black;"></td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-</td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-            
+
                 @php
-                if (empty($analyse_data->Mg )) {
-                         echo 'GHGH ';
-                     } else {
-                        echo Archivos::ft3nb(($analyse_data->Ca)/($analyse_data->Mg),true);
-                     }
-                @endphp
+                    if (empty($analyse_data->Mg)) {
+                        echo '_';
+                    } else {
+                        echo Archivos::ft3nb($analyse_data->Ca / $analyse_data->Mg, true);
+                    }
+                    // ((max1+min1)/2)/((max2+min2)/2)
+                @endphp  
             </td>
-            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">-ff</td>
-            
-
-            <td>
-                @php
-                  if (empty($analyse_data->Znn)){
-                            echo ' ';
-                        } else {
-                            echo Archivos::EAP($analyse_data->Zn, 2.0, 5.0);
-                        }
-           @endphp
-           </td>
-
+            <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->Ca["min"]+$cultureData->Ca["max"])/2)/(($cultureData->Mg["min"]+$cultureData->Mg["max"])/2),true) }}</td>
+            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
+            <td style="width:121px;padding:0px !important"></td>
+        </tr>
+    </table>
+    <table style="margin-left: 1px;font-size:10px;">
+        <tr>
+            <th
+                style="background: #b5feb4 !important; padding-top:10px;padding-bottom:10px;text-align:left;color:green;border-right: 1px solid black;border-bottom: 1px dotted black;width: 198px;border-left: 1px solid black;">
+                <strong>COMMENTAIRES : </strong>
+            </th>
+            <th
+                style="text-align:left;color:green;border-bottom: 1px dotted black;border-right: 1px solid black;width: 497.5px">
+            </th>
 
         </tr>
     </table>
-   
-    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px" width="500px">
+    <table style="margin-left: 1px;font-size:10px;">
+        <tr>
+            <th
+                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
+                *Teneur correcte en azote, mais trop élevée par rapport au calcium, montrant des feuilles plus juvéniles
+                que la référence. Ne pas accentuer les apports azotés et vérifier la disponibilité en calcium du sol.
+            </th>
+        </tr>
+    </table>
+    <table style="margin-left: 1px;font-size:10px;">
+        <tr>
+            <th
+                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
+                *Niveau correct en phosphore. Il est inutile d'augmenter ici les apports en cet élément.
+            </th>
+        </tr>
+    </table>
+    <table style="margin-left: 1px;font-size:10px;">
+        <tr>
+            <th
+                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
+                *Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.
+            </th>
+        </tr>
+    </table>
+    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px"
+        width="500px">
     <p class="text" style="font-size:8px;"><strong> FIN DE PAGE<br>
             ------------------------------<br>
             Laboratoire LACQ <br>
@@ -806,10 +604,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-

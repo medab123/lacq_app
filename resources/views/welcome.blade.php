@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="navbarList">
-        <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
+        <img src="{{ asset('img/LOGO-EV-RVB.png') }}" style="float:left;width: 80px;margin-left:20px;">
         <!-- Modal -->
         <div style="float:right;">
             <a style=" color: #f1f3ce;padding:16px;font-size: 14px;" class="text-uppercase"> {{ Auth::user()->name }}
@@ -93,8 +93,8 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center w-100 mt-5">
-        <div class="col-xl-2">
+    <div class="row  w-100 mt-5">
+        <div class="col-sm-12 col-md-4 d-flex justify-content-center text-center">
             <div class="card text-center" style="width: 18rem;">
                 <img class="card-img-top" src="{{ asset('img/ascending-graph-1173935.png') }}"
                     alt="Card image cap">
@@ -107,8 +107,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-2">
-            <div class="card text-center" style="width: 18rem;">
+        <div class="col-sm-12 col-md-4 d-flex justify-content-center text-center">
+            <div class="card text-center " style="width: 18rem;">
                 <img class="card-img-top mx-auto mt-1" src="{{ asset('img/laboratoire-logo-design-template.jpg') }}"
                     alt="Card image cap">
                 <div class="card-body">
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-2">
+        <div class="col-sm-12 col-md-4 d-flex justify-content-center text-center">
             <div class="card text-center" style="width: 18rem;">
                 <img class="card-img-top mx-auto pt-3" style="width: 163px !important"
                     src="{{ asset('img/administration.png') }}" alt="Card image cap">

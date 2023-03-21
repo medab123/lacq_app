@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CulturData;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CommandeController;
 use App\Models\Commande;
@@ -48,14 +49,21 @@ class ReportController extends Controller
         $culturData =null;
         $cultur = null;
         if($commande_info->culture != "_"){
-
             $cultur = strtolower($commande_info->culture);
-
-
-            $culturData = Cultur::select("prametre",$cultur."_min",$cultur."_max")->get()->toArray();
+            $culturData = CulturData::where('cultur_name',$cultur)->get(["parametre","min","max"])->toArray();
+           
+            $culturData2 = new \stdClass();
+            collect($culturData)->map(function($item) use ($culturData2){
+                $a = $item["parametre"];
+                $culturData2->$a = ["min" => $item["max"],"max"=>$item["min"]];
+                //echo $item["parametre"]."<br>";
+            });
+           
+            //$test->$a = 1;
             
         }
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data,"cultureData" => $culturData,"culture" => $cultur])->setOptions(['defaultFont' => 'sans-serif'])->stream();
+        //dd($culturData2,$culturData);
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data,"cultureData" => $culturData2,"culture" => $cultur])->setOptions(['defaultFont' => 'sans-serif'])->stream();
     }
 
 

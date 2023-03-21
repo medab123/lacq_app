@@ -15,16 +15,19 @@ div.form {
 }
 
 .navbarList {
+    background: rgb(87, 163, 52) !important;
+    background: linear-gradient(90deg, rgba(87, 163, 52, 1) 0%, rgba(242, 148, 0, 1) 100%) !important;
     display: block;
     height: 55px;
     margin-bottom: 30px;
-    background-color: #1e871e;
+    /*background-color: #1e871e;*/
     z-index: 2;
     position: sticky;
     top: 0;
 }
 
 .navbarList a {
+    
     display: block;
     font-size: 13px;
     font-family: system-ui;

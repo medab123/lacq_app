@@ -30,6 +30,7 @@ class Archivos
 
     public static function ft3nb($num, $force = false)
     {
+        
         $count = strlen(intval($num));
         if (is_float($num)) {
             if ($force) {
@@ -60,7 +61,7 @@ class Archivos
         return $new_date;
     }
 
-    public static function afficherBar($r, $min, $max, $prifix = null)
+    /*public static function afficherBar($r, $min, $max, $prifix = null)
     {
 
         //SI(R25<=$L25-($M25-$L25)
@@ -91,41 +92,9 @@ class Archivos
                 }
             }
         }
-    }
+    }*/
 
-    public static function EAP2($r, $min, $max, $prifix = null)
-    {
-
-        //SI(R25<=$L25-($M25-$L25)
-
-        if ($r <= $min - ($max - $min)) {
-
-            echo "<h6 style='color:#FFA500;font-size:8px'>IIIIII</h6>";
-        } else {
-
-            //SI(R25>=$M25+($M25-$L25);REPT("I";60)&"I"
-
-            if ($r >= $max + ($max - $min)) {
-
-                echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", 88);
-            }
-
-            //REPT("I";27+(K27-$L27)/($M27-$L27)*13)&"I")
-
-            else {
-
-                $calcul = 30 + ($r - $min) / ($max - $min) * 29;
-                $calcul = ($calcul < 0) ? 0 : $calcul;
-                if ($r <= $min) {
-                    echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>", $calcul);
-                } elseif ($r > $min && $r <= $max) {
-                    echo str_repeat("<h6 style='color:green;font-size:8px'>I</h6>", $calcul);
-                } elseif ($r > $max) {
-                    echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", $calcul);
-                }
-            }
-        }
-    }
+   
 
     public static function EAP($value, $min, $max)
     {
@@ -152,25 +121,27 @@ class Archivos
 
     public static function VEG($value, $min, $max)
     {
+        $graph = "";
+        $max_of_td = 42;
+        $moy = ($min+$max)/2;
 
-        $X = $value * 100 / ($max + $min);
-        //$X=35;
-        if ($X > 100);
-
-        $barre = (int)$X * 90 / 100;
-        //echo $X;
-        //echo$max;
-        //35
-        if ($X <= 30) {
-
-            echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>", $barre);
-        } else if ($X <= 60 && $X >= 30) {
-
-            echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>", $barre);
-        } else if ($X > 66) {
-
-            echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", $barre);
+        $x = (($moy - $value) * 100) / $moy;
+        $barre = abs((int)$x * $max_of_td / 100) > 42 ? 42 : abs((int)$x * $max_of_td / 100);
+    
+        if ($value < $min ) {
+            $graph = str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>", $barre);
+        } else if ($value >= $min && $value <= $max) {
+            $graph =  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>", $barre);
+        } else if ($value > $max) {
+            $graph = str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", $barre);
         }
+        //$graph = $x;
+        if($value<=$moy)
+        return  '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">  '.$graph.'</td>
+                 <td style="width: 121px;padding:0px !important">'.''.'</td>';
+        if($value>$moy)
+        return  '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">'.''.'</td>
+                 <td style="width: 121px;padding:0px !important">  '.$graph.'</td>';
     }
 
 
