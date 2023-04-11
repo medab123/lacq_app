@@ -19,7 +19,7 @@ abstract class PackageServiceProvider extends ServiceProvider
     {
         $this->registeringPackage();
 
-        $this->package = new Package();
+        $this->package = $this->newPackage();
 
         $this->package->setBasePath($this->getPackageBaseDir());
 
@@ -38,9 +38,22 @@ abstract class PackageServiceProvider extends ServiceProvider
         return $this;
     }
 
+    public function newPackage(): Package
+    {
+        return new Package();
+    }
+
     public function boot()
     {
         $this->bootingPackage();
+
+        if ($this->package->hasTranslations) {
+            $langPath = 'vendor/' . $this->package->shortName();
+
+            $langPath = (function_exists('lang_path'))
+                ? lang_path($langPath)
+                : resource_path('lang/' . $langPath);
+        }
 
         if ($this->app->runningInConsole()) {
             foreach ($this->package->configFileNames as $configFileName) {
@@ -57,16 +70,26 @@ abstract class PackageServiceProvider extends ServiceProvider
 
             $now = Carbon::now();
             foreach ($this->package->migrationFileNames as $migrationFileName) {
+                $filePath = $this->package->basePath("/../database/migrations/{$migrationFileName}.php");
+                if (! file_exists($filePath)) {
+                    // Support for the .stub file extension
+                    $filePath .= '.stub';
+                }
+
                 $this->publishes([
-                    $this->package->basePath("/../database/migrations/{$migrationFileName}.php.stub") => $this->generateMigrationName(
+                    $filePath => $this->generateMigrationName(
                         $migrationFileName,
                         $now->addSecond()
                     ), ], "{$this->package->shortName()}-migrations");
+
+                if ($this->package->runsMigrations) {
+                    $this->loadMigrationsFrom($filePath);
+                }
             }
 
             if ($this->package->hasTranslations) {
                 $this->publishes([
-                    $this->package->basePath('/../resources/lang') => resource_path("lang/vendor/{$this->package->shortName()}"),
+                    $this->package->basePath('/../resources/lang') => $langPath,
                 ], "{$this->package->shortName()}-translations");
             }
 
@@ -88,7 +111,8 @@ abstract class PackageServiceProvider extends ServiceProvider
             );
 
             $this->loadJsonTranslationsFrom($this->package->basePath('/../resources/lang/'));
-            $this->loadJsonTranslationsFrom(resource_path('lang/vendor/'. $this->package->shortName()));
+
+            $this->loadJsonTranslationsFrom($langPath);
         }
 
         if ($this->package->hasViews) {
@@ -134,7 +158,7 @@ abstract class PackageServiceProvider extends ServiceProvider
             $migrationFileName = Str::of($migrationFileName)->afterLast('/');
         }
 
-        foreach (glob(database_path("${migrationsPath}*.php")) as $filename) {
+        foreach (glob(database_path("{$migrationsPath}*.php")) as $filename) {
             if ((substr($filename, -$len) === $migrationFileName . '.php')) {
                 return $filename;
             }

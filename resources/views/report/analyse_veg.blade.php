@@ -93,7 +93,7 @@
                 <label style="font-size:9px;margin:0;padding:0;">Laboratoire d'Analyses et Contrôle<br> Qualité ELEPHANT
                     VERT <br>MAROC S.A. </label>
                 <br>
-                <label style="color:green;font-size:11px;">LAB03F62-Vd</label>
+                <label style="color:green;font-size:11px;">LAB03F62-Ve</label>
             </td>
             <td style="align-self: center;">
                 <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE DE
@@ -152,6 +152,14 @@
 
         </tr>
         <tr>
+            <th class="head bordered" style="width: 150px;">Lieu d'exécution des essais : :</th>
+            <td class="bordered">{{ $commande_info->lieu ?? "_" }}</td>
+            <th class="head bordered" style="width: 150px;">Quantité récéptionnée: </th>
+            <td class="bordered">{{ $commande_info->quantite }}</td>
+
+        </tr>
+
+        <tr>
             <th class="head bordered" style="width: 150px;">Référence client :</th>
             <td class="bordered" colspan="3">{{ $commande_info->ref_client }}</td>
         </tr>
@@ -162,11 +170,11 @@
             <td class="bordered">{{ $client_info->organisme }}</td>
         </tr>
     </table>
-    <table style="width:100%;font-size:10px;margin-top:;border:1px solid black;">
+    <table style="width:100%;font-size:10px;margin-top:10px;border:1px solid black;">
         <tr class="head bordered">
             <th style="width:151px;text-align: left;padding-left:10px ">Paramètres</th>
-            <th style="width:39px;">Sym.</th>
-            <th class=" bordered" style="width:50px;">Unité</th>
+            <th style="width:34px;">Sym.</th>
+            <th class=" bordered" style="width:59px;">Unité</th>
             <th class=" bordered" style="width:91px;">Résultats</th>
             <th class=" bordered" style="width:70px;">Niveau souhaitable</th>
             <th class=" bordered"> Appréciation</th>
@@ -188,7 +196,7 @@
         <tr>
             <td style="width:130px;">Azote total</td>
             <td style="width:22px;text-align:center;border-right:1px solid black;">NTK</td>
-            <td style="width:40px;border-right:1px solid black;text-align:center;">%MS</td>
+            <td style="width:50px;border-right:1px solid black;text-align:center;">%MS</td>
             <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
                     if (empty($analyse_data->NTK)) {
@@ -277,15 +285,21 @@
         </tr>
     </table>
     <table style="width:100%;font-size:10px;">
-        <tr>
-            <th style="border:0px;text-align:left;color:green"><strong>ELEMENTS NEFASTES</strong></th>
+        <tr style="font-size:10px;">
+            <td colspan="4" class="" style="padding: 0;text-align:left;color:green;"><strong
+                    style="margin-left:-10px;padding:0">ELEMENTS NEFASTES</strong></td>
+
+            <td class="" style="width:65px;text-align:left; color:orange; font-weight: 900;">Faible</td>
+            <td class="" style="width:65px;text-align:center; color:green; font-weight: 900;">Correct</td>
+            <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
     </table>
+    
     <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
             <td style="width:130px;">Sodium </td>
             <td style="width:22px;text-align:center;border-right:1px solid black;">Na</td>
-            <td style="width:40px;border-right:1px solid black;text-align:center;">% MS</td>
+            <td style="width:50px;border-right:1px solid black;text-align:center;">% MS</td>
             <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
                     if (empty($analyse_data->Na)) {
@@ -319,15 +333,20 @@
         </tr>
     </table>
     <table style="width:100%;font-size:10px;">
-        <tr>
-            <th style="border:0px;text-align:left;color:green">OLIGO-ELEMENTS</th>
+        <tr style="font-size:10px;">
+            <td colspan="4" class="" style="padding: 0;text-align:left;color:green;"><strong
+                    style="margin-left:-10px;padding:0">OLIGO-ELEMENTS</strong></td>
+
+            <td class="" style="width:65px;text-align:left; color:orange; font-weight: 900;">Faible</td>
+            <td class="" style="width:65px;text-align:center; color:green; font-weight: 900;">Correct</td>
+            <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
     </table>
     <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
             <td style="width:130px;">Zinc</td>
             <td style="width:22px;text-align:center;border-right:1px solid black;">Zn</td>
-            <td style="width:40px;border-right:1px solid black;text-align:center;">mg/kg MS</td>
+            <td style="width:50px;border-right:1px solid black;text-align:center;">mg/kg MS</td>
             <td style="width:75px;border-right:1px solid black;text-align:center;">@php
                 
                 if (empty($analyse_data->Zn)) {
@@ -414,15 +433,21 @@
         </tr>
     </table>
     <table style="width:100%;font-size:10px;">
-        <tr>
-            <th style="border:0px;text-align:left;color:green"><strong>EQUILIBRES NUTRITIONNELS</strong></th>
+        <tr style="font-size:10px;">
+            <td colspan="4" class="" style="padding: 0;text-align:left;color:green;"><strong
+                    style="margin-left:-10px;padding:0">EQUILIBRES NUTRITIONNELS</strong></td>
+
+            <td class="" style="width:65px;text-align:left; color:orange; font-weight: 900;">Faible</td>
+            <td class="" style="width:65px;text-align:center; color:green; font-weight: 900;">Correct</td>
+            <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
     </table>
+  
     <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
             <td style="width: 130px">N/P</td>
             <td style="width:22px;text-align:center;border-right:1px solid black;"></td>
-            <td style="width:40px;border-right:1px solid black;text-align:center;">-</td>
+            <td style="width:50px;border-right:1px solid black;text-align:center;">-</td>
             <td style="width:75px;border-right:1px solid black;text-align:center;">
                 @php
                     if (empty($analyse_data->PT)) {
@@ -435,8 +460,7 @@
 
             </td>
             <td style="width:60px;text-align:center;border-right:1px solid black;">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->PT["min"]+$cultureData->PT["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed"></td>
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->NTK / $analyse_data->PT,$cultureData->NrP["min"] , $cultureData->NrP["max"]) !!}
 
         </tr>
         <tr>
@@ -454,8 +478,7 @@
                 @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black; ">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->K["min"]+$cultureData->K["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->NTK / $analyse_data->K,$cultureData->NrK["min"] , $cultureData->NrK["max"]) !!}
 
         </tr>
         <tr>
@@ -472,8 +495,7 @@
                 @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->NTK["min"]+$cultureData->NTK["max"])/2)/(($cultureData->Ca["min"]+$cultureData->Ca["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->NTK / $analyse_data->Ca,$cultureData->NrCa["min"] , $cultureData->NrCa["max"]) !!}
         </tr>
         <tr>
             <td>Ca/P</td>
@@ -490,8 +512,7 @@
                 @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->Ca["min"]+$cultureData->Ca["max"])/2)/(($cultureData->PT["min"]+$cultureData->PT["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->Ca / $analyse_data->PT,$cultureData->CarP["min"] , $cultureData->CarP["max"]) !!}
 
         </tr>
         <tr>
@@ -509,8 +530,7 @@
                 @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->K["min"]+$cultureData->K["max"])/2)/(($cultureData->Mg["min"]+$cultureData->Mg["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->K / $analyse_data->Mg,$cultureData->KrmG["min"] , $cultureData->KrmG["max"]) !!}
 
         </tr>
 
@@ -530,8 +550,7 @@
                 @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->K["min"]+$cultureData->K["max"])/2)/(($cultureData->Ca["min"]+$cultureData->Ca["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->K / $analyse_data->Ca,$cultureData->KrCa["min"] , $cultureData->KrCa["max"]) !!}
         </tr>
 
         <tr>
@@ -550,8 +569,7 @@
                 @endphp  
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->Ca["min"]+$cultureData->Ca["max"])/2)/(($cultureData->Mg["min"]+$cultureData->Mg["max"])/2),true) }}</td>
-            <td style="width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">
-            <td style="width:121px;padding:0px !important"></td>
+            {!! Archivos::VEG($analyse_data->Ca / $analyse_data->Mg,$cultureData->CarMg["min"] , $cultureData->CarMg["max"]) !!}
         </tr>
     </table>
     <table style="margin-left: 1px;font-size:10px;">
@@ -566,32 +584,9 @@
 
         </tr>
     </table>
-    <table style="margin-left: 1px;font-size:10px;">
-        <tr>
-            <th
-                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
-                *Teneur correcte en azote, mais trop élevée par rapport au calcium, montrant des feuilles plus juvéniles
-                que la référence. Ne pas accentuer les apports azotés et vérifier la disponibilité en calcium du sol.
-            </th>
-        </tr>
-    </table>
-    <table style="margin-left: 1px;font-size:10px;">
-        <tr>
-            <th
-                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
-                *Niveau correct en phosphore. Il est inutile d'augmenter ici les apports en cet élément.
-            </th>
-        </tr>
-    </table>
-    <table style="margin-left: 1px;font-size:10px;">
-        <tr>
-            <th
-                style="width: 698px; padding-top:10px;padding-bottom:10px;text-align:left;border-right: 1px solid black;border-bottom: 1px dotted black;border-left: 1px solid black;">
-                *Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.
-            </th>
-        </tr>
-    </table>
-    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:20px"
+    
+    {!! Archivos::commants($analyse_data,$cultureData) !!}
+    <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:50px"
         width="500px">
     <p class="text" style="font-size:8px;"><strong> FIN DE PAGE<br>
             ------------------------------<br>

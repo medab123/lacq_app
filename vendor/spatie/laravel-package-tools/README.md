@@ -1,3 +1,6 @@
+
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
+
 # Tools for creating Laravel packages
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-package-tools.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-package-tools)
@@ -264,7 +267,7 @@ This will copy over the assets to the `public/vendor/<your-package-name>` direct
 
 ### Working with migrations
 
-The `PackageServiceProvider` assumes that any migrations are placed in this directory: `<package root>/database/migrations`. Inside that directory you can put any migrations. Make sure they all have a `php.stub` extension. Using that extension will make sure that static analysers won't get confused with classes existing in multiple places when your migration gets published.
+The `PackageServiceProvider` assumes that any migrations are placed in this directory: `<package root>/database/migrations`. Inside that directory you can put any migrations.
 
 To register your migration, you should pass its name without the extension to the `hasMigration` table. 
 
@@ -291,6 +294,15 @@ php artisan vendor:publish --tag=your-package-name-migrations
 ```
 
 Like you might expect, published migration files will be prefixed with the current datetime.
+
+You can also enable the migrations to be registered without needing the users of your package to publish them:
+
+```php
+$package
+    ->name('your-package-name')
+    ->hasMigrations(['my_package_tables', 'some_other_migration'])
+    ->runsMigrations();
+```
 
 ### Registering commands
 
@@ -356,7 +368,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 

@@ -62,7 +62,7 @@ class ReportController extends Controller
             //$test->$a = 1;
             
         }
-        //dd($culturData2,$culturData);
+            //dd($analyse_data,$culturData);
         return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($analyse_blade,["commantair" => $commantair,"commande_info" => $commande_info,"client_info" => $client_info,"analyse_data" => $analyse_data,"cultureData" => $culturData2,"culture" => $cultur])->setOptions(['defaultFont' => 'sans-serif'])->stream();
     }
 
