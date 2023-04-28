@@ -15,6 +15,7 @@ class CreateCulturDataTable extends Migration
     {
         Schema::create('cultur_data', function (Blueprint $table) {
             $table->id();
+            
             $table->timestamps();
         });
     }
