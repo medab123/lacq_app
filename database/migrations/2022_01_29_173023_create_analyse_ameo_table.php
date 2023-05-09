@@ -17,7 +17,6 @@ class CreateAnalyseAmeoTable extends Migration
             $table->id();
             $table->unsignedBigInteger("commande_id");
             $table->float("MS")->nullable();
-            
             $table->string("Etat")->nullable();
             $table->float("PH")->nullable();
             $table->float("EC")->nullable();

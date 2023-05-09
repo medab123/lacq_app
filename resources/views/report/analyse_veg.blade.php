@@ -43,9 +43,6 @@
             background-color: #b5feb4 !important;
 
         }
-
-        
-
         tr,
         td {
             margin: 0 !important;
@@ -210,7 +207,7 @@
                 {{ $cultureData->NTK["min"] }} -
                 {{ $cultureData->NTK["max"] }}</td>
                 {!! Archivos::VEG($analyse_data->NTK,$cultureData->NTK["min"] , $cultureData->NTK["max"]) !!}
-            
+
         </tr>
         <tr>
             <td>Phosphore </td>
@@ -218,7 +215,7 @@
             <td style="border-right:1px solid black;text-align:center;">%MS</td>
             <td style="border-right:1px solid black;text-align:center;">
                 @php
-                    
+
                     if (empty($analyse_data->PT)) {
                         echo '-';
                     } else {
@@ -230,7 +227,7 @@
             </td>
             <td style="text-align:center;border-right:1px solid black;">{{ $cultureData->PT["min"] }} -
                 {{ $cultureData->PT["max"] }} </td>
-                {!! Archivos::VEG($analyse_data->PT,$cultureData->PT["min"] , $cultureData->PT["max"]) !!}
+
         </tr>
         <tr>
             <td>Potassium </td>
@@ -294,7 +291,7 @@
             <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
     </table>
-    
+
     <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
             <td style="width:130px;">Sodium </td>
@@ -348,13 +345,13 @@
             <td style="width:22px;text-align:center;border-right:1px solid black;">Zn</td>
             <td style="width:50px;border-right:1px solid black;text-align:center;">mg/kg MS</td>
             <td style="width:75px;border-right:1px solid black;text-align:center;">@php
-                
+
                 if (empty($analyse_data->Zn)) {
                     echo '-';
                 } else {
                     echo Archivos::ft3nb($analyse_data->Zn, true);
                 }
-                
+
             @endphp
             </td>
             <td style="width:60px;text-align:center;border-right:1px solid black;">
@@ -364,7 +361,7 @@
             {!! Archivos::VEG($analyse_data->Zn,$cultureData->Zn["min"] , $cultureData->Zn["max"]) !!}
         </tr>
         <tr>
-            <td>Cuivre 
+            <td>Cuivre
             </td>
             <td style="text-align:center;border-right:1px solid black;">Cu</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -382,7 +379,7 @@
                 {!! Archivos::VEG($analyse_data->Cu,$cultureData->Cu["min"] , $cultureData->Cu["max"]) !!}
         </tr>
         <tr>
-            <td>Manganèse 
+            <td>Manganèse
             </td>
             <td style="text-align:center;border-right:1px solid black;">Mn</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -399,7 +396,7 @@
                 {!! Archivos::VEG($analyse_data->Mn,$cultureData->Mn["min"] , $cultureData->Mn["max"]) !!}
         </tr>
         <tr>
-            <td>Fer 
+            <td>Fer
             </td>
             <td style="text-align:center;border-right:1px solid black;">Fe</td>
             <td style="border-right:1px solid black;text-align:center;">mg/kg MS</td>
@@ -442,7 +439,7 @@
             <td class="" style="width:65px; text-align:right; color:red; font-weight: 900;">Elevé</td>
         </tr>
     </table>
-  
+
     <table style="width:100%;font-size:10px;margin-top:0;border:1px solid black;">
         <tr>
             <td style="width: 130px">N/P</td>
@@ -504,7 +501,7 @@
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
 
                 @php
-                    if (empty($analyse_data->PT)) { 
+                    if (empty($analyse_data->PT)) {
                         echo '_';
                     } else {
                         echo Archivos::ft3nb($analyse_data->Ca / $analyse_data->PT, true);
@@ -566,7 +563,7 @@
                         echo Archivos::ft3nb($analyse_data->Ca / $analyse_data->Mg, true);
                     }
                     // ((max1+min1)/2)/((max2+min2)/2)
-                @endphp  
+                @endphp
             </td>
             <td style="text-align:center;border-right:1px solid black;border-left:1px solid black;">{{ Archivos::ft3nb((($cultureData->Ca["min"]+$cultureData->Ca["max"])/2)/(($cultureData->Mg["min"]+$cultureData->Mg["max"])/2),true) }}</td>
             {!! Archivos::VEG($analyse_data->Ca / $analyse_data->Mg,$cultureData->CarMg["min"] , $cultureData->CarMg["max"]) !!}
@@ -584,7 +581,7 @@
 
         </tr>
     </table>
-    
+
     {!! Archivos::commants($analyse_data,$cultureData) !!}
     <img src="{{ Archivos::imagenABase64(public_path('img/signature.png')) }}" style="margin-top:50px"
         width="500px">

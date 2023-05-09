@@ -49,7 +49,7 @@ class Archivos
                 }
             }
         } else {
-            $num2 = ($force && $count < 3) ?  number_format($num, 3 - $count) : $num;
+            $num2 = ($force && $count < 3) ? number_format($num, 3 - $count) : $num;
         }
         return $num2;
     }
@@ -65,9 +65,10 @@ class Archivos
 
         $x = $value * 100 / ($max + $min);
         //$x=35;
-        if ($x > 100);
+        if ($x > 100)
+            ;
 
-        $barre = (int)$x * 90 / 100;
+        $barre = (int) $x * 90 / 100;
         //echo $x;
         //echo$max;
         //35
@@ -76,7 +77,7 @@ class Archivos
             echo str_repeat("<h6 style='color:#FFA500;font-size:8px'>I</h6>", $barre);
         } else if ($x <= 60 && $x >= 30) {
 
-            echo  str_repeat("<h6 style='color:green;font-size:8px'>I</h6>", $barre);
+            echo str_repeat("<h6 style='color:green;font-size:8px'>I</h6>", $barre);
         } else if ($x > 66) {
 
             echo str_repeat("<h6 style='color:red;font-size:8px'>I</h6>", $barre);
@@ -92,51 +93,103 @@ class Archivos
         $graph = "";
         $max_of_td = 41;
         $x = (($value - $moy) * 100) / $max2;
-        $barre = max(0, min(abs((int)$x * $max_of_td / 100), $max_of_td));
+        $barre = max(0, min(abs((int) $x * $max_of_td / 100), $max_of_td));
         $color = ($value < $min) ? "#FFA500" : (($value > $max) ? "red" : "green");
         $graph = str_repeat("<h6 style='color:$color;font-size:8px'>I</h6>", $barre);
-        $graph = self::generateGraph($value <= $moy, $barre); // Red
+        $graph = self::generateGraph($barre, $value <= $moy); // Red
         if ($value <= $moy)
-            return  '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">  ' . $graph . '</td>
+            return '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">  ' . $graph . '</td>
                  <td style="width: 121px;padding:0px !important">' . '' . '</td>';
         if ($value > $moy)
-            return  '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">' . '' . '</td>
+            return '<td style="text-align:right;width: 121px;z-index:10;padding:0px !important;border-right: black 1px dashed">' . '' . '</td>
                  <td style="width: 121px;padding:0px !important">  ' . $graph . '</td>';
     }
-    public static function generateGraph($choix, $n)
+    public static function SOL($value, $min0, $max0)
     {
-        $n = intval($n);
-        $res = "";
-        $color = $choix ? [255 - ((41 - $n) * 6.3), 180 + ((41 - $n) * 1.8), 0] : [0, 255, 0];
-        // Calculate the color step based on the number of elements
-        for ($i = 0; $i < $n; $i++) {
-            if ($choix == 1) {
-                $color = [max($color[0] - 6.3, 0), max(0, $color[1] + 1.8), $color[2]];
-            } else {
-                $color = [min($color[0] + 6.3, 255), max(0, $color[1] - 6.3), $color[2]];
+        $min = min($max0, $min0);
+        $max = max($max0, $min0);
+        $moy = ($min + $max) / 2;
+        $x = $value * 100 / ($max + $min);
+        //$x=35;
+        if ($x > 100)
+            ;
+
+        $barre = (int) $x * 30 / 100;
+        $graph = self::generateGraph($barre, 1, "sol"); // Red
+        //echo $barre;
+        return $graph;
+
+    }
+    public static function generateGraph($n, $choix, $type = "veg")
+    {
+        if ($type == "veg") {
+            $n = intval($n);
+            $res = "";
+            $color = $choix ? [255 - ((41 - $n) * 6.3), 180 + ((41 - $n) * 1.8), 0] : [0, 255, 0]; // 255,180,0
+            // Calculate the color step based on the number of elements
+            for ($i = 0; $i < $n; $i++) {
+                if ($choix == 1) {
+                    $color = [max($color[0] - 6.3, 0), max(0, $color[1] + 1.8), $color[2]];
+                } else {
+                    $color = [min($color[0] + 6.3, 255), max(0, $color[1] - 6.3), $color[2]];
+                }
+                $res .= "<h6 style='color:rgb(" . $color[0] . "," . $color[1] . "," . $color[2] . ");font-size:8px'>I</h6>";
             }
-            $res .= "<h6 style='color:rgb(" . $color[0] . "," . $color[1] . "," . $color[2] . ");font-size:8px'>I</h6>";
+        }
+        if ($type == "sol") {
+            $iterations = 29;
+            $n = intval($n);
+            $res = "";
+            $startColor = [255, 180, 0];
+            $passingColor = [0, 255, 0];
+            $endColor = [255, 0, 0];
+
+            $result = array();
+
+            // Calculate the incremental changes for each color component
+            $rStep1 = ($passingColor[0] - $startColor[0]) / floor($iterations / 2);
+            $gStep1 = ($passingColor[1] - $startColor[1]) / floor($iterations / 2);
+            $bStep1 = ($passingColor[2] - $startColor[2]) / floor($iterations / 2);
+
+            $rStep2 = ($endColor[0] - $passingColor[0]) / ceil($iterations / 2);
+            $gStep2 = ($endColor[1] - $passingColor[1]) / ceil($iterations / 2);
+            $bStep2 = ($endColor[2] - $passingColor[2]) / ceil($iterations / 2);
+            // Generate the colors for all iterations
+            for ($i = 0; $i < $iterations; $i++) {
+                if ($i < $iterations / 2) {
+                    $r = intval($startColor[0] + ($i * $rStep1));
+                    $g = intval($startColor[1] + ($i * $gStep1));
+                    $b = intval($startColor[2] + ($i * $bStep1));
+                } else {
+                    $r = intval($passingColor[0] + ($i - floor($iterations / 2)) * $rStep2);
+                    $g = intval($passingColor[1] + ($i - floor($iterations / 2)) * $gStep2);
+                    $b = intval($passingColor[2] + ($i - floor($iterations / 2)) * $bStep2);
+                }
+                $res .= "<h6 style='color:rgb(" . $r . "," . $g . "," . $b . ");font-size:8px'>I</h6>";
+                if ($n == $i)
+                    break;
+            }
         }
         return $res;
     }
     public static function parametreStatusSec3($res, $min0, $max0)
     {
-       // echo $min0."  ". $max0 ,"<br>";
-        $min = min($min0,$max0);
-        $max = max($min0,$max0);
+        // echo $min0."  ". $max0 ,"<br>";
+        $min = min($min0, $max0);
+        $max = max($min0, $max0);
         if ($res > $max) {
             return "Elevé";
-        }else if ($res < $min) {
+        } else if ($res < $min) {
             return "Faible";
         } else {
             return "correct";
         }
     }
-    public static function parametreStatusSec1($res,$min0, $max0)
-    { 
+    public static function parametreStatusSec1($res, $min0, $max0)
+    {
         //echo $res,$min0, $max0 ,"<br>";
-        $min = min($min0,$max0);
-        $max = max($min0,$max0);
+        $min = min($min0, $max0);
+        $max = max($min0, $max0);
         $moy = ($min + $max) / 2;
         $coef = 1 - ($min / $moy);
         $t_max = $moy * (1 + (3 * $coef));
@@ -157,306 +210,239 @@ class Archivos
     public static function com1(\stdClass $data)
     {
 
-        $res_ntk     = $data->NTK["res"];
-        $min_ntk     = $data->NTK["min"];
-        $max_ntk     = $data->NTK["max"];
-        $res_ca      = $data->Ca["res"];
-        $min_ca      = $data->Ca["min"];
-        $max_ca      = $data->Ca["max"];
-        $res_nRca    = $data->NTK["res"]/$data->Ca["res"];
-        $min_nRca    = $data->NrCa["min"];
-        $max_nRca    = $data->NrCa["max"];
-        $status_ntk  = self::parametreStatusSec1($res_ntk, $min_ntk, $max_ntk);
-        $status_ca   = self::parametreStatusSec1($res_ca, $min_ca, $max_ca);
+        $res_ntk = $data->NTK["res"];
+        $min_ntk = $data->NTK["min"];
+        $max_ntk = $data->NTK["max"];
+        $res_ca = $data->Ca["res"];
+        $min_ca = $data->Ca["min"];
+        $max_ca = $data->Ca["max"];
+        $res_nRca = $data->NTK["res"] / $data->Ca["res"];
+        $min_nRca = $data->NrCa["min"];
+        $max_nRca = $data->NrCa["max"];
+        $status_ntk = self::parametreStatusSec1($res_ntk, $min_ntk, $max_ntk);
+        $status_ca = self::parametreStatusSec1($res_ca, $min_ca, $max_ca);
         $status_nRca = self::parametreStatusSec3($res_nRca, $min_nRca, $max_nRca);
         //dd($status_ntk, $status_ca, $status_nRca);
 
-        $commantaire     = "";
-        if ($status_ntk   == "Très faible" && $status_nRca == "Faible") {
-            $commantaire =  "Teneur très limitée en azote aussi bien en niveau qu'en équlibre avec le calcium. Cela traduit un végétal plus sénescent que la référence. Vérifier la disponibilité azotée et hydrique sur cette parcelle (en terme de quantité et de régularité des apports).";
+        $commantaire = "";
+        if ($status_ntk == "Très faible" && $status_nRca == "Faible") {
+            $commantaire = "Teneur très limitée en azote aussi bien en niveau qu'en équlibre avec le calcium. Cela traduit un végétal plus sénescent que la référence. Vérifier la disponibilité azotée et hydrique sur cette parcelle (en terme de quantité et de régularité des apports).";
         } else if ($status_ntk == "Très faible" && $status_nRca == "correct") {
-            $commantaire =  "Teneur très faible en azote, mais en équilibre correct vis-à-vis du calcium. Cela montre un déséquilibre végétatif très important ou un phénomène de dilution.";
+            $commantaire = "Teneur très faible en azote, mais en équilibre correct vis-à-vis du calcium. Cela montre un déséquilibre végétatif très important ou un phénomène de dilution.";
         } else if ($status_ntk == "Très faible" && $status_nRca == "Elevé") {
-            $commantaire =  " Très faibles teneurs en azote et en calcium, montrant un phénomène de dilution. Le rapport N/Ca élevé, traduit des feuilles trop juvéniles. Ne pas accentuer les apports en azote et vérifier impérativement la disponibilité en calcium.";
+            $commantaire = " Très faibles teneurs en azote et en calcium, montrant un phénomène de dilution. Le rapport N/Ca élevé, traduit des feuilles trop juvéniles. Ne pas accentuer les apports en azote et vérifier impérativement la disponibilité en calcium.";
         } else if ($status_ntk == "Faible" && $status_nRca == "Faible") {
-            $commantaire =  "Teneur limitée en azote aussi bien en niveau qu'en équlibre avec le calcium. Cela traduit un végétal plus sénescent que la référence. Vérifier la disponibilité azotée et hydrique sur cette parcelle (en terme de quantité et de régularité des apports).";
+            $commantaire = "Teneur limitée en azote aussi bien en niveau qu'en équlibre avec le calcium. Cela traduit un végétal plus sénescent que la référence. Vérifier la disponibilité azotée et hydrique sur cette parcelle (en terme de quantité et de régularité des apports).";
         } else if ($status_ntk == "Faible" && $status_ca == "faible" && $status_nRca == "correct") {
-            $commantaire =  "Teneur faible en azote, mais en équilibre correct vis-à-vis du calcium. Cela montre un déséquilibre végétatif important ou un phénomène de dilution. ";
+            $commantaire = "Teneur faible en azote, mais en équilibre correct vis-à-vis du calcium. Cela montre un déséquilibre végétatif important ou un phénomène de dilution. ";
         } else if ($status_ntk == "Faible" && $status_nRca == "correct") {
-            $commantaire =  "Teneur faible en azote. Vérifier l'équilibre végétatif et la disponibilité azotée et hydrique sur cette parcelle.";
+            $commantaire = "Teneur faible en azote. Vérifier l'équilibre végétatif et la disponibilité azotée et hydrique sur cette parcelle.";
         } else if ($status_ntk == "Faible" && $status_nRca == "Elevé") {
-            $commantaire =  "Faibles teneurs en azote et en calcium, montrant un phénomène de dilution. Le rapport N/Ca élevé, traduit des feuilles trop juvéniles. Ne pas accentuer les apports en azote. Vérifier impérativement la disponibilité en calcium du sol.";
+            $commantaire = "Faibles teneurs en azote et en calcium, montrant un phénomène de dilution. Le rapport N/Ca élevé, traduit des feuilles trop juvéniles. Ne pas accentuer les apports en azote. Vérifier impérativement la disponibilité en calcium du sol.";
         } else if ($status_ntk == "correct" && $status_nRca == "Faible") {
-            $commantaire =  "Niveau correct en azote, mais trop moyen par rapport au calcium. Vérifier l'équilibre végétatif et la disponibilité azotée et hydrique sur cette parcelle.";
+            $commantaire = "Niveau correct en azote, mais trop moyen par rapport au calcium. Vérifier l'équilibre végétatif et la disponibilité azotée et hydrique sur cette parcelle.";
         } else if ($status_ntk == "correct" && $status_nRca == "correct") {
-            $commantaire =  "Niveau correct en azote et en équilibre favorable vis-à-vis du calcium, montrant une bonne gestion de la fertilisation azotée.";
+            $commantaire = "Niveau correct en azote et en équilibre favorable vis-à-vis du calcium, montrant une bonne gestion de la fertilisation azotée.";
         } else if ($status_ntk == "correct" && $status_nRca == "Elevé") {
-            $commantaire =  "Teneur correcte en azote, mais trop élevée par rapport au calcium, montrant des feuilles plus juvéniles que la référence. Ne pas accentuer les apports azotés et vérifier la disponibilité en calcium du sol.";
+            $commantaire = "Teneur correcte en azote, mais trop élevée par rapport au calcium, montrant des feuilles plus juvéniles que la référence. Ne pas accentuer les apports azotés et vérifier la disponibilité en calcium du sol.";
         } else if ($status_ntk == "Elevé" && $status_nRca == "Faible") {
-            $commantaire =  "Niveaux soutenus en azote et calcium liés à un effet de concentration, mais le rapport N/Ca est limité. Vérifier l'équilibre végétatif / fructifère et la disponibilité hydrique.";
+            $commantaire = "Niveaux soutenus en azote et calcium liés à un effet de concentration, mais le rapport N/Ca est limité. Vérifier l'équilibre végétatif / fructifère et la disponibilité hydrique.";
         } else if ($status_ntk == "Elevé" && $status_nRca == "correct") {
-            $commantaire =  "Niveau déja soutenu en azote, mais en équilibre correct avec le calcium, ne pas accentuer les apports d'azote sur cette parcelle.";
+            $commantaire = "Niveau déja soutenu en azote, mais en équilibre correct avec le calcium, ne pas accentuer les apports d'azote sur cette parcelle.";
         } else if ($status_ntk == "Elevé" && $status_nRca == "Elevé") {
-            $commantaire =  "Teneur soutenue en azote, accentuée par le moindre niveau en calcium. Cela traduit un retard végétatif ou une disponibilité trop soutenue en azote. Ne pas accentuer les apports azotés ou hydrique sur cette parcelle.";
+            $commantaire = "Teneur soutenue en azote, accentuée par le moindre niveau en calcium. Cela traduit un retard végétatif ou une disponibilité trop soutenue en azote. Ne pas accentuer les apports azotés ou hydrique sur cette parcelle.";
         } else if ($status_ntk == "Très élevé" && $status_nRca == "Faible") {
-            $commantaire =  "Niveaux très soutenus en azote et calcium liés à un effet de concentration, mais le rapport N/Ca est limité. Vérifier l'équilibre végétatif et fructifère et la disponibilité hydrique.";
+            $commantaire = "Niveaux très soutenus en azote et calcium liés à un effet de concentration, mais le rapport N/Ca est limité. Vérifier l'équilibre végétatif et fructifère et la disponibilité hydrique.";
         } else if ($status_ntk == "Très élevé" && $status_nRca == "correct") {
-            $commantaire =  "Niveau très élevé en azote, mais en équilibre correct avec le calcium, ne pas accentuer les apports d'azote sur cette parcelle.";
+            $commantaire = "Niveau très élevé en azote, mais en équilibre correct avec le calcium, ne pas accentuer les apports d'azote sur cette parcelle.";
         } else if ($status_ntk == "Très élevé" && $status_nRca == "Elevé") {
-            $commantaire =  "Teneur très soutenue en azote, accentuée par le moindre niveau en calcium. Cela traduit un retard végétatif ou une disponibilité trop soutenue en azote. Ne pas accentuer les apports azotés ou hydrique sur cette parcelle.";
+            $commantaire = "Teneur très soutenue en azote, accentuée par le moindre niveau en calcium. Cela traduit un retard végétatif ou une disponibilité trop soutenue en azote. Ne pas accentuer les apports azotés ou hydrique sur cette parcelle.";
         }
         return $commantaire;
     }
     public static function com2(\stdClass $data)
     {
         //dd($data);
-        $res_pt       = $data->PT["res"];
-        $min_pt       = $data->PT["min"];
-        $max_pt       = $data->PT["max"];
-        $res_nRp      = $data->NTK["res"]/$data->PT["res"];
-        $min_nRp      = $data->NrP["min"];
-        $max_nRp      = $data->NrP["max"];
-        $res_nRca     = $data->NTK["res"]/$data->Ca["res"];
-        $min_nRca     = $data->NrCa["min"];
-        $max_nRca     = $data->NrCa["max"];
-        $status_pt    = self::parametreStatusSec1($res_pt, $min_pt, $max_pt);
-        $status_nRp   = self::parametreStatusSec3($res_nRp, $min_nRp, $max_nRp);
-        $status_nRca  = self::parametreStatusSec3($res_nRca, $min_nRca, $max_nRca);
+        $res_pt = $data->PT["res"];
+        $min_pt = $data->PT["min"];
+        $max_pt = $data->PT["max"];
+        $res_nRp = $data->NTK["res"] / $data->PT["res"];
+        $min_nRp = $data->NrP["min"];
+        $max_nRp = $data->NrP["max"];
+        $res_nRca = $data->NTK["res"] / $data->Ca["res"];
+        $min_nRca = $data->NrCa["min"];
+        $max_nRca = $data->NrCa["max"];
+        $status_pt = self::parametreStatusSec1($res_pt, $min_pt, $max_pt);
+        $status_nRp = self::parametreStatusSec3($res_nRp, $min_nRp, $max_nRp);
+        $status_nRca = self::parametreStatusSec3($res_nRca, $min_nRca, $max_nRca);
         //dd($status_pt, $status_nRp, $status_nRca);
 
-        $commantaire     = "";
-        if($status_pt == "Très faible" && $status_nRp == "Faible"){
-            $commantaire =  "Teneur en phosphore  très limitée mais en équilibre correct avec l'azote. Maintenir ce rapport favorable en augmentant proportionnellement la disponibilité en azote et en phosphore.";
-        }
-        else if($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "Faible"){
-            $commantaire =  "Les teneurs réduites en anions (N,P) montrent une difficulté végétative importante. La disponibilité du phosphore a été insuffisante ici.";
-        }
-        else if($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "correct"){
-            $commantaire =  "Teneur très faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif ou un phénomène de dilution.";
-        }
-        else if($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "Elevé"){
-            $commantaire =  "Teneur très faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif et ne justifie pas d'augmenter les apports de P2O5.";
-        }
-        else if($status_pt == "Très faible" && $status_nRp == "Elevé"){
-            $commantaire =  " Teneur en phosphore  très faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
-        }
-        else if($status_pt == "Faible" && $status_nRp == "Faible"){
-            $commantaire =  "Teneur en phosphore  faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
-        }
-        else if($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "Faible"){
-            $commantaire =  "Les teneurs réduites en anions (N,P) montrent une difficulté végétative importante. La disponibilité du phosphore a été insuffisante ici.";
-        }
-        else if($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "correct"){
-            $commantaire =  "Teneur  faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif ou un phénomène de dilution.";
-        }
-        else if($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "Elevé"){
-            $commantaire =  "Teneur  faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif et ne justifie pas d'augmenter les apports de P2O5.";
-        }
-        else if($status_pt == "Faible" && $status_nRp == "Elevé"){
-            $commantaire =  " Teneur en phosphore  faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
-        }
-        else if($status_pt == "correct" && $status_nRp == "Faible"){
-            $commantaire =  "Niveau correct en phosphore.  Il est inutile d'augmenter ici les apports en cet élément.";
-        }
-        else if($status_pt == "correct" && $status_nRp == "correct"){
-            $commantaire =  "Teneur favorable en phosphore, en niveau et en équilibre avec l'azote.";
-        }
-        else if($status_pt == "correct" && $status_nRp == "Elevé"){
-            $commantaire =  "Teneur correcte en phosphore, mais en équilibre défavorable par rapport à l'azote. Maintenir une disponibilité suffisante en phosphore et vérifier le fonctionnement du sol et l'équilibre N / P2O5 de la fertilisation.";
-        }
-        else if($status_pt == "Elevé" && $status_nRp == "Faible"){
-            $commantaire =  "Teneur élevée en phosphore mais non pénalisante. Cela traduit souvent un manque précoce d'azote. Vérifier l'équilibre N / P2O5 de la fertilisation.";
-        }
-        else if($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "Faible"){
-            $commantaire =  "Teneur soutenue en phosphore, là aussi ne pas accentuer les apports de P2O5. ";
-        }
-        else if($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "correct"){
-            $commantaire =  "Teneur élevée en phosphore, liée à un phénomène de concentration. Ne pas diminuer, s'il y a lieu les apports en P2O5.";
-        }
-        else if($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "Elevé"){
-            $commantaire =  "Teneur soutenue en anions (azote, phosphore) montrant un végétal juvénile.";
-        }
-        else if($status_pt == "Elevé" && $status_nRp == "Elevé"){
-            $commantaire =  "Niveau soutenu en phosphore mais en équilibre trop faible par rapport à l'azote. Maintenir, s'il y a lieu, des apports suffisants en P2O5.";
-        }
-        else if($status_pt == "Très élevé" && $status_nRp == "Faible"){
-            $commantaire =  "Teneur très élevée en phosphore mais non pénalisante. Cela traduit souvent un manque précoce d'azote. Vérifier l'équilibre N / P2O5 de la fertilisation.";
-        }
-        else if($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "Elevé"){
-            $commantaire =  "Teneur très soutenue en anions (azote, phosphore) montrant un végétal juvénile.";
-        }
-        else if($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "correct"){
-            $commantaire =  "Teneur très élevée en phosphore, liée à un phénomène de concentration. Ne pas diminuer, s'il y a lieu les apports en P2O5.";
-        }
-        else if($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "Faible"){
-            $commantaire =  "Teneur très soutenue en phosphore, là aussi ne pas accentuer les apports de P2O5. ";
-        }
-        else if($status_pt == "Très élevé" && $status_nRp == "Elevé"){
-            $commantaire =  "Niveau très soutenu en phosphore mais en équilibre trop faible par rapport à l'azote. Maintenir, s'il y a lieu, des apports suffisants en P2O5.";
+        $commantaire = "";
+        if ($status_pt == "Très faible" && $status_nRp == "Faible") {
+            $commantaire = "Teneur en phosphore  très limitée mais en équilibre correct avec l'azote. Maintenir ce rapport favorable en augmentant proportionnellement la disponibilité en azote et en phosphore.";
+        } else if ($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "Faible") {
+            $commantaire = "Les teneurs réduites en anions (N,P) montrent une difficulté végétative importante. La disponibilité du phosphore a été insuffisante ici.";
+        } else if ($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "correct") {
+            $commantaire = "Teneur très faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif ou un phénomène de dilution.";
+        } else if ($status_pt == "Très faible" && $status_nRp == "correct" && $status_nRca == "Elevé") {
+            $commantaire = "Teneur très faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif et ne justifie pas d'augmenter les apports de P2O5.";
+        } else if ($status_pt == "Très faible" && $status_nRp == "Elevé") {
+            $commantaire = " Teneur en phosphore  très faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
+        } else if ($status_pt == "Faible" && $status_nRp == "Faible") {
+            $commantaire = "Teneur en phosphore  faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
+        } else if ($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "Faible") {
+            $commantaire = "Les teneurs réduites en anions (N,P) montrent une difficulté végétative importante. La disponibilité du phosphore a été insuffisante ici.";
+        } else if ($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "correct") {
+            $commantaire = "Teneur  faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif ou un phénomène de dilution.";
+        } else if ($status_pt == "Faible" && $status_nRp == "correct" && $status_nRca == "Elevé") {
+            $commantaire = "Teneur  faible en phosphore, mais en équilibre correct avec l'azote. Cela traduit un déséquilibre végétatif et ne justifie pas d'augmenter les apports de P2O5.";
+        } else if ($status_pt == "Faible" && $status_nRp == "Elevé") {
+            $commantaire = " Teneur en phosphore  faible, insister sur les apports en cet élément après avoir vérifié sa disponibilité au sol. Attention à un éventuel blocage par l'azote.";
+        } else if ($status_pt == "correct" && $status_nRp == "Faible") {
+            $commantaire = "Niveau correct en phosphore.  Il est inutile d'augmenter ici les apports en cet élément.";
+        } else if ($status_pt == "correct" && $status_nRp == "correct") {
+            $commantaire = "Teneur favorable en phosphore, en niveau et en équilibre avec l'azote.";
+        } else if ($status_pt == "correct" && $status_nRp == "Elevé") {
+            $commantaire = "Teneur correcte en phosphore, mais en équilibre défavorable par rapport à l'azote. Maintenir une disponibilité suffisante en phosphore et vérifier le fonctionnement du sol et l'équilibre N / P2O5 de la fertilisation.";
+        } else if ($status_pt == "Elevé" && $status_nRp == "Faible") {
+            $commantaire = "Teneur élevée en phosphore mais non pénalisante. Cela traduit souvent un manque précoce d'azote. Vérifier l'équilibre N / P2O5 de la fertilisation.";
+        } else if ($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "Faible") {
+            $commantaire = "Teneur soutenue en phosphore, là aussi ne pas accentuer les apports de P2O5. ";
+        } else if ($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "correct") {
+            $commantaire = "Teneur élevée en phosphore, liée à un phénomène de concentration. Ne pas diminuer, s'il y a lieu les apports en P2O5.";
+        } else if ($status_pt == "Elevé" && $status_nRp == "correct" && $status_nRca == "Elevé") {
+            $commantaire = "Teneur soutenue en anions (azote, phosphore) montrant un végétal juvénile.";
+        } else if ($status_pt == "Elevé" && $status_nRp == "Elevé") {
+            $commantaire = "Niveau soutenu en phosphore mais en équilibre trop faible par rapport à l'azote. Maintenir, s'il y a lieu, des apports suffisants en P2O5.";
+        } else if ($status_pt == "Très élevé" && $status_nRp == "Faible") {
+            $commantaire = "Teneur très élevée en phosphore mais non pénalisante. Cela traduit souvent un manque précoce d'azote. Vérifier l'équilibre N / P2O5 de la fertilisation.";
+        } else if ($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "Elevé") {
+            $commantaire = "Teneur très soutenue en anions (azote, phosphore) montrant un végétal juvénile.";
+        } else if ($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "correct") {
+            $commantaire = "Teneur très élevée en phosphore, liée à un phénomène de concentration. Ne pas diminuer, s'il y a lieu les apports en P2O5.";
+        } else if ($status_pt == "Très élevé" && $status_nRp == "correct" && $status_nRca == "Faible") {
+            $commantaire = "Teneur très soutenue en phosphore, là aussi ne pas accentuer les apports de P2O5. ";
+        } else if ($status_pt == "Très élevé" && $status_nRp == "Elevé") {
+            $commantaire = "Niveau très soutenu en phosphore mais en équilibre trop faible par rapport à l'azote. Maintenir, s'il y a lieu, des apports suffisants en P2O5.";
         }
         return $commantaire;
     }
     public static function com3(\stdClass $data)
     {
-      //     dd($data);
-        $res_k        = $data->K["res"];
-        $min_k        = $data->K["min"];
-        $max_k        = $data->K["max"];
-        $res_nRk      = $data->NTK["res"]/$data->K["res"];////////
-        $min_nRk      = $data->NrK["min"];
-        $max_nRk      = $data->NrK["max"];
-        $res_nRca     = $data->NTK["res"]/$data->Ca["res"];
-        $min_nRca     = $data->NrCa["min"];
-        $max_nRca     = $data->NrCa["max"];
+        //     dd($data);
+        $res_k = $data->K["res"];
+        $min_k = $data->K["min"];
+        $max_k = $data->K["max"];
+        $res_nRk = $data->NTK["res"] / $data->K["res"]; ////////
+        $min_nRk = $data->NrK["min"];
+        $max_nRk = $data->NrK["max"];
+        $res_nRca = $data->NTK["res"] / $data->Ca["res"];
+        $min_nRca = $data->NrCa["min"];
+        $max_nRca = $data->NrCa["max"];
 
-        $res_kRca     = $data->K["res"]/$data->Ca["res"];
-        $min_kRca     = $data->KrCa["min"];
-        $max_kRca     = $data->KrCa["max"];
+        $res_kRca = $data->K["res"] / $data->Ca["res"];
+        $min_kRca = $data->KrCa["min"];
+        $max_kRca = $data->KrCa["max"];
 
-        $status_k     = self::parametreStatusSec1($res_k, $min_k, $max_k);
-        $status_nRk   = self::parametreStatusSec3($res_nRk, $min_nRk, $max_nRk);  
-        $status_nRca  = self::parametreStatusSec3($res_nRca, $min_nRca, $max_nRca);
-        $status_kRca  = self::parametreStatusSec3($res_kRca, $min_kRca, $max_kRca);
+        $status_k = self::parametreStatusSec1($res_k, $min_k, $max_k);
+        $status_nRk = self::parametreStatusSec3($res_nRk, $min_nRk, $max_nRk);
+        $status_nRca = self::parametreStatusSec3($res_nRca, $min_nRca, $max_nRca);
+        $status_kRca = self::parametreStatusSec3($res_kRca, $min_kRca, $max_kRca);
         //dd($res_nRk,$min_nRk,$max_nRk );
         //dd($status_k, $status_nRk, $status_nRca,$status_kRca);
-        $commantair     = "";
-        if($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "Faible"){
-            $commantair =  "Teneur très limitée en potassium montrant avec l'azote un problème de disponibilité minérale ou hydrique sur cette parcelle. Vérifier les réserves du sol en potasse et les apports de K2O (niveau, fractionnement,...etc).";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "correct"){
-            $commantair =  "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "Elevé"){
-            $commantair =  "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports en K2O.";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "Faible"){
-            $commantair =  "Très faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "correct"){
-            $commantair =  "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "Elevé"){
-            $commantair =  "Très faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "Faible"){
-            $commantair =  "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "correct"){
-            $commantair =  "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "Elevé"){
-            $commantair =  "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "Faible"){
-            $commantair =  "Teneur limitée en potassium montrant avec l'azote un problème de disponibilité minérale ou hydrique sur cette parcelle. Vérifier les réserves du sol en potasse et les apports de K2O (niveau, fractionnement,...etc).";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "correct"){
-            $commantair =  "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "Elevé"){
-            $commantair =  "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports en K2O.";
-        }
-        else if($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "Faible"){
-            $commantair =  "Faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
-        }
-        else if($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "correct"){
-            $commantair =  "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
-        }
-        else if($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "Elevé"){
-            $commantair =  "Faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "Faible"){
-            $commantair =  "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "correct"){
-            $commantair =  "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "Elevé"){
-            $commantair =  "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
-        }
-        else if($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "Faible"){
-            $commantair =  "Niveau correct en potassium, mais en équilibre faible vis-à-vis du calcium. Vérifier la disponibilité en K2O (sol, fertilisation) et surtout en eau sur cette parcelle.";
-        }
-        else if($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "correct"){
-            $commantair =  "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
-        }
-        else if($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "Elevé"){
-            $commantair =  "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
-        }
-        else if($status_k == "correct" && $status_nRk == "correct" && $status_kRca == "Faible"){
-            $commantair =  "Niveau correct en potassium, mais en équilibre trop faible vis-à-vis du calcium. Vérifier la disponibilité en K2O (sol, fertilisation) et surtout en eau sur cette parcelle.";
-        }
-        else if($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "Faible"){
-            $commantair =  "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
-        }
-        else if($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "correct"){
-            $commantair =  "Niveau favorable en potassium, en équilibre avec l'azote. Ne pas accentuer les apports en K2O.";
-        }
-        else if($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "Elevé"){
-            $commantair =  "Niveau correct en potassium, mais trop élevé par rapport au calcium. Attention à l'antagonisme entre ces deux éléments.";
-        }
-        else if($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "Faible"){
-            $commantair =  "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
-        }
-        else if($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "correct"){
-            $commantair =  "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
-        }
-        else if($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "Elevé"){
-            $commantair =  "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "Faible"){
-            $commantair =  "Teneur élevée en potassium liée essentiellement à un manque de disponibilité azotée. Cela ne justifie pas forcément de diminuer les apports de K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "correct"){
-            $commantair =  "Teneur élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "Elevé"){
-            $commantair =  "Teneur élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "Faible"){
-            $commantair =  "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "correct"){
-            $commantair =  "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "Elevé"){
-            $commantair =  "Niveau élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "Faible"){
-            $commantair =  "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "correct"){
-            $commantair =  "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "Elevé"){
-            $commantair =  "Niveau élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "Faible"){
-            $commantair =  "Teneur très élevée en potassium liée essentiellement à un manque de disponibilité azotée. Cela ne justifie pas forcément de diminuer les apports de K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "correct"){
-            $commantair =  "Teneur très élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "Elevé"){
-            $commantair =  "Teneur très élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "Faible"){
-            $commantair =  "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "correct"){
-            $commantair =  "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "Elevé"){
-            $commantair =  "Niveau très élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "Faible"){
-            $commantair =  "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "correct"){
-            $commantair =  "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
-        }
-        else if($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "Elevé"){
-            $commantair =  "Niveau très élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
+        $commantair = "";
+        if ($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "Faible") {
+            $commantair = "Teneur très limitée en potassium montrant avec l'azote un problème de disponibilité minérale ou hydrique sur cette parcelle. Vérifier les réserves du sol en potasse et les apports de K2O (niveau, fractionnement,...etc).";
+        } else if ($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "correct") {
+            $commantair = "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
+        } else if ($status_k == "Très faible" && $status_nRk == "Faible" && $status_nRca == "Elevé") {
+            $commantair = "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports en K2O.";
+        } else if ($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "Faible") {
+            $commantair = "Très faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
+        } else if ($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "correct") {
+            $commantair = "Très faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
+        } else if ($status_k == "Très faible" && $status_nRk == "correct" && $status_nRca == "Elevé") {
+            $commantair = "Très faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
+        } else if ($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "Faible") {
+            $commantair = "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "correct") {
+            $commantair = "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "Très faible" && $status_nRk == "Elevé" && $status_nRca == "Elevé") {
+            $commantair = "Teneur  très faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "Faible") {
+            $commantair = "Teneur limitée en potassium montrant avec l'azote un problème de disponibilité minérale ou hydrique sur cette parcelle. Vérifier les réserves du sol en potasse et les apports de K2O (niveau, fractionnement,...etc).";
+        } else if ($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "correct") {
+            $commantair = "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
+        } else if ($status_k == "Faible" && $status_nRk == "Faible" && $status_nRca == "Elevé") {
+            $commantair = "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports en K2O.";
+        } else if ($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "Faible") {
+            $commantair = "Faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
+        } else if ($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "correct") {
+            $commantair = "Faible teneur en potassium liée à un phénomène de dilution, il est inutile d'augmenter les apports de K2O.";
+        } else if ($status_k == "Faible" && $status_nRk == "correct" && $status_nRca == "Elevé") {
+            $commantair = "Faible teneur en potassium, montrant un problème important de disponibilité en K2O (sol, fertilisation) ou en eau.";
+        } else if ($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "Faible") {
+            $commantair = "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "correct") {
+            $commantair = "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "Faible" && $status_nRk == "Elevé" && $status_nRca == "Elevé") {
+            $commantair = "Teneur  faible en potassium ; vérifier la disponibilité en potasse du sol ; les apports en K2O sont-ils suffisants (niveau, fractionnement...) ?";
+        } else if ($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "Faible") {
+            $commantair = "Niveau correct en potassium, mais en équilibre faible vis-à-vis du calcium. Vérifier la disponibilité en K2O (sol, fertilisation) et surtout en eau sur cette parcelle.";
+        } else if ($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "correct") {
+            $commantair = "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
+        } else if ($status_k == "correct" && $status_nRk == "Faible" && $status_kRca == "Elevé") {
+            $commantair = "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
+        } else if ($status_k == "correct" && $status_nRk == "correct" && $status_kRca == "Faible") {
+            $commantair = "Niveau correct en potassium, mais en équilibre trop faible vis-à-vis du calcium. Vérifier la disponibilité en K2O (sol, fertilisation) et surtout en eau sur cette parcelle.";
+        } else if ($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "Faible") {
+            $commantair = "Teneur correcte en potassium, il est inutile d'accentuer les apports en cet élément.";
+        } else if ($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "correct") {
+            $commantair = "Niveau favorable en potassium, en équilibre avec l'azote. Ne pas accentuer les apports en K2O.";
+        } else if ($status_k == "correct" && $status_nRk == "correct" && $status_nRca == "Elevé") {
+            $commantair = "Niveau correct en potassium, mais trop élevé par rapport au calcium. Attention à l'antagonisme entre ces deux éléments.";
+        } else if ($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "Faible") {
+            $commantair = "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
+        } else if ($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "correct") {
+            $commantair = "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
+        } else if ($status_k == "correct" && $status_nRk == "Elevé" && $status_nRca == "Elevé") {
+            $commantair = "Teneur correcte en potassium mais trop faible par rapport à l'azote. Contrôler l'équilibre N / K2O de la fertilisation et du sol.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "Faible") {
+            $commantair = "Teneur élevée en potassium liée essentiellement à un manque de disponibilité azotée. Cela ne justifie pas forcément de diminuer les apports de K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "correct") {
+            $commantair = "Teneur élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Faible" && $status_nRca == "Elevé") {
+            $commantair = "Teneur élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "Faible") {
+            $commantair = "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "correct") {
+            $commantair = "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "correct" && $status_nRca == "Elevé") {
+            $commantair = "Niveau élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "Faible") {
+            $commantair = "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "correct") {
+            $commantair = "Potassium soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Elevé" && $status_nRk == "Elevé" && $status_nRca == "Elevé") {
+            $commantair = "Niveau élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "Faible") {
+            $commantair = "Teneur très élevée en potassium liée essentiellement à un manque de disponibilité azotée. Cela ne justifie pas forcément de diminuer les apports de K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "correct") {
+            $commantair = "Teneur très élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Faible" && $status_nRca == "Elevé") {
+            $commantair = "Teneur très élevée en potassium par rapport aux autres éléments majeurs. Attention aux risques de limitation végétative. Ne pas augmenter, voire diminuer les apports de K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "Faible") {
+            $commantair = "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "correct") {
+            $commantair = "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "correct" && $status_nRca == "Elevé") {
+            $commantair = "Niveau très élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "Faible") {
+            $commantair = "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "correct") {
+            $commantair = "Potassium très soutenu, lié à un phénomène de concentration, cela ne justifie pas forcément de diminuer les apports en K2O.";
+        } else if ($status_k == "Très élevé" && $status_nRk == "Elevé" && $status_nRca == "Elevé") {
+            $commantair = "Niveau très élevé en potassium, montrant une disponibilité potassique ou hydrique très soutenue. Ne pas accentuer, voire diminuer, les apports en K2O. Attention à l'antagonisme potassium / calcium.";
         }
         return $commantair;
     }
@@ -466,7 +452,7 @@ class Archivos
         //return self::parametreStatusCom1(2,3,5);
         $com1data = new \stdClass();
         foreach ($cultureData as $key => $value) {
-            $com1data->$key = ["res" => $analyse_data->$key ?? "", "min" => min($value["min"],$value["max"]), "max" => max($value["min"],$value["max"])];
+            $com1data->$key = ["res" => $analyse_data->$key ?? "", "min" => min($value["min"], $value["max"]), "max" => max($value["min"], $value["max"])];
         }
         return '<table style="margin-left: 1px;font-size:10px;">
                     <tr>
@@ -508,16 +494,84 @@ class Archivos
         return $tmpValue + $toLow;
     }
 
-    public static function GeneratTriengleTextural($argile, $limons, $sables)
+    public static function GeneratTriengleTextural($argile, $limons, $sables,$onlyReserveText = false)
     {
+        //SI(D6<=D11;SI(D7<=D9;"Texture grossière sableuse";SI(D7<=D10;"Texture moyenne sableuse";$C$30));SI(D6<=F10;SI(D7<D9;"Texture grossière de limon sableux";SI(D7<D10;"Texture moyenne de limon sablo-argileux";SI(D7<F11;"Texture fine limono-argilo-sableuse";SI(D7<F9;"Texture fine d'argile limono-sableuse";"Texture très fine argileuse")))); SI(D7<D10;"Texture moyenne limoneuse";SI(D7<F9;"Texture fine de limon argileux"; "Texture très fine argileuse"))))
         if (($argile + $limons + $sables) == 1000) {
+            $d9 = ($limons * (-0.0324)) + 120;
+            $d10 = ($limons * (-0.0361)) + 220;
+            $d11 = ($argile * (-0.4545)) + 455;
+            $d12 = ($argile * (-0.2562)) + 317.41;
+            $f9 = ($argile * (-0.0984)) + 450;
+            $f10 = (1066.9 - $argile) + 1.4038;
+            $f11 = ($limons * (-0.0411)) + 320;
+            $title = "";
+            $reserveText = "";
+            if ($limons <= $d11) {
+                if ($argile <= $d9) {
+                    $title = "Texture grossière sableuse";
+                    $reserveText = "0,7 mm d'eau /cm de sol";
+                } else if ($argile <= $d10) {
+                    $title = "Texture moyenne sableuse";
+                    $reserveText = "1,2 mm d'eau /cm de sol";
+                } else {
+                    if ($limons <= $d12) {
+                        if ($argile < $f9) {
+                            $title = "Texture fine argilo-sableuse";
+                            $reserveText = "1,8 mm d'eau /cm de sol";
+                        } else {
+                            $title = "Texture très fine argileuse";
+                            $reserveText = "";
+                        }
+                    } else {
+                        if ($argile < $f11) {
+                            $title = "Texture fine limono-argilo-sableuse";
+                        } else if ($argile < $f9) {
+                            $title = "Texture fine d'argile limono-sableuse";
+                        } else {
+                            $title = "Texture très fine argileuse";
+                        }
+                    }
+                }
+            } else if ($limons <= $f10) {
+                if ($argile < $d9) {
+                    $title = "Texture grossière de limons sableux";
+                } else if ($argile < $d10) {
+                    $title = "Texture moyenne de limons sablo-argileux";
+                } else if ($argile < $f11) {
+                    $title = "Texture fine limono-argilo-sableuse";
+                } else if ($argile < $f9) {
+                    $title = "Texture fine d'argile limono-sableuse";
+                } else {
+                    $title = "Texture très fine argileuse";
+                }
+            } else {
+                if ($argile < $d10) {
+                    $title = "Texture moyenne limoneuse";
+                } else if ($argile < $f9) {
+                    $title = "Texture fine de limons argileux";
+                } else {
+                    $title = "Texture très fine argileuse";
+                }
+            }
+
             $posx = self::map($argile, 0, 1000, 85, 1200);
             $posy = self::map(($limons + $sables), 0, 1000, 426, 10);
-            $img = Image::make('img/TriengleTextural.PNG');
+            $img = Image::make('img/TriengleTextural2.jpg');
             $img->rectangle($posx, $posy, $posx + 30, $posy + 30, function ($draw) {
                 $draw->background('#008000');
             });
+            $img->text($title, 800,20, function($font) {
+                $font->file(base_path('public/assets/fonts/lato.black-italic.ttf'));
+               // $font->color('black');
+                $font->align('center');
+                $font->valign('top');
+                //$font->angle(90);
+                $font->size(50);
+          });
             //echo  '<img src="' . $img->encode('data-url') . '" height="500px">';
+            if($onlyReserveText)
+            return $reserveText;
             return $img->encode('data-url');
         }
     }

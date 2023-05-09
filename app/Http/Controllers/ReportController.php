@@ -48,6 +48,7 @@ class ReportController extends Controller
         $commantair = ["Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) répondent aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine. ","Les valeurs trouvées en paramètres recherchés (pH, Conductivité électrique, Turbidité, Oxydabilité, NO3, NO2, Mn, Cu, Zn et Fer) ne répondent pas aux critères physico-chimique indiqués selon la norme NM 03.70.01-2020 relative à la qualité des eaux d'alimentation humaine."];
         $culturData =null;
         $cultur = null;
+        $culturData2 = null;
         if($commande_info->culture != "_"){
             $cultur = strtolower($commande_info->culture);
             $culturData = CulturData::where('cultur_name',$cultur)->get(["parametre","min","max"])->toArray();

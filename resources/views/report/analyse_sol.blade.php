@@ -80,10 +80,14 @@
             right: 0px;
             height: 150px;
         }
+
+        @page {
+            margin: 10px;
+        }
     </style>
 
     @php use App\Custom\Archivos; @endphp
-    <table border="0">
+    <table border="0" style="width: 100%">
         <tr>
             <td><img src="{{ Archivos::imagenABase64(public_path('img/LacqLogo.jpg')) }}" width="160px" height="40px">
                 <br>
@@ -93,8 +97,8 @@
                 <label style="color:green;font-size:11px;">LAB03F61-Vg</label>
             </td>
             <td>
-                <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE D'EAU D'IRRIGATION
-                    </br>N° EAU {{ $commande_info->code_commande }} </h5>
+                <h5 style="color:green;text-align:center; font-size:14px;">RAPPORT D'ANALYSE SOL N° SOL
+                    {{ $commande_info->code_commande }} </h5>
             </td>
             <td style="text-align:right;vertical-align: top;"><img
                     src="{{ Archivos::imagenABase64(public_path('img/semac.png')) }}" width="90px" height="40px"><br>
@@ -171,14 +175,15 @@
     <div
         style="font-size:9px; margin-top:5px;float:left;border-top:black 0.5pt solid;border-left:black 0.5pt solid;border-right:black 0.5pt solid;padding:2px 5px 2px 5px;width:300px;background-color:#b5feb4;font-family: Verdana, Geneva, sans-serif;font-weight: 700;">
         ETAT PHYSIQUE</div>
-    <table border="" style="width:100%;font-size:9px;margin-top:21px;border:0.1pt solid black;">
+    <table border="0" style="width:100%;font-size:9px;margin-top:21px;border:0.1pt solid black;">
 
         <tr style="">
             <td class="" style="text-align:left; width:150px">Argile ‰ (&lt; 2 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Agrile}}</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{ $analyse_data->Agrile }}</span>
             </td>
             <td class="" style="text-align:;" rowspan="3"><img
-                    src="{{ App\Custom\Archivos::GeneratTriengleTextural($analyse_data->Agrile , $analyse_data->Limon , $analyse_data->Sable ) }}" height="70px"></td>
+                    src="{{ App\Custom\Archivos::GeneratTriengleTextural($analyse_data->Agrile, $analyse_data->Limon, $analyse_data->Sable) }}"
+                    height="70px"></td>
             <td class="" style="text-align:;">Indice de battance : <span
                     style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
             </td>
@@ -186,7 +191,7 @@
         </tr>
         <tr style="">
             <td class="" style="text-align:left;width:150px ">Limons ‰ (2 à 50 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Limon}}</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{ $analyse_data->Limon }}</span>
             </td>
             <td class="" style="text-align:;">Indice de porosité : <span
                     style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">50</span>
@@ -195,349 +200,536 @@
         </tr>
         <tr style="">
             <td class="" style="text-align:left;width:150px ">Sables ‰ (50 à 2000 µm): <span
-                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{$analyse_data->Sable}}</span>
+                    style="text-align:center;margin-top:5px;float: right; background-color: #b5feb4;padding:2px 5px 2px 5px;width:20px;border:black 1px solid">{{ $analyse_data->Sable }}</span>
             </td>
             <td class="" style="text-align:;">Réserve Utile estimée :</td>
 
         </tr>
 
     </table>
-    <table border="" style="margin:0;padding:0; width: 50%;font-size:10px;float:left;margin-top:5px;"
+    <table border="0" style="margin:0;padding:0; width: 49%;font-size:10px;float:left;margin-top:5px;"
         class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">ETAT HUMIQUE</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:148px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;"><small
-                    style="text-align: left;">Faible</small><small>Elevé</small></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="text-align: left;float:left;">Faible</span><span
+                    style="text-align: right;float:right">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Matière organique en g/kg (<b
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Carbone organique en g/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF ISO
                     14235:V1998</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->C_O, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->C_O, 12, 17) !!}
+            </td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">12 à
+                17</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Matière organique en g/kg</span><br /><span
                     style="color: gray;font-size:8px">NF ISO 14235: V1998 (MO=Carb. Org*1,72)</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->C_O * 1.72, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->C_O * 1.72, 20, 30) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">20 à
+                30</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Azote
                     total en g/kg</span><br /><span style="color: gray;font-size:8px">NF ISO 11261: V1995</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->NT, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->NT, 1, 3) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">1,0 à
+                3,0</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Rapport C/N</span><br /><span
                     style="color: gray;font-size:8px">Calcul.</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ $analyse_data->NT != 0 ? Archivos::ft3nb($analyse_data->C_O / $analyse_data->NT, true) : '_' }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->NT != 0 ? $analyse_data->C_O / $analyse_data->NT : 12, 8, 12) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">8 à
+                12</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:5px" class="bordered">
+    <table style="margin:0;padding:0;width: 49%;font-size:10px;float:right;margin-top:5px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">SALINITE</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:135px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px;">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="text-align: left;float:left;">Faible</span><span
+                    style="text-align: right;float:right">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/cm (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">ISO 11265:
                     V1995</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,40</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->EC, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->EC, 0, 1) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                0,40</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Sodium (Na2O) g/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF × 31 -108:
                     V2002</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 0,34</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->Na2O, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->Na2O, 0, 1) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                0,34</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Chlorures (Cl ) mg/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">Extrait aqueux
                     1/5
                     Flux continu</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 100</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->Cl, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->Cl, 0, 200) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                100</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Conductivité éléctrique mS/m (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">ISO 11265
                     :V1995</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">Inf à 40</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->EC * 100, true) }}
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->EC * 100, 0, 80) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                40</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:132px" class="bordered">
+    <table style="margin:132px 0px 0 16px;padding:0;width: 49%;font-size:10px;float:left" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">ELEMENTS MAJEURS</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="text-align: left;float:left;">Faible</span><span
+                    style="text-align: right;float:right">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Phosphore (P2O5) mg/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF ISO 11263:
                     V1995 (Olsen)
                 </span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->P2O5, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->P2O5, 37, 60) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">37 à
+                60</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Potasse (K2O) g/kg (<b style="color: red">*</b>)
                 </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
                 </span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->K2O / 1000, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->K2O / 1000, 0.41, 0.83) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">0.41
+                à
+                0.83</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Magnésie (MgO) g/kg (<b style="color: red">*</b>)
                 </span><br /><span style="color: gray;font-size:8px">NF × 31 -108: V2002
                 </span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->MgO / 1000, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->MgO / 1000, 0.36, 0.72) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">0.36
+                à
+                0.72</td>
         </tr>
-        <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
-                    style="font-weight: 500;font-size:9px">Rapport C/N</span><br /><span
-                    style="color: gray;font-size:8px">Calcul.</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
-        </tr>
-    </table>
 
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:left;margin-top:257px" class="bordered">
+    </table>
+    <table style="margin:240px 0 0 16px;padding:0;width: 49%;font-size:10px;float:left;" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="3">AZOTE MINERAL DU SOL</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Azote Nitrique N-NO3 (Kg/ha)
                     <br /></span><span style="color: gray;font-size:8px">Extrait aqueux 1/5 Flux continu
                 </span>
             </td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">27.4</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                en cours</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Azote Ammoniacal N-NH4 (Kg/ha)
                 </span><br /><span style="color: gray;font-size:8px">Extrait aqueux 1/5 Flux continu
                 </span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                en cours</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
         </tr>
     </table>
-
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:132px" class="bordered">
+    <table style="margin:132px 2% 0 0;padding:0;width: 49%;font-size:10px;float:right;" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">STATUT ACIDO-BASIQUE</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="">Faible</span><span style="margin-left:50px">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Calcaire total g/kg</span><br /><span
                     style="color: gray;font-size:8px">NF ISO 10693:V2014</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->CT * 10, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->CT * 10, 0, 200) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                100</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Calcaire actif g/kg</span><br /><span
                     style="color: gray;font-size:8px">NF X 31-106:V 2002</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->CA * 10, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->CA * 10, 0, 60) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">Inf à
+                30</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">pH
                     eau corrigé à 25°C (<b style="color: red">*</b>)</span><br /><span
                     style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->PH, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->PH, 6.5, 7.4) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">
+                6.5 à 7.4</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">pH
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">pH
                     KCl corrigé à 25°C (<b style="color: red">*</b>)</span><br /><span
                     style="color: gray;font-size:8px">NF ISO 10390: V2005</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->pH_KCI, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->pH_KCI, 5.5, 6.4) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">5.5 à
+                6.4</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Calcium (CaO) g/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">NF × 31 -108:
                     V2002</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->CaO, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->CaO, 2.5, 5) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">2.5 à
+                5</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 400;font-size:9px">CEC
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">CEC
                     Metson Cmol/kg</span><br /><span style="color: gray;font-size:8px">NF × 31 -130:V 1999</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                {{ Archivos::ft3nb($analyse_data->CEC, true) }}</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">
+                {!! Archivos::SOL($analyse_data->CEC, 8, 15) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">8 à
+                15</td>
         </tr>
 
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;margin-top:305px" class="bordered">
+    <table style="margin:305px 2% 0 0;padding:0;width: 49%;font-size:10px;" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">OLIGO-ELEMENTS</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="">Faible</span><span style="margin-left:50px">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Cuivre mg/kg (*)</span><br /><span
                     style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">0</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                0</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">12 à
+                17</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Zinc mg/kg (*)</span><br /><span
                     style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">6,36</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">20 à 30</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                6,36</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">20 à
+                30</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Manganèse mg/kg (<b
                         style="color: red">*</b>)</span><br /><span style="color: gray;font-size:8px">LAB03MO49:Vb du
                     22/04/2019</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">4,85</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">1,0 à 3,0</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                4,85</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">1,0 à
+                3,0</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span style="font-weight: 500;font-size:9px">Fer
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
+                    style="font-weight: 500;font-size:9px">Fer
                     mg/kg (<b style="color: red">*</b>)</span><br /><span
                     style="color: gray;font-size:8px">LAB03MO49:Vb du 22/04/2019</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">31.3</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                31.3</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">8 à
+                12</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Bore mg/kg</span><br /><span
                     style="color: gray;font-size:8px">Méthode interne</span></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">_</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 12</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                _</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">8 à
+                12</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-125px" class="bordered">
+    <table style="margin:0;padding:0;width: 49%;font-size:10px;float:right;margin-top:-125px" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">TAUX DE SATURATION EN CALCIUM</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="">Faible</span><span style="margin-left:50px">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Ca/CEC (%)</span>
             </td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">12 à 17</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"></td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">12 à
+                17</td>
         </tr>
     </table>
-    <table style="margin:0;padding:0;width: 50%;font-size:10px;float:right;margin-top:-53" class="bordered">
+    <table style="margin:0;padding:0;width: 49%;font-size:10px;float:right;margin-top:-60" class="bordered">
         <tr>
             <td class="head bordered" style="font-weight: 500" colspan="4">EQUILIBRES</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;width:150px"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Résultats</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Faible</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;font-size:8px">Seuils</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;width:148px">
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:10px">
+                Résultats</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:85px;padding: 0px !important">
+                <span style="">Faible</span><span style="margin-left:50px">Elevé</span>
+            </td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;font-size:8px;width:40px">
+                Seuils
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">K/CEC (%)</span>
             </td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">3 à 5</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">{!! Archivos::SOL(0,3,5) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">3 à 5
+            </td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">Mg/CEC (%)</span>
             </td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">8 à 16</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">{!! Archivos::SOL(0,8,16) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">8 à
+                16</td>
         </tr>
         <tr>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"><span
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;"><span
                     style="font-weight: 500;font-size:9px">K/Mg</span>
             </td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;text-align:center">48</td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;"></td>
-            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;">0,3 à 0,6</td>
+            <td
+                style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;text-align:center">
+                48</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;padding:0px !important;">{!! Archivos::SOL(0,0.3,0.5) !!}</td>
+            <td style="border-bottom:rgb(141, 141, 141) 0.2pt solid;border-right:rgb(141, 141, 141) 0.2pt solid;">0,3 à
+                0,6</td>
         </tr>
     </table>
     <p style="font-size: 8; text-align:left"><b style="color: red">*</b>: Paramètres accrédités
         "Echantillon séché à 40°C, broyé manuellement et tamisé à 2mm selon la norme NF ISO 11464. Moyens utilisés:
         Diviseur multifentes.
-        Description de l’échantillon: Echantillon reçu dans un emballage en plastique fermé en absence des pierres,
-        fragments de verre ou toute substance susceptible d’avoir une influence sur la qualité des analyses . "
+        Description de l'échantillon: Echantillon reçu dans un emballage en plastique fermé en absence des pierres,
+        fragments de verre ou toute substance susceptible d'avoir une influence sur la qualité des analyses . "
         Si l'échantillonnage est assuré par le client, le laboratoire dégage toute résponsablité par rapport à la
         technique d'échantillonnage utilisée.
         Le présent rapport ne concerne que les objets soumis à l'essai. Il comporte une seule page et ne doit pas être
